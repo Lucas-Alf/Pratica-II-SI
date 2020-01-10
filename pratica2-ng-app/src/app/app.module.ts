@@ -38,12 +38,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { IndexComponent } from './index/index.component';
 
 // Outros componentes
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,22 +1,3 @@
-<!-- <div class="main-div" style="background-color: rgba(0, 0, 0, 0.26)"> -->
-<div class="main-div" style="background-image: url(../assets/img/background.jpg); background-size: cover">
-  <mat-card class="z-depth center" flex="50" style="text-align: center; width: 350px;">
-    <mat-card-title>
-      Login
-    </mat-card-title>
-    <mat-card-content>
-      <mat-form-field style="width: 300px;">
-        <input matInput placeholder="Email" [(ngModel)]='email'>
-      </mat-form-field><br />
-      <mat-form-field style="width: 300px;">
-        <input matInput placeholder="Senha" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]='senha'>
-        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Esconder senha'"
-          [attr.aria-pressed]="hidePassword">
-          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field><br />
-      <button mat-raised-button color="primary" (click)="recuperarSenha()" style="margin-right:5px; width: 225px;">Recuperar senha</button>
-      <button mat-raised-button color="primary" (click)="login()">Entrar</button>
-    </mat-card-content>
-  </mat-card>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
