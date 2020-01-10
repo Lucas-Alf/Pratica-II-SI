@@ -4,7 +4,7 @@ Projeto API em Spring Boot (pratica2-api)
 
 Projeto em Angular (pratica2-ng-app)
 * Instalar o <a href="https://drive.google.com/open?id=1LjHwkID8Ow9so7r6HBXWdih_3gfk6P3J">NodeJS</a>
-* Instalar o <a href="https://cli.angular.io/"Angular CLI</a>
+* Instalar o <a href="https://cli.angular.io/">Angular CLI</a>
 * Na primeira vez executar na raiz do projeto:
     npm install
 * Para compilar o Angular: ng build
