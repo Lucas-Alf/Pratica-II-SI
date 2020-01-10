@@ -1,0 +1,60 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+# Angular Project
+# compiled output
+/pratica2-ng-app/dist
+/pratica2-ng-app/tmp
+/pratica2-ng-app/out-tsc
+# Only exists if Bazel was run
+/pratica2-ng-app/bazel-out
+
+# dependencies
+/pratica2-ng-app/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# misc
+/pratica2-ng-app/.sass-cache
+/pratica2-ng-app/connect.lock
+/pratica2-ng-app/coverage
+/pratica2-ng-app/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/pratica2-ng-app/typings
