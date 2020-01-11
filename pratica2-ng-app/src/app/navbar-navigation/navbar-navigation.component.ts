@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-navigation',
@@ -9,7 +10,12 @@ export class NavbarNavigationComponent implements OnInit {
 
   infosUsuario = JSON.parse(localStorage.getItem('userData'));
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  public sair() {
+    localStorage.removeItem('userData');
+    this.router.navigate(['/index/']);
+  }
 
   ngOnInit() {
   }
