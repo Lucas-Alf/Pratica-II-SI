@@ -1,0 +1,14 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Prática Profissional 2</span>
+    <span class="example-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <span>{{infosUsuario.pessoa.nome}}</span>
+      <mat-icon class="example-icon" style="padding-right: 0px;" aria-hidden="false">account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a href="/home" mat-menu-item>Voltar a home</a>
+      <a href="/index" mat-menu-item>Sair</a>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

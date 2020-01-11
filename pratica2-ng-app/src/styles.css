@@ -2,6 +2,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .center{
   width: 75%;
   margin: 10px auto;
@@ -12,4 +13,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-grid-tile {
+  background: white;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+.mat-figure {
+  padding: 10px !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+.circular--square {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  max-width: 120px;
+  max-height: 120px;
 }

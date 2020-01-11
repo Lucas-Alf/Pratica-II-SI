@@ -1,0 +1,26 @@
+.home-div {
+  height: 100vh;
+}
+
+.home-mat-grid-tile {
+  background: #80808052;
+}
+
+.home-icon {
+  font-size: 106px;
+  color: #565b67;
+}
+
+.titulo-home-icon-duas-linhas {
+  text-align: center;
+  margin-top: 30px;
+  width: 150px;
+  color: black;
+}
+
+.titulo-home-icon-uma-linha {
+  text-align: center;
+  margin-top: 40px;
+  width: 150px;
+  color: black;
+}

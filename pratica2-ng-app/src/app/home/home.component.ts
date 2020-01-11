@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import axios from 'axios';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  infosUsuario = JSON.parse(localStorage.getItem('userData'));
+  fotoUsuario: string;
   constructor() { }
 
-  ngOnInit() {
+  public fotoAleatoria() {
+    axios.get('https://randomuser.me/api/?results=1').then((response) => {
+      this.fotoUsuario = response.data.results[0].picture.large;
+    });
   }
 
+  ngOnInit() {
+    this.fotoAleatoria();
+   }
 }
