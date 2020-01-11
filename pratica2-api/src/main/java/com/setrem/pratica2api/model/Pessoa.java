@@ -2,21 +2,20 @@ package com.setrem.pratica2api.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "pessoa")
@@ -59,15 +58,18 @@ public class Pessoa implements Serializable {
     @JoinColumn(name = "paisnascimentoid", referencedColumnName = "id")
     @ManyToOne
     private Pais paisnascimento;
+    @Column(name = "foto")
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] foto;
 
     public Pessoa() {
     }
 
-    public Pessoa(String cpf) {
+    public Pessoa(final String cpf) {
         this.cpf = cpf;
     }
 
-    public Pessoa(String cpf, String nome, Character sexo, String rg, Date datanascimento, String telefonecelular, String telefonefixo) {
+    public Pessoa(final String cpf, final String nome, final Character sexo, final String rg, final Date datanascimento, final String telefonecelular, final String telefonefixo) {
         this.cpf = cpf;
         this.nome = nome;
         this.sexo = sexo;
@@ -81,7 +83,7 @@ public class Pessoa implements Serializable {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(final String cpf) {
         this.cpf = cpf;
     }
 
@@ -89,7 +91,7 @@ public class Pessoa implements Serializable {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(final String nome) {
         this.nome = nome;
     }
 
@@ -97,7 +99,7 @@ public class Pessoa implements Serializable {
         return sexo;
     }
 
-    public void setSexo(Character sexo) {
+    public void setSexo(final Character sexo) {
         this.sexo = sexo;
     }
 
@@ -105,7 +107,7 @@ public class Pessoa implements Serializable {
         return rg;
     }
 
-    public void setRg(String rg) {
+    public void setRg(final String rg) {
         this.rg = rg;
     }
 
@@ -113,7 +115,7 @@ public class Pessoa implements Serializable {
         return datanascimento;
     }
 
-    public void setDatanascimento(Date datanascimento) {
+    public void setDatanascimento(final Date datanascimento) {
         this.datanascimento = datanascimento;
     }
 
@@ -121,7 +123,7 @@ public class Pessoa implements Serializable {
         return telefonecelular;
     }
 
-    public void setTelefonecelular(String telefonecelular) {
+    public void setTelefonecelular(final String telefonecelular) {
         this.telefonecelular = telefonecelular;
     }
 
@@ -129,7 +131,7 @@ public class Pessoa implements Serializable {
         return telefonefixo;
     }
 
-    public void setTelefonefixo(String telefonefixo) {
+    public void setTelefonefixo(final String telefonefixo) {
         this.telefonefixo = telefonefixo;
     }
 
@@ -137,7 +139,7 @@ public class Pessoa implements Serializable {
         return paisnascimento;
     }
 
-    public void setPaisnascimento(Pais paisnascimentoid) {
+    public void setPaisnascimento(final Pais paisnascimentoid) {
         this.paisnascimento = paisnascimentoid;
     }
 
@@ -149,12 +151,12 @@ public class Pessoa implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Pessoa)) {
             return false;
         }
-        Pessoa other = (Pessoa) object;
+        final Pessoa other = (Pessoa) object;
         if ((this.cpf == null && other.cpf != null) || (this.cpf != null && !this.cpf.equals(other.cpf))) {
             return false;
         }
@@ -164,6 +166,14 @@ public class Pessoa implements Serializable {
     @Override
     public String toString() {
         return "com.setrem.pratica2api.model.Pessoa[ cpf=" + cpf + " ]";
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
     
 }

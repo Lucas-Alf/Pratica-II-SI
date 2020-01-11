@@ -5,28 +5,32 @@
     <mat-grid-tile rowspan="3" colspan="1">
       <mat-list style="width: 100%;">
         <mat-card>
-        <img class="circular--square" style="margin-left: 80px;" src={{fotoUsuario}} />
+          <img class="circular--square" style="margin-left: 80px;"
+            src='data:image/png;base64,{{infosUsuario.pessoa.foto}}' />
         </mat-card>
         <mat-card style="margin-top: 10px; text-align: center;">{{infosUsuario.pessoa.nome}}</mat-card>
-        <mat-card style="margin-top: 10px; text-align: center;">Administrador</mat-card>
+        <mat-card style="margin-top: 10px; text-align: center;">{{infosUsuario.nivel.descricao}}</mat-card>
       </mat-list>
     </mat-grid-tile>
     <mat-grid-tile rowspan="3" colspan="2">
       <mat-grid-list cols="5" rowHeight="1:1" gutterSize="10px" style="width: 100%;">
-        <a href="/home">
-          <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="2" matTooltip="Folha de pagamento">
+        <a [attr.href]="retornaRota(1)">
+          <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(1)}" rowspan="1"
+            colspan="2" matTooltip="Folha de pagamento">
             <i class="material-icons home-icon">local_atm</i>
             <span class="titulo-home-icon-duas-linhas">Folha de Pagamento</span>
           </mat-grid-tile>
         </a>
-        <a href="/home">
-          <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="2" matTooltip="Processo Seletivo">
+        <a [attr.href]="retornaRota(2)">
+          <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1"
+            rowspan="1" colspan="2" matTooltip="Processo Seletivo">
             <i class="material-icons home-icon">supervised_user_circle</i>
             <span class="titulo-home-icon-duas-linhas">Processo Seletivo</span>
           </mat-grid-tile>
         </a>
-        <a href="/home">
-          <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1" matTooltip="Configurações">
+        <a [attr.href]="retornaRota(3)">
+          <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(3)}" rowspan="1"
+            colspan="1" matTooltip="Configurações">
             <i class="material-icons home-icon">settings_applications</i>
           </mat-grid-tile>
         </a>

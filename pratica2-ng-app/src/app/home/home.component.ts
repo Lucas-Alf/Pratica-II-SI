@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +8,16 @@ import axios from 'axios';
 export class HomeComponent implements OnInit {
 
   infosUsuario = JSON.parse(localStorage.getItem('userData'));
-  fotoUsuario: string;
   constructor() { }
-
-  public fotoAleatoria() {
-    axios.get('https://randomuser.me/api/?results=1').then((response) => {
-      this.fotoUsuario = response.data.results[0].picture.large;
-    });
+  public retornaPermissao(modulo) {
+    return !(this.infosUsuario.nivel.modulonivelList.filter(x => x.moduloid.id == modulo).length > 0);
   }
-
-  ngOnInit() {
-    this.fotoAleatoria();
-   }
+  public retornaRota(modulo) {
+    if (!this.retornaPermissao(modulo)) {
+      return this.infosUsuario.nivel.modulonivelList.filter(x=>x.moduloid.id == modulo)[0].moduloid.rota;
+    } else {
+      return '/home';
+    }
+  }
+  ngOnInit() { }
 }

@@ -5,13 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -39,10 +37,12 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "senha")
     private String senha;
-    
     @JoinColumn(name = "pessoacpf", referencedColumnName = "cpf")
     @OneToOne()
     private Pessoa pessoa;
+    @JoinColumn(name = "nivelid", referencedColumnName = "id")
+    @ManyToOne()
+    private Nivel nivel;
 
     public Usuario() {
     }
@@ -112,6 +112,14 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "com.setrem.pratica2api.model.Usuario[ id=" + id + " ]";
+    }
+
+    public Nivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Nivel nivel) {
+        this.nivel = nivel;
     }
     
 }

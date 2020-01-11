@@ -24,3 +24,8 @@
   width: 150px;
   color: black;
 }
+
+.disabled {
+  background: #808080a8 !important;
+  cursor: no-drop;
+}

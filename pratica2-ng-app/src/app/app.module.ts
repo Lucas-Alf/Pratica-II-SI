@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConstantsService } from './common/services/constants.service';
 
-//Angular Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
@@ -41,8 +40,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { NavbarNavigationComponent } from './navbar-navigation/navbar-navigation.component';
-
-// Outros componentes
 
 @NgModule({
   declarations: [
