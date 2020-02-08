@@ -40,6 +40,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { NavbarNavigationComponent } from './navbar-navigation/navbar-navigation.component';
+import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
+import { BlockSpinnerComponent } from './block-spinner/block-spinner.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { NavbarNavigationComponent } from './navbar-navigation/navbar-navigation
     HomeComponent,
     IndexComponent,
     NavbarNavigationComponent,
+    ConfiguracoesComponent,
+    BlockSpinnerComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ export class IndexComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
   public login() {
+    $('#cover-spin').show(0);
     axios.post(this.apiUrl + 'usuario/login', { email: this.email, senha: this.senha }).then((response) => {
       if (response && response.data) {
         localStorage.setItem('userData', JSON.stringify(response.data));
