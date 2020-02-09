@@ -41,7 +41,8 @@ import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { NavbarNavigationComponent } from './navbar-navigation/navbar-navigation.component';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
-import { BlockSpinnerComponent } from './block-spinner/block-spinner.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { LoaderService } from './services/loader.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { BlockSpinnerComponent } from './block-spinner/block-spinner.component';
     IndexComponent,
     NavbarNavigationComponent,
     ConfiguracoesComponent,
-    BlockSpinnerComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +92,7 @@ import { BlockSpinnerComponent } from './block-spinner/block-spinner.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ConstantsService],
+  providers: [ConstantsService, LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
