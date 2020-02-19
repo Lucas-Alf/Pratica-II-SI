@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "pratica2-ng-app"
+  "defaultProject": "pratica2-ng-app",
+  "cli": {
+    "analytics": "3b5690f1-35bd-459d-b032-886d218bfb84"
+  }
 }
