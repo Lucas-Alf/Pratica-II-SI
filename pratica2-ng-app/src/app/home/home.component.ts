@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   infosUsuario = JSON.parse(localStorage.getItem('userData'));
+  diaSemanaAtual: string = "";
+  corDiaSemanaAtual: string = "";
+  dataExtensaAtual: string = "";
   constructor(private router: Router) { }
   public sair() {
     localStorage.removeItem('userData');
@@ -24,5 +27,27 @@ export class HomeComponent implements OnInit {
       return '/home';
     }
   }
-  ngOnInit() { }
+  private diaSemana() {
+    return [
+      { nome: "Domingo", cor: "blue" },
+      { nome: "Segunda-feira", cor: "#ea0707" },
+      { nome: "Terça-feira", cor: "green" },
+      { nome: "Quarta-feira", cor: "#ff008d" },
+      { nome: "Quinta-feira", cor: "purple" },
+      { nome: "Sexta-feira", cor: "orange" },
+      { nome: "Sábado", cor: "#d60610" }
+    ][new Date().getDay()];
+    //rgb(45, 51, 85)
+  }
+  private dataExtensa() {
+    var data = new Date()
+    var mes = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"][data.getMonth()];
+    return data.getDate() + " de " + mes + " de " + data.getFullYear();
+  }
+  ngOnInit() {
+    var dia = this.diaSemana();
+    this.diaSemanaAtual = dia.nome;
+    this.corDiaSemanaAtual = dia.cor;
+    this.dataExtensaAtual = this.dataExtensa();
+  }
 }
