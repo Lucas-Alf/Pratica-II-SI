@@ -29,13 +29,13 @@ export class HomeComponent implements OnInit {
   }
   private diaSemana() {
     return [
-      { nome: "Domingo", cor: "blue" },
-      { nome: "Segunda-feira", cor: "#ea0707" },
-      { nome: "Terça-feira", cor: "green" },
-      { nome: "Quarta-feira", cor: "#ff008d" },
-      { nome: "Quinta-feira", cor: "purple" },
-      { nome: "Sexta-feira", cor: "orange" },
-      { nome: "Sábado", cor: "#d60610" }
+      { nome: "Domingo", cor: "#008f96" },
+      { nome: "Segunda-feira", cor: "#008f96" },
+      { nome: "Terça-feira", cor: "#008f96" },
+      { nome: "Quarta-feira", cor: "#008f96" },
+      { nome: "Quinta-feira", cor: "#008f96" },
+      { nome: "Sexta-feira", cor: "#008f96" },
+      { nome: "Sábado", cor: "#008f96" }
     ][new Date().getDay()];
   }
   private dataExtensa() {

@@ -25,24 +25,28 @@ export class IndexComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
   public login() {
-    this.loaderService.show();
-    axios.post(this.apiUrl + 'usuario/login', { email: this.email, senha: this.senha }).then((response) => {
-      if (response && response.data) {
-        localStorage.setItem('userData', JSON.stringify(response.data));
+    if (this.email && this.senha) {
+      this.loaderService.show();
+      axios.post(this.apiUrl + 'usuario/login', { email: this.email, senha: this.senha }).then((response) => {
+        if (response && response.data) {
+          localStorage.setItem('userData', JSON.stringify(response.data));
+          this.loaderService.hide();
+          this.router.navigate(['/home/']);
+          // alert(response.data);
+        } else {
+          this.loaderService.hide();
+          this.snackBar.open("Usuário e senha não encontrados. 🤔", null, { duration: 5000 });
+        }
+      }).catch((error) => {
         this.loaderService.hide();
-        this.router.navigate(['/home/']);
-        // alert(response.data);
-      } else {
-        this.loaderService.hide();
-        this.snackBar.open("Usuário e senha não encontrados. 🤔", null, { duration: 5000 });
-      }
-    }).catch((error) => {
-      this.loaderService.hide();
-      if (error.response) {
-        console.error(error.response.data.message);
-      }
-      this.snackBar.open("Ocorreu um erro ao fazer login. 😬", null, { duration: 5000 });
-    });
+        if (error.response) {
+          console.error(error.response.data.message);
+        }
+        this.snackBar.open("Ocorreu um erro ao fazer login. 😬", null, { duration: 5000 });
+      });
+    } else {
+      this.snackBar.open("❌ Email e Senha são obrigatórios.", null, { duration: 5000 });
+    }
   }
   public recuperarSenha() {
     this.snackBar.open("Essa função ainda não foi implementada. 😥", null, { duration: 5000 });
