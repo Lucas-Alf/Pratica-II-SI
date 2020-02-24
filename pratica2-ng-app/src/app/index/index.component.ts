@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ConstantsService } from '../common/services/constants.service';
 import { Router } from '@angular/router';
 import { LoaderService } from '../services/loader.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-index',
@@ -15,7 +16,12 @@ export class IndexComponent implements OnInit {
   email: string;
   senha: string;
   hidePassword = true;
-  constructor(private constant: ConstantsService, private router: Router, private loaderService: LoaderService) {
+  constructor(
+    private constant: ConstantsService,
+    private router: Router,
+    private loaderService: LoaderService,
+    private snackBar: MatSnackBar
+  ) {
     this.apiUrl = this.constant.apiUrl;
   }
   public login() {
@@ -28,17 +34,18 @@ export class IndexComponent implements OnInit {
         // alert(response.data);
       } else {
         this.loaderService.hide();
-        alert('Usuário e senha não encontrados.');
+        this.snackBar.open("Usuário e senha não encontrados. 🤔", null, { duration: 5000 });
       }
     }).catch((error) => {
+      this.loaderService.hide();
       if (error.response) {
-        this.loaderService.hide();
-        alert(error.response.data.message);
+        console.error(error.response.data.message);
       }
+      this.snackBar.open("Ocorreu um erro ao fazer login. 😬", null, { duration: 5000 });
     });
   }
   public recuperarSenha() {
-    alert('Chorra');
+    this.snackBar.open("Essa função ainda não foi implementada. 😥", null, { duration: 5000 });
   }
   ngOnInit() {
   }

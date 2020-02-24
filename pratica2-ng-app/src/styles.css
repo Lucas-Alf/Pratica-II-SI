@@ -15,10 +15,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: center;
 }
 
-.example-icon {
-  padding: 0 14px;
-}
-
 .example-spacer {
   flex: 1 1 auto;
 }
@@ -41,4 +37,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 120px;
   max-width: 120px;
   max-height: 120px;
+}
+
+.material-text {
+  color: #000000;
+  opacity:  87%;
+  font-family: Roboto
+}
+
+.material-text-medium {
+  color: #000000;
+  opacity:  60%;
+  font-family: Roboto
+}
+
+.material-text-disabled {
+  color: #000000;
+  opacity:  38%;
+  font-family: Roboto
+}
+
+.material-text-error {
+  color: #B00020 ;
+  opacity:  100%;
+  font-family: Roboto
+}
+
+.bold {
+  font-weight: bold;
 }
