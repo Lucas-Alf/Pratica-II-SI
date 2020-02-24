@@ -12,4 +12,5 @@
 * Na primeira vez, executar na raiz do projeto:
    * npm install
 * Para iniciar o Angular: ng serve
-* Para gerar um novo componente do Angular: ng generate component nomeComponente
+* Para gerar um novo componente do Angular:
+   * ng generate component nomeComponente
