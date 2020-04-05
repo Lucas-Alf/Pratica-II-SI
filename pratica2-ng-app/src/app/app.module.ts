@@ -43,6 +43,8 @@ import { NavbarNavigationComponent } from './navbar-navigation/navbar-navigation
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { LoaderService } from './services/loader.service';
+import { FolhapagamentoComponent } from './folhapagamento/folhapagamento.component';
+import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { LoaderService } from './services/loader.service';
     NavbarNavigationComponent,
     ConfiguracoesComponent,
     LoadingSpinnerComponent,
+    FolhapagamentoComponent,
+    MenuLateralComponent,
   ],
   imports: [
     BrowserModule,
