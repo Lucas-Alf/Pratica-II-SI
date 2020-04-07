@@ -10,7 +10,7 @@ import com.setrem.pratica2api.model.Evento;
 import com.setrem.pratica2api.repository.EventoRepository;
 
 @RestController
-@RequestMapping("/api/incidenciaevento")
+@RequestMapping("/api/evento")
 @CrossOrigin
 public class EventoController {
     private EventoRepository eventoRepository;
