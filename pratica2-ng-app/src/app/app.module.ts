@@ -45,6 +45,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { LoaderService } from './services/loader.service';
 import { FolhapagamentoComponent } from './folhapagamento/folhapagamento.component';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+import { CabecalhoSistemaComponent } from './cabecalho-sistema/cabecalho-sistema.component';
+import { RodapeSistemaComponent } from './rodape-sistema/rodape-sistema.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
     LoadingSpinnerComponent,
     FolhapagamentoComponent,
     MenuLateralComponent,
+    CabecalhoSistemaComponent,
+    RodapeSistemaComponent,
   ],
   imports: [
     BrowserModule,

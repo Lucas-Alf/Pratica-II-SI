@@ -1,15 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
 
-.center{
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.center {
   width: 75%;
   margin: 10px auto;
 }
 
-.main-div{
-  height: 100vh;
+.main-div {
+  height: 88vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +37,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: flex-start !important;
 }
 
+.accent-background-color {
+  background-color: #193651;
+}
+
+.accent-color {
+  color: #193651;
+}
+
 .circular--square {
   border-radius: 50%;
   width: 120px;
@@ -41,25 +55,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .material-text {
   color: #000000;
-  opacity:  87%;
+  opacity: 87%;
   font-family: Roboto
 }
 
+.material-text-white {
+  color:white;
+  font-family: Roboto
+}
 .material-text-medium {
   color: #000000;
-  opacity:  60%;
+  opacity: 60%;
   font-family: Roboto
 }
 
 .material-text-disabled {
   color: #000000;
-  opacity:  38%;
+  opacity: 38%;
   font-family: Roboto
 }
 
 .material-text-error {
-  color: #B00020 ;
-  opacity:  100%;
+  color: #B00020;
+  opacity: 100%;
   font-family: Roboto
 }
 

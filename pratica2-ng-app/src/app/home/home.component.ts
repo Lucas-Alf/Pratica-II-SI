@@ -29,17 +29,17 @@ export class HomeComponent implements OnInit {
   }
   private diaSemana() {
     return [
-      { nome: "Domingo", cor: "#008f96" },
-      { nome: "Segunda-feira", cor: "#008f96" },
-      { nome: "Terça-feira", cor: "#008f96" },
-      { nome: "Quarta-feira", cor: "#008f96" },
-      { nome: "Quinta-feira", cor: "#008f96" },
-      { nome: "Sexta-feira", cor: "#008f96" },
-      { nome: "Sábado", cor: "#008f96" }
+      { nome: "Domingo", cor: "blue" },
+      { nome: "Segunda-feira", cor: "#06ae87" },
+      { nome: "Terça-feira", cor: "rgb(12, 75, 134)" },
+      { nome: "Quarta-feira", cor: "#9d00ff" },
+      { nome: "Quinta-feira", cor: "#806a00" },
+      { nome: "Sexta-feira", cor: "#ff3b00" },
+      { nome: "Sábado", cor: "#43d606" }
     ][new Date().getDay()];
   }
   private dataExtensa() {
-    var data = new Date()
+    var data = new Date();
     var mes = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"][data.getMonth()];
     return data.getDate() + " de " + mes + " de " + data.getFullYear();
   }
