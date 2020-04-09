@@ -7,7 +7,7 @@
       <mat-icon class="example-icon" style="padding-right: 0px;" aria-hidden="false">account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <a href="/home" mat-menu-item>Voltar a home</a>
+      <a [routerLink]="['/home']" mat-menu-item>Voltar a home</a>
       <a (click)="sair()" mat-menu-item>Sair</a>
     </mat-menu>
   </mat-toolbar-row>
