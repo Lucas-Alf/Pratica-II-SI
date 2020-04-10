@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       { nome: "Terça-feira", cor: "rgb(12, 75, 134)" },
       { nome: "Quarta-feira", cor: "#9d00ff" },
       { nome: "Quinta-feira", cor: "#806a00" },
-      { nome: "Sexta-feira", cor: "#ff3b00" },
+      { nome: "Sexta-feira", cor: "rgb(12, 75, 134)" },
       { nome: "Sábado", cor: "#43d606" }
     ][new Date().getDay()];
   }

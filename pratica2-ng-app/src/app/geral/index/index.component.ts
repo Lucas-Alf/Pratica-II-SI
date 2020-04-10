@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
-import { ConstantsService } from '../common/services/constants.service';
+import { ConstantsService } from '../../common/services/constants.service';
 import { Router } from '@angular/router';
-import { LoaderService } from '../services/loader.service';
+import { LoaderService } from '../../services/loader.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({

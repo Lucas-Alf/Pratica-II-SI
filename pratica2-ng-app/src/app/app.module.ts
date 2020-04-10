@@ -37,16 +37,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
-import { IndexComponent } from './index/index.component';
-import { NavbarNavigationComponent } from './navbar-navigation/navbar-navigation.component';
-import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { HomeComponent } from './geral/home/home.component';
+import { IndexComponent } from './geral/index/index.component';
 import { LoaderService } from './services/loader.service';
-import { FolhapagamentoComponent } from './folhapagamento/folhapagamento.component';
-import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
-import { CabecalhoSistemaComponent } from './cabecalho-sistema/cabecalho-sistema.component';
-import { RodapeSistemaComponent } from './rodape-sistema/rodape-sistema.component';
+import { FolhapagamentoComponent } from './folhapagamento/home/folhapagamento.component';
+import { FolhaMenuLateralComponent } from './folhapagamento/folha-menu-lateral/folha-menu-lateral.component';
+import { NavbarNavigationComponent } from './componentes/navbar-navigation/navbar-navigation.component';
+import { ConfiguracoesComponent } from './geral/configuracoes/configuracoes.component';
+import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-spinner.component';
+import { CabecalhoSistemaComponent } from './componentes/cabecalho-sistema/cabecalho-sistema.component';
+import { RodapeSistemaComponent } from './componentes/rodape-sistema/rodape-sistema.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,7 @@ import { RodapeSistemaComponent } from './rodape-sistema/rodape-sistema.componen
     ConfiguracoesComponent,
     LoadingSpinnerComponent,
     FolhapagamentoComponent,
-    MenuLateralComponent,
+    FolhaMenuLateralComponent,
     CabecalhoSistemaComponent,
     RodapeSistemaComponent,
   ],
