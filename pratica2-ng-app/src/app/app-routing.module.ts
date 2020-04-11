@@ -5,6 +5,7 @@ import { HomeComponent } from './geral/home/home.component';
 import { ConfiguracoesComponent } from './geral/configuracoes/configuracoes.component';
 import { FolhapagamentoComponent } from './folhapagamento/home/folhapagamento.component';
 import { IncidenciaComponent } from './folhapagamento/incidencia/incidencia.component';
+import { EventoComponent } from './folhapagamento/evento/evento.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'configuracoes', component: ConfiguracoesComponent },
   { path: 'folhapagamento', component: FolhapagamentoComponent },
   { path: 'folhapagamento/incidencia', component: IncidenciaComponent },
+  { path: 'folhapagamento/evento', component: EventoComponent },
 ];
 
 @NgModule({

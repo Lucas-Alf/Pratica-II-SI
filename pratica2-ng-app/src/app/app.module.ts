@@ -48,6 +48,7 @@ import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-s
 import { CabecalhoSistemaComponent } from './componentes/cabecalho-sistema/cabecalho-sistema.component';
 import { RodapeSistemaComponent } from './componentes/rodape-sistema/rodape-sistema.component';
 import { IncidenciaComponent } from './folhapagamento/incidencia/incidencia.component';
+import { EventoComponent } from './folhapagamento/evento/evento.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { IncidenciaComponent } from './folhapagamento/incidencia/incidencia.comp
     CabecalhoSistemaComponent,
     RodapeSistemaComponent,
     IncidenciaComponent,
+    EventoComponent,
   ],
   imports: [
     BrowserModule,

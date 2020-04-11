@@ -1,0 +1,51 @@
+<app-folha-menu-lateral></app-folha-menu-lateral>
+<div style="margin-left: 250px;">
+  <app-cabecalho-sistema></app-cabecalho-sistema>
+  <div style="margin: 15px;">
+    <mat-card><b>Evento</b></mat-card>
+    <mat-card style="margin-top: 13px;">
+      <div style="width: 100%; display:inline-block;">
+        <button mat-stroked-button class="crud-button">
+          <mat-icon>add</mat-icon> Incluir
+        </button>
+        <button mat-stroked-button class="crud-button">
+          <mat-icon>edit</mat-icon> Alterar
+        </button>
+        <button mat-stroked-button class="crud-button">
+          <mat-icon>delete</mat-icon> Excluir
+        </button>
+        <div style="float: right;">
+          <mat-form-field style="margin-right: 10px;">
+            <mat-label>🔎 Pesquisar</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+        </div>
+      </div>
+      <table mat-table [dataSource]="storeEvento">
+        <ng-container matColumnDef="id">
+          <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Código </th>
+          <td mat-cell *matCellDef="let evento"> {{evento.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="descricao">
+          <th mat-header-cell *matHeaderCellDef> Descrição </th>
+          <td mat-cell *matCellDef="let evento"> {{evento.descricao}} </td>
+        </ng-container>
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let evento"> {{evento.tipo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="incidencia">
+          <th mat-header-cell *matHeaderCellDef> Incidencia </th>
+          <td mat-cell *matCellDef="let evento"> {{evento.incidencia}} </td>
+        </ng-container>
+        <ng-container matColumnDef="automatico">
+          <th mat-header-cell *matHeaderCellDef> Automatico </th>
+          <td mat-cell *matCellDef="let evento"> {{evento.automatico}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>   
+    </mat-card>
+  </div>
+  <app-rodape-sistema></app-rodape-sistema>
+</div>
