@@ -4,6 +4,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ValidationException;
+import javax.websocket.server.PathParam;
+
 import java.util.List;
 
 import com.setrem.pratica2api.model.Incidencia;
@@ -25,7 +27,7 @@ public class IncidenciaController {
         return incidencias;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public Incidencia save(@RequestBody Incidencia data, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
@@ -34,9 +36,9 @@ public class IncidenciaController {
         return data;
     }
 
-    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable int id) {
         this.incidenciaRepository.deleteById(id);
     }
-
 }
