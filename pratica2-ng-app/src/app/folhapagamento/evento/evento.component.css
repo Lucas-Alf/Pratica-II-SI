@@ -6,6 +6,11 @@
     font-size: 14px;
     width: 250px;
   }
+
+  .mat-column-select {
+    overflow: initial;
+    width: 50px;
+  }
   
   .crud-button {
     margin-left: 8px;

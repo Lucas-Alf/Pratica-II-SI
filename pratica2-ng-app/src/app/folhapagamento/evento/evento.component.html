@@ -11,7 +11,7 @@
         <button mat-stroked-button class="crud-button">
           <mat-icon>edit</mat-icon> Alterar
         </button>
-        <button mat-stroked-button class="crud-button">
+        <button  (click)="excluir()"  mat-stroked-button class="crud-button">
           <mat-icon>delete</mat-icon> Excluir
         </button>
         <div style="float: right;">
@@ -22,6 +22,18 @@
         </div>
       </div>
       <table mat-table [dataSource]="storeEvento">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
         <ng-container matColumnDef="id">
           <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Código </th>
           <td mat-cell *matCellDef="let evento"> {{evento.id}} </td>
@@ -36,7 +48,7 @@
         </ng-container>
         <ng-container matColumnDef="incidencia">
           <th mat-header-cell *matHeaderCellDef> Incidencia </th>
-          <td mat-cell *matCellDef="let evento"> {{evento.incidencia}} </td>
+          <td mat-cell *matCellDef="let evento"> {{evento.incidencia}} </td> <!-- How to get the descrition of the incidency? -->
         </ng-container>
         <ng-container matColumnDef="automatico">
           <th mat-header-cell *matHeaderCellDef> Automatico </th>

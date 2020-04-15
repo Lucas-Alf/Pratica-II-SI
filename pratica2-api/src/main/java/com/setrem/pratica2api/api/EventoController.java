@@ -34,7 +34,8 @@ public class EventoController {
         return data;
     }
 
-    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable int id) {
         this.eventoRepository.deleteById(id);
     }
