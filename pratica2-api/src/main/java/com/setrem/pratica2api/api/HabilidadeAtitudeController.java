@@ -10,7 +10,7 @@ import com.setrem.pratica2api.model.HabilidadeAtitude;
 import com.setrem.pratica2api.repository.HabilidadeAtitudeRepository;;
 
 @RestController
-@RequestMapping("/api/cargo")
+@RequestMapping("/api/habilidadeatitude")
 @CrossOrigin
 public class HabilidadeAtitudeController {
     private HabilidadeAtitudeRepository HabilidadeAtitudeRepository;
