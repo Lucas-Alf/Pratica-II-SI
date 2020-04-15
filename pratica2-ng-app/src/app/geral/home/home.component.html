@@ -47,7 +47,13 @@
             matTooltip="Sair">
             <i class="material-icons home-icon">exit_to_app</i>
           </mat-grid-tile>
-          <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="2"></mat-grid-tile>
+          <a [routerLink]="retornaRota(4)">
+            <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1"
+              rowspan="1" colspan="2" matTooltip="Contratação">
+              <i class="material-icons home-icon">supervised_user_circle</i>
+              <span class="titulo-home-icon-uma-linha">Contratação</span>
+            </mat-grid-tile>
+          </a>
           <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
           <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
         </mat-grid-list>

@@ -1,0 +1,28 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer opened class="example-sidenav" mode="side">
+      <mat-card class="header-sidenav accent-background-color"><p style="margin-top: 1px;">Contratação</p></mat-card>
+      <mat-list>
+        <mat-list-item [routerLink]="['#']" class="item-menu">
+          <mat-icon class="icone-menu">build</mat-icon>
+          <a>Cadastro de Funcionário</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['#']" class="item-menu">
+          <mat-icon class="icone-menu">build</mat-icon>
+          <a>Cadastro de Departamento</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['#']" class="item-menu">
+          <mat-icon class="icone-menu">build</mat-icon>
+          <a>Cadastro de Empresa</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['#']" class="item-menu">
+          <mat-icon class="icone-menu">build</mat-icon>
+          <a>Cadastro de Endereço</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/home']" style="cursor: pointer; position: fixed; bottom: 0; width: 250px; background-color: #e2e2e2">
+          <mat-icon class="icone-menu">keyboard_return</mat-icon>
+          <a>Voltar</a>
+        </mat-list-item>
+      </mat-list>
+    </mat-drawer>
+  </mat-drawer-container>
+  

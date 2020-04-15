@@ -49,6 +49,9 @@ import { CabecalhoSistemaComponent } from './componentes/cabecalho-sistema/cabec
 import { RodapeSistemaComponent } from './componentes/rodape-sistema/rodape-sistema.component';
 import { IncidenciaComponent } from './folhapagamento/incidencia/incidencia.component';
 import { EventoComponent } from './folhapagamento/evento/evento.component';
+import { ContratacaoComponent } from './contratacao/home/contratacao.component';
+import { ContratacaoMenuLateralComponent } from './contratacao/contratacao-menu-lateral/contratacao-menu-lateral.component';
+
 
 @NgModule({
   declarations: [
@@ -64,6 +67,8 @@ import { EventoComponent } from './folhapagamento/evento/evento.component';
     RodapeSistemaComponent,
     IncidenciaComponent,
     EventoComponent,
+    ContratacaoComponent,
+    ContratacaoMenuLateralComponent,
   ],
   imports: [
     BrowserModule,
