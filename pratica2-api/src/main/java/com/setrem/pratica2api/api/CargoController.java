@@ -4,6 +4,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ValidationException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.setrem.pratica2api.model.Cargo;
@@ -23,6 +25,12 @@ public class CargoController {
     public List<Cargo> all() {
         var cargos = this.CargoRepository.findAll();
         return cargos;
+    }
+
+    @GetMapping("/lista")
+    public List<Cargo> Lista() {
+        //var cargos = this.CargoRepository.ListarCargos();
+        return this.CargoRepository.ListarCargos();
     }
 
     @PostMapping

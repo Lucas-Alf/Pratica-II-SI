@@ -7,6 +7,8 @@ import { FolhapagamentoComponent } from './folhapagamento/home/folhapagamento.co
 import { IncidenciaComponent } from './folhapagamento/incidencia/incidencia.component';
 import { EventoComponent } from './folhapagamento/evento/evento.component';
 import {ContratacaoComponent} from './contratacao/home/contratacao.component';
+import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
+import { CargoComponent } from './recrutamento/cargo/cargo.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'folhapagamento', component: FolhapagamentoComponent },
   { path: 'folhapagamento/incidencia', component: IncidenciaComponent },
   { path: 'folhapagamento/evento', component: EventoComponent },
+  { path: 'recrutamento', component: RecrutamentoComponent },
+  { path: 'recrutamento/cargo', component: CargoComponent },
 ];
 
 @NgModule({

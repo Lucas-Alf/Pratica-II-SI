@@ -51,7 +51,9 @@ import { IncidenciaComponent } from './folhapagamento/incidencia/incidencia.comp
 import { EventoComponent } from './folhapagamento/evento/evento.component';
 import { ContratacaoComponent } from './contratacao/home/contratacao.component';
 import { ContratacaoMenuLateralComponent } from './contratacao/contratacao-menu-lateral/contratacao-menu-lateral.component';
-
+import { RecrutamentoMenuLateralComponent } from './recrutamento/recrutamento-menu-lateral/recrutamento-menu-lateral.component';
+import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
+import { CargoComponent } from './recrutamento/cargo/cargo.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,9 @@ import { ContratacaoMenuLateralComponent } from './contratacao/contratacao-menu-
     EventoComponent,
     ContratacaoComponent,
     ContratacaoMenuLateralComponent,
+    RecrutamentoMenuLateralComponent,
+    RecrutamentoComponent,
+    CargoComponent,
   ],
   imports: [
     BrowserModule,

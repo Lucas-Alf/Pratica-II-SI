@@ -1,0 +1,47 @@
+<app-recrutamento-menu-lateral></app-recrutamento-menu-lateral>
+<div style="margin-left: 250px;">
+  <app-cabecalho-sistema></app-cabecalho-sistema>
+  <div style="margin: 15px;">
+    <mat-card><b>Cargo</b></mat-card>
+    <mat-card style="margin-top: 13px;">
+      <div style="width: 100%; display:inline-block;">
+        <button mat-stroked-button class="crud-button">
+          <mat-icon>add</mat-icon> Incluir
+        </button>
+        <button mat-stroked-button class="crud-button">
+          <mat-icon>edit</mat-icon> Alterar
+        </button>
+        <button mat-stroked-button class="crud-button">
+          <mat-icon>delete</mat-icon> Excluir
+        </button>
+        <div style="float: right;">
+          <mat-form-field style="margin-right: 10px;">
+            <mat-label>🔎 Pesquisar</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+        </div>
+      </div>
+      <table mat-table [dataSource]="storeCargo">
+        <ng-container matColumnDef="id">
+          <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Código </th>
+          <td mat-cell *matCellDef="let cargo"> {{cargo.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="descricao">
+          <th mat-header-cell *matHeaderCellDef> Descrição </th>
+          <td mat-cell *matCellDef="let cargo"> {{cargo.descricao}} </td>
+        </ng-container>
+        <ng-container matColumnDef="cboid">
+          <th mat-header-cell *matHeaderCellDef> CBO </th>
+          <td mat-cell *matCellDef="let cargo"> {{cargo.cboid}} </td>
+        </ng-container>
+        <ng-container matColumnDef="departamento">
+          <th mat-header-cell *matHeaderCellDef> Departamento </th>
+          <td mat-cell *matCellDef="let cargo"> {{cargo.departamento}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+  <app-rodape-sistema></app-rodape-sistema>
+</div>
