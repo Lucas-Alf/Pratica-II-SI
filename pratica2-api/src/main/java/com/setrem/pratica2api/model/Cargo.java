@@ -38,11 +38,11 @@ public class Cargo implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descricao")
     private String descricao;
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "cboid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cbo cboid;
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "departamentoid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Departamento departamentoid;
