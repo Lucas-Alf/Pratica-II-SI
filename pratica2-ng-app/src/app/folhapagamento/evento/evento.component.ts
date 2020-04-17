@@ -4,8 +4,8 @@ import axios from 'axios';
 import { ConstantsService } from 'src/app/common/services/constants.service';
 import { Evento } from './evento';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SelectionModel } from '@angular/cdk/collections';
 import { LoaderService } from 'src/app/services/loader.service';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-evento',
@@ -23,9 +23,8 @@ export class EventoComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'descricao', 'tipo', 'incidencia', 'automatico'];
+  displayedColumns: string[] = ['select', 'id', 'descricao', 'tipo','automatico','incidencia'];
   storeEvento = new MatTableDataSource();
-
   selection = new SelectionModel<Evento>();
 
   isAllSelected() {
@@ -62,8 +61,10 @@ export class EventoComponent implements OnInit {
   }
 
   listar(): void {
+    debugger
     this.loaderService.show();
     axios.get(this.apiUrl + 'evento/all').then((response) => {
+      debugger
       if (response && response.data) {
         this.storeEvento.data = response.data;
         this.loaderService.hide();
@@ -80,10 +81,12 @@ export class EventoComponent implements OnInit {
       return !filter || data.descricao.toLowerCase().includes(filter.toLowerCase());
     }
 
+    //Preenche a tabela
     this.listar();
 
     const initialSelection = [];
     const allowMultiSelect = false;
     this.selection = new SelectionModel<Evento>(allowMultiSelect, initialSelection);
   }
+
 }

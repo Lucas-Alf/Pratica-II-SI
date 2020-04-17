@@ -37,7 +37,7 @@ public class Evento implements Serializable {
     @Size(min = 1, max = 1)
     @Column(name = "tipo")
     private String tipo;
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "incidenciaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Incidencia incidenciaId;
