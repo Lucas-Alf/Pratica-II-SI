@@ -5,10 +5,10 @@
     <mat-card><b>Incidencias</b></mat-card>
     <mat-card style="margin-top: 13px;">
       <div style="width: 100%; display:inline-block;">
-        <button mat-stroked-button class="crud-button">
+        <button (click)="incluir()" mat-stroked-button class="crud-button">
           <mat-icon>add</mat-icon> Incluir
         </button>
-        <button mat-stroked-button class="crud-button">
+        <button (click)="alterar()" mat-stroked-button class="crud-button">
           <mat-icon>edit</mat-icon> Alterar
         </button>
         <button (click)="excluir()" mat-stroked-button class="crud-button">

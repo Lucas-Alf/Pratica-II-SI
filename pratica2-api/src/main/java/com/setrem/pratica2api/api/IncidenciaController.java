@@ -27,13 +27,34 @@ public class IncidenciaController {
         return incidencias;
     }
 
-    @PostMapping("/save")
-    public Incidencia save(@RequestBody Incidencia data, BindingResult bindingResult) {
+    @PostMapping("/Incluir")
+    public Incidencia add(@RequestBody Incidencia data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        data = this.incidenciaRepository.save(data);
-        return data;
+        var jaExistente = this.incidenciaRepository.findById(data.getId());
+        if (jaExistente.isPresent()) {
+            throw new Exception("Já existe uma incidencia com este código.");
+        } else {
+            data = this.incidenciaRepository.save(data);
+            return data;
+        }
+    }
+
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public Incidencia update(@RequestBody Incidencia data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+        var jaExistente = this.incidenciaRepository.findById(data.getId());
+        if (!jaExistente.isPresent()) {
+            throw new Exception("Incidencia com código " + data.getId() + " não encontrada.");
+        } else {
+            jaExistente.get().setDescricao(data.getDescricao());
+            this.incidenciaRepository.save(jaExistente.get());
+            return jaExistente.get();
+        }
     }
 
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
