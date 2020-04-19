@@ -1,5 +1,5 @@
 <app-cabecalho-sistema></app-cabecalho-sistema>
-<div class="main-div" style="background-color: #80808021;">
+<div class="main-div" style="background-color: #80808021;" (keydown.enter)="login()">
   <table>
     <tr>
       <td style="border-right: 1.2px solid #013f84; padding-right: 70px;">
@@ -16,8 +16,8 @@
             </mat-form-field><br />
             <mat-form-field style="width: 300px;">
               <input matInput placeholder="Senha" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]='senha'>
-              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Esconder senha'"
-                [attr.aria-pressed]="hidePassword">
+              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Esconder senha'" [attr.aria-pressed]="hidePassword">
                 <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field><br />
