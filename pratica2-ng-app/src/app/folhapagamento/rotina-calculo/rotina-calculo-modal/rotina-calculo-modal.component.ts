@@ -1,19 +1,19 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Incidencia } from '../incidencia';
+import { RotinaCalculo } from '../RotinaCalculo';
 
 @Component({
-  selector: 'app-incidencia-modal',
-  templateUrl: './incidencia-modal.component.html',
-  styleUrls: ['./incidencia-modal.component.css']
+  selector: 'app-rotina-calculo-modal',
+  templateUrl: './rotina-calculo-modal.component.html',
+  styleUrls: ['./rotina-calculo-modal.component.css']
 })
-export class IncidenciaModalComponent implements OnInit {
+export class RotinaCalculoModalComponent implements OnInit {
   codigoHabilitado: boolean;
   codigo: number;
   descricao: string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
-    public dialogRef: MatDialogRef<IncidenciaModalComponent>
+    public dialogRef: MatDialogRef<RotinaCalculoModalComponent>
   ) { }
 
   close(): void {
@@ -21,7 +21,7 @@ export class IncidenciaModalComponent implements OnInit {
   }
 
   save(): void {
-    const dados: Incidencia = { id: this.codigo, descricao: this.descricao };
+    const dados: RotinaCalculo = { id: this.codigo, descricao: this.descricao };
     this.data.component.salvar(this.data.action, dados);
   }
 

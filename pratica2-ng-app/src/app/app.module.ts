@@ -55,6 +55,8 @@ import { RecrutamentoMenuLateralComponent } from './recrutamento/recrutamento-me
 import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
 import { IncidenciaModalComponent } from './folhapagamento/incidencia/incidencia-modal/incidencia-modal.component';
+import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
+import { RotinaCalculoModalComponent } from './folhapagamento/rotina-calculo/rotina-calculo-modal/rotina-calculo-modal.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { IncidenciaModalComponent } from './folhapagamento/incidencia/incidencia
     RecrutamentoComponent,
     CargoComponent,
     IncidenciaModalComponent,
+    RotinaCalculoComponent,
+    RotinaCalculoModalComponent,
   ],
   imports: [
     BrowserModule,
