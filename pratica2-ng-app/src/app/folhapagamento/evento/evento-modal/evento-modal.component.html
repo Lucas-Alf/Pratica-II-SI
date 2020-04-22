@@ -15,7 +15,11 @@
   </mat-form-field><br />
   <mat-form-field appearance="standard" style="width: 300px;">
     <mat-label>Incidência</mat-label>
-    <input type="text" matInput placeholder="Incidência" [(ngModel)]='incidenciaId'>
+    <mat-select [(ngModel)]='incidenciaId'>
+      <mat-option *ngFor="let incidencia of incidencias" [value]="incidenciaId.id">
+        {{incidenciaId.id}} - {{incidenciaId.descricao}}
+      </mat-option>
+    </mat-select>
   </mat-form-field><br />
 
 </div>
