@@ -2,7 +2,7 @@
 <div style="margin-left: 250px;">
   <app-cabecalho-sistema></app-cabecalho-sistema>
   <div style="margin: 15px;">
-    <mat-card><b>Incidências</b></mat-card>
+    <mat-card><b>Rotinas de Cálculo</b></mat-card>
     <mat-card style="margin-top: 13px;">
       <div style="width: 100%; display:inline-block;">
         <button (click)="incluir()" mat-stroked-button class="crud-button">
@@ -21,7 +21,7 @@
           </mat-form-field>
         </div>
       </div>
-      <table mat-table [dataSource]="storeIncidencia">
+      <table mat-table [dataSource]="storeRotinaCalculo">
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
             <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"

@@ -1,12 +1,14 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer opened class="example-sidenav" mode="side">
-    <mat-card class="header-sidenav accent-background-color"><p style="margin-top: 1px;">Folha de Pagamento</p></mat-card>
+    <mat-card class="header-sidenav accent-background-color">
+      <p style="margin-top: 1px;">Folha de Pagamento</p>
+    </mat-card>
     <mat-list>
-      <mat-list-item [routerLink]="['#']" class="item-menu">
+      <mat-list-item [routerLink]="['#']" class="item-menu-desabilitado">
         <mat-icon class="icone-menu">monetization_on</mat-icon>
-        <a>Folha de Pagamento</a>
+        <a>Folha de Pagamento ❌</a>
       </mat-list-item>
-      <mat-list-item [routerLink]="['#']" class="item-menu">
+      <mat-list-item [routerLink]="['/folhapagamento/rotinacalculo']" class="item-menu">
         <mat-icon class="icone-menu">build</mat-icon>
         <a>Rotinas de Cálculo</a>
       </mat-list-item>
@@ -18,7 +20,16 @@
         <mat-icon class="icone-menu">swap_horiz</mat-icon>
         <a>Incidencias</a>
       </mat-list-item>
-      <mat-list-item [routerLink]="['/home']" style="cursor: pointer; position: fixed; bottom: 0; width: 250px; background-color: #e2e2e2">
+      <mat-list-item [routerLink]="['/folhapagamento/incidencia']" class="item-menu-desabilitado">
+        <mat-icon class="icone-menu">today</mat-icon>
+        <a>Periodo de Cálculo ❌</a>
+      </mat-list-item>
+      <mat-list-item [routerLink]="['/folhapagamento/incidencia']" class="item-menu-desabilitado">
+        <mat-icon class="icone-menu">settings</mat-icon>
+        <a>Parâmetros ❌</a>
+      </mat-list-item>
+      <mat-list-item [routerLink]="['/home']"
+        style="cursor: pointer; position: fixed; bottom: 0; width: 250px; background-color: #e2e2e2">
         <mat-icon class="icone-menu">keyboard_return</mat-icon>
         <a>Voltar</a>
       </mat-list-item>

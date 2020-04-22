@@ -28,21 +28,25 @@ public class Evento implements Serializable {
     @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "descricao")
-    private String  descricao;
+    private String descricao;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1)
     @Column(name = "tipo")
     private String tipo;
-    //@JsonIgnore
+    // @JsonIgnore
     @JoinColumn(name = "incidenciaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Incidencia incidenciaId;
+
+    @JoinColumn(name = "rotinacalculoid", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private RotinaCalculo rotinacalculoId;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "automatico")
     private boolean automatico;
-
 
     public Integer getId() {
         return this.id;
@@ -96,7 +100,9 @@ public class Evento implements Serializable {
             return false;
         }
         Evento evento = (Evento) o;
-        return Objects.equals(id, evento.id) && Objects.equals(descricao, evento.descricao) && Objects.equals(tipo, evento.tipo) && Objects.equals(incidenciaId, evento.incidenciaId) && automatico == evento.automatico;
+        return Objects.equals(id, evento.id) && Objects.equals(descricao, evento.descricao)
+                && Objects.equals(tipo, evento.tipo) && Objects.equals(incidenciaId, evento.incidenciaId)
+                && automatico == evento.automatico;
     }
 
     @Override
@@ -106,8 +112,8 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "{ id='" + getId() + ", descricao='" + getDescricao() + "' tipo='" + getTipo() + "', incidenciaId='" + getIncidenciaId() + "', automatico='" + isAutomatico() + "'}";
+        return "{" + " id='" + getId() + "'" + ", descricao='" + getDescricao() + "'" + ", tipo='" + getTipo() + "'"
+                + ", incidenciaId='" + getIncidenciaId() + "'" + ", automatico='" + isAutomatico() + "'" + "}";
     }
-
 
 }

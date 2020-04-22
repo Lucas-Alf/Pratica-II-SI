@@ -34,3 +34,8 @@ a {
 .item-menu {
   cursor: pointer;
 }
+
+.item-menu-desabilitado {
+  cursor: not-allowed;
+  /* background-color: #00000024; */
+}
