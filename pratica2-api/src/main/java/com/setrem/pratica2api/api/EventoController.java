@@ -25,13 +25,34 @@ public class EventoController {
         return eventos;
     }
 
-    @PostMapping
-    public Evento save(@RequestBody Evento data, BindingResult bindingResult) {
+    @PostMapping("/Incluir")
+    public Evento add(@RequestBody Evento data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        data = this.eventoRepository.save(data);
-        return data;
+        var jaExistente = this.eventoRepository.findById(data.getId());
+        if (jaExistente.isPresent()) {
+            throw new Exception("Já existe um evento com este código.");
+        } else {
+            data = this.eventoRepository.save(data);
+            return data;
+        }
+    }
+
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public Evento update(@RequestBody Evento data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+        var jaExistente = this.eventoRepository.findById(data.getId());
+        if (!jaExistente.isPresent()) {
+            throw new Exception("Evento com código " + data.getId() + " não encontrada.");
+        } else {
+            jaExistente.get().setDescricao(data.getDescricao());
+            this.eventoRepository.save(jaExistente.get());
+            return jaExistente.get();
+        }
     }
 
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })

@@ -55,6 +55,7 @@ import { RecrutamentoMenuLateralComponent } from './recrutamento/recrutamento-me
 import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
 import { IncidenciaModalComponent } from './folhapagamento/incidencia/incidencia-modal/incidencia-modal.component';
+import { EventoModalComponent } from './folhapagamento/evento/evento-modal/evento-modal.component';
 
 @NgModule({
   declarations: [
@@ -76,13 +77,13 @@ import { IncidenciaModalComponent } from './folhapagamento/incidencia/incidencia
     RecrutamentoComponent,
     CargoComponent,
     IncidenciaModalComponent,
+    EventoModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MatCheckboxModule,
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,

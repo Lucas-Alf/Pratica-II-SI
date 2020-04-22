@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>{{data.action}} Evento</h1>
+<div mat-dialog-content>
+  <mat-checkbox  [(checked)]='automatico'>Automatico</mat-checkbox><br/>
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="!codigoHabilitado" [(ngModel)]='codigo'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Descrição</mat-label>
+    <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Tipo</mat-label>
+    <input type="text" matInput placeholder="Tipo" [(ngModel)]='tipo'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Incidência</mat-label>
+    <input type="text" matInput placeholder="Incidência" [(ngModel)]='incidenciaId'>
+  </mat-form-field><br />
+
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
+  <button (click)="save()" mat-button>Gravar</button>
+</div>
