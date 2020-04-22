@@ -11,4 +11,7 @@ import com.setrem.pratica2api.model.Cargo;
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo, Integer> {
 
+    @Query(value = "SELECT coalesce(max(id), 0)+1 FROM cargo", nativeQuery = true)
+    public int maxIdCargo();
+    
 }

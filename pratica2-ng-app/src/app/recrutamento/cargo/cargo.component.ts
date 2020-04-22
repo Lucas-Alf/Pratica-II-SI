@@ -6,6 +6,8 @@ import { Cargo } from './cargo';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CargoModalComponent } from './cargo-modal/cargo-modal.component';
 
 @Component({
   selector: 'app-cargo',
@@ -15,10 +17,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class CargoComponent implements OnInit {
 
   apiUrl: string;
+  dialogRef: MatDialogRef<CargoModalComponent, any>;
   constructor(
     private constant: ConstantsService,
     private snackBar: MatSnackBar,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public dialog: MatDialog
   ) {
     this.apiUrl = this.constant.apiUrl;
   }
@@ -36,6 +40,41 @@ export class CargoComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.storeCargo.filter = filterValue;
+  }
+
+  incluir(): void {
+    this.dialogRef = this.dialog.open(CargoModalComponent, { data: { action: 'Incluir', component: this } });
+  }
+
+  salvar(action: string, data: Cargo): void {
+    this.loaderService.show();
+    axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
+      if (response && response.data) {
+        this.loaderService.hide();
+        this.listar();
+        this.dialogRef.close();
+      } else {
+        this.loaderService.hide();
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      if (error.response) {
+        console.error(error.response.data.message);
+        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+      } else {
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    });
+  }
+
+  alterar(): void {
+    if (this.selection.selected.length > 0) {
+      const selection = this.selection.selected[0];
+      this.dialogRef = this.dialog.open(CargoModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
+    } else {
+      this.snackBar.open('Selecione um registro para alterar. 🤦‍♂️', null, { duration: 5000 });
+    }
   }
 
   excluir(): void {
@@ -61,10 +100,8 @@ export class CargoComponent implements OnInit {
   }
 
   listar(): void {
-    debugger
     this.loaderService.show();
     axios.get(this.apiUrl + 'cargo/all').then((response) => {
-      debugger
       if (response && response.data) {
         this.storeCargo.data = response.data;
         this.loaderService.hide();
