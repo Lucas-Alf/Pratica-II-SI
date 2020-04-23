@@ -40,7 +40,7 @@ public class Evento implements Serializable {
     private Incidencia incidenciaId;
 
     @JoinColumn(name = "rotinacalculoid", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private RotinaCalculo rotinacalculoId;
 
     @Basic(optional = false)
