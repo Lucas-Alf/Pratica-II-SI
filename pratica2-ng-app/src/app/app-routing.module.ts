@@ -10,6 +10,7 @@ import {ContratacaoComponent} from './contratacao/home/contratacao.component';
 import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
 import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
+import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/periodo-calculo.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'folhapagamento/incidencia', component: IncidenciaComponent },
   { path: 'folhapagamento/evento', component: EventoComponent },
   { path: 'folhapagamento/rotinacalculo', component: RotinaCalculoComponent },
+  { path: 'folhapagamento/periodocalculo', component: PeriodoCalculoComponent },
   { path: 'recrutamento', component: RecrutamentoComponent },
   { path: 'recrutamento/cargo', component: CargoComponent },
 ];

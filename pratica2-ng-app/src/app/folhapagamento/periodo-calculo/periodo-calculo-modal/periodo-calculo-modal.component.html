@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>{{data.action}} Periodo de Cálculo</h1>
+<div mat-dialog-content>
+  <mat-form-field class="invisible" appearance="standard">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [(ngModel)]='id'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Data Inicial</mat-label>
+    <input type="date" matInput placeholder="Data Inicial" [(ngModel)]='dataInicial'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Data Final</mat-label>
+    <input type="date" matInput placeholder="Data Final" [(ngModel)]='dataFinal'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Execução</mat-label>
+    <mat-select [(ngModel)]='execucao'>
+      <mat-option *ngFor="let item of execucoes" [value]="item.id">
+        {{item.descricao}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
+  <button (click)="save()" mat-button>Gravar</button>
+</div>
