@@ -48,10 +48,10 @@ export class ConhecimentoComponent implements OnInit {
 
   salvar(action: string, data: Conhecimento): void {
     this.loaderService.show();
-    if (data.nome == undefined) {
+    if (data.nome == undefined || data.nome == "") {
       this.loaderService.hide();
       this.snackBar.open('Informe a Descrição.', null, { duration: 5000 });
-    } else if (data.formacao == undefined) {
+    } else if (data.formacao == undefined || data.formacao == "") {
       this.loaderService.hide();
       this.snackBar.open('Informe a Formação.', null, { duration: 5000 });
     } else {

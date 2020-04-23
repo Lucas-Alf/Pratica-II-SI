@@ -58,6 +58,8 @@ import { IncidenciaModalComponent } from './folhapagamento/incidencia/incidencia
 import { EventoModalComponent } from './folhapagamento/evento/evento-modal/evento-modal.component';
 import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
 import { RotinaCalculoModalComponent } from './folhapagamento/rotina-calculo/rotina-calculo-modal/rotina-calculo-modal.component';
+import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/periodo-calculo.component';
+import { PeriodoCalculoModalComponent } from './folhapagamento/periodo-calculo/periodo-calculo-modal/periodo-calculo-modal.component';
 import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-modal.component';
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecimento-modal/conhecimento-modal.component';
@@ -85,6 +87,8 @@ import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecim
     EventoModalComponent,
     RotinaCalculoComponent,
     RotinaCalculoModalComponent,
+    PeriodoCalculoComponent,
+    PeriodoCalculoModalComponent,
     CargoModalComponent,
     ConhecimentoComponent,
     ConhecimentoModalComponent,
