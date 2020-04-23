@@ -48,24 +48,35 @@ export class CargoComponent implements OnInit {
 
   salvar(action: string, data: Cargo): void {
     this.loaderService.show();
-    axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
-      if (response && response.data) {
-        this.loaderService.hide();
-        this.listar();
-        this.dialogRef.close();
-      } else {
-        this.loaderService.hide();
-        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
-      }
-    }).catch((error) => {
+    if (data.descricao == undefined || data.descricao == "") {
       this.loaderService.hide();
-      if (error.response) {
-        console.error(error.response.data.message);
-        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
-      } else {
-        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
-      }
-    });
+      this.snackBar.open('Informe a Descrição.', null, { duration: 5000 });
+    } else if (data.cboid == undefined || data.cboid == null) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o CBO.', null, { duration: 5000 });
+    } else if (data.departamentoid == undefined || data.cboid == null == null) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Departamento.', null, { duration: 5000 });
+    } else {
+      axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
+        if (response && response.data) {
+          this.loaderService.hide();
+          this.listar();
+          this.dialogRef.close();
+        } else {
+          this.loaderService.hide();
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      }).catch((error) => {
+        this.loaderService.hide();
+        if (error.response) {
+          console.error(error.response.data.message);
+          this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+        } else {
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      });
+    }
   }
 
   alterar(): void {
