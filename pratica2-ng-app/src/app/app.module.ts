@@ -58,10 +58,7 @@ import { IncidenciaModalComponent } from './folhapagamento/incidencia/incidencia
 import { EventoModalComponent } from './folhapagamento/evento/evento-modal/evento-modal.component';
 import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
 import { RotinaCalculoModalComponent } from './folhapagamento/rotina-calculo/rotina-calculo-modal/rotina-calculo-modal.component';
-<<<<<<< HEAD
-=======
 import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-modal.component';
->>>>>>> 690bf595b054b46f6be243a9bcca4152dce1c6ea
 
 @NgModule({
   declarations: [

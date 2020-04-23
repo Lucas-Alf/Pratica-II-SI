@@ -47,9 +47,11 @@ public class EventoController {
         }
         var jaExistente = this.eventoRepository.findById(data.getId());
         if (!jaExistente.isPresent()) {
-            throw new Exception("Evento com código " + data.getId() + " não encontrada.");
+            throw new Exception("Evento com código " + data.getId() + " não encontrado.");
         } else {
             jaExistente.get().setDescricao(data.getDescricao());
+            jaExistente.get().setTipo(data.getTipo());
+            jaExistente.get().setIncidenciaId(data.getIncidenciaId());
             this.eventoRepository.save(jaExistente.get());
             return jaExistente.get();
         }

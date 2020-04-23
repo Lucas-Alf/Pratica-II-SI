@@ -30,12 +30,11 @@ export class EventoModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<EventoModalComponent>,
     private snackBar: MatSnackBar,
-    private loaderService: LoaderService,
+      private loaderService: LoaderService,
     private constant: ConstantsService
   ) { 
-    this.automatico = false;
     this.apiUrl = this.constant.apiUrl;
-    this.listarIncids;
+    this.listarIncids();
   }
 
   close(): void {
@@ -43,7 +42,7 @@ export class EventoModalComponent implements OnInit {
   }
 
   save(): void {
-    const dados: Evento = { id: this.codigo, descricao: this.descricao, tipo: this.tipo, automatico: this.automatico, incidenciaId: { id: this.incidenciaId, descricao: '' } };
+    const dados: Evento = { id: this.codigo, descricao: this.descricao, tipo: this.tipo, automatico: this.automatico, incidenciaId: { id: this.incidenciaId,descricao:'' } };
     this.data.component.salvar(this.data.action, dados);
   }
 
