@@ -37,5 +37,5 @@ a {
 
 .item-menu-desabilitado {
   cursor: not-allowed;
-  /* background-color: #00000024; */
+  opacity: 0.5;
 }
