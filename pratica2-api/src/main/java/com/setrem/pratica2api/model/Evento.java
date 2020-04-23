@@ -92,6 +92,14 @@ public class Evento implements Serializable {
         this.automatico = automatico;
     }
 
+    public RotinaCalculo getRotinacalculoId() {
+        return this.rotinacalculoId;
+    }
+
+    public void setRotinacalculoId(RotinaCalculo rotinacalculoId) {
+        this.rotinacalculoId = rotinacalculoId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)

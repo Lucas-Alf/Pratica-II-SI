@@ -17,7 +17,7 @@
     <mat-label>Incidência</mat-label>
     <mat-select [(ngModel)]='incidenciaId'>
       <mat-option *ngFor="let incidencia of incidencias" [value]="incidencia.id">
-        {{incidencia.descricao}} 
+        {{incidencia.id}} - {{incidencia.descricao}} 
       </mat-option>
     </mat-select>
   </mat-form-field><br />

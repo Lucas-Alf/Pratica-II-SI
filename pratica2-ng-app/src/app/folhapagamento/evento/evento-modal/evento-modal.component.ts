@@ -28,7 +28,7 @@ export class EventoModalComponent implements OnInit {
   tipo: string;
   automatico: boolean;
   incidenciaId: number;
-  rotinaCalculoId:number;
+  rotinaCalculoId: number;
 
   incidencias:Incidencia[];
   rotinas:Rotina[];
@@ -83,7 +83,6 @@ export class EventoModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
     if (this.data.info) {
       this.codigo = this.data.info.id;
       this.descricao = this.data.info.descricao;
