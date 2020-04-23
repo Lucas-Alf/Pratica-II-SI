@@ -59,6 +59,8 @@ import { EventoModalComponent } from './folhapagamento/evento/evento-modal/event
 import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
 import { RotinaCalculoModalComponent } from './folhapagamento/rotina-calculo/rotina-calculo-modal/rotina-calculo-modal.component';
 import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-modal.component';
+import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
+import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecimento-modal/conhecimento-modal.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-moda
     RotinaCalculoComponent,
     RotinaCalculoModalComponent,
     CargoModalComponent,
+    ConhecimentoComponent,
+    ConhecimentoModalComponent,
   ],
   imports: [
     BrowserModule,
