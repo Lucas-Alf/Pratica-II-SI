@@ -16,6 +16,7 @@ import com.setrem.pratica2api.repository.CargoRepository;
 @CrossOrigin
 public class CargoController {
     private CargoRepository cargoRepository;
+    private Cargo cargo = new Cargo();
 
     public CargoController(CargoRepository cargoRepository) {
         this.cargoRepository = cargoRepository;
@@ -26,13 +27,31 @@ public class CargoController {
         return this.cargoRepository.findAll();
     }
     
-    @PostMapping("/save")
-    public Cargo save(@RequestBody Cargo data, BindingResult bindingResult) {
+    @PostMapping("/Incluir")
+    public Cargo add(@RequestBody Cargo data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
+        int id = this.cargoRepository.maxIdCargo();
+        this.cargo.setId(id);
         data = this.cargoRepository.save(data);
         return data;
+    }
+
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public Cargo update(@RequestBody Cargo data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+        var jaExistente = this.cargoRepository.findById(data.getId());
+        if (!jaExistente.isPresent()) {
+            throw new Exception("Cargo com código " + data.getId() + " não encontrada.");
+        } else {
+            jaExistente.get().setDescricao(data.getDescricao());
+            this.cargoRepository.save(jaExistente.get());
+            return jaExistente.get();
+        }
     }
 
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })

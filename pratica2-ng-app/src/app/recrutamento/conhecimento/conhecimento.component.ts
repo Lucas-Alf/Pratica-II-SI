@@ -2,22 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import axios from 'axios';
 import { ConstantsService } from 'src/app/common/services/constants.service';
-import { Cargo } from './cargo';
+import { Conhecimento } from './conhecimento';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CargoModalComponent } from './cargo-modal/cargo-modal.component';
+import { ConhecimentoModalComponent } from './conhecimento-modal/conhecimento-modal.component';
 
 @Component({
-  selector: 'app-cargo',
-  templateUrl: './cargo.component.html',
-  styleUrls: ['./cargo.component.css']
+  selector: 'app-conhecimento',
+  templateUrl: './conhecimento.component.html',
+  styleUrls: ['./conhecimento.component.css']
 })
-export class CargoComponent implements OnInit {
+export class ConhecimentoComponent implements OnInit {
 
   apiUrl: string;
-  dialogRef: MatDialogRef<CargoModalComponent, any>;
+  dialogRef: MatDialogRef<ConhecimentoModalComponent, any>;
   constructor(
     private constant: ConstantsService,
     private snackBar: MatSnackBar,
@@ -27,38 +27,35 @@ export class CargoComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'descricao', 'cboid', 'departamentoid.descricao'];
-  storeCargo = new MatTableDataSource();
-  selection = new SelectionModel<Cargo>();
+  displayedColumns: string[] = ['select', 'id', 'nome', 'especializacao', 'formacao'];
+  storeConhecimento = new MatTableDataSource();
+  selection = new SelectionModel<Conhecimento>();
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.storeCargo.data.length;
+    const numRows = this.storeConhecimento.data.length;
     return numSelected == numRows;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.storeCargo.filter = filterValue;
+    this.storeConhecimento.filter = filterValue;
   }
 
   incluir(): void {
-    this.dialogRef = this.dialog.open(CargoModalComponent, { data: { action: 'Incluir', component: this } });
+    this.dialogRef = this.dialog.open(ConhecimentoModalComponent, { data: { action: 'Incluir', component: this } });
   }
 
-  salvar(action: string, data: Cargo): void {
+  salvar(action: string, data: Conhecimento): void {
     this.loaderService.show();
-    if (data.descricao == undefined || data.descricao == "") {
+    if (data.nome == undefined || data.nome == "") {
       this.loaderService.hide();
       this.snackBar.open('Informe a Descrição.', null, { duration: 5000 });
-    } else if (data.cboid == undefined || data.cboid == null) {
+    } else if (data.formacao == undefined || data.formacao == "") {
       this.loaderService.hide();
-      this.snackBar.open('Informe o CBO.', null, { duration: 5000 });
-    } else if (data.departamentoid == undefined || data.cboid == null == null) {
-      this.loaderService.hide();
-      this.snackBar.open('Informe o Departamento.', null, { duration: 5000 });
+      this.snackBar.open('Informe a Formação.', null, { duration: 5000 });
     } else {
-      axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
+      axios.post(this.constant.apiUrl + 'conhecimento/' + action, data).then((response) => {
         if (response && response.data) {
           this.loaderService.hide();
           this.listar();
@@ -82,7 +79,7 @@ export class CargoComponent implements OnInit {
   alterar(): void {
     if (this.selection.selected.length > 0) {
       const selection = this.selection.selected[0];
-      this.dialogRef = this.dialog.open(CargoModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
+      this.dialogRef = this.dialog.open(ConhecimentoModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
     } else {
       this.snackBar.open('Selecione um registro para alterar. 🤦‍♂️', null, { duration: 5000 });
     }
@@ -91,7 +88,7 @@ export class CargoComponent implements OnInit {
   excluir(): void {
     if (this.selection.selected.length > 0) {
       this.loaderService.show();
-      axios.delete(this.apiUrl + 'cargo/delete/' + this.selection.selected[0].id).then((response) => {
+      axios.delete(this.apiUrl + 'conhecimento/delete/' + this.selection.selected[0].id).then((response) => {
         if (response && response.status === 200) {
           this.loaderService.hide();
           this.listar();
@@ -112,9 +109,9 @@ export class CargoComponent implements OnInit {
 
   listar(): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'cargo/all').then((response) => {
+    axios.get(this.apiUrl + 'conhecimento/all').then((response) => {
       if (response && response.data) {
-        this.storeCargo.data = response.data;
+        this.storeConhecimento.data = response.data;
         this.loaderService.hide();
       }
     }).catch((error) => {
@@ -125,8 +122,8 @@ export class CargoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storeCargo.filterPredicate = (data: Cargo, filter) => {
-      return !filter || data.descricao.toLowerCase().includes(filter.toLowerCase());
+    this.storeConhecimento.filterPredicate = (data: Conhecimento, filter) => {
+      return !filter || data.nome.toLowerCase().includes(filter.toLowerCase());
     }
 
     //Preenche a tabela
@@ -134,7 +131,7 @@ export class CargoComponent implements OnInit {
 
     const initialSelection = [];
     const allowMultiSelect = false;
-    this.selection = new SelectionModel<Cargo>(allowMultiSelect, initialSelection);
+    this.selection = new SelectionModel<Conhecimento>(allowMultiSelect, initialSelection);
   }
 
 }

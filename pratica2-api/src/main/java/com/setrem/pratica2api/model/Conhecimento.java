@@ -24,13 +24,12 @@ public class Conhecimento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private String id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
     @Column(name = "nome")
     private String nome;
-    @NotNull
     @Size(min = 1, max = 150)
     @Column(name = "especializacao")
     private String especializacao;
@@ -42,11 +41,11 @@ public class Conhecimento implements Serializable {
     public Conhecimento() {
     }
 
-    public Conhecimento(String id) {
+    public Conhecimento(Integer id) {
         this.id = id;
     }
 
-    public Conhecimento(String id, String nome, String especializacao, String formacao) {
+    public Conhecimento(Integer id, String nome, String especializacao, String formacao) {
         this.id = id;
         this.nome = nome;
         this.especializacao = especializacao;
@@ -57,11 +56,11 @@ public class Conhecimento implements Serializable {
         return serialVersionUID;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

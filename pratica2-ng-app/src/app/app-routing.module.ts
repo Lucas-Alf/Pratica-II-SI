@@ -11,6 +11,7 @@ import { RecrutamentoComponent } from './recrutamento/home/recrutamento.componen
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
 import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
 import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/periodo-calculo.component';
+import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'folhapagamento/periodocalculo', component: PeriodoCalculoComponent },
   { path: 'recrutamento', component: RecrutamentoComponent },
   { path: 'recrutamento/cargo', component: CargoComponent },
+  { path: 'recrutamento/conhecimento', component: ConhecimentoComponent },
 ];
 
 @NgModule({

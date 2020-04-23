@@ -6,6 +6,8 @@ import { Evento } from './evento';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { EventoModalComponent } from './evento-modal/evento-modal.component';
 
 @Component({
   selector: 'app-evento',
@@ -15,15 +17,17 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class EventoComponent implements OnInit {
 
   apiUrl: string;
+  dialogRef: MatDialogRef<EventoModalComponent, any>;
   constructor(
     private constant: ConstantsService,
     private snackBar: MatSnackBar,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public dialog: MatDialog
   ) {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'descricao', 'tipo','automatico','incidencia'];
+  displayedColumns: string[] = ['select', 'id', 'descricao', 'tipo', 'automatico', 'incidencia'];
   storeEvento = new MatTableDataSource();
   selection = new SelectionModel<Evento>();
 
@@ -60,11 +64,44 @@ export class EventoComponent implements OnInit {
     }
   }
 
+  incluir(): void {
+    this.dialogRef = this.dialog.open(EventoModalComponent, { data: { action: 'Incluir', component: this } });
+  }
+
+  alterar(): void {
+    if (this.selection.selected.length > 0) {
+      const selection = this.selection.selected[0];
+      this.dialogRef = this.dialog.open(EventoModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
+    } else {
+      this.snackBar.open('Selecione um registro para alterar. 🤦‍♂️', null, { duration: 5000 });
+    }
+  }
+
+  salvar(action: string, data: Evento): void {
+    this.loaderService.show();
+    axios.post(this.constant.apiUrl + 'evento/' + action, data).then((response) => {
+      if (response && response.data) {
+        this.loaderService.hide();
+        this.listar();
+        this.dialogRef.close();
+      } else {
+        this.loaderService.hide();
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      if (error.response) {
+        console.error(error.response.data.message);
+        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+      } else {
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    });
+  }
+
   listar(): void {
-    debugger
     this.loaderService.show();
     axios.get(this.apiUrl + 'evento/all').then((response) => {
-      debugger
       if (response && response.data) {
         this.storeEvento.data = response.data;
         this.loaderService.hide();
