@@ -10,6 +10,10 @@ export interface Incidencia {
   id: number;
   descricao: string
 }
+export interface Rotina {
+  id: number;
+  descricao: string
+}
 
 @Component({
   selector: 'app-evento-modal',
@@ -24,8 +28,10 @@ export class EventoModalComponent implements OnInit {
   tipo: string;
   automatico: boolean;
   incidenciaId: number;
+  rotinaCalculoId:number;
 
   incidencias:Incidencia[];
+  rotinas:Rotina[];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<EventoModalComponent>,
@@ -35,6 +41,7 @@ export class EventoModalComponent implements OnInit {
   ) { 
     this.apiUrl = this.constant.apiUrl;
     this.listarIncids();
+    this.listarRotinas();
   }
 
   close(): void {
@@ -42,7 +49,8 @@ export class EventoModalComponent implements OnInit {
   }
 
   save(): void {
-    const dados: Evento = { id: this.codigo, descricao: this.descricao, tipo: this.tipo, automatico: this.automatico, incidenciaId: { id: this.incidenciaId,descricao:'' } };
+    debugger
+    const dados: Evento = { id: this.codigo, descricao: this.descricao, tipo: this.tipo, automatico: this.automatico, incidenciaId: { id: this.incidenciaId,descricao:'' }, rotinacalculoId: { id: this.rotinaCalculoId,descricao:'' }};
     this.data.component.salvar(this.data.action, dados);
   }
 
@@ -60,13 +68,29 @@ export class EventoModalComponent implements OnInit {
     });
   }
 
+  listarRotinas(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'RotinaCalculo/all').then((response) => {
+      if (response && response.data) {
+        this.rotinas = response.data;
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
   ngOnInit(): void {
+    debugger
     if (this.data.info) {
       this.codigo = this.data.info.id;
       this.descricao = this.data.info.descricao;
       this.tipo = this.data.info.tipo;
       this.automatico = this.data.info.automatico;
       this.incidenciaId = this.data.info.incidenciaId.id;
+      this.rotinaCalculoId = this.data.info.rotinaCalculoId.id;
       this.codigoHabilitado = false;
     } else {
       this.codigoHabilitado = true;

@@ -27,7 +27,7 @@ export class EventoComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'descricao', 'tipo', 'automatico', 'incidencia'];
+  displayedColumns: string[] = ['select', 'id', 'descricao', 'tipo', 'automatico', 'incidencia', 'rotinaCalculo'];
   storeEvento = new MatTableDataSource();
   selection = new SelectionModel<Evento>();
 
