@@ -23,7 +23,7 @@
   </mat-form-field><br />
   <mat-form-field appearance="standard" style="width: 300px;">
     <mat-label>Rotina de Cálculo</mat-label>
-    <mat-select [(ngModel)]='rotinaCalculoId'>
+    <mat-select [(ngModel)]='rotinacalculoId'>
       <mat-option *ngFor="let rotina of rotinas" [value]="rotina.id">
         {{rotina.id}} - {{rotina.descricao}} 
       </mat-option>

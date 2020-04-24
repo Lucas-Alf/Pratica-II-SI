@@ -28,7 +28,7 @@ export class EventoModalComponent implements OnInit {
   tipo: string;
   automatico: boolean;
   incidenciaId: number;
-  rotinaCalculoId: number;
+  rotinacalculoId: number;
 
   incidencias:Incidencia[];
   rotinas:Rotina[];
@@ -49,8 +49,7 @@ export class EventoModalComponent implements OnInit {
   }
 
   save(): void {
-    debugger
-    const dados: Evento = { id: this.codigo, descricao: this.descricao, tipo: this.tipo, automatico: this.automatico, incidenciaId: { id: this.incidenciaId,descricao:'' }, rotinacalculoId: { id: this.rotinaCalculoId,descricao:'' }};
+    const dados: Evento = { id: this.codigo, descricao: this.descricao, tipo: this.tipo, automatico: this.automatico, incidenciaId: { id: this.incidenciaId,descricao:'' }, rotinacalculoId: { id: this.rotinacalculoId,descricao:'' }};
     this.data.component.salvar(this.data.action, dados);
   }
 
@@ -89,7 +88,7 @@ export class EventoModalComponent implements OnInit {
       this.tipo = this.data.info.tipo;
       this.automatico = this.data.info.automatico;
       this.incidenciaId = this.data.info.incidenciaId.id;
-      this.rotinaCalculoId = this.data.info.rotinaCalculoId.id;
+      this.rotinacalculoId = this.data.info.rotinacalculoId.id;
       this.codigoHabilitado = false;
     } else {
       this.codigoHabilitado = true;
