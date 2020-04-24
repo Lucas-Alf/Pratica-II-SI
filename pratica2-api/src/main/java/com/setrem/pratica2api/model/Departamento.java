@@ -1,16 +1,12 @@
 package com.setrem.pratica2api.model;
-
+import java.util.Objects;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,23 +29,6 @@ public class Departamento implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descricao")
     private String descricao;
-
-    public Departamento() {
-    }
-
-    public Departamento(Integer id) {
-        this.id = id;
-    }
-
-    public Departamento(Integer id, String nome, String descricao) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
     public Integer getId() {
         return id;
@@ -77,12 +56,7 @@ public class Departamento implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        return result;
+        return Objects.hash(id, nome);
     }
 
     @Override
@@ -114,7 +88,11 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.setrem.pratica2api.model.Departamento[ id=" + id + " ]";
+        return "{" +
+            " id='" + getId() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", descricao='" + getDescricao() + "'" +
+            "}";
     }
 
 }

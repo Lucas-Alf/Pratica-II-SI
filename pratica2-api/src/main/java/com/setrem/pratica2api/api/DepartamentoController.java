@@ -7,7 +7,7 @@ import javax.validation.ValidationException;
 import java.util.List;
 
 import com.setrem.pratica2api.model.Departamento;
-import com.setrem.pratica2api.repository.DepartamentoRepository;;
+import com.setrem.pratica2api.repository.DepartamentoRepository;
 
 @RestController
 @RequestMapping("/api/departamento")
@@ -33,9 +33,9 @@ public class DepartamentoController {
         data = this.DepartamentoRepository.save(data);
         return data;
     }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
+    @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable int id) {
         this.DepartamentoRepository.deleteById(id);
     }
 

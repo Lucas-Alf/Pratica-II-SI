@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.setrem.pratica2api.model.Departamento;
 
 @Repository
-public interface DepartamentoRepository extends JpaRepository<Departamento, String> {
+public interface DepartamentoRepository extends JpaRepository<Departamento, Integer> {
 
 }

@@ -9,6 +9,7 @@ import { EventoComponent } from './folhapagamento/evento/evento.component';
 import {ContratacaoComponent} from './contratacao/home/contratacao.component';
 import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
+import { DepartamentoComponent } from './contratacao/departamento/departamento.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'configuracoes', component: ConfiguracoesComponent },
   { path: 'contratacao', component: ContratacaoComponent },
+  { path: 'contratacao/departamento', component: DepartamentoComponent },
   { path: 'folhapagamento', component: FolhapagamentoComponent },
   { path: 'folhapagamento/incidencia', component: IncidenciaComponent },
   { path: 'folhapagamento/evento', component: EventoComponent },

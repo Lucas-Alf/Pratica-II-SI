@@ -54,6 +54,7 @@ import { ContratacaoMenuLateralComponent } from './contratacao/contratacao-menu-
 import { RecrutamentoMenuLateralComponent } from './recrutamento/recrutamento-menu-lateral/recrutamento-menu-lateral.component';
 import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
+import { DepartamentoComponent } from './contratacao/departamento/departamento.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { CargoComponent } from './recrutamento/cargo/cargo.component';
     RecrutamentoMenuLateralComponent,
     RecrutamentoComponent,
     CargoComponent,
+    DepartamentoComponent,
   ],
   imports: [
     BrowserModule,
