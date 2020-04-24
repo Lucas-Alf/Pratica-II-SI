@@ -6,8 +6,6 @@ import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -19,7 +17,6 @@ public class Incidencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -27,8 +24,7 @@ public class Incidencia implements Serializable {
     @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "descricao")
-    private String  descricao;
-
+    private String descricao;
 
     public Integer getId() {
         return this.id;
@@ -64,11 +60,7 @@ public class Incidencia implements Serializable {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", descricao='" + getDescricao() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", descricao='" + getDescricao() + "'" + "}";
     }
-
 
 }

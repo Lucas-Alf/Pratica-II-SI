@@ -5,10 +5,10 @@
     <mat-card><b>Evento</b></mat-card>
     <mat-card style="margin-top: 13px;">
       <div style="width: 100%; display:inline-block;">
-        <button mat-stroked-button class="crud-button">
+        <button (click)="incluir()" mat-stroked-button class="crud-button">
           <mat-icon>add</mat-icon> Incluir
         </button>
-        <button mat-stroked-button class="crud-button">
+        <button (click)="alterar()" mat-stroked-button class="crud-button">
           <mat-icon>edit</mat-icon> Alterar
         </button>
         <button (click)="excluir()" mat-stroked-button class="crud-button">
@@ -35,7 +35,7 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="id">
-          <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Código </th>
+          <th style="width: 75px;" mat-header-cell *matHeaderCellDef> Código </th>
           <td mat-cell *matCellDef="let evento"> {{evento.id}} </td>
         </ng-container>
         <ng-container matColumnDef="descricao">
@@ -43,7 +43,7 @@
           <td mat-cell *matCellDef="let evento"> {{evento.descricao}} </td>
         </ng-container>
         <ng-container matColumnDef="tipo">
-          <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Tipo </th>
+          <th style="width: 50px;" mat-header-cell *matHeaderCellDef> Tipo </th>
           <td mat-cell *matCellDef="let evento"> {{evento.tipo}} </td>
         </ng-container>
         <ng-container matColumnDef="incidencia">
@@ -52,7 +52,14 @@
         </ng-container>
         <ng-container matColumnDef="automatico">
           <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Automatico </th>
-          <td mat-cell *matCellDef="let evento"> {{evento.automatico}} </td>
+          <td mat-cell *matCellDef="let evento" [ngSwitch]="evento.automatico">
+            <span *ngSwitchCase="false">Não</span>
+            <span *ngSwitchCase="true">Sim</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="rotinaCalculo">
+          <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Rotinas de Cálculo </th>
+          <td mat-cell *matCellDef="let evento"> {{evento.rotinacalculoId.descricao}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -35,21 +35,21 @@ export class IndexComponent implements OnInit {
           // alert(response.data);
         } else {
           this.loaderService.hide();
-          this.snackBar.open("Usuário e senha não encontrados. 🤔", null, { duration: 5000 });
+          this.snackBar.open('Usuário e senha não encontrados. 🤔', null, { duration: 5000 });
         }
       }).catch((error) => {
         this.loaderService.hide();
         if (error.response) {
           console.error(error.response.data.message);
         }
-        this.snackBar.open("Ocorreu um erro ao fazer login. 😬", null, { duration: 5000 });
+        this.snackBar.open('Ocorreu um erro ao fazer login. 😬', null, { duration: 5000 });
       });
     } else {
-      this.snackBar.open("❌ Email e Senha são obrigatórios.", null, { duration: 5000 });
+      this.snackBar.open('❌ Email e Senha são obrigatórios.', null, { duration: 5000 });
     }
   }
   public recuperarSenha() {
-    this.snackBar.open("Essa função ainda não foi implementada. 😥", null, { duration: 5000 });
+    this.snackBar.open('Essa função ainda não foi implementada. 😥', null, { duration: 5000 });
   }
   ngOnInit() {
   }

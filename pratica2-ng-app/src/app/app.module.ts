@@ -55,6 +55,16 @@ import { RecrutamentoMenuLateralComponent } from './recrutamento/recrutamento-me
 import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
 import { DepartamentoComponent } from './contratacao/departamento/departamento.component';
+import { IncidenciaModalComponent } from './folhapagamento/incidencia/incidencia-modal/incidencia-modal.component';
+import { EventoModalComponent } from './folhapagamento/evento/evento-modal/evento-modal.component';
+import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
+import { RotinaCalculoModalComponent } from './folhapagamento/rotina-calculo/rotina-calculo-modal/rotina-calculo-modal.component';
+import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/periodo-calculo.component';
+import { PeriodoCalculoModalComponent } from './folhapagamento/periodo-calculo/periodo-calculo-modal/periodo-calculo-modal.component';
+import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-modal.component';
+import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
+import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecimento-modal/conhecimento-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -76,13 +86,21 @@ import { DepartamentoComponent } from './contratacao/departamento/departamento.c
     RecrutamentoComponent,
     CargoComponent,
     DepartamentoComponent,
+    IncidenciaModalComponent,
+    EventoModalComponent,
+    RotinaCalculoComponent,
+    RotinaCalculoModalComponent,
+    PeriodoCalculoComponent,
+    PeriodoCalculoModalComponent,
+    CargoModalComponent,
+    ConhecimentoComponent,
+    ConhecimentoModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MatCheckboxModule,
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,

@@ -8,5 +8,8 @@ export interface Evento {
     id: number;
     descricao: string
   }
-  
+  rotinacalculoId: {
+    id: number;
+    descricao: string
+  }
 }
