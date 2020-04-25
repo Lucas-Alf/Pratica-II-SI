@@ -90,6 +90,7 @@ export class DepartamentoComponent implements OnInit {
   }
 
   salvar(action: string, data: Departamento): void {
+    debugger
     this.loaderService.show();
     if (data.descricao == undefined || data.descricao == "") {
       this.loaderService.hide();
@@ -98,7 +99,7 @@ export class DepartamentoComponent implements OnInit {
       this.loaderService.hide();
       this.snackBar.open('Informe o Nome.', null, { duration: 5000 });
     } else {
-      axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
+      axios.post(this.constant.apiUrl + 'departamento/' + action, data).then((response) => {
         if (response && response.data) {
           this.loaderService.hide();
           this.listar();

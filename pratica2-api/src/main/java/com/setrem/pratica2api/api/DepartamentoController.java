@@ -43,15 +43,8 @@ public class DepartamentoController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        var jaExistente = this.DepartamentoRepository.findById(data.getId());
-        if (!jaExistente.isPresent()) {
-            throw new Exception("Departamento com código " + data.getId() + " não encontrada.");
-        } else {
-            jaExistente.get().setDescricao(data.getDescricao());
-            jaExistente.get().setNome(data.getNome());
-            this.DepartamentoRepository.save(jaExistente.get());
-            return jaExistente.get();
-        }
+            this.DepartamentoRepository.save(data);
+            return data;
     }
 
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
