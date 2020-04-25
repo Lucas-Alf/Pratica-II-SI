@@ -64,7 +64,8 @@ import { PeriodoCalculoModalComponent } from './folhapagamento/periodo-calculo/p
 import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-modal.component';
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecimento-modal/conhecimento-modal.component';
-
+import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude.component';
+import { HabilidadeAtitudeModalComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude-modal/habilidadeAtitude-modal.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,8 @@ import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecim
     CargoModalComponent,
     ConhecimentoComponent,
     ConhecimentoModalComponent,
+    HabilidadeAtitudeComponent,
+    HabilidadeAtitudeModalComponent,
   ],
   imports: [
     BrowserModule,

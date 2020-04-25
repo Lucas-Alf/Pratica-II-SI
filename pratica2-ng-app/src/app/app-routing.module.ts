@@ -13,7 +13,7 @@ import { DepartamentoComponent } from './contratacao/departamento/departamento.c
 import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
 import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/periodo-calculo.component';
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
-
+import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'recrutamento', component: RecrutamentoComponent },
   { path: 'recrutamento/cargo', component: CargoComponent },
   { path: 'recrutamento/conhecimento', component: ConhecimentoComponent },
+  { path: 'recrutamento/habilidadeAtitude', component: HabilidadeAtitudeComponent },
 ];
 
 @NgModule({
