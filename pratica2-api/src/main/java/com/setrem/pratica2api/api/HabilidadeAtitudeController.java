@@ -13,30 +13,43 @@ import com.setrem.pratica2api.repository.HabilidadeAtitudeRepository;;
 @RequestMapping("/api/habilidadeAtitude")
 @CrossOrigin
 public class HabilidadeAtitudeController {
-    private HabilidadeAtitudeRepository HabilidadeAtitudeRepository;
+    private HabilidadeAtitudeRepository habilidadeAtitudeRepository;
+    private HabilidadeAtitude habilidadeAtitude = new HabilidadeAtitude();
 
-    public HabilidadeAtitudeController(HabilidadeAtitudeRepository HabilidadeAtitudeRepository) {
-        this.HabilidadeAtitudeRepository = HabilidadeAtitudeRepository;
+    public HabilidadeAtitudeController(HabilidadeAtitudeRepository habilidadeAtitudeRepository) {
+        this.habilidadeAtitudeRepository = habilidadeAtitudeRepository;
     }
 
     @GetMapping("/all")
     public List<HabilidadeAtitude> all() {
-        var habilidadeAtitudes = this.HabilidadeAtitudeRepository.findAll();
-        return habilidadeAtitudes;
+        return this.habilidadeAtitudeRepository.findAll();
     }
-
-    @PostMapping
-    public HabilidadeAtitude save(@RequestBody HabilidadeAtitude data, BindingResult bindingResult) {
+    
+    @PostMapping("/Incluir")
+    public HabilidadeAtitude add(@RequestBody HabilidadeAtitude data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        data = this.HabilidadeAtitudeRepository.save(data);
+        int id = this.habilidadeAtitudeRepository.maxIdHabilidadeAtitude();
+        this.habilidadeAtitude.setId(id);
+        data = this.habilidadeAtitudeRepository.save(data);
         return data;
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
-        this.HabilidadeAtitudeRepository.deleteById(id);
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public HabilidadeAtitude update(@RequestBody HabilidadeAtitude data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+            this.habilidadeAtitudeRepository.save(data);
+            return data;
+    }
+
+    @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable int id) {
+        this.habilidadeAtitudeRepository.deleteById(id);
     }
 
 }

@@ -64,8 +64,13 @@ import { PeriodoCalculoModalComponent } from './folhapagamento/periodo-calculo/p
 import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-modal.component';
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecimento-modal/conhecimento-modal.component';
+<<<<<<< HEAD
 import { DepartamentoModalComponent } from './contratacao/departamento/departamento-modal/departamento-modal.component';
 
+=======
+import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude.component';
+import { HabilidadeAtitudeModalComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude-modal/habilidadeAtitude-modal.component';
+>>>>>>> 7211424d66d08d9ffb2fbd62561b03c0203e04d3
 
 @NgModule({
   declarations: [
@@ -96,7 +101,12 @@ import { DepartamentoModalComponent } from './contratacao/departamento/departame
     CargoModalComponent,
     ConhecimentoComponent,
     ConhecimentoModalComponent,
+<<<<<<< HEAD
     DepartamentoModalComponent,
+=======
+    HabilidadeAtitudeComponent,
+    HabilidadeAtitudeModalComponent,
+>>>>>>> 7211424d66d08d9ffb2fbd62561b03c0203e04d3
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{data.action}} Habilidade e Atitude</h1>
+<div mat-dialog-content style="height: 200px;">
+  <mat-form-field appearance="standard" style="width: 200px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="true" [(ngModel)]='id'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Descrição</mat-label>
+    <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
+  </mat-form-field>
+  <br>
+  <mat-radio-group [(ngModel)]='tipo'>
+    <mat-radio-button value="Habilidade" style="margin-right: 50px;">Habilidade</mat-radio-button>
+    <mat-radio-button value="Atitude">Atitude</mat-radio-button>
+  </mat-radio-group>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="save()" mat-button>Gravar</button>
+  <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
+</div>
