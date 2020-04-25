@@ -14,19 +14,20 @@ import com.setrem.pratica2api.repository.EmpresaRepository;;
 @CrossOrigin
 public class EmpresaController {
     private EmpresaRepository EmpresaRepository;
+    private Empresa emp = new Empresa();
 
     public EmpresaController(EmpresaRepository EmpresaRepository) {
         this.EmpresaRepository = EmpresaRepository;
     }
 
-    @GetMapping("/all") //Teste: http://localhost:8080/api/empresa/all
+    @GetMapping("/all") // Teste: http://localhost:8080/api/empresa/all
     public List<Empresa> all() {
         var empresas = this.EmpresaRepository.findAll();
         return empresas;
     }
 
-    @PostMapping
-    public Empresa save(@RequestBody Empresa data, BindingResult bindingResult) {
+    @PostMapping("/Incluir")
+    public Empresa add(@RequestBody Empresa data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
@@ -34,7 +35,18 @@ public class EmpresaController {
         return data;
     }
 
-    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public Empresa update(@RequestBody Empresa data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+        this.EmpresaRepository.save(data);
+        return data;
+    }
+
+    @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
         this.EmpresaRepository.deleteById(id);
     }

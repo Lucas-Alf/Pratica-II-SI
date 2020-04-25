@@ -10,10 +10,12 @@ import {ContratacaoComponent} from './contratacao/home/contratacao.component';
 import { RecrutamentoComponent } from './recrutamento/home/recrutamento.component';
 import { CargoComponent } from './recrutamento/cargo/cargo.component';
 import { DepartamentoComponent } from './contratacao/departamento/departamento.component';
+import { EmpresaComponent} from './contratacao/empresa/empresa.component';
 import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-calculo.component';
 import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/periodo-calculo.component';
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude.component';
+
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'configuracoes', component: ConfiguracoesComponent },
   { path: 'contratacao', component: ContratacaoComponent },
   { path: 'contratacao/departamento', component: DepartamentoComponent },
+  { path: 'contratacao/empresa', component: EmpresaComponent },
   { path: 'folhapagamento', component: FolhapagamentoComponent },
   { path: 'folhapagamento/incidencia', component: IncidenciaComponent },
   { path: 'folhapagamento/evento', component: EventoComponent },

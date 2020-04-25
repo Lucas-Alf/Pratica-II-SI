@@ -28,13 +28,18 @@ public class Empresa implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 14)
-    @Column(name = "telefonefixo")
-    private String telefonefixo;
+    @Column(name = "telefone")
+    private String telefone;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 14)
-    @Column(name = "telefonecelularresponsavel")
-    private String telefonecelularresponsavel;
+    @Size(min = 1, max = 100)
+    @Column(name = "nomefantasia")
+    private String nomefantasia;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 500)
+    @Column(name = "endereco")
+    private String endereco;
 
     public Empresa() {
     }
@@ -43,43 +48,12 @@ public class Empresa implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public Empresa(String cnpj, String razaosocial, String telefonefixo, String telefonecelularresponsavel) {
+    public Empresa(String cnpj, String razaosocial, String telefone, String nomefantasia, String endereco) {
         this.cnpj = cnpj;
         this.razaosocial = razaosocial;
-        this.telefonefixo = telefonefixo;
-        this.telefonecelularresponsavel = telefonecelularresponsavel;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getRazaosocial() {
-        return razaosocial;
-    }
-
-    public void setRazaosocial(String razaosocial) {
-        this.razaosocial = razaosocial;
-    }
-
-    public String getTelefonefixo() {
-        return telefonefixo;
-    }
-
-    public void setTelefonefixo(String telefonefixo) {
-        this.telefonefixo = telefonefixo;
-    }
-
-    public String getTelefonecelularresponsavel() {
-        return telefonecelularresponsavel;
-    }
-
-    public void setTelefonecelularresponsavel(String telefonecelularresponsavel) {
-        this.telefonecelularresponsavel = telefonecelularresponsavel;
+        this.telefone = telefone;
+        this.nomefantasia = nomefantasia;
+        this.endereco = endereco;
     }
 
     @Override
@@ -106,5 +80,49 @@ public class Empresa implements Serializable {
     public String toString() {
         return "com.setrem.pratica2api.model.Empresa[ cnpj=" + cnpj + " ]";
     }
-    
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getRazaosocial() {
+        return razaosocial;
+    }
+
+    public void setRazaosocial(String razaosocial) {
+        this.razaosocial = razaosocial;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getNomefantasia() {
+        return nomefantasia;
+    }
+
+    public void setNomefantasia(String nomefantasia) {
+        this.nomefantasia = nomefantasia;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
 }
