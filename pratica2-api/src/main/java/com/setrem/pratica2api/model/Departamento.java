@@ -29,7 +29,22 @@ public class Departamento implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descricao")
     private String descricao;
+    public Departamento() {
+    }
 
+    public Departamento(Integer id) {
+        this.id = id;
+    }
+
+    public Departamento(Integer id, String descricao, String nome) {
+        this.id = id;
+        this.descricao = descricao;
+        this.nome = nome;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
     public Integer getId() {
         return id;
     }
@@ -56,7 +71,12 @@ public class Departamento implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
@@ -88,11 +108,7 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", nome='" + getNome() + "'" +
-            ", descricao='" + getDescricao() + "'" +
-            "}";
+        return "com.setrem.pratica2api.model.Departamento[ id=" + id + " ]";
     }
 
 }

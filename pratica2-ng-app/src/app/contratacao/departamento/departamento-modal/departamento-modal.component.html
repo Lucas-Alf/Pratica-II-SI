@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{data.action}} Departamento</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="true" [(ngModel)]='id'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Nome</mat-label>
+    <input type="text" matInput placeholder="Nome" [(ngModel)]='nome'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Descrição</mat-label>
+    <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
+  </mat-form-field>
+  <br>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="save()" mat-button>Gravar</button>
+  <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
+</div>

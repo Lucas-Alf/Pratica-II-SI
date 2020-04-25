@@ -14,6 +14,7 @@ import com.setrem.pratica2api.repository.DepartamentoRepository;
 @CrossOrigin
 public class DepartamentoController {
     private DepartamentoRepository DepartamentoRepository;
+    private Departamento dep = new Departamento();
 
     public DepartamentoController(DepartamentoRepository DepartamentoRepository) {
         this.DepartamentoRepository = DepartamentoRepository;
@@ -25,14 +26,34 @@ public class DepartamentoController {
         return departamentos;
     }
 
-    @PostMapping
-    public Departamento save(@RequestBody Departamento data, BindingResult bindingResult) {
+    @PostMapping("/Incluir")
+    public Departamento add(@RequestBody Departamento data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
+        int id = this.DepartamentoRepository.maxIdDepartamento();
+        this.dep.setId(id);
         data = this.DepartamentoRepository.save(data);
         return data;
     }
+
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public Departamento update(@RequestBody Departamento data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+        var jaExistente = this.DepartamentoRepository.findById(data.getId());
+        if (!jaExistente.isPresent()) {
+            throw new Exception("Departamento com código " + data.getId() + " não encontrada.");
+        } else {
+            jaExistente.get().setDescricao(data.getDescricao());
+            jaExistente.get().setNome(data.getNome());
+            this.DepartamentoRepository.save(jaExistente.get());
+            return jaExistente.get();
+        }
+    }
+
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable int id) {

@@ -6,6 +6,8 @@ import { Departamento } from './departamento';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SelectionModel } from '@angular/cdk/collections';
 import { LoaderService } from 'src/app/services/loader.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DepartamentoModalComponent } from './departamento-modal/departamento-modal.component';
 
 @Component({
   selector: 'app-departamento',
@@ -15,15 +17,17 @@ import { LoaderService } from 'src/app/services/loader.service';
 export class DepartamentoComponent implements OnInit {
 
   apiUrl: string;
+  dialogRef: MatDialogRef<DepartamentoModalComponent, any>;
   constructor(
     private constant: ConstantsService,
     private snackBar: MatSnackBar,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public dialog: MatDialog
   ) {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'descricao', 'nome'];
+  displayedColumns: string[] = ['select', 'id', 'nome', 'descricao'];
   storeDepartamento = new MatTableDataSource();
 
   selection = new SelectionModel<Departamento>();
@@ -38,14 +42,23 @@ export class DepartamentoComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.storeDepartamento.filter = filterValue;
   }
-
+  incluir(): void {
+    this.dialogRef = this.dialog.open(DepartamentoModalComponent, { data: { action: 'Incluir', component: this } });
+  }
+  alterar(): void {
+    if (this.selection.selected.length > 0) {
+      const selection = this.selection.selected[0];
+      this.dialogRef = this.dialog.open(DepartamentoModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
+    } else {
+      this.snackBar.open('Selecione um registro para alterar. 🤦‍♂️', null, { duration: 5000 });
+    }
+  }
   excluir(): void {
     if (this.selection.selected.length > 0) {
       this.loaderService.show();
       axios.delete(this.apiUrl + 'departamento/delete/' + this.selection.selected[0].id).then((response) => {
         if (response && response.status === 200) {
           this.loaderService.hide();
-          //this.snackBar.open("Departamento: " + this.selection.selected[0].nome, null, { duration: 5000 });
           this.listar();
         } else {
           this.loaderService.hide();
@@ -76,11 +89,42 @@ export class DepartamentoComponent implements OnInit {
     });
   }
 
+  salvar(action: string, data: Departamento): void {
+    this.loaderService.show();
+    if (data.descricao == undefined || data.descricao == "") {
+      this.loaderService.hide();
+      this.snackBar.open('Informe a Descrição.', null, { duration: 5000 });
+    } else if (data.nome == undefined || data.nome == "") {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Nome.', null, { duration: 5000 });
+    } else {
+      axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
+        if (response && response.data) {
+          this.loaderService.hide();
+          this.listar();
+          this.dialogRef.close();
+        } else {
+          this.loaderService.hide();
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      }).catch((error) => {
+        this.loaderService.hide();
+        if (error.response) {
+          console.error(error.response.data.message);
+          this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+        } else {
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.storeDepartamento.filterPredicate = (data: Departamento, filter) => {
-      return !filter || data.nome.toLowerCase().includes(filter.toLowerCase());
+      return !filter || data.descricao.toLowerCase().includes(filter.toLowerCase());
     }
 
+    //Preenche a tabela
     this.listar();
 
     const initialSelection = [];

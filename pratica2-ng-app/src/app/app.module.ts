@@ -64,6 +64,7 @@ import { PeriodoCalculoModalComponent } from './folhapagamento/periodo-calculo/p
 import { CargoModalComponent } from './recrutamento/cargo/cargo-modal/cargo-modal.component';
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecimento-modal/conhecimento-modal.component';
+import { DepartamentoModalComponent } from './contratacao/departamento/departamento-modal/departamento-modal.component';
 
 
 @NgModule({
@@ -95,6 +96,7 @@ import { ConhecimentoModalComponent } from './recrutamento/conhecimento/conhecim
     CargoModalComponent,
     ConhecimentoComponent,
     ConhecimentoModalComponent,
+    DepartamentoModalComponent,
   ],
   imports: [
     BrowserModule,
