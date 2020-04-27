@@ -69,6 +69,8 @@ import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/hab
 import { HabilidadeAtitudeModalComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude-modal/habilidadeAtitude-modal.component';
 import { EmpresaComponent } from './contratacao/empresa/empresa.component';
 import { EmpresaModalComponent } from './contratacao/empresa/empresa-modal/empresa-modal.component';
+import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
+import { FunionarioModalComponent } from './contratacao/funcionario/funionario-modal/funionario-modal.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import { EmpresaModalComponent } from './contratacao/empresa/empresa-modal/empre
     HabilidadeAtitudeModalComponent,
     EmpresaComponent,
     EmpresaModalComponent,
+    FuncionarioComponent,
+    FunionarioModalComponent,
   ],
   imports: [
     BrowserModule,

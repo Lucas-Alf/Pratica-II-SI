@@ -15,7 +15,7 @@ import { RotinaCalculoComponent } from './folhapagamento/rotina-calculo/rotina-c
 import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/periodo-calculo.component';
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude.component';
-
+import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'contratacao', component: ContratacaoComponent },
   { path: 'contratacao/departamento', component: DepartamentoComponent },
   { path: 'contratacao/empresa', component: EmpresaComponent },
+  { path: 'contratacao/funcionario', component: FuncionarioComponent },
   { path: 'folhapagamento', component: FolhapagamentoComponent },
   { path: 'folhapagamento/incidencia', component: IncidenciaComponent },
   { path: 'folhapagamento/evento', component: EventoComponent },

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{data.action}} Funcionário</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="standard" style="width: 300px;">
+        <mat-label>CPF</mat-label>
+        <input type="text" matInput placeholder="cpf" [(ngModel)]='cpf'>
+    </mat-form-field><br />
+    <mat-form-field appearance="standard" style="width: 500px;">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput placeholder="nome" [(ngModel)]='nome'>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="standard" style="width: 500px;">
+      <mat-label>País</mat-label>
+      <mat-select [(ngModel)]='paisnascimentoid'>
+        <mat-option *ngFor="let pais of paises" [value]="pais.id">
+          {{pais.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: right;">
+    <button (click)="save()" mat-button>Gravar</button>
+    <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
+</div>

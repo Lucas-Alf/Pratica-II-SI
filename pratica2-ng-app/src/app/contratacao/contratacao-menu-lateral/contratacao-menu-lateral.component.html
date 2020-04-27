@@ -2,7 +2,7 @@
     <mat-drawer #drawer opened class="example-sidenav" mode="side">
       <mat-card class="header-sidenav accent-background-color"><p style="margin-top: 1px;">Contratação</p></mat-card>
       <mat-list>
-        <mat-list-item [routerLink]="['#']" class="item-menu">
+        <mat-list-item [routerLink]="['/contratacao/funcionario']" class="item-menu">
           <mat-icon class="icone-menu">build</mat-icon>
           <a>Funcionário</a>
         </mat-list-item>
@@ -13,10 +13,6 @@
         <mat-list-item [routerLink]="['/contratacao/empresa']" class="item-menu">
           <mat-icon class="icone-menu">build</mat-icon>
           <a>Empresa</a> 
-        </mat-list-item>
-        <mat-list-item [routerLink]="['#']" class="item-menu">
-          <mat-icon class="icone-menu">build</mat-icon>
-          <a>Endereços</a>
         </mat-list-item>
         <mat-list-item [routerLink]="['/home']" style="cursor: pointer; position: fixed; bottom: 0; width: 250px; background-color: #e2e2e2">
           <mat-icon class="icone-menu">keyboard_return</mat-icon>
