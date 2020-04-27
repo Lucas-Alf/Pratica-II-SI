@@ -1,0 +1,66 @@
+<app-contratacao-menu-lateral></app-contratacao-menu-lateral>
+<div style="margin-left: 250px;">
+    <app-cabecalho-sistema></app-cabecalho-sistema>
+    <div style="margin: 15px;">
+        <mat-card><b>Endereço</b></mat-card>
+        <mat-card style="margin-top: 13px;">
+            <div style="width: 100%; display:inline-block;">
+                <!-- <button (click)="incluir()" mat-stroked-button class="crud-button">
+          <mat-icon>add</mat-icon> Incluir
+        </button>
+                <button (click)="alterar()" mat-stroked-button class="crud-button">
+          <mat-icon>edit</mat-icon> Alterar
+        </button>
+                <button (click)="excluir()" mat-stroked-button clasas="crud-button">
+          <mat-icon>delete</mat-icon> Excluir
+        </button> -->
+                <div style="float: right;">
+                    <mat-form-field style="margin-right: 10px;">
+                        <mat-label>🔎 Pesquisar CEP</mat-label>
+                        <input matInput (keyup)="applyFilter($event)">
+                    </mat-form-field>
+                </div>
+            </div>
+            <table mat-table [dataSource]="storeEndereco">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th style="width: 200px;" mat-header-cell *matHeaderCellDef> Código </th>
+                    <td mat-cell *matCellDef="let endereco"> {{endereco.id}} </td>
+                </ng-container>
+                <ng-container matColumnDef="rua">
+                    <th style="width: 200px;" mat-header-cell *matHeaderCellDef> Rua </th>
+                    <td mat-cell *matCellDef="let endereco"> {{endereco.rua}} </td>
+                </ng-container>
+                <ng-container matColumnDef="numero">
+                    <th style="width: 200px;" mat-header-cell *matHeaderCellDef> Numero </th>
+                    <td mat-cell *matCellDef="let endereco"> {{endereco.numero}} </td>
+                </ng-container>
+                <ng-container matColumnDef="bairro">
+                    <th style="width: 200px;" mat-header-cell *matHeaderCellDef> Bairro </th>
+                    <td mat-cell *matCellDef="let endereco"> {{endereco.bairro}} </td>
+                </ng-container>
+                <ng-container matColumnDef="cep">
+                    <th style="width: 200px;" mat-header-cell *matHeaderCellDef> CEP </th>
+                    <td mat-cell *matCellDef="let endereco"> {{endereco.cep}} </td>
+                </ng-container>
+                <ng-container matColumnDef="cidade">
+                    <th style="width: 200px;" mat-header-cell *matHeaderCellDef> Cidade </th>
+                    <td mat-cell *matCellDef="let endereco"> {{endereco.cidadeid.nome}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </mat-card>
+    </div>
+    <app-rodape-sistema></app-rodape-sistema>
+</div>
