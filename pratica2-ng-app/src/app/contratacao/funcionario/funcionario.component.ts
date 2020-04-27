@@ -6,49 +6,54 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SelectionModel } from '@angular/cdk/collections';
 import { LoaderService } from 'src/app/services/loader.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { EmpresaModalComponent } from './empresa-modal/empresa-modal.component';
-import { Empresa } from './empresa';
+import { Funcionario } from './funcionario';
+import { FunionarioModalComponent } from './funionario-modal/funionario-modal.component';
 
 @Component({
-  selector: 'app-empresa',
-  templateUrl: './empresa.component.html',
-  styleUrls: ['./empresa.component.css']
+  selector: 'app-funcionario',
+  templateUrl: './funcionario.component.html',
+  styleUrls: ['./funcionario.component.css']
 })
-export class EmpresaComponent implements OnInit {
+export class FuncionarioComponent implements OnInit {
+
   apiUrl: string;
-  dialogRef: MatDialogRef<EmpresaModalComponent, any>;
+  dialogRef: MatDialogRef<FunionarioModalComponent, any>;
 
   constructor(private constant: ConstantsService,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,
     public dialog: MatDialog) { this.apiUrl = this.constant.apiUrl; }
 
-  displayedColumns: string[] = ['select', 'cnpj', 'razaosocial', 'nomefantasia', 'endereco', 'telefone'];
-  storeEmpresa = new MatTableDataSource();
-  selection = new SelectionModel<Empresa>();
+  displayedColumns: string[] = ['select', 'cpf', 'nome'];
+  storeFuncionario = new MatTableDataSource();
+  selection = new SelectionModel<Funcionario>();
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.storeEmpresa.data.length;
+    const numRows = this.storeFuncionario.data.length;
     return numSelected == numRows;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.storeFuncionario.filter = filterValue;
+  }
   ngOnInit(): void {
-    this.storeEmpresa.filterPredicate = (data: Empresa, filter) => {
-      return !filter || data.razaosocial.toLowerCase().includes(filter.toLowerCase());
+    this.storeFuncionario.filterPredicate = (data: Funcionario, filter) => {
+      return !filter || data.nome.toLowerCase().includes(filter.toLowerCase());
     }
 
     this.listar();
 
     const initialSelection = [];
     const allowMultiSelect = false;
-    this.selection = new SelectionModel<Empresa>(allowMultiSelect, initialSelection);
+    this.selection = new SelectionModel<Funcionario>(allowMultiSelect, initialSelection);
   }
   listar(): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'empresa/all').then((response) => {
+    axios.get(this.apiUrl + 'pessoa/all').then((response) => {
       if (response && response.data) {
-        this.storeEmpresa.data = response.data;
+        this.storeFuncionario.data = response.data;
         this.loaderService.hide();
       }
     }).catch((error) => {
@@ -57,25 +62,23 @@ export class EmpresaComponent implements OnInit {
       this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
     });
   }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.storeEmpresa.filter = filterValue;
-  }
+
   incluir(): void {
-    this.dialogRef = this.dialog.open(EmpresaModalComponent, { data: { action: 'Incluir', component: this } });
+    this.dialogRef = this.dialog.open(FunionarioModalComponent, { data: { action: 'Incluir', component: this } });
   }
   alterar(): void {
     if (this.selection.selected.length > 0) {
       const selection = this.selection.selected[0];
-      this.dialogRef = this.dialog.open(EmpresaModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
+      this.dialogRef = this.dialog.open(FunionarioModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
     } else {
       this.snackBar.open('Selecione um registro para alterar. 🤦‍♂️', null, { duration: 5000 });
     }
   }
+
   excluir(): void {
     if (this.selection.selected.length > 0) {
       this.loaderService.show();
-      axios.delete(this.apiUrl + 'empresa/delete/' + this.selection.selected[0].cnpj).then((response) => {
+      axios.delete(this.apiUrl + 'funcionario/delete/' + this.selection.selected[0].cpf).then((response) => {
         if (response && response.status === 200) {
           this.loaderService.hide();
           this.listar();
@@ -94,22 +97,13 @@ export class EmpresaComponent implements OnInit {
     }
   }
 
-  salvar(action: string, data: Empresa): void {
+  salvar(action: string, data: Funcionario): void {
     this.loaderService.show();
-    if (data.razaosocial == undefined || data.razaosocial == "") {
+    if (data.nome == undefined || data.nome == "") {
       this.loaderService.hide();
-      this.snackBar.open('Informe a Razão Social.', null, { duration: 5000 });
-    } else if (data.nomefantasia == undefined || data.nomefantasia == "") {
-      this.loaderService.hide();
-      this.snackBar.open('Informe o Nome Fantasia.', null, { duration: 5000 });
-    } else if (data.cnpj == undefined || data.cnpj == "") {
-      this.loaderService.hide();
-      this.snackBar.open('Informe o CNPJ.', null, { duration: 5000 });
-    } else if (data.endereco == undefined || data.endereco == "") {
-      this.loaderService.hide();
-      this.snackBar.open('Informe o Endereço.', null, { duration: 5000 });
+      this.snackBar.open('Informe o Nome.', null, { duration: 5000 });
     } else {
-      axios.post(this.constant.apiUrl + 'empresa/' + action, data).then((response) => {
+      axios.post(this.constant.apiUrl + 'funcionario/' + action, data).then((response) => {
         if (response && response.data) {
           this.loaderService.hide();
           this.listar();

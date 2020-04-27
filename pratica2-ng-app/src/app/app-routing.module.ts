@@ -16,7 +16,7 @@ import { PeriodoCalculoComponent } from './folhapagamento/periodo-calculo/period
 import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.component';
 import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude.component';
 import { EnderecoComponent } from './contratacao/endereco/endereco.component';
-
+import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'contratacao/departamento', component: DepartamentoComponent },
   { path: 'contratacao/empresa', component: EmpresaComponent },
   { path: 'contratacao/endereco', component: EnderecoComponent },
+  { path: 'contratacao/funcionario', component: FuncionarioComponent },
   { path: 'folhapagamento', component: FolhapagamentoComponent },
   { path: 'folhapagamento/incidencia', component: IncidenciaComponent },
   { path: 'folhapagamento/evento', component: EventoComponent },
