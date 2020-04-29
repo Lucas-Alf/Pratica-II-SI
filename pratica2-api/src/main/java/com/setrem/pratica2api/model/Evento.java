@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import antlr.debug.Event;
+
 @Entity
 @Table(name = "evento")
 public class Evento implements Serializable {
@@ -124,4 +126,8 @@ public class Evento implements Serializable {
                 + ", incidenciaId='" + getIncidenciaId() + "'" + ", automatico='" + isAutomatico() + "'" + "}";
     }
 
+    @Override
+    public int compareTo(Evento o) {
+        return this.getId().compareTo(o.getId());
+    }
 }

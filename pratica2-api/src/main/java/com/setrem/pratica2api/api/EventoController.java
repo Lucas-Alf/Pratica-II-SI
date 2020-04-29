@@ -4,6 +4,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ValidationException;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.setrem.pratica2api.model.Evento;
@@ -22,6 +26,8 @@ public class EventoController {
     @GetMapping("/all")
     public List<Evento> all() {
         var eventos = this.eventoRepository.findAll();
+        Comparator<Evento> compareById = (Evento o1, Evento o2) -> o1.getId().compareTo(o2.getId());
+         Collections.sort(eventos, compareById);
         return eventos;
     }
 

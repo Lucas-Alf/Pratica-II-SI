@@ -1,35 +1,34 @@
 <h1 mat-dialog-title>{{data.action}} Evento</h1>
-<div mat-dialog-content>
-  <mat-checkbox  [(checked)]='automatico' (change)="automatico = !automatico">Automatico</mat-checkbox><br/>
-  <mat-form-field appearance="standard" style="width: 300px;">
+<div mat-dialog-content style="height: 450px;">
+  <mat-form-field appearance="standard" style="width: 400px;">
     <mat-label>Código</mat-label>
     <input type="number" matInput placeholder="Código" [disabled]="!codigoHabilitado" [(ngModel)]='codigo'>
   </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 300px;">
+  <mat-form-field appearance="standard" style="width: 400px;">
     <mat-label>Descrição</mat-label>
     <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
   </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 300px;">
+  <mat-form-field appearance="standard" style="width: 400px;">
     <mat-label>Tipo</mat-label>
     <input type="text" matInput placeholder="Tipo" [(ngModel)]='tipo'>
   </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 300px;">
+  <mat-form-field appearance="standard" style="width: 400px;">
     <mat-label>Incidência</mat-label>
     <mat-select [(ngModel)]='incidenciaId'>
       <mat-option *ngFor="let incidencia of incidencias" [value]="incidencia.id">
-        {{incidencia.id}} - {{incidencia.descricao}} 
+        {{incidencia.id}} - {{incidencia.descricao}}
       </mat-option>
     </mat-select>
   </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 300px;">
+  <mat-form-field appearance="standard" style="width: 400px;">
     <mat-label>Rotina de Cálculo</mat-label>
     <mat-select [(ngModel)]='rotinacalculoId'>
       <mat-option *ngFor="let rotina of rotinas" [value]="rotina.id">
-        {{rotina.id}} - {{rotina.descricao}} 
+        {{rotina.id}} - {{rotina.descricao}}
       </mat-option>
     </mat-select>
   </mat-form-field><br />
-
+  <mat-checkbox  [(checked)]='automatico' (change)="automatico = !automatico">Automático</mat-checkbox>
 </div>
 <div mat-dialog-actions style="float: right;">
   <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>

@@ -51,7 +51,7 @@
           <td mat-cell *matCellDef="let evento"> {{evento.incidenciaId.descricao}} </td>
         </ng-container>
         <ng-container matColumnDef="automatico">
-          <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Automatico </th>
+          <th style="width: 150px;" mat-header-cell *matHeaderCellDef> Automático </th>
           <td mat-cell *matCellDef="let evento" [ngSwitch]="evento.automatico">
             <span *ngSwitchCase="false">Não</span>
             <span *ngSwitchCase="true">Sim</span>
