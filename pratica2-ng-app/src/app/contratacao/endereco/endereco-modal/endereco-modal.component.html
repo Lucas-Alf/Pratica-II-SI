@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>{{data.action}} Endereço</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="true" [(ngModel)]='id'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Rua</mat-label>
+    <input type="text" matInput placeholder="Rua" [(ngModel)]='rua'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 150px;">
+    <mat-label>Número</mat-label>
+    <input type="number" matInput placeholder="Número" [(ngModel)]='numero'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Bairro</mat-label>
+    <input type="text" matInput placeholder="Bairro" [(ngModel)]='bairro'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 150px;">
+    <mat-label>CEP</mat-label>
+    <input type="text" matInput placeholder="CEP" [(ngModel)]='cep'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Cidade</mat-label>
+    <mat-select [(ngModel)]='cidadeid'>
+      <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
+        {{cidade.nome}} - {{cidade.estadoid.sigla}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="save()" mat-button>Gravar</button>
+  <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
+</div>

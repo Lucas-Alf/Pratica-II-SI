@@ -7,6 +7,10 @@ export interface Endereco {
   cidadeid: {
     id: number;
     nome: string;
-    estadoid: number;
+    estadoid: {
+      id: number;
+      nome: string;
+      sigla: string;
+    }
   }
 }

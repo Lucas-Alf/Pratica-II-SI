@@ -68,6 +68,19 @@ public class Endereco implements Serializable {
         this.id = id;
     }
 
+    public Endereco(Integer id, String rua, Integer numero, String bairro, String cep, Cidade cidadeid) {
+        this.id = id;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.cidadeid = cidadeid;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -169,6 +182,11 @@ public class Endereco implements Serializable {
         } else if (!rua.equals(other.rua))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.setrem.pratica2api.model.Endereco[ id=" + id + " ]";
     }
 
 }

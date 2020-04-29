@@ -10,11 +10,11 @@ import com.setrem.pratica2api.model.Endereco;
 import com.setrem.pratica2api.repository.EnderecoRepository;
 
 @RestController
-@RequestMapping("/api/Endereco")
+@RequestMapping("/api/endereco")
 @CrossOrigin
 public class EnderecoController {
     private EnderecoRepository EnderecoRepository;
-    private Endereco dep = new Endereco();
+    private Endereco endereco = new Endereco();
 
     public EnderecoController(EnderecoRepository EnderecoRepository) {
         this.EnderecoRepository = EnderecoRepository;
@@ -22,8 +22,8 @@ public class EnderecoController {
 
     @GetMapping("/all")
     public List<Endereco> all() {
-        var Enderecos = this.EnderecoRepository.findAll();
-        return Enderecos;
+        var teste = this.EnderecoRepository.findAll();
+        return teste;
     }
 
     @PostMapping("/Incluir")
@@ -31,8 +31,8 @@ public class EnderecoController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        // int id = this.EnderecoRepository.maxIdEndereco();
-        // this.dep.setId(id);
+        int id = this.EnderecoRepository.maxIdEndereco();
+        data.setId(id);
         data = this.EnderecoRepository.save(data);
         return data;
     }
@@ -43,8 +43,8 @@ public class EnderecoController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-            this.EnderecoRepository.save(data);
-            return data;
+        this.EnderecoRepository.save(data);
+        return data;
     }
 
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })

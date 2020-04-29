@@ -42,14 +42,8 @@ public class ConhecimentoController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        var jaExistente = this.ConhecimentoRepository.findById(data.getId());
-        if (!jaExistente.isPresent()) {
-            throw new Exception("Conhecimento com código " + data.getId() + " não encontrada.");
-        } else {
-            jaExistente.get().setNome(data.getNome());
-            this.ConhecimentoRepository.save(jaExistente.get());
-            return jaExistente.get();
-        }
+        this.ConhecimentoRepository.save(data);
+        return data;
     }
 
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })

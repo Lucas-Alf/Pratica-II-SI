@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "cidade")
 public class Cidade implements Serializable {
@@ -34,17 +33,23 @@ public class Cidade implements Serializable {
     @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "nome")
-    private String rua;
+    private String nome;
 
     @JoinColumn(name = "estadoid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Estado cidadeid;
+    private Estado estadoid;
 
     public Cidade() {
     }
 
-    public Cidade(Integer id) {
+    public Cidade(Integer id, String nome, Estado estadoid) {
         this.id = id;
+        this.nome = nome;
+        this.estadoid = estadoid;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
     }
 
     public Integer getId() {
@@ -55,29 +60,29 @@ public class Cidade implements Serializable {
         this.id = id;
     }
 
-    public String getRua() {
-        return rua;
+    public String getNome() {
+        return nome;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Estado getCidadeid() {
-        return cidadeid;
+    public Estado getEstadoid() {
+        return estadoid;
     }
 
-    public void setCidadeid(Estado cidadeid) {
-        this.cidadeid = cidadeid;
+    public void setEstadoid(Estado estadoid) {
+        this.estadoid = estadoid;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((cidadeid == null) ? 0 : cidadeid.hashCode());
+        result = prime * result + ((estadoid == null) ? 0 : estadoid.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((rua == null) ? 0 : rua.hashCode());
+        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         return result;
     }
 
@@ -90,22 +95,27 @@ public class Cidade implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Cidade other = (Cidade) obj;
-        if (cidadeid == null) {
-            if (other.cidadeid != null)
+        if (estadoid == null) {
+            if (other.estadoid != null)
                 return false;
-        } else if (!cidadeid.equals(other.cidadeid))
+        } else if (!estadoid.equals(other.estadoid))
             return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (rua == null) {
-            if (other.rua != null)
+        if (nome == null) {
+            if (other.nome != null)
                 return false;
-        } else if (!rua.equals(other.rua))
+        } else if (!nome.equals(other.nome))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.setrem.pratica2api.model.Cidade[ id=" + id + " ]";
     }
 
 }

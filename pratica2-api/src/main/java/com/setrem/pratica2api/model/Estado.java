@@ -43,6 +43,20 @@ public class Estado implements Serializable {
     @ManyToOne(optional = false)
     private Pais paisid;
 
+    public Estado() {
+    }
+
+    public Estado(Integer id, String nome, String sigla, Pais paisid) {
+        this.id = id;
+        this.nome = nome;
+        this.sigla = sigla;
+        this.paisid = paisid;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -117,4 +131,10 @@ public class Estado implements Serializable {
             return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "com.setrem.pratica2api.model.Estado[ id=" + id + " ]";
+    }
+
 }

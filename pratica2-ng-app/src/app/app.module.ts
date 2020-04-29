@@ -70,6 +70,7 @@ import { HabilidadeAtitudeModalComponent } from './recrutamento/habilidadeAtitud
 import { EmpresaComponent } from './contratacao/empresa/empresa.component';
 import { EmpresaModalComponent } from './contratacao/empresa/empresa-modal/empresa-modal.component';
 import { EnderecoComponent } from './contratacao/endereco/endereco.component';
+import { EnderecoModalComponent } from './contratacao/endereco/endereco-modal/endereco-modal.component';
 import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
 import { FunionarioModalComponent } from './contratacao/funcionario/funionario-modal/funionario-modal.component';
 
@@ -110,6 +111,7 @@ import { FunionarioModalComponent } from './contratacao/funcionario/funionario-m
     EnderecoComponent,
     FuncionarioComponent,
     FunionarioModalComponent,
+    EnderecoModalComponent,
   ],
   imports: [
     BrowserModule,
