@@ -27,7 +27,7 @@ public class EventoController {
     public List<Evento> all() {
         var eventos = this.eventoRepository.findAll();
         Comparator<Evento> compareById = (Evento o1, Evento o2) -> o1.getId().compareTo(o2.getId());
-         Collections.sort(eventos, compareById);
+        Collections.sort(eventos, compareById);
         return eventos;
     }
 
