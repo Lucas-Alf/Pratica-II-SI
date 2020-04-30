@@ -16,6 +16,7 @@ export class FunionarioModalComponent implements OnInit {
   apiUrl: string;
 
   cpf: string;
+  rg: string;
   nome: string;
   paisnascimentoid: number;
   paises: Pais[];
@@ -32,7 +33,7 @@ export class FunionarioModalComponent implements OnInit {
   }
 
   save(): void {
-    const dados: Funcionario = { cpf: this.cpf, nome: this.nome, paisnascimentoid: { id: this.paisnascimentoid, nome: '' }, };
+    const dados: Funcionario = { cpf: this.cpf, rg: this.rg, nome: this.nome, paisnascimentoid: { id: this.paisnascimentoid, nome: '' }, };
     this.data.component.salvar(this.data.action, dados);
   }
 

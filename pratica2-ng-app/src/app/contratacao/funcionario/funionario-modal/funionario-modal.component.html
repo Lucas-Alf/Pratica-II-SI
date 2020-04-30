@@ -1,24 +1,51 @@
 <h1 mat-dialog-title>{{data.action}} Funcionário</h1>
 <div mat-dialog-content>
-    <mat-form-field appearance="standard" style="width: 300px;">
-        <mat-label>CPF</mat-label>
-        <input type="text" matInput placeholder="cpf" [(ngModel)]='cpf'>
-    </mat-form-field><br />
-    <mat-form-field appearance="standard" style="width: 500px;">
-        <mat-label>Nome</mat-label>
-        <input type="text" matInput placeholder="nome" [(ngModel)]='nome'>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="standard" style="width: 500px;">
-      <mat-label>País</mat-label>
-      <mat-select [(ngModel)]='paisnascimentoid'>
-        <mat-option *ngFor="let pais of paises" [value]="pais.id">
-          {{pais.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-tab-group>
+        <mat-tab label="Informações do Funcionário">
+            <br>
+            <mat-form-field appearance="fill" class="normal" style="width: 135px;">
+                <mat-label>CPF</mat-label>
+                <input type="text" matInput placeholder="cpf" [(ngModel)]='cpf'>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>RG</mat-label>
+                <input type="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 500px;" class="fim">
+                <mat-label>Nome</mat-label>
+                <input type="text" matInput placeholder="nome" [(ngModel)]='nome' style="width: 600px;">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill" class="normal">
+                <mat-select required>
+                    <mat-option value="M">Masculino</mat-option>
+                    <mat-option value="F">Feminino</mat-option>
+                </mat-select>
+                <mat-label>
+                    Sexo
+                </mat-label>
+            </mat-form-field>
+
+
+            <!-- <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+              <mat-label>País</mat-label>
+              <mat-select [(ngModel)]='paisnascimentoid'>
+                  <mat-option *ngFor="let pais of paises" [value]="pais.id">
+                      {{pais.nome}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field> -->
+
+        </mat-tab>
+        <mat-tab label="Contrato"> Contrato </mat-tab>
+    </mat-tab-group>
+</div>
+<div mat-dialog-actions style="float: left;">
+    <button (click)="save()" mat-button>Gravar</button>
 </div>
 <div mat-dialog-actions style="float: right;">
-    <button (click)="save()" mat-button>Gravar</button>
     <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
 </div>
