@@ -1,64 +1,59 @@
 <app-cabecalho-sistema></app-cabecalho-sistema>
 <div style="padding-top: 60px;">
-  <div>
-    <div style="margin-left: 40px; float: left;padding-bottom: 10px;">
-      <span class="material-text bold" style="font-size: 45px;">
+    <div>
+        <div style="margin-left: 40px; float: left;padding-bottom: 10px;">
+            <span class="material-text bold" style="font-size: 45px;">
         Bem-Vindo
       </span>
-      <div>
-        <span class="material-text bold" style="font-size: 35px;" [ngStyle]="{color: corDiaSemanaAtual}">
+            <div>
+                <span class="material-text bold" style="font-size: 35px;" [ngStyle]="{color: corDiaSemanaAtual}">
           {{diaSemanaAtual}}
         </span>
-        <span class="material-text-medium bold" style="font-size: 35px;">
+                <span class="material-text-medium bold" style="font-size: 35px;">
           {{dataExtensaAtual}}
         </span>
-      </div>
+            </div>
+        </div>
+        <div style="float: right; margin-right: 40px;">
+            <mat-card style="width: 530px;">
+                <mat-grid-list cols="4" rowHeight="120px" gutterSize="10px">
+                    <a [routerLink]="retornaRota(1)">
+                        <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(1)}" rowspan="1" colspan="2" matTooltip="Folha de pagamento">
+                            <i class="material-icons home-icon">local_atm</i>
+                            <span class="titulo-home-icon-duas-linhas">Folha de Pagamento</span>
+                        </mat-grid-tile>
+                    </a>
+                    <a [routerLink]="retornaRota(2)">
+                        <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1" rowspan="1" colspan="2" matTooltip="Recrutamento e Seleção">
+                            <i class="material-icons home-icon">supervised_user_circle</i>
+                            <span class="titulo-home-icon-duas-linhas">Recrutamento e Seleção</span>
+                        </mat-grid-tile>
+                    </a>
+                    <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
+                    <a [routerLink]="retornaRota(4)">
+                        <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1" rowspan="1" colspan="2" matTooltip="Contratação">
+                            <i class="material-icons home-icon">group_add</i>
+                            <span class="titulo-home-icon-uma-linha">Contratação</span>
+                        </mat-grid-tile>
+                    </a>
+                    <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
+                    <a routerLink="['/home']">
+                        <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="2" matTooltip="Minha conta">
+                            <i class="material-icons home-icon">account_circle</i>
+                            <span class="titulo-home-icon-uma-linha">Minha conta</span>
+                        </mat-grid-tile>
+                    </a>
+                    <a [routerLink]="retornaRota(3)">
+                        <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(3)}" rowspan="1" colspan="1" matTooltip="Configurações">
+                            <i class="material-icons home-icon">settings_applications</i>
+                        </mat-grid-tile>
+                    </a>
+                    <mat-grid-tile (click)="sair()" style="cursor: pointer;" class="home-mat-grid-tile" rowspan="1" colspan="1" matTooltip="Sair">
+                        <i class="material-icons home-icon">exit_to_app</i>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </div>
     </div>
-    <div style="float: right; margin-right: 40px;">
-      <mat-card style="width: 530px;">
-        <mat-grid-list cols="4" rowHeight="120px" gutterSize="10px">
-          <a [routerLink]="retornaRota(1)">
-            <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(1)}" rowspan="1"
-              colspan="2" matTooltip="Folha de pagamento">
-              <i class="material-icons home-icon">local_atm</i>
-              <span class="titulo-home-icon-duas-linhas">Folha de Pagamento</span>
-            </mat-grid-tile>
-          </a>
-          <a [routerLink]="retornaRota(2)">
-            <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1"
-              rowspan="1" colspan="2" matTooltip="Recrutamento e Seleção">
-              <i class="material-icons home-icon">supervised_user_circle</i>
-              <span class="titulo-home-icon-duas-linhas">Recrutamento e Seleção</span>
-            </mat-grid-tile>
-          </a>
-          <a [routerLink]="retornaRota(3)">
-            <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(3)}" rowspan="1"
-              colspan="1" matTooltip="Configurações">
-              <i class="material-icons home-icon">settings_applications</i>
-            </mat-grid-tile>
-          </a>
-          <a routerLink="['/home']">
-            <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="2" matTooltip="Minha conta">
-              <i class="material-icons home-icon">account_circle</i>
-              <span class="titulo-home-icon-uma-linha">Minha conta</span>
-            </mat-grid-tile>
-          </a>
-          <mat-grid-tile (click)="sair()" style="cursor: pointer;" class="home-mat-grid-tile" rowspan="1" colspan="1"
-            matTooltip="Sair">
-            <i class="material-icons home-icon">exit_to_app</i>
-          </mat-grid-tile>
-          <a [routerLink]="retornaRota(4)">
-            <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1"
-              rowspan="1" colspan="2" matTooltip="Contratação">
-              <i class="material-icons home-icon">supervised_user_circle</i>
-              <span class="titulo-home-icon-uma-linha">Contratação</span>
-            </mat-grid-tile>
-          </a>
-          <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
-          <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
-        </mat-grid-list>
-      </mat-card>
-    </div>
-  </div>
 </div>
 <app-rodape-sistema></app-rodape-sistema>
