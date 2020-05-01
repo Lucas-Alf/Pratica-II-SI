@@ -28,12 +28,11 @@ public class IncidenciaEvento implements Serializable {
     @JsonIgnore
     @JoinColumn(name = "incidenciaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Incidencia incidenciaId;
+    private Incidencia incidencia;
     @JsonIgnore
     @JoinColumn(name = "eventoid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Evento eventoId;
-
+    private Evento evento;
 
     public Integer getId() {
         return this.id;
@@ -43,20 +42,20 @@ public class IncidenciaEvento implements Serializable {
         this.id = id;
     }
 
-    public Incidencia getIncidenciaId() {
-        return this.incidenciaId;
+    public Incidencia getIncidencia() {
+        return this.incidencia;
     }
 
-    public void setIncidenciaId(Incidencia incidenciaId) {
-        this.incidenciaId = incidenciaId;
+    public void setIncidencia(Incidencia incidenciaId) {
+        this.incidencia = incidenciaId;
     }
 
-    public Evento getEventoId() {
-        return this.eventoId;
+    public Evento getEvento() {
+        return this.evento;
     }
 
-    public void setEventoId(Evento eventoId) {
-        this.eventoId = eventoId;
+    public void setEvento(Evento eventoId) {
+        this.evento = eventoId;
     }
 
     @Override
@@ -67,22 +66,19 @@ public class IncidenciaEvento implements Serializable {
             return false;
         }
         IncidenciaEvento incidenciaEvento = (IncidenciaEvento) o;
-        return Objects.equals(id, incidenciaEvento.id) && Objects.equals(incidenciaId, incidenciaEvento.incidenciaId) && Objects.equals(eventoId, incidenciaEvento.eventoId);
+        return Objects.equals(id, incidenciaEvento.id) && Objects.equals(incidencia, incidenciaEvento.incidencia)
+                && Objects.equals(evento, incidenciaEvento.evento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, incidenciaId, eventoId);
+        return Objects.hash(id, incidencia, evento);
     }
-
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", incidenciaId='" + getIncidenciaId() + "'" +
-            ", eventoId='" + getEventoId() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", incidencia='" + getIncidencia() + "'" + ", evento='" + getEvento()
+                + "'" + "}";
     }
 
 }

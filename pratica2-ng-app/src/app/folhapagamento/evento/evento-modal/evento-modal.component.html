@@ -1,34 +1,71 @@
 <h1 mat-dialog-title>{{data.action}} Evento</h1>
-<div mat-dialog-content style="height: 450px;">
-  <mat-form-field appearance="standard" style="width: 400px;">
-    <mat-label>Código</mat-label>
-    <input type="number" matInput placeholder="Código" [disabled]="!codigoHabilitado" [(ngModel)]='codigo'>
-  </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 400px;">
-    <mat-label>Descrição</mat-label>
-    <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
-  </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 400px;">
-    <mat-label>Tipo</mat-label>
-    <input type="text" matInput placeholder="Tipo" [(ngModel)]='tipo'>
-  </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 400px;">
-    <mat-label>Incidência</mat-label>
-    <mat-select [(ngModel)]='incidenciaId'>
-      <mat-option *ngFor="let incidencia of incidencias" [value]="incidencia.id">
-        {{incidencia.id}} - {{incidencia.descricao}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 400px;">
-    <mat-label>Rotina de Cálculo</mat-label>
-    <mat-select [(ngModel)]='rotinacalculoId'>
-      <mat-option *ngFor="let rotina of rotinas" [value]="rotina.id">
-        {{rotina.id}} - {{rotina.descricao}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field><br />
-  <mat-checkbox  [(checked)]='automatico' (change)="automatico = !automatico">Automático</mat-checkbox>
+<div mat-dialog-content style="height: 370px;">
+  <table>
+    <tr>
+      <td style="vertical-align: initial;">
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Código</mat-label>
+          <input type="number" matInput placeholder="Código" [disabled]="!codigoHabilitado" [(ngModel)]='codigo'>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Descrição</mat-label>
+          <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Tipo</mat-label>
+          <mat-select [(ngModel)]='tipo'>
+            <mat-option [value]="'V'">Vencimento</mat-option>
+            <mat-option [value]="'D'">Desconto</mat-option>
+            <mat-option [value]="'B'">Base</mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Rotina de Cálculo</mat-label>
+          <mat-select [(ngModel)]='rotinacalculoId'>
+            <mat-option *ngFor="let rotina of rotinas" [value]="rotina.id">
+              {{rotina.id}} - {{rotina.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-checkbox [(checked)]='automatico' (change)="automatico = !automatico">Automático</mat-checkbox>
+      </td>
+      <td style="padding-left: 25px; vertical-align: initial;">
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Incidência recebida</mat-label>
+          <mat-select [(ngModel)]='incidenciaId'>
+            <mat-option *ngFor="let incidencia of incidencias" [value]="incidencia.id">
+              {{incidencia.id}} - {{incidencia.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-form-field class="example-chip-list" id="incidenciasChips">
+          <mat-chip-list #chipList aria-label="Incidências Atingidas">
+            <mat-chip
+              *ngFor="let item of incidenciasAtingidas"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(item)">
+              {{item.descricao}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Incidências Atingidas"
+              #fruitInput
+              [formControl]="IncidenciasCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let item of filteredIncidencias | async" [value]="item">
+              {{item.descricao}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
 </div>
 <div mat-dialog-actions style="float: right;">
   <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>

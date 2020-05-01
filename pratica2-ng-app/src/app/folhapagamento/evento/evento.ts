@@ -1,3 +1,4 @@
+import { Incidencia } from '../incidencia/incidencia';
 
 export interface Evento {
   id: number;
@@ -7,9 +8,10 @@ export interface Evento {
   incidenciaId: {
     id: number;
     descricao: string
-  }
+  };
   rotinacalculoId: {
     id: number;
     descricao: string
-  }
+  };
+  incidenciasAtingidas: Incidencia[];
 }
