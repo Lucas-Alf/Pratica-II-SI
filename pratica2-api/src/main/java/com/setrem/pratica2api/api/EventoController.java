@@ -29,9 +29,7 @@ public class EventoController {
 
     @GetMapping("/all")
     public List<Evento> all() {
-        var eventos = this.eventoRepository.findAll();
-        Comparator<Evento> compareById = (Evento o1, Evento o2) -> o1.getId().compareTo(o2.getId());
-        Collections.sort(eventos, compareById);
+        var eventos = this.eventoRepository.findAllByOrderByIdAsc();
         for (Evento evento : eventos) {
             var incidenciasEvento = incidenciasEventoRepository.findByEventoId(evento.getId());
             if (incidenciasEvento.size() > 0) {

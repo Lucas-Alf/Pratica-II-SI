@@ -23,7 +23,7 @@ public class IncidenciaController {
 
     @GetMapping("/all")
     public List<Incidencia> all() {
-        var incidencias = this.incidenciaRepository.findAll();
+        var incidencias = this.incidenciaRepository.findAllByOrderByIdAsc();
         return incidencias;
     }
 
