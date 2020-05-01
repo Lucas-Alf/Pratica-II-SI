@@ -22,7 +22,7 @@ public class RotinaCalculoController {
 
     @GetMapping("/all")
     public List<RotinaCalculo> all() {
-        var RotinaCalculos = this.RotinaCalculoRepository.findAll();
+        var RotinaCalculos = this.RotinaCalculoRepository.findAllByOrderByIdAsc();
         return RotinaCalculos;
     }
 
