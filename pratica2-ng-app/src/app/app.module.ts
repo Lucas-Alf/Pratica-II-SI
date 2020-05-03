@@ -73,8 +73,6 @@ import { EnderecoComponent } from './contratacao/endereco/endereco.component';
 import { EnderecoModalComponent } from './contratacao/endereco/endereco-modal/endereco-modal.component';
 import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
 import { FunionarioModalComponent } from './contratacao/funcionario/funionario-modal/funionario-modal.component';
-import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/parametro-empresa.component';
-import { ParametroEmpresaModalComponent } from './folhapagamento/parametro-empresa/parametro-empresa-modal/parametro-empresa-modal.component';
 
 @NgModule({
   declarations: [
@@ -114,8 +112,6 @@ import { ParametroEmpresaModalComponent } from './folhapagamento/parametro-empre
     FuncionarioComponent,
     FunionarioModalComponent,
     EnderecoModalComponent,
-    ParametroEmpresaComponent,
-    ParametroEmpresaModalComponent,
   ],
   imports: [
     BrowserModule,
