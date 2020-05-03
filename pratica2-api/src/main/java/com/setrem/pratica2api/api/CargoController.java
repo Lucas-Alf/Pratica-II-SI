@@ -48,9 +48,8 @@ public class CargoController {
         if (!jaExistente.isPresent()) {
             throw new Exception("Cargo com código " + data.getId() + " não encontrada.");
         } else {
-            jaExistente.get().setDescricao(data.getDescricao());
-            this.cargoRepository.save(jaExistente.get());
-            return jaExistente.get();
+            this.cargoRepository.save(data);
+            return data;
         }
     }
 

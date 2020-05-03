@@ -31,9 +31,11 @@ export class CargoModalComponent implements OnInit {
   descricao: string;
   cboid: string;
   departamentoid: number;
+  faixatabelasalarialid: number;
 
   cbos: Cbo[];
   departamentos: Departamento[];
+  faixaTabelaSalarialList: any[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -45,6 +47,7 @@ export class CargoModalComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
     this.listarCbo();
     this.listarDepartamento();
+    this.listarFaixaTabelaSalarial();
   }
 
   close(): void {
@@ -52,7 +55,7 @@ export class CargoModalComponent implements OnInit {
   }
 
   save(): void {
-    const dados: Cargo = { id: this.id, descricao: this.descricao, cboid: { id: this.cboid, descricaosumaria: '' }, departamentoid: { id: this.departamentoid, nome: '', descricao: '' } };
+    const dados: Cargo = { id: this.id, descricao: this.descricao, cboid: { id: this.cboid, descricaosumaria: '' }, departamentoid: { id: this.departamentoid, nome: '', descricao: '' }, faixatabelasalarial: { id: this.faixatabelasalarialid } };
     this.data.component.salvar(this.data.action, dados);
   }
 
@@ -84,12 +87,27 @@ export class CargoModalComponent implements OnInit {
     });
   }
 
+  listarFaixaTabelaSalarial(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'FaixaTabelaSalarial/all').then((response) => {
+      if (response && response.data) {
+        this.faixaTabelaSalarialList = response.data;
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
   ngOnInit(): void {
     if (this.data.info) {
       this.id = this.data.info.id;
       this.descricao = this.data.info.descricao;
       this.cboid = this.data.info.cboid.id;
       this.departamentoid = this.data.info.departamentoid.id;
+      this.faixatabelasalarialid = this.data.info.faixatabelasalarial.id;
     }
   }
 

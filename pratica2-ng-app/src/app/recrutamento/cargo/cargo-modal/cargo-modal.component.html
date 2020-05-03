@@ -26,6 +26,15 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Faixa Tabela Salarial</mat-label>
+    <mat-select [(ngModel)]='faixatabelasalarialid'>
+      <mat-option *ngFor="let faixa of faixaTabelaSalarialList" [value]="faixa.id">
+        {{faixa.tabelasalarial.descricao + ' ' + faixa.nivel}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions style="float: right;">
   <button (click)="save()" mat-button>Gravar</button>

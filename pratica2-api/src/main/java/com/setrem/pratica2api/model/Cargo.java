@@ -43,8 +43,8 @@ public class Cargo implements Serializable {
     @ManyToOne(optional = false)
     private Departamento departamentoid;
     @JoinColumn(name = "faixatabelasalarialid", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private FaixaTabelSalarial faixatabelasalarial;
+    @ManyToOne(optional = true)
+    private FaixaTabelaSalarial faixatabelasalarial;
 
     public Cargo() {
     }
@@ -101,11 +101,11 @@ public class Cargo implements Serializable {
         return "com.setrem.pratica2api.model.Cargo[ id=" + id + " ]";
     }
 
-    public FaixaTabelSalarial getFaixatabelasalarial() {
+    public FaixaTabelaSalarial getFaixatabelasalarial() {
         return faixatabelasalarial;
     }
 
-    public void setFaixatabelasalarial(FaixaTabelSalarial faixatabelasalarial) {
+    public void setFaixatabelasalarial(FaixaTabelaSalarial faixatabelasalarial) {
         this.faixatabelasalarial = faixatabelasalarial;
     }
 

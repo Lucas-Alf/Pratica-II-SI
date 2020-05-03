@@ -136,5 +136,4 @@ export class CargoComponent implements OnInit {
     const allowMultiSelect = false;
     this.selection = new SelectionModel<Cargo>(allowMultiSelect, initialSelection);
   }
-
 }
