@@ -17,6 +17,7 @@ import { ConhecimentoComponent } from './recrutamento/conhecimento/conhecimento.
 import { HabilidadeAtitudeComponent } from './recrutamento/habilidadeAtitude/habilidadeAtitude.component';
 import { EnderecoComponent } from './contratacao/endereco/endereco.component';
 import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
+import { VagaComponent } from './recrutamento/vaga/vaga.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'recrutamento/cargo', component: CargoComponent },
   { path: 'recrutamento/conhecimento', component: ConhecimentoComponent },
   { path: 'recrutamento/habilidadeAtitude', component: HabilidadeAtitudeComponent },
+  { path: 'recrutamento/vaga', component: VagaComponent },
 ];
 
 @NgModule({

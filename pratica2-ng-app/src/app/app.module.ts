@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -73,6 +74,8 @@ import { EnderecoComponent } from './contratacao/endereco/endereco.component';
 import { EnderecoModalComponent } from './contratacao/endereco/endereco-modal/endereco-modal.component';
 import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
 import { FunionarioModalComponent } from './contratacao/funcionario/funionario-modal/funionario-modal.component';
+import { VagaComponent } from './recrutamento/vaga/vaga.component';
+import { VagaModalComponent } from './recrutamento/vaga/vaga-modal/vaga-modal.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +115,8 @@ import { FunionarioModalComponent } from './contratacao/funcionario/funionario-m
     FuncionarioComponent,
     FunionarioModalComponent,
     EnderecoModalComponent,
+    VagaComponent,
+    VagaModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,6 +128,7 @@ import { FunionarioModalComponent } from './contratacao/funcionario/funionario-m
     MatInputModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
@@ -151,7 +157,7 @@ import { FunionarioModalComponent } from './contratacao/funcionario/funionario-m
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ConstantsService, LoaderService],
+  providers: [ConstantsService, LoaderService, { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,28 +14,40 @@ import com.setrem.pratica2api.repository.VagaRepository;;
 @CrossOrigin
 public class VagaController {
     private VagaRepository VagaRepository;
-
+    
     public VagaController(VagaRepository VagaRepository) {
         this.VagaRepository = VagaRepository;
     }
 
     @GetMapping("/all")
     public List<Vaga> all() {
-        var vagas = this.VagaRepository.findAll();
-        return vagas;
+        return this.VagaRepository.findAll();
     }
 
-    @PostMapping
-    public Vaga save(@RequestBody Vaga data, BindingResult bindingResult) {
+    @PostMapping("/Incluir")
+    public Vaga add(@RequestBody Vaga data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
+        int id = this.VagaRepository.maxIdVaga();
+        data.setId(id);
         data = this.VagaRepository.save(data);
         return data;
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public Vaga update(@RequestBody Vaga data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+        this.VagaRepository.save(data);
+        return data;
+    }
+
+    @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable int id) {
         this.VagaRepository.deleteById(id);
     }
 

@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>{{data.action}} Vaga</h1>
+<div>
+  <mat-form-field appearance="standard" style="width: 200px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="true" [(ngModel)]='id'>
+  </mat-form-field><br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Descrição</mat-label>
+    <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 200px; margin-right: 50px;">
+    <mat-label>Quantidade</mat-label>
+    <input type="number" matInput placeholder="Quantidade" [(ngModel)]='quantidade'>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Selecione o Prazo</mat-label>
+    <input matInput [matDatepicker]="dp3" disabled [(ngModel)]='prazo'>
+    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+  </mat-form-field>
+
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Cargo</mat-label>
+    <mat-select [(ngModel)]='cargoid'>
+      <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">
+        {{cargo.cboid.id}} - {{cargo.descricao}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-radio-group [(ngModel)]='tipo'>
+    <mat-radio-button value="Interno" style="margin-right: 50px;">Recrutamento Interno</mat-radio-button>
+    <mat-radio-button value="Externo">Recrutamento Externo</mat-radio-button>
+  </mat-radio-group>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button (click)="save()" mat-button class="gravar-button">Gravar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>

@@ -44,9 +44,8 @@ public class Vaga implements Serializable {
     private Integer quantidade;
     @Column(name = "prazo")
     private Date prazo;
-    @Column(name = "internoexterno")
-    private Integer internoexterno;
-    @JsonIgnore
+    @Column(name = "tipo")
+    private String tipo;
     @JoinColumn(name = "cargoid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cargo cargoid;
@@ -58,12 +57,12 @@ public class Vaga implements Serializable {
         this.id = id;
     }
 
-    public Vaga(Integer id, String descricao, Integer quantidade, Date prazo, Integer internoexterno, Cargo cargoid) {
+    public Vaga(Integer id, String descricao, Integer quantidade, Date prazo, String tipo, Cargo cargoid) {
         this.id = id;
         this.descricao = descricao;
         this.quantidade = quantidade;
         this.prazo = prazo;
-        this.internoexterno = internoexterno;
+        this.tipo = tipo;
         this.cargoid = cargoid;
     }
 
@@ -103,12 +102,12 @@ public class Vaga implements Serializable {
         this.prazo = prazo;
     }
 
-    public Integer getInternoexterno() {
-        return internoexterno;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setInternoexterno(Integer internoexterno) {
-        this.internoexterno = internoexterno;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Cargo getCargoid() {
@@ -126,9 +125,9 @@ public class Vaga implements Serializable {
         result = prime * result + ((cargoid == null) ? 0 : cargoid.hashCode());
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((internoexterno == null) ? 0 : internoexterno.hashCode());
         result = prime * result + ((prazo == null) ? 0 : prazo.hashCode());
         result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
+        result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
         return result;
     }
 
@@ -156,11 +155,6 @@ public class Vaga implements Serializable {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (internoexterno == null) {
-            if (other.internoexterno != null)
-                return false;
-        } else if (!internoexterno.equals(other.internoexterno))
-            return false;
         if (prazo == null) {
             if (other.prazo != null)
                 return false;
@@ -170,6 +164,11 @@ public class Vaga implements Serializable {
             if (other.quantidade != null)
                 return false;
         } else if (!quantidade.equals(other.quantidade))
+            return false;
+        if (tipo == null) {
+            if (other.tipo != null)
+                return false;
+        } else if (!tipo.equals(other.tipo))
             return false;
         return true;
     }
