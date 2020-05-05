@@ -25,7 +25,6 @@ public class IncidenciaEvento implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @JsonIgnore
     @JoinColumn(name = "incidenciaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Incidencia incidencia;

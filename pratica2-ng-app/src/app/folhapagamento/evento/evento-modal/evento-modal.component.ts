@@ -36,7 +36,7 @@ export class EventoModalComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   IncidenciasCtrl = new FormControl();
   filteredIncidencias: Observable<Incidencia[]>;
-  incidenciasAtingidas: Incidencia[] = [];
+  incidenciasAtingidas: any[] = [];
 
   incidencias: Incidencia[];
   rotinas: RotinaCalculo[];
@@ -72,7 +72,7 @@ export class EventoModalComponent implements OnInit {
       rotinacalculoId: {
         id: this.rotinacalculoId, descricao: ''
       },
-      incidenciasAtingidas: this.incidenciasAtingidas
+      incidenciasAtingidas: this.incidenciasAtingidas.map((x) => ({ incidencia: x }))
     };
     this.data.component.salvar(this.data.action, dados);
   }
@@ -170,7 +170,7 @@ export class EventoModalComponent implements OnInit {
       this.rotinacalculoId = this.data.info.rotinacalculoId.id;
       this.codigoHabilitado = false;
       if (this.data.info.incidenciasAtingidas) {
-        this.incidenciasAtingidas = this.data.info.incidenciasAtingidas;
+        this.incidenciasAtingidas = this.data.info.incidenciasAtingidas.map(x => x.incidencia);
       } else {
         this.incidenciasAtingidas = [];
       }

@@ -30,13 +30,6 @@ public class EventoController {
     @GetMapping("/all")
     public List<Evento> all() {
         var eventos = this.eventoRepository.findAllByOrderByIdAsc();
-        for (Evento evento : eventos) {
-            var incidenciasEvento = incidenciasEventoRepository.findByEventoId(evento.getId());
-            if (incidenciasEvento.size() > 0) {
-                evento.setIncidenciasAtingidas(
-                        incidenciasEvento.stream().map(x -> x.getIncidencia()).toArray(Incidencia[]::new));
-            }
-        }
         return eventos;
     }
 
@@ -49,14 +42,11 @@ public class EventoController {
         if (jaExistente.isPresent()) {
             throw new Exception("Já existe um evento com este código.");
         } else {
-            var incidenciasAtingidasTemp = data.getIncidenciasAtingidas();
-            data = this.eventoRepository.save(data);
-            for (Incidencia incidencia : incidenciasAtingidasTemp) {
-                var incidenciaEvento = new IncidenciaEvento();
-                incidenciaEvento.setIncidencia(incidencia);
-                incidenciaEvento.setEvento(data);
-                incidenciasEventoRepository.save(incidenciaEvento);
+            incidenciasEventoRepository.deleteByEventoId(data.getId());
+            for (IncidenciaEvento incidencia : data.getIncidenciasAtingidas()) {
+                incidencia.setEvento(data);
             }
+            this.eventoRepository.save(data);
             return data;
         }
     }
@@ -71,14 +61,11 @@ public class EventoController {
         if (!jaExistente.isPresent()) {
             throw new Exception("Evento com código " + data.getId() + " não encontrado.");
         } else {
-            this.eventoRepository.save(data);
             incidenciasEventoRepository.deleteByEventoId(data.getId());
-            for (Incidencia incidencia : data.getIncidenciasAtingidas()) {
-                var incidenciaEvento = new IncidenciaEvento();
-                incidenciaEvento.setIncidencia(incidencia);
-                incidenciaEvento.setEvento(data);
-                incidenciasEventoRepository.save(incidenciaEvento);
+            for (IncidenciaEvento incidencia : data.getIncidenciasAtingidas()) {
+                incidencia.setEvento(data);
             }
+            this.eventoRepository.save(data);
             return data;
         }
     }
