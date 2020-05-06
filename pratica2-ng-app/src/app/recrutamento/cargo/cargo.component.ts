@@ -47,6 +47,7 @@ export class CargoComponent implements OnInit {
   }
 
   salvar(action: string, data: Cargo): void {
+    debugger
     this.loaderService.show();
     if (data.descricao == undefined || data.descricao == "") {
       this.loaderService.hide();
