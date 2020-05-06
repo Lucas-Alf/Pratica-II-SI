@@ -6,8 +6,11 @@
 package com.setrem.pratica2api.model;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,9 +18,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "cargo")
@@ -34,11 +40,11 @@ public class Cargo implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "descricao")
     private String descricao;
-    //@JsonIgnore
+    // @JsonIgnore
     @JoinColumn(name = "cboid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cbo cboid;
-    //@JsonIgnore
+    // @JsonIgnore
     @JoinColumn(name = "departamentoid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Departamento departamentoid;
@@ -46,23 +52,8 @@ public class Cargo implements Serializable {
     @ManyToOne(optional = true)
     private FaixaTabelaSalarial faixatabelasalarial;
 
-    public Cargo() {
-    }
-
-    public Cargo(Integer id) {
-        this.id = id;
-    }
-
-    public Cargo(Integer id, String descricao, Cbo cboid, Departamento departamentoid) {
-        this.id = id;
-        this.descricao = descricao;
-        this.cboid = cboid;
-        this.departamentoid = departamentoid;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargo")
+    private List<CargoConhecimento> cargoConhecimentos;
 
     public Integer getId() {
         return id;
@@ -96,11 +87,6 @@ public class Cargo implements Serializable {
         this.departamentoid = departamentoid;
     }
 
-    @Override
-    public String toString() {
-        return "com.setrem.pratica2api.model.Cargo[ id=" + id + " ]";
-    }
-
     public FaixaTabelaSalarial getFaixatabelasalarial() {
         return faixatabelasalarial;
     }
@@ -109,10 +95,37 @@ public class Cargo implements Serializable {
         this.faixatabelasalarial = faixatabelasalarial;
     }
 
+    public List<CargoConhecimento> getCargoConhecimentos() {
+        return cargoConhecimentos;
+    }
+
+    public void setCargoConhecimentos(List<CargoConhecimento> cargoConhecimentos) {
+        this.cargoConhecimentos = cargoConhecimentos;
+    }
+
     @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Cargo)) {
+            return false;
+        }
+        Cargo cargo = (Cargo) o;
+        return Objects.equals(id, cargo.id) && Objects.equals(descricao, cargo.descricao)
+                && Objects.equals(cboid, cargo.cboid) && Objects.equals(departamentoid, cargo.departamentoid)
+                && Objects.equals(faixatabelasalarial, cargo.faixatabelasalarial);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, descricao, cboid, departamentoid, faixatabelasalarial);
+    }
+
+    /*@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((cargoConhecimentos == null) ? 0 : cargoConhecimentos.hashCode());
         result = prime * result + ((cboid == null) ? 0 : cboid.hashCode());
         result = prime * result + ((departamentoid == null) ? 0 : departamentoid.hashCode());
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
@@ -130,6 +143,11 @@ public class Cargo implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Cargo other = (Cargo) obj;
+        if (cargoConhecimentos == null) {
+            if (other.cargoConhecimentos != null)
+                return false;
+        } else if (!cargoConhecimentos.equals(other.cargoConhecimentos))
+            return false;
         if (cboid == null) {
             if (other.cboid != null)
                 return false;
@@ -156,6 +174,12 @@ public class Cargo implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }*/
+
+    @Override
+    public String toString() {
+        return "{" + " id='" + getId() + "'" + ", descricao='" + getDescricao() + "'" + ", cboid='" + getCboid() + "'"
+                + ", departamentoid='" + getDepartamentoid() + "'" + ", faixatabelasalarial='" + getFaixatabelasalarial() + "'" + "}";
     }
 
 }
