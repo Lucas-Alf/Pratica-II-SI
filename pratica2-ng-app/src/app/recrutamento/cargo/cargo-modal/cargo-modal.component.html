@@ -30,8 +30,8 @@
   <mat-form-field appearance="standard" style="width: 500px;">
     <mat-label>Faixa Tabela Salarial</mat-label>
     <mat-select [(ngModel)]='faixatabelasalarialid'>
-      <mat-option *ngFor="let faixa of faixaTabelaSalarialList" [value]="faixa.id">
-        {{faixa.tabelasalarial.descricao + ' ' + faixa.nivel}}
+      <mat-option *ngFor="let faixa of faixaTabelaSalarialList" [value]="faixa.id" style="display: flex;">
+        {{faixa.tabelasalarial.descricao + ' ' + faixa.nivel }}&nbsp;&nbsp;&nbsp;<div style="float: right;">Base: R${{faixa.tabelasalarial.valorBase}}&nbsp;&nbsp;&nbsp;Percentual: {{faixa.percentual}}&nbsp;&nbsp;&nbsp;Valor: R${{((faixa.tabelasalarial.valorBase / 100) * faixa.percentual)}}</div>
       </mat-option>
     </mat-select>
   </mat-form-field>

@@ -25,12 +25,6 @@ public class FaixaTabelaSalarial implements Serializable {
     @Column(name = "nivel")
     private Integer nivel;
     
-    @Column(name = "subnivel")
-    private Integer subnivel;
-    
-    @Column(name = "classe")
-    private String classe;
-    
     @Column(name = "percentual")
     private Double percentual;
 
@@ -61,22 +55,6 @@ public class FaixaTabelaSalarial implements Serializable {
         this.nivel = nivel;
     }
 
-    public Integer getSubnivel() {
-        return subnivel;
-    }
-
-    public void setSubnivel(Integer subnivel) {
-        this.subnivel = subnivel;
-    }
-
-    public String getClasse() {
-        return classe;
-    }
-
-    public void setClasse(String classe) {
-        this.classe = classe;
-    }
-
     public Double getPercentual() {
         return percentual;
     }
@@ -97,11 +75,9 @@ public class FaixaTabelaSalarial implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((classe == null) ? 0 : classe.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nivel == null) ? 0 : nivel.hashCode());
         result = prime * result + ((percentual == null) ? 0 : percentual.hashCode());
-        result = prime * result + ((subnivel == null) ? 0 : subnivel.hashCode());
         result = prime * result + ((tabelasalarial == null) ? 0 : tabelasalarial.hashCode());
         return result;
     }
@@ -115,11 +91,6 @@ public class FaixaTabelaSalarial implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         FaixaTabelaSalarial other = (FaixaTabelaSalarial) obj;
-        if (classe == null) {
-            if (other.classe != null)
-                return false;
-        } else if (!classe.equals(other.classe))
-            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -134,11 +105,6 @@ public class FaixaTabelaSalarial implements Serializable {
             if (other.percentual != null)
                 return false;
         } else if (!percentual.equals(other.percentual))
-            return false;
-        if (subnivel == null) {
-            if (other.subnivel != null)
-                return false;
-        } else if (!subnivel.equals(other.subnivel))
             return false;
         if (tabelasalarial == null) {
             if (other.tabelasalarial != null)
