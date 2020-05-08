@@ -76,6 +76,7 @@ import { FuncionarioComponent } from './contratacao/funcionario/funcionario.comp
 import { FunionarioModalComponent } from './contratacao/funcionario/funionario-modal/funionario-modal.component';
 import { VagaComponent } from './recrutamento/vaga/vaga.component';
 import { VagaModalComponent } from './recrutamento/vaga/vaga-modal/vaga-modal.component';
+import { PermissaoModalComponent } from './geral/configuracoes/permissao-modal/permissao-modal.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { VagaModalComponent } from './recrutamento/vaga/vaga-modal/vaga-modal.co
     EnderecoModalComponent,
     VagaComponent,
     VagaModalComponent,
+    PermissaoModalComponent
   ],
   imports: [
     BrowserModule,
