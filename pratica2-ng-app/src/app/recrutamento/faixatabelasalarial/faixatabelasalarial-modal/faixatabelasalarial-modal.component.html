@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>{{data.action}} Faixa Tabela Salarial</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="true" [(ngModel)]='id'>
+  </mat-form-field><br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Tabela Salarial</mat-label>
+    <mat-select [(ngModel)]='tabelaSalarialId'>
+      <mat-option *ngFor="let tabelasalarial of tabelasalariais" [value]="tabelasalarial.id">
+        {{tabelasalarial.descricao}} - R$ {{tabelasalarial.valorbase}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Nível</mat-label>
+    <input type="number" matInput placeholder="Nível" [(ngModel)]='nivel'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Percentual</mat-label>
+    <input type="number" matInput placeholder="Percentual" [(ngModel)]='percentual'>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button (click)="save()" mat-button class="gravar-button">Gravar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>

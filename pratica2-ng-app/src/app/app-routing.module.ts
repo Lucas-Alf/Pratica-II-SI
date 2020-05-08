@@ -19,6 +19,7 @@ import { EnderecoComponent } from './contratacao/endereco/endereco.component';
 import { FuncionarioComponent } from './contratacao/funcionario/funcionario.component';
 import { VagaComponent } from './recrutamento/vaga/vaga.component';
 import { TabelaSalarialComponent } from './recrutamento/tabelasalarial/tabelasalarial.component';
+import { FaixaTabelaSalarialComponent } from './recrutamento/faixatabelasalarial/faixatabelasalarial.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'recrutamento/habilidadeAtitude', component: HabilidadeAtitudeComponent },
   { path: 'recrutamento/vaga', component: VagaComponent },
   { path: 'recrutamento/tabelasalarial', component: TabelaSalarialComponent },
+  { path: 'recrutamento/faixatabelasalarial', component: FaixaTabelaSalarialComponent },
 ];
 
 @NgModule({
