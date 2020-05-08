@@ -24,6 +24,11 @@ public class HabilidadeAtitudeController {
     public List<HabilidadeAtitude> all() {
         return this.habilidadeAtitudeRepository.findAll();
     }
+
+    /*@GetMapping("/listarHabilidade")
+    public List<HabilidadeAtitude> listarHabilidade() {
+        return this.habilidadeAtitudeRepository.listarHabilidade();
+    }*/
     
     @PostMapping("/Incluir")
     public HabilidadeAtitude add(@RequestBody HabilidadeAtitude data, BindingResult bindingResult) throws Exception {

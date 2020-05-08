@@ -10,7 +10,9 @@ import java.util.List;
 
 import com.setrem.pratica2api.model.Cargo;
 import com.setrem.pratica2api.model.CargoConhecimento;
+import com.setrem.pratica2api.model.CargoHabilidadeAtitude;
 import com.setrem.pratica2api.repository.CargoConhecimentoRepository;
+import com.setrem.pratica2api.repository.CargoHabilidadeAtitudeRepository;
 import com.setrem.pratica2api.repository.CargoRepository;
 
 @RestController
@@ -19,11 +21,13 @@ import com.setrem.pratica2api.repository.CargoRepository;
 public class CargoController {
     private CargoRepository cargoRepository;
     private CargoConhecimentoRepository cargoConhecimentoRepository;
+    private CargoHabilidadeAtitudeRepository cargoHabilidadeAtitudeRepository;
     private Cargo cargo = new Cargo();
 
-    public CargoController(CargoRepository cargoRepository, CargoConhecimentoRepository cargoConhecimentoRepository) {
+    public CargoController(CargoRepository cargoRepository, CargoConhecimentoRepository cargoConhecimentoRepository, CargoHabilidadeAtitudeRepository cargoHabilidadeAtitudeRepository) {
         this.cargoRepository = cargoRepository;
         this.cargoConhecimentoRepository = cargoConhecimentoRepository;
+        this.cargoHabilidadeAtitudeRepository = cargoHabilidadeAtitudeRepository;
     }
 
     @GetMapping("/all")
@@ -45,6 +49,11 @@ public class CargoController {
             conhecimento.setCargo(data);
         }
 
+        cargoHabilidadeAtitudeRepository.deleteByHabilidadeAtitudeId(data.getId());
+        for (CargoHabilidadeAtitude habilidadeAtitude : data.getCargoHabilidadeAtitudes()) {
+            habilidadeAtitude.setCargo(data);
+        }
+
         this.cargoRepository.save(data);
         return data;
     }
@@ -62,6 +71,11 @@ public class CargoController {
             cargoConhecimentoRepository.deleteByConhecimentoId(data.getId());
             for (CargoConhecimento conhecimento : data.getCargoConhecimentos()) {
                 conhecimento.setCargo(data);
+            }
+
+            cargoHabilidadeAtitudeRepository.deleteByHabilidadeAtitudeId(data.getId());
+            for (CargoHabilidadeAtitude habilidadeAtitude : data.getCargoHabilidadeAtitudes()) {
+                habilidadeAtitude.setCargo(data);
             }
 
             this.cargoRepository.save(data);

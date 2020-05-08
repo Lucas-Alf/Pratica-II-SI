@@ -36,16 +36,16 @@
     </mat-select>
   </mat-form-field>
   <br>
-  
-  <mat-form-field class="example-chip-list" id="conhecimentosChips">
+
+  <mat-form-field style="margin-right: 10px;" class="example-chip-list" id="conhecimentosChips">
     <mat-chip-list #chipList aria-label="Conhecimento">
       <mat-chip
         *ngFor="let item of cargoConhecimentos"
-        [selectable]="selectable"
-        [removable]="removable"
-        (removed)="remove(item)">
+        [selectable]="selectableConhecimento"
+        [removable]="removableConhecimento"
+        (removed)="removeCargoConhecimento(item)">
         {{item.nome}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        <mat-icon matChipRemove *ngIf="removableConhecimento">cancel</mat-icon>
       </mat-chip>
       <input
         placeholder="Conhecimento"
@@ -53,16 +53,42 @@
         [formControl]="ConhecimentoCtrl"
         [matAutocomplete]="auto"
         [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        (matChipInputTokenEnd)="add($event)">
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodesConhecimento"
+        (matChipInputTokenEnd)="addCargoConhecimento($event)">
     </mat-chip-list>
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCargoConhecimento($event)">
       <mat-option *ngFor="let item of filteredConhecimentos | async" [value]="item">
         {{item.nome}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 
+  <mat-form-field class="example-chip-list" id="habilidadesChips">
+    <mat-chip-list #chipList2 aria-label="Habilidade/Atitude">
+      <mat-chip
+        *ngFor="let item2 of cargoHabilidadeAtitudes"
+        [selectable]="selectableHabilidade"
+        [removable]="removableHabilidade"
+        (removed)="removeCargoHabilidade(item2)">
+        {{item2.descricao}} - {{item2.tipo}}
+        <mat-icon matChipRemove *ngIf="removableHabilidade">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Habilidade/Atitude"
+        #fruitInput2
+        [formControl]="HabilidadeCtrl"
+        [matAutocomplete]="auto2"
+        [matChipInputFor]="chipList2"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodesHabilidade"
+        (matChipInputTokenEnd)="addCargoHabilidade($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedCargoHabilidade($event)">
+      <mat-option *ngFor="let item2 of filteredHabilidades | async" [value]="item2">
+        {{item2.descricao}} - {{item2.tipo}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <br>
 </div>
 <div mat-dialog-actions style="float: left;">
   <button (click)="save()" mat-button class="gravar-button">Gravar</button>

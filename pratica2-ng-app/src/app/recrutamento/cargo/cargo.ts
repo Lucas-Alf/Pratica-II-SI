@@ -12,4 +12,5 @@ export interface Cargo {
   };
   faixatabelasalarial: any;
   cargoConhecimentos: any[];
+  cargoHabilidadeAtitudes: any[];
 }

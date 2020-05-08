@@ -55,6 +55,9 @@ public class Cargo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargo")
     private List<CargoConhecimento> cargoConhecimentos;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargo")
+    private List<CargoHabilidadeAtitude> cargoHabilidadeAtitudes;
+
     public Integer getId() {
         return id;
     }
@@ -103,6 +106,14 @@ public class Cargo implements Serializable {
         this.cargoConhecimentos = cargoConhecimentos;
     }
 
+    public List<CargoHabilidadeAtitude> getCargoHabilidadeAtitudes() {
+        return cargoHabilidadeAtitudes;
+    }
+
+    public void setCargoHabilidadeAtitudes(List<CargoHabilidadeAtitude> cargoHabilidadeAtitudes) {
+        this.cargoHabilidadeAtitudes = cargoHabilidadeAtitudes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -120,61 +131,6 @@ public class Cargo implements Serializable {
     public int hashCode() {
         return Objects.hash(id, descricao, cboid, departamentoid, faixatabelasalarial);
     }
-
-    /*@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((cargoConhecimentos == null) ? 0 : cargoConhecimentos.hashCode());
-        result = prime * result + ((cboid == null) ? 0 : cboid.hashCode());
-        result = prime * result + ((departamentoid == null) ? 0 : departamentoid.hashCode());
-        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-        result = prime * result + ((faixatabelasalarial == null) ? 0 : faixatabelasalarial.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Cargo other = (Cargo) obj;
-        if (cargoConhecimentos == null) {
-            if (other.cargoConhecimentos != null)
-                return false;
-        } else if (!cargoConhecimentos.equals(other.cargoConhecimentos))
-            return false;
-        if (cboid == null) {
-            if (other.cboid != null)
-                return false;
-        } else if (!cboid.equals(other.cboid))
-            return false;
-        if (departamentoid == null) {
-            if (other.departamentoid != null)
-                return false;
-        } else if (!departamentoid.equals(other.departamentoid))
-            return false;
-        if (descricao == null) {
-            if (other.descricao != null)
-                return false;
-        } else if (!descricao.equals(other.descricao))
-            return false;
-        if (faixatabelasalarial == null) {
-            if (other.faixatabelasalarial != null)
-                return false;
-        } else if (!faixatabelasalarial.equals(other.faixatabelasalarial))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }*/
 
     @Override
     public String toString() {

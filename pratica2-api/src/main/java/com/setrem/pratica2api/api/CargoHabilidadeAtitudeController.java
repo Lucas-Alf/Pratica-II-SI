@@ -30,8 +30,8 @@ public class CargoHabilidadeAtitudeController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        int id = this.CargoHabilidadeAtitudeRepository.maxIdCargoHabilidadeAtitude();
-        data.setId(id);
+        //int id = this.CargoHabilidadeAtitudeRepository.maxIdCargoHabilidadeAtitude();
+        //data.setId(id);
         data = this.CargoHabilidadeAtitudeRepository.save(data);
         return data;
     }

@@ -7,6 +7,8 @@ package com.setrem.pratica2api.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,27 +38,11 @@ public class CargoHabilidadeAtitude implements Serializable {
     private Integer id;
     @JoinColumn(name = "habilidadesatitudesid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private HabilidadeAtitude habilidadesatitudesid;
+    private HabilidadeAtitude habilidadeatitude;
+    @JsonIgnore
     @JoinColumn(name = "cargoid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Cargo cargoid;
-
-    public CargoHabilidadeAtitude() {
-    }
-
-    public CargoHabilidadeAtitude(Integer id) {
-        this.id = id;
-    }
-
-    public CargoHabilidadeAtitude(Integer id, HabilidadeAtitude habilidadesatitudesid, Cargo cargoid) {
-        this.id = id;
-        this.habilidadesatitudesid = habilidadesatitudesid;
-        this.cargoid = cargoid;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
+    private Cargo cargo;
 
     public Integer getId() {
         return id;
@@ -66,62 +52,44 @@ public class CargoHabilidadeAtitude implements Serializable {
         this.id = id;
     }
 
-    public HabilidadeAtitude getHabilidadesatitudesid() {
-        return habilidadesatitudesid;
+    public HabilidadeAtitude getHabilidadeatitude() {
+        return habilidadeatitude;
     }
 
-    public void setHabilidadesatitudesid(HabilidadeAtitude habilidadesatitudesid) {
-        this.habilidadesatitudesid = habilidadesatitudesid;
+    public void setHabilidadeatitude(HabilidadeAtitude habilidadeatitude) {
+        this.habilidadeatitude = habilidadeatitude;
     }
 
-    public Cargo getCargoid() {
-        return cargoid;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setCargoid(Cargo cargoid) {
-        this.cargoid = cargoid;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof CargoHabilidadeAtitude)) {
+            return false;
+        }
+        CargoHabilidadeAtitude cargoHabilidadeAtitude = (CargoHabilidadeAtitude) o;
+        return Objects.equals(id, cargoHabilidadeAtitude.id)
+                && Objects.equals(habilidadeatitude, cargoHabilidadeAtitude.habilidadeatitude)
+                && Objects.equals(cargo, cargoHabilidadeAtitude.cargo);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((cargoid == null) ? 0 : cargoid.hashCode());
-        result = prime * result + ((habilidadesatitudesid == null) ? 0 : habilidadesatitudesid.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-            CargoHabilidadeAtitude other = (CargoHabilidadeAtitude) obj;
-        if (cargoid == null) {
-            if (other.cargoid != null)
-                return false;
-        } else if (!cargoid.equals(other.cargoid))
-            return false;
-        if (habilidadesatitudesid == null) {
-            if (other.habilidadesatitudesid != null)
-                return false;
-        } else if (!habilidadesatitudesid.equals(other.habilidadesatitudesid))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+        return Objects.hash(id, habilidadeatitude, cargo);
     }
 
     @Override
     public String toString() {
-        return "com.setrem.pratica2api.model.CargoHabilidadeAtitude[ id=" + id + " ]";
+        return "{" + " id='" + getId() + "'" + ", habilidadeatitude='" + getHabilidadeatitude() + "'" + ", cargo='"
+                + getCargo() + "'" + "}";
     }
 
 }

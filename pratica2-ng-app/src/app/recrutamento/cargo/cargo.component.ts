@@ -81,6 +81,7 @@ export class CargoComponent implements OnInit {
   }
 
   alterar(): void {
+    debugger
     if (this.selection.selected.length > 0) {
       const selection = this.selection.selected[0];
       this.dialogRef = this.dialog.open(CargoModalComponent, { data: { action: 'Alterar', component: this, info: selection } });
