@@ -1,0 +1,55 @@
+<app-recrutamento-menu-lateral></app-recrutamento-menu-lateral>
+<div style="margin-left: 250px;">
+  <app-cabecalho-sistema></app-cabecalho-sistema>
+  <div style="margin: 15px;">
+    <mat-card><b>Tabela Salarial</b></mat-card>
+    <mat-card style="margin-top: 13px;">
+      <div style="width: 100%; display:inline-block;">
+        <button (click)="incluir()" mat-stroked-button class="crud-button">
+          <mat-icon>add</mat-icon> Incluir
+        </button>
+        <button (click)="alterar()" mat-stroked-button class="crud-button">
+          <mat-icon>edit</mat-icon> Alterar
+        </button>
+        <button (click)="excluir()" mat-stroked-button class="crud-button">
+          <mat-icon>delete</mat-icon> Excluir
+        </button>
+        <div style="float: right;">
+          <mat-form-field style="margin-right: 10px;">
+            <mat-label>🔎 Pesquisar</mat-label>
+            <input matInput (keyup)="applyFilter($event)">
+          </mat-form-field>
+        </div>
+      </div>
+      <table mat-table [dataSource]="storeTabelaSalarial">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef style="width: 10%;">
+            <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="id">
+          <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Código </th>
+          <td mat-cell *matCellDef="let tabelasalarial"> {{tabelasalarial.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="descricao">
+          <th style="width: 40%;" mat-header-cell *matHeaderCellDef> Descrição </th>
+          <td mat-cell *matCellDef="let tabelasalarial"> {{tabelasalarial.descricao}} </td>
+        </ng-container>
+        <ng-container matColumnDef="valorbase">
+          <th style="width: 25%;" mat-header-cell *matHeaderCellDef> Valor Base </th>
+          <td mat-cell *matCellDef="let tabelasalarial"> {{tabelasalarial.valorbase}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+  <app-rodape-sistema></app-rodape-sistema>
+</div>

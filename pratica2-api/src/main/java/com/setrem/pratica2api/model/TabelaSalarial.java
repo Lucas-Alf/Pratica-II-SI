@@ -29,7 +29,7 @@ public class TabelaSalarial implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "valorbase")
-    private Double valorBase;
+    private Double valorbase;
 
     public TabelaSalarial() {
 
@@ -55,12 +55,12 @@ public class TabelaSalarial implements Serializable {
         this.descricao = descricao;
     }
 
-    public Double getValorBase() {
-        return valorBase;
+    public Double getValorbase() {
+        return valorbase;
     }
 
-    public void setValorBase(Double valorBase) {
-        this.valorBase = valorBase;
+    public void setValorbase(Double valorbase) {
+        this.valorbase = valorbase;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class TabelaSalarial implements Serializable {
         int result = 1;
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((valorBase == null) ? 0 : valorBase.hashCode());
+        result = prime * result + ((valorbase == null) ? 0 : valorbase.hashCode());
         return result;
     }
 
@@ -92,11 +92,12 @@ public class TabelaSalarial implements Serializable {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (valorBase == null) {
-            if (other.valorBase != null)
+        if (valorbase == null) {
+            if (other.valorbase != null)
                 return false;
-        } else if (!valorBase.equals(other.valorBase))
+        } else if (!valorbase.equals(other.valorbase))
             return false;
         return true;
     }
+    
 }

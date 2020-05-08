@@ -31,6 +31,8 @@ public class TabelaSalarialController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
+        int id = this.TabelaSalarialRepository.maxIdTabelaSalarial();
+        data.setId(id);
         data = this.TabelaSalarialRepository.save(data);
         return data;
     }
