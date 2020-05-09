@@ -20,12 +20,15 @@ import { FuncionarioComponent } from './contratacao/funcionario/funcionario.comp
 import { VagaComponent } from './recrutamento/vaga/vaga.component';
 import { TabelaSalarialComponent } from './recrutamento/tabelasalarial/tabelasalarial.component';
 import { FaixaTabelaSalarialComponent } from './recrutamento/faixatabelasalarial/faixatabelasalarial.component';
+import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.component';
+
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
   { path: '',   redirectTo: '/index', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'configuracoes', component: ConfiguracoesComponent },
+  { path: 'configuracoes/permissao', component: PermissaoComponent },
   { path: 'contratacao', component: ContratacaoComponent },
   { path: 'contratacao/departamento', component: DepartamentoComponent },
   { path: 'contratacao/empresa', component: EmpresaComponent },

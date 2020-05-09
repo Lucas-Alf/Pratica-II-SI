@@ -1,0 +1,17 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer opened class="example-sidenav" mode="side">
+        <mat-card class="header-sidenav accent-background-color">
+            <p style="margin-top: 1px;">Configurações</p>
+        </mat-card>
+        <mat-list>
+            <mat-list-item [routerLink]="['/configuracoes/permissao']" class="item-menu">
+                <mat-icon class="icone-menu">emoji_people</mat-icon>
+                <a>Permissões</a>
+            </mat-list-item>    
+            <mat-list-item [routerLink]="['/home']" style="cursor: pointer; position: fixed; bottom: 0; width: 250px; background-color: #e2e2e2">
+                <mat-icon class="icone-menu">keyboard_return</mat-icon>
+                <a>Voltar</a>
+            </mat-list-item>        
+        </mat-list>
+    </mat-drawer>
+</mat-drawer-container>

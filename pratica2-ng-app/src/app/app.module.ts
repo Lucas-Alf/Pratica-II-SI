@@ -76,11 +76,13 @@ import { FuncionarioComponent } from './contratacao/funcionario/funcionario.comp
 import { FunionarioModalComponent } from './contratacao/funcionario/funionario-modal/funionario-modal.component';
 import { VagaComponent } from './recrutamento/vaga/vaga.component';
 import { VagaModalComponent } from './recrutamento/vaga/vaga-modal/vaga-modal.component';
-import { PermissaoModalComponent } from './geral/configuracoes/permissao-modal/permissao-modal.component';
+import { PermissaoModalComponent } from './geral/configuracoes/permissao/permissao-modal/permissao-modal.component';
 import { TabelaSalarialComponent } from './recrutamento/tabelasalarial/tabelasalarial.component';
 import { TabelaSalarialModalComponent } from './recrutamento/tabelasalarial/tabelasalarial-modal/tabelasalarial-modal.component';
 import { FaixaTabelaSalarialComponent } from './recrutamento/faixatabelasalarial/faixatabelasalarial.component';
 import { FaixaTabelaSalarialModalComponent } from './recrutamento/faixatabelasalarial/faixatabelasalarial-modal/faixatabelasalarial-modal.component';
+import { ConfiguracoesMenuLateralComponent } from './geral/configuracoes/configuracoes-menu-lateral/configuracoes-menu-lateral.component';
+import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +128,9 @@ import { FaixaTabelaSalarialModalComponent } from './recrutamento/faixatabelasal
     TabelaSalarialComponent,
     TabelaSalarialModalComponent,
     FaixaTabelaSalarialComponent,
-    FaixaTabelaSalarialModalComponent
+    FaixaTabelaSalarialModalComponent,
+    ConfiguracoesMenuLateralComponent,
+    PermissaoComponent
   ],
   imports: [
     BrowserModule,

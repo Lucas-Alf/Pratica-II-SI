@@ -37,12 +37,6 @@
                         </mat-grid-tile>
                     </a>
                     <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
-                    <a routerLink="['/home']">
-                        <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="2" matTooltip="Minha conta">
-                            <i class="material-icons home-icon">account_circle</i>
-                            <span class="titulo-home-icon-uma-linha">Minha conta</span>
-                        </mat-grid-tile>
-                    </a>
                     <a [routerLink]="retornaRota(3)">
                         <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(3)}" rowspan="1" colspan="1" matTooltip="Configurações">
                             <i class="material-icons home-icon">settings_applications</i>
