@@ -83,6 +83,8 @@ import { FaixaTabelaSalarialComponent } from './recrutamento/faixatabelasalarial
 import { FaixaTabelaSalarialModalComponent } from './recrutamento/faixatabelasalarial/faixatabelasalarial-modal/faixatabelasalarial-modal.component';
 import { ConfiguracoesMenuLateralComponent } from './geral/configuracoes/configuracoes-menu-lateral/configuracoes-menu-lateral.component';
 import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.component';
+import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/parametro-empresa.component';
+import { ParametroEmpresaModalComponent } from './folhapagamento/parametro-empresa/parametro-empresa-modal/parametro-empresa-modal.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +132,9 @@ import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.co
     FaixaTabelaSalarialComponent,
     FaixaTabelaSalarialModalComponent,
     ConfiguracoesMenuLateralComponent,
-    PermissaoComponent
+    PermissaoComponent,
+    ParametroEmpresaComponent,
+    ParametroEmpresaModalComponent
   ],
   imports: [
     BrowserModule,

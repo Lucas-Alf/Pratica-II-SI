@@ -29,22 +29,24 @@
                             <span class="titulo-home-icon-duas-linhas">Recrutamento e Seleção</span>
                         </mat-grid-tile>
                     </a>
-                    <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
                     <a [routerLink]="retornaRota(4)">
-                        <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1" rowspan="1" colspan="2" matTooltip="Contratação">
-                            <i class="material-icons home-icon">group_add</i>
-                            <span class="titulo-home-icon-uma-linha">Contratação</span>
-                        </mat-grid-tile>
+                      <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(2)}" rowspan="1" rowspan="1" colspan="2" matTooltip="Contratação">
+                        <i style="margin-left: 5px;" class="material-icons home-icon">group_add</i>
+                        <span class="titulo-home-icon-uma-linha">Contratação</span>
+                      </mat-grid-tile>
+                    </a>
+                    <a [routerLink]="retornaRota(3)">
+                      <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(3)}" rowspan="1" colspan="1" matTooltip="Configurações">
+                        <i class="material-icons home-icon">settings_applications</i>
+                      </mat-grid-tile>
                     </a>
                     <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
-                    <a [routerLink]="retornaRota(3)">
-                        <mat-grid-tile class="home-mat-grid-tile" [ngClass]="{'disabled': retornaPermissao(3)}" rowspan="1" colspan="1" matTooltip="Configurações">
-                            <i class="material-icons home-icon">settings_applications</i>
-                        </mat-grid-tile>
-                    </a>
                     <mat-grid-tile (click)="sair()" style="cursor: pointer;" class="home-mat-grid-tile" rowspan="1" colspan="1" matTooltip="Sair">
-                        <i class="material-icons home-icon">exit_to_app</i>
+                      <i class="material-icons home-icon">exit_to_app</i>
                     </mat-grid-tile>
+                    <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
+                    <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
+                    <mat-grid-tile class="home-mat-grid-tile" rowspan="1" colspan="1"></mat-grid-tile>
                 </mat-grid-list>
             </mat-card>
         </div>

@@ -21,6 +21,7 @@ import { VagaComponent } from './recrutamento/vaga/vaga.component';
 import { TabelaSalarialComponent } from './recrutamento/tabelasalarial/tabelasalarial.component';
 import { FaixaTabelaSalarialComponent } from './recrutamento/faixatabelasalarial/faixatabelasalarial.component';
 import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.component';
+import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/parametro-empresa.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'folhapagamento/evento', component: EventoComponent },
   { path: 'folhapagamento/rotinacalculo', component: RotinaCalculoComponent },
   { path: 'folhapagamento/periodocalculo', component: PeriodoCalculoComponent },
+  { path: 'folhapagamento/parametroempresa', component: ParametroEmpresaComponent },
   { path: 'recrutamento', component: RecrutamentoComponent },
   { path: 'recrutamento/cargo', component: CargoComponent },
   { path: 'recrutamento/conhecimento', component: ConhecimentoComponent },

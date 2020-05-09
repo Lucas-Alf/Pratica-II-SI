@@ -1,0 +1,74 @@
+<h1 mat-dialog-title>Parametros da Empresa</h1>
+<div mat-dialog-content>
+  <table>
+    <tr>
+      <td style="vertical-align: initial;">
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Periodo de Cálculo</mat-label>
+          <mat-select [(ngModel)]='periodocalculoId'>
+            <mat-option *ngFor="let periodo of periodosDeCalculo" [value]="periodo.id">
+              {{periodo.dataInicial | date: 'dd/MM/yyyy'}} - {{periodo.dataFinal | date: 'dd/MM/yyyy'}} -
+              {{retornaExecucao(periodo.execucao)}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento de Salario</mat-label>
+          <mat-select [(ngModel)]='eventosalarioId'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento de INSS</mat-label>
+          <mat-select [(ngModel)]='eventoinssId'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento de IRRF</mat-label>
+          <mat-select [(ngModel)]='eventoirrfId'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento de FGTS</mat-label>
+          <mat-select [(ngModel)]='eventofgtsId'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="padding-left: 25px; vertical-align: initial;">
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento de Hora Extra 50%</mat-label>
+          <mat-select [(ngModel)]='eventohoraextra50Id'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br />
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento de Hora Extra 100%</mat-label>
+          <mat-select [(ngModel)]='eventohoraextra100Id'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button (click)="save()" mat-button class="gravar-button">Gravar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>

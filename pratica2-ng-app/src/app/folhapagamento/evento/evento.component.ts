@@ -78,7 +78,6 @@ export class EventoComponent implements OnInit {
   }
 
   salvar(action: string, data: Evento): void {
-    debugger
     this.loaderService.show();
     axios.post(this.constant.apiUrl + 'evento/' + action, data).then((response) => {
       if (response && response.data) {

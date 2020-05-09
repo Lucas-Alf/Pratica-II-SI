@@ -16,13 +16,12 @@ import javax.persistence.Table;
 @Table(name = "parametroempresa")
 public class ParametroEmpresa implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     
     @Column(name = "empresacnpj")
-    private Integer empresacnpj;
+    private String empresacnpj;
 
     @JoinColumn(name = "periodocalculoid", referencedColumnName = "id")
     @ManyToOne
@@ -47,6 +46,10 @@ public class ParametroEmpresa implements Serializable {
     @JoinColumn(name = "eventohoraextra100", referencedColumnName = "id")
     @ManyToOne
     private Evento eventohoraextra100;
+    
+    @JoinColumn(name = "eventofgts", referencedColumnName = "id")
+    @ManyToOne
+    private Evento eventofgts;
 
     public Integer getId() {
         return id;
@@ -56,11 +59,11 @@ public class ParametroEmpresa implements Serializable {
         this.id = id;
     }
 
-    public Integer getEmpresacnpj() {
+    public String getEmpresacnpj() {
         return empresacnpj;
     }
 
-    public void setEmpresacnpj(Integer empresacnpj) {
+    public void setEmpresacnpj(String empresacnpj) {
         this.empresacnpj = empresacnpj;
     }
 
@@ -117,6 +120,7 @@ public class ParametroEmpresa implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((empresacnpj == null) ? 0 : empresacnpj.hashCode());
+        result = prime * result + ((eventofgts == null) ? 0 : eventofgts.hashCode());
         result = prime * result + ((eventohoraextra100 == null) ? 0 : eventohoraextra100.hashCode());
         result = prime * result + ((eventohoraextra50 == null) ? 0 : eventohoraextra50.hashCode());
         result = prime * result + ((eventoinss == null) ? 0 : eventoinss.hashCode());
@@ -140,6 +144,11 @@ public class ParametroEmpresa implements Serializable {
             if (other.empresacnpj != null)
                 return false;
         } else if (!empresacnpj.equals(other.empresacnpj))
+            return false;
+        if (eventofgts == null) {
+            if (other.eventofgts != null)
+                return false;
+        } else if (!eventofgts.equals(other.eventofgts))
             return false;
         if (eventohoraextra100 == null) {
             if (other.eventohoraextra100 != null)
@@ -177,5 +186,13 @@ public class ParametroEmpresa implements Serializable {
         } else if (!periodocalculo.equals(other.periodocalculo))
             return false;
         return true;
+    }
+
+    public Evento getEventofgts() {
+        return eventofgts;
+    }
+
+    public void setEventofgts(Evento eventofgts) {
+        this.eventofgts = eventofgts;
     }
 }
