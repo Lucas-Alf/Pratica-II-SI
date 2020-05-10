@@ -19,7 +19,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="fill" class="normal">
+            <mat-form-field appearance="fill" class="normal" style="width:200px;">
                 <mat-select required>
                     <mat-option value="M">Masculino</mat-option>
                     <mat-option value="F">Feminino</mat-option>
@@ -28,23 +28,176 @@
                     Sexo
                 </mat-label>
             </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Data de Nascimento</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
 
-            <!-- <mat-form-field appearance="fill" style="width: 500px;" class="normal">
-              <mat-label>País</mat-label>
-              <mat-select [(ngModel)]='paisnascimentoid'>
-                  <mat-option *ngFor="let pais of paises" [value]="pais.id">
-                      {{pais.nome}}
-                  </mat-option>
-              </mat-select>
-          </mat-form-field> -->
+            <mat-form-field appearance="fill" style="width:200px;" class="normal">
+                <mat-label>País</mat-label>
+                <mat-select [(ngModel)]='paisnascimentoid'>
+                    <mat-option *ngFor="let pais of paises" [value]="pais.id">
+                        {{pais.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>Telefone</mat-label>
+                <input type="number" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>Telefone Fixo</mat-label>
+                <input matInput="number" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>Pis/Pasep</mat-label>
+                <input matInput="number" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Pis Exp.</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>CNH Número</mat-label>
+                <input matInput="number" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>CNH Data</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>CNH Tipo</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>CTPS Número</mat-label>
+                <input matInput="number" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 160px;" class="normal">
+                <mat-label>CTPS Série</mat-label>
+                <input matInput="number" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="normal" style="width:200px;">
+                <mat-select required>
+                    <mat-option value="AC">Acre</mat-option>
+                    <mat-option value="AL">Alagoas</mat-option>
+                    <mat-option value="AP">Amapá</mat-option>
+                    <mat-option value="AM">Amazonas</mat-option>
+                    <mat-option value="BA">Bahia</mat-option>
+                    <mat-option value="CE">Ceará</mat-option>
+                    <mat-option value="DF">Destrito Federal</mat-option>
+                    <mat-option value="ES">Espírito Santo</mat-option>
+                    <mat-option value="GO">Goiás</mat-option>
+                    <mat-option value="MA">Maranhão</mat-option>
+                    <mat-option value="MT">Mato Grosso</mat-option>
+                    <mat-option value="MS">Mato Grosso do Sul</mat-option>
+                    <mat-option value="MG">Minas Gerais</mat-option>
+                    <mat-option value="PA">Paraná</mat-option>
+                    <mat-option value="PB">Paraibá</mat-option>
+                    <mat-option value="PR">Pará</mat-option>
+                    <mat-option value="PE">Pernambuco</mat-option>
+                    <mat-option value="PI">Piauí</mat-option>
+                    <mat-option value="RJ">Rio de Janeiro</mat-option>
+                    <mat-option value="RN">Rio Grande do Norte</mat-option>
+                    <mat-option value="RS">Rio Grade do Sul</mat-option>
+                    <mat-option value="RO">Rondônia</mat-option>
+                    <mat-option value="RR">Roraima</mat-option>
+                    <mat-option value="SC">Santa Catarina</mat-option>
+                    <mat-option value="SP">São Paulo</mat-option>
+                    <mat-option value="SE">Seará</mat-option>
+                    <mat-option value="TO">Tocantins</mat-option>
+                </mat-select>
+                <mat-label>CTPS UF</mat-label>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Nome Mãe</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Nome Pai</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-divider>Titulo de Eleitor</mat-divider>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Número Título de Eleitor</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Número Título de Eleitor</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="normal" style="width:200px;">
+                <mat-select required>
+                    <mat-option value="AC">Acre</mat-option>
+                    <mat-option value="AL">Alagoas</mat-option>
+                    <mat-option value="AP">Amapá</mat-option>
+                    <mat-option value="AM">Amazonas</mat-option>
+                    <mat-option value="BA">Bahia</mat-option>
+                    <mat-option value="CE">Ceará</mat-option>
+                    <mat-option value="DF">Destrito Federal</mat-option>
+                    <mat-option value="ES">Espírito Santo</mat-option>
+                    <mat-option value="GO">Goiás</mat-option>
+                    <mat-option value="MA">Maranhão</mat-option>
+                    <mat-option value="MT">Mato Grosso</mat-option>
+                    <mat-option value="MS">Mato Grosso do Sul</mat-option>
+                    <mat-option value="MG">Minas Gerais</mat-option>
+                    <mat-option value="PA">Paraná</mat-option>
+                    <mat-option value="PB">Paraibá</mat-option>
+                    <mat-option value="PR">Pará</mat-option>
+                    <mat-option value="PE">Pernambuco</mat-option>
+                    <mat-option value="PI">Piauí</mat-option>
+                    <mat-option value="RJ">Rio de Janeiro</mat-option>
+                    <mat-option value="RN">Rio Grande do Norte</mat-option>
+                    <mat-option value="RS">Rio Grade do Sul</mat-option>
+                    <mat-option value="RO">Rondônia</mat-option>
+                    <mat-option value="RR">Roraima</mat-option>
+                    <mat-option value="SC">Santa Catarina</mat-option>
+                    <mat-option value="SP">São Paulo</mat-option>
+                    <mat-option value="SE">Seará</mat-option>
+                    <mat-option value="TO">Tocantins</mat-option>
+                </mat-select>
+                <mat-label>Titulo Eleitor UF</mat-label>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Zona Título de Eleitor</mat-label>
+                <input matInput="number" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Seção Título de Eleitor</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Certificado ded Reservista</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width: 500px;" class="normal">
+                <mat-label>Certificado ded Reservista</mat-label>
+                <input matInput="text" matInput placeholder="rg" [(ngModel)]='rg'>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width:200px;" class="normal">
+                <mat-label>País</mat-label>
+                <mat-select [(ngModel)]='enderecoid'>
+                    <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
+                        {{endereco.logradouro}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </mat-tab>
         <mat-tab label="Contrato"> Contrato </mat-tab>
     </mat-tab-group>
 </div>
 <div mat-dialog-actions style="float: left;">
-    <button (click)="save()" mat-button>Gravar</button>
+    <!-- <button (click)="save()" mat-button>Gravar</button> -->
 </div>
 <div mat-dialog-actions style="float: right;">
     <button (click)="close()" cdkFocusInitial mat-button>Cancelar</button>
