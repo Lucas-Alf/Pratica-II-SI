@@ -6,6 +6,10 @@
     margin: 5px 5px 5px 0px;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 
 /* .mat-form-field-infix {
     display: block;
