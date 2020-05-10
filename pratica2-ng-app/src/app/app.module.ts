@@ -85,6 +85,8 @@ import { ConfiguracoesMenuLateralComponent } from './geral/configuracoes/configu
 import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.component';
 import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/parametro-empresa.component';
 import { ParametroEmpresaModalComponent } from './folhapagamento/parametro-empresa/parametro-empresa-modal/parametro-empresa-modal.component';
+import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.component';
+import { UsuarioModalComponent } from './geral/configuracoes/usuario/usuario-modal/usuario-modal.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +136,9 @@ import { ParametroEmpresaModalComponent } from './folhapagamento/parametro-empre
     ConfiguracoesMenuLateralComponent,
     PermissaoComponent,
     ParametroEmpresaComponent,
-    ParametroEmpresaModalComponent
+    ParametroEmpresaModalComponent,
+    UsuarioComponent,
+    UsuarioModalComponent
   ],
   imports: [
     BrowserModule,

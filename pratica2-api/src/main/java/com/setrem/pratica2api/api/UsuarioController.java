@@ -25,6 +25,16 @@ public class UsuarioController {
         return usuarios;
     }
 
+    @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
+    @PostMapping("/Alterar")
+    public Usuario update(@RequestBody Usuario data, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException();
+        }
+        this.UsuarioRepository.save(data);
+        return data;
+    }
+
     @PostMapping("/save")
     public Usuario save(@RequestBody Usuario data, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

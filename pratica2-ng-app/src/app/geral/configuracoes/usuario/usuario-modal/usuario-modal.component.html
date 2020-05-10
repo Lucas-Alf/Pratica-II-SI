@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>{{data.action}} Dados</h1>
+<div mat-dialog-content > 
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="!codigoHabilitado" [(ngModel)]='id'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Email</mat-label>
+    <input type="text" matInput placeholder="Email" [(ngModel)]='email'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Senha</mat-label>
+    <input type="text" matInput placeholder="Senha" [(ngModel)]='senha'>
+  </mat-form-field><br />
+  <mat-form-field  appearance="standard" style="width: 300px;">
+    <mat-label>CPF</mat-label>
+    <mat-select [disabled]="true" [(ngModel)]='pessoa'>
+      <mat-option *ngFor="let pessoa of pessoas" [value]="pessoa.cpf">
+        {{pessoa.cpf}} - {{pessoa.nome}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Nivel Acesso</mat-label>
+  <mat-select [disabled]="true" [(ngModel)]='nivel'>
+      <mat-option *ngFor="let nivel of niveis" [value]="nivel.id">
+        {{nivel.id}} - {{nivel.descricao}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button (click)="save()" mat-button class="gravar-button">Gravar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button [routerLink]="['/configuracoes']" (click)="close()"  mat-button class="cancelar-button">Cancelar</button>
+</div>

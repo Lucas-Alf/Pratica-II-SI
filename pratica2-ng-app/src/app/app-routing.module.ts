@@ -22,6 +22,7 @@ import { TabelaSalarialComponent } from './recrutamento/tabelasalarial/tabelasal
 import { FaixaTabelaSalarialComponent } from './recrutamento/faixatabelasalarial/faixatabelasalarial.component';
 import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.component';
 import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/parametro-empresa.component';
+import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'configuracoes', component: ConfiguracoesComponent },
   { path: 'configuracoes/permissao', component: PermissaoComponent },
+  { path: 'configuracoes/usuario', component: UsuarioComponent },
   { path: 'contratacao', component: ContratacaoComponent },
   { path: 'contratacao/departamento', component: DepartamentoComponent },
   { path: 'contratacao/empresa', component: EmpresaComponent },

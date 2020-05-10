@@ -6,8 +6,12 @@
         <mat-list>
             <mat-list-item [routerLink]="['/configuracoes/permissao']" class="item-menu">
                 <mat-icon class="icone-menu">emoji_people</mat-icon>
-                <a>Permissões</a>
-            </mat-list-item>    
+                <a>Cad. Permissões</a>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/configuracoes/usuario']" class="item-menu">
+                <mat-icon class="icone-menu">settings</mat-icon>
+                <a>Alterar dados</a>
+            </mat-list-item> 
             <mat-list-item [routerLink]="['/home']" style="cursor: pointer; position: fixed; bottom: 0; width: 250px; background-color: #e2e2e2">
                 <mat-icon class="icone-menu">keyboard_return</mat-icon>
                 <a>Voltar</a>
