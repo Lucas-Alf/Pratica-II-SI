@@ -60,6 +60,10 @@ export class RecrutamentoInternoComponent implements OnInit {
   storeVagaInterno = new MatTableDataSource();
   selection = new SelectionModel<Vaga>();
 
+  retornaConhecimentos(vaga: Vaga): string {
+    return vaga.cargoid.cargoConhecimentos.map(x => x.conhecimento.nome).join(', ') + '.';
+  }
+
   teste: string;
 
   applyFilter(event: Event) {

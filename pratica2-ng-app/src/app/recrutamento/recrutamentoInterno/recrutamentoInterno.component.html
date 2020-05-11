@@ -17,11 +17,11 @@
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef class="th-tabela"></th>
             <td mat-cell *matCellDef="let vaga" class="td-tabela"> <a class="link-vaga" href="#">{{vaga.descricao}}</a>
-            
+
               <p class="texto-vaga">{{vaga.quantidade}} Vagas - Disponível até {{vaga.prazo | date: 'dd/MM/yyyy'}}</p>
               <p class="texto-cargo">Cargo: {{vaga.cargoid.cboid.id}} - {{vaga.cargoid.descricao}}</p>
-              
-              <p class="texto-cha">Conhecimentos:</p>
+
+              <p class="texto-cha">Conhecimentos: {{retornaConhecimentos(vaga)}}</p>
               <p class="texto-cha">Habilidades:</p>
               <p class="texto-cha">Atitudes:</p>
             </td>
