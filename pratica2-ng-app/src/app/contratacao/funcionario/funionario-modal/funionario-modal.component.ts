@@ -38,7 +38,6 @@ export class FunionarioModalComponent implements OnInit {
 
   save(): void {
     const dados: Funcionario = { cpf: this.cpf, rg: this.rg, nome: this.nome, paisnascimentoid: { id: this.paisnascimentoid, nome: '' }, };
-    this.data.component.salvar(this.data.action, dados);
   }
 
   listarPais(): void {
