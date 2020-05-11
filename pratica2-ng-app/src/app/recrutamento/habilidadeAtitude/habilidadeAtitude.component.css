@@ -2,6 +2,12 @@ table {
   width: 100%;
 }
 
+.table-container {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 250px;

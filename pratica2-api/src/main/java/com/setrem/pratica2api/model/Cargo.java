@@ -44,10 +44,6 @@ public class Cargo implements Serializable {
     @JoinColumn(name = "cboid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cbo cboid;
-    // @JsonIgnore
-    @JoinColumn(name = "departamentoid", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Departamento departamentoid;
     @JoinColumn(name = "faixatabelasalarialid", referencedColumnName = "id")
     @ManyToOne(optional = true)
     private FaixaTabelaSalarial faixatabelasalarial;
@@ -80,14 +76,6 @@ public class Cargo implements Serializable {
 
     public void setCboid(Cbo cboid) {
         this.cboid = cboid;
-    }
-
-    public Departamento getDepartamentoid() {
-        return departamentoid;
-    }
-
-    public void setDepartamentoid(Departamento departamentoid) {
-        this.departamentoid = departamentoid;
     }
 
     public FaixaTabelaSalarial getFaixatabelasalarial() {
@@ -123,19 +111,18 @@ public class Cargo implements Serializable {
         }
         Cargo cargo = (Cargo) o;
         return Objects.equals(id, cargo.id) && Objects.equals(descricao, cargo.descricao)
-                && Objects.equals(cboid, cargo.cboid) && Objects.equals(departamentoid, cargo.departamentoid)
-                && Objects.equals(faixatabelasalarial, cargo.faixatabelasalarial);
+                && Objects.equals(cboid, cargo.cboid) && Objects.equals(faixatabelasalarial, cargo.faixatabelasalarial);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, descricao, cboid, departamentoid, faixatabelasalarial);
+        return Objects.hash(id, descricao, cboid, faixatabelasalarial);
     }
 
     @Override
     public String toString() {
         return "{" + " id='" + getId() + "'" + ", descricao='" + getDescricao() + "'" + ", cboid='" + getCboid() + "'"
-                + ", departamentoid='" + getDepartamentoid() + "'" + ", faixatabelasalarial='" + getFaixatabelasalarial() + "'" + "}";
+                + ", faixatabelasalarial='" + getFaixatabelasalarial() + "'" + "}";
     }
 
 }

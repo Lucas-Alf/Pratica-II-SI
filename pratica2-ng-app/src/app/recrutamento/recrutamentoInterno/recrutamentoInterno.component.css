@@ -1,0 +1,57 @@
+.tabela {
+  width: 100%;
+  border-collapse: separate; 
+  border-spacing: 200px 40px;
+}
+
+.table-container {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.th-tabela {
+  border: none;
+}
+
+.td-tabela {
+  border: 1px solid #ccc;
+  height: 150px;
+  text-align: top;
+  border-left-width: 5px;
+  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  vertical-align: top;
+  border-left-color: #193651;
+  padding-top: 5px;
+}
+
+.td-tabela:hover {
+  border-left-color: #1389fd;
+}
+
+.link-vaga {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.link-vaga:hover {
+  color: gray;
+}
+
+.texto-vaga {
+  color: gray;
+  font-size: 12px;
+  line-height: 0px;
+}
+
+.texto-cargo {
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+
+.texto-cha {
+  line-height: 5px;
+  font-size: 13px;
+}

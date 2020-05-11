@@ -49,6 +49,9 @@ public class Vaga implements Serializable {
     @JoinColumn(name = "cargoid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cargo cargoid;
+    @JoinColumn(name = "departamentoid", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Departamento departamentoid;
 
     public Vaga() {
     }
@@ -57,13 +60,14 @@ public class Vaga implements Serializable {
         this.id = id;
     }
 
-    public Vaga(Integer id, String descricao, Integer quantidade, Date prazo, String tipo, Cargo cargoid) {
+    public Vaga(Integer id, String descricao, Integer quantidade, Date prazo, String tipo, Cargo cargoid, Departamento departamentoid) {
         this.id = id;
         this.descricao = descricao;
         this.quantidade = quantidade;
         this.prazo = prazo;
         this.tipo = tipo;
         this.cargoid = cargoid;
+        this.departamentoid = departamentoid;
     }
 
     public static long getSerialversionuid() {
@@ -118,11 +122,20 @@ public class Vaga implements Serializable {
         this.cargoid = cargoid;
     }
 
+    public Departamento getDepartamentoid() {
+        return departamentoid;
+    }
+
+    public void setDepartamentoid(Departamento departamentoid) {
+        this.departamentoid = departamentoid;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((cargoid == null) ? 0 : cargoid.hashCode());
+        result = prime * result + ((departamentoid == null) ? 0 : departamentoid.hashCode());
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((prazo == null) ? 0 : prazo.hashCode());
@@ -144,6 +157,11 @@ public class Vaga implements Serializable {
             if (other.cargoid != null)
                 return false;
         } else if (!cargoid.equals(other.cargoid))
+            return false;
+        if (departamentoid == null) {
+            if (other.departamentoid != null)
+                return false;
+        } else if (!departamentoid.equals(other.departamentoid))
             return false;
         if (descricao == null) {
             if (other.descricao != null)

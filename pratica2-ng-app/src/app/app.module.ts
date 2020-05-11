@@ -87,6 +87,7 @@ import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/pa
 import { ParametroEmpresaModalComponent } from './folhapagamento/parametro-empresa/parametro-empresa-modal/parametro-empresa-modal.component';
 import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.component';
 import { UsuarioModalComponent } from './geral/configuracoes/usuario/usuario-modal/usuario-modal.component';
+import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +139,8 @@ import { UsuarioModalComponent } from './geral/configuracoes/usuario/usuario-mod
     ParametroEmpresaComponent,
     ParametroEmpresaModalComponent,
     UsuarioComponent,
-    UsuarioModalComponent
+    UsuarioModalComponent,
+    RecrutamentoInternoComponent
   ],
   imports: [
     BrowserModule,
