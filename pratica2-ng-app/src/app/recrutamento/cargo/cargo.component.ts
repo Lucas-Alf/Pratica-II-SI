@@ -27,7 +27,7 @@ export class CargoComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'descricao', 'cboid', 'departamentoid.descricao'];
+  displayedColumns: string[] = ['select', 'id', 'descricao', 'cboid'];
   storeCargo = new MatTableDataSource();
   selection = new SelectionModel<Cargo>();
 
@@ -55,9 +55,6 @@ export class CargoComponent implements OnInit {
     } else if (data.cboid == undefined || data.cboid == null) {
       this.loaderService.hide();
       this.snackBar.open('Informe o CBO.', null, { duration: 5000 });
-    } else if (data.departamentoid == undefined || data.cboid == null == null) {
-      this.loaderService.hide();
-      this.snackBar.open('Informe o Departamento.', null, { duration: 5000 });
     } else {
       axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
         if (response && response.data) {

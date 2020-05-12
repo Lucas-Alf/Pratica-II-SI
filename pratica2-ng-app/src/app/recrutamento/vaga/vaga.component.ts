@@ -27,7 +27,7 @@ export class VagaComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'descricao', 'cargoid.descricao', 'quantidade', 'prazo', 'tipo'];
+  displayedColumns: string[] = ['select', 'id', 'descricao', 'cargoid.descricao', 'departamentoid.descricao', 'quantidade', 'prazo', 'tipo'];
   storeVaga = new MatTableDataSource();
   selection = new SelectionModel<Vaga>();
 
@@ -61,6 +61,9 @@ export class VagaComponent implements OnInit {
     } else if (data.cargoid.id == undefined) {
       this.loaderService.hide();
       this.snackBar.open('Informe o Cargo.', null, { duration: 5000 });
+    } else if (data.departamentoid.id == undefined) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Departamento.', null, { duration: 5000 });
     } else if (data.tipo == undefined) {
       this.loaderService.hide();
       this.snackBar.open('Informe o Tipo de Recrutamento.', null, { duration: 5000 });

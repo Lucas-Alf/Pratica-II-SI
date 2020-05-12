@@ -20,21 +20,21 @@ export interface Vaga {
       id: string;
     },
     cargoConhecimentos: [{
-      //id: number;
       conhecimento: {
-        //id: number;
         nome: string;
-        //formacao: string;
+        formacao: string;
       }
     }],
     cargoHabilidadeAtitudes: [{
-      //id: number;
       habilidadeatitude: {
         id: number;
         descricao: string;
         tipo: string;
       }
     }],
+  },
+  departamentoid: {
+    descricao: string;
   }
 }
 
@@ -61,10 +61,28 @@ export class RecrutamentoInternoComponent implements OnInit {
   selection = new SelectionModel<Vaga>();
 
   retornaConhecimentos(vaga: Vaga): string {
-    return vaga.cargoid.cargoConhecimentos.map(x => x.conhecimento.nome).join(', ') + '.';
+    var retorno = vaga.cargoid.cargoConhecimentos.map(x => x.conhecimento.nome).join(', ');
+    if (retorno != "") {
+      retorno = retorno + ".";
+    }
+    return retorno;
   }
 
-  teste: string;
+  retornaHabilidades(vaga: Vaga): string {
+    var retorno = vaga.cargoid.cargoHabilidadeAtitudes.filter(x=>x.habilidadeatitude.tipo == "Habilidade").map(x => x.habilidadeatitude.descricao).join(', ');
+    if (retorno != "") {
+      retorno = retorno + ".";
+    }
+    return retorno;
+  }
+
+  retornaAtitudes(vaga: Vaga): string {
+    var retorno = vaga.cargoid.cargoHabilidadeAtitudes.filter(x=>x.habilidadeatitude.tipo == "Atitude").map(x => x.habilidadeatitude.descricao).join(', ');
+    if (retorno != "") {
+      retorno = retorno + ".";
+    }
+    return retorno;
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -77,7 +95,6 @@ export class RecrutamentoInternoComponent implements OnInit {
       debugger
       if (response && response.data) {
         this.storeVagaInterno.data = response.data;
-        //this.teste = response.data.cargoid.cargoConhecimentos.map((x)=> (x.conhecimento.nome)).join(', ');
         this.loaderService.hide();
       }
     }).catch((error) => {

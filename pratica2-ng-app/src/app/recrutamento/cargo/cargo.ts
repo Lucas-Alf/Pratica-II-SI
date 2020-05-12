@@ -5,11 +5,6 @@ export interface Cargo {
     id: string;
     descricaosumaria: string
   };
-  departamentoid: {
-    id: number;
-    nome: string;
-    descricao: string;
-  };
   faixatabelasalarial: any;
   cargoConhecimentos: any[];
   cargoHabilidadeAtitudes: any[];

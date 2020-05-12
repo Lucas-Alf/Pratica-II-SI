@@ -46,6 +46,10 @@
           <th style="width: 20%;" mat-header-cell *matHeaderCellDef> Cargo </th>
           <td mat-cell *matCellDef="let vaga"> {{vaga.cargoid.descricao}} </td>
         </ng-container>
+        <ng-container matColumnDef="departamentoid.descricao">
+          <th style="width: 20%;" mat-header-cell *matHeaderCellDef> Departamento </th>
+          <td mat-cell *matCellDef="let vaga"> {{vaga.departamentoid.descricao}} </td>
+        </ng-container>
         <ng-container matColumnDef="quantidade">
           <th style="width: 10%; text-align: center;" mat-header-cell *matHeaderCellDef> Quantidade </th>
           <td style="text-align: center;" mat-cell *matCellDef="let vaga"> {{vaga.quantidade}} </td>

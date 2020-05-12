@@ -8,4 +8,8 @@ export interface Vaga {
     id: number;
     descricao: string;
   }
+  departamentoid: {
+    id: number;
+    descricao: string;
+  }
 }
