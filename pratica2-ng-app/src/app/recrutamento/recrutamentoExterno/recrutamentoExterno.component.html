@@ -12,24 +12,26 @@
         </div>
       </div>
       <a class="link-div" href="">
-      <div class="table-container">
-        <table mat-table [dataSource]="storeVagaExterno" class="tabela">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef class="th-tabela"></th>
-            <td mat-cell *matCellDef="let vaga" class="td-tabela"> <b class="link-vaga" href="#">{{vaga.descricao}}</b>
+        <div class="table-container">
+          <table mat-table [dataSource]="storeVagaExterno" class="tabela">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="th-tabela"></th>
+              <td mat-cell *matCellDef="let vaga" class="td-tabela"> <b class="link-vaga"
+                  href="#">{{vaga.descricao}}</b>
 
-              <p class="texto-vaga">{{vaga.quantidade}} Vagas - Disponível até {{vaga.prazo | date: 'dd/MM/yyyy'}}</p>
-              <p class="texto-cargo"><b>Cargo:</b> {{vaga.cargoid.cboid.id}} - {{vaga.cargoid.descricao}} | <b>Departamento:</b> {{vaga.departamentoid.descricao}}</p>
+                <p class="texto-vaga">{{vaga.quantidade}} Vagas - Disponível até {{vaga.prazo | date: 'dd/MM/yyyy'}}</p>
+                <p class="texto-cargo"><b>Cargo:</b> {{vaga.cargoid.cboid.id}} - {{vaga.cargoid.descricao}} |
+                  <b>Departamento:</b> {{vaga.departamentoid.descricao}}</p>
 
-              <p class="texto-cha">Conhecimentos: {{retornaConhecimentos(vaga)}}</p>
-              <p class="texto-cha">Habilidades: {{retornaHabilidades(vaga)}}</p>
-              <p class="texto-cha">Atitudes: {{retornaAtitudes(vaga)}}</p>
-            </td>
-          </ng-container>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </div>
-    </a>
+                <p class="texto-cha">Conhecimentos: {{retornaConhecimentos(vaga)}}</p>
+                <p class="texto-cha">Habilidades: {{retornaHabilidades(vaga)}}</p>
+                <p class="texto-cha">Atitudes: {{retornaAtitudes(vaga)}}</p>
+              </td>
+            </ng-container>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </a>
     </mat-card>
   </div>
   <app-rodape-sistema></app-rodape-sistema>
