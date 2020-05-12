@@ -24,6 +24,7 @@ import { PermissaoComponent } from './geral/configuracoes/permissao/permissao.co
 import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/parametro-empresa.component';
 import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.component';
 import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno.component';
+import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: 'recrutamento/tabelasalarial', component: TabelaSalarialComponent },
   { path: 'recrutamento/faixatabelasalarial', component: FaixaTabelaSalarialComponent },
   { path: 'recrutamento/recrutamentoInterno', component: RecrutamentoInternoComponent },
+  { path: 'recrutamento/recrutamentoExterno', component: RecrutamentoExternoComponent },
 ];
 
 @NgModule({
