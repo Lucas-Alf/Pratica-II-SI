@@ -19,15 +19,6 @@
   </mat-form-field>
   <br>
   <mat-form-field appearance="standard" style="width: 500px;">
-    <mat-label>Departamento</mat-label>
-    <mat-select [(ngModel)]='departamentoid'>
-      <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
-        {{departamento.nome}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="standard" style="width: 500px;">
     <mat-label>Faixa Tabela Salarial</mat-label>
     <mat-select [(ngModel)]='faixatabelasalarialid'>
       <mat-option *ngFor="let faixa of faixaTabelaSalarialList" [value]="faixa.id" style="display: flex;">

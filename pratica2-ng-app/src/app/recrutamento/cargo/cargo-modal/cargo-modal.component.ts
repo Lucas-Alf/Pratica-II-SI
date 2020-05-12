@@ -101,11 +101,6 @@ export class CargoModalComponent implements OnInit {
         id: this.cboid,
         descricaosumaria: ''
     },
-    departamentoid: {
-      id: this.departamentoid,
-      nome: '',
-      descricao: ''
-    },
     faixatabelasalarial: {
       id: this.faixatabelasalarialid
       },
@@ -308,7 +303,6 @@ export class CargoModalComponent implements OnInit {
       this.id = this.data.info.id;
       this.descricao = this.data.info.descricao;
       this.cboid = this.data.info.cboid.id;
-      this.departamentoid = this.data.info.departamentoid.id;
       this.faixatabelasalarialid = this.data.info.faixatabelasalarial.id;
       if (this.data.info.cargoConhecimentos) {
         this.cargoConhecimentos = this.data.info.cargoConhecimentos.map(x => x.conhecimento);

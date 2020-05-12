@@ -1,17 +1,18 @@
 .tabela {
   width: 100%;
   border-collapse: separate; 
-  border-spacing: 200px 40px;
+  border-spacing: 20px 20px;
 }
 
 .table-container {
   position: relative;
-  max-height: 400px;
+  height: 60vh;
   overflow: auto;
 }
 
 .th-tabela {
   border: none;
+  height: 0px;
 }
 
 .td-tabela {
@@ -21,7 +22,7 @@
   border-left-width: 5px;
   box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
   vertical-align: top;
-  border-left-color: #193651;
+  border-left-color: #255078;
   padding-top: 5px;
 }
 
@@ -34,6 +35,10 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 20px;
+}
+
+.link-div {
+  text-decoration: none;
 }
 
 .link-vaga:hover {
