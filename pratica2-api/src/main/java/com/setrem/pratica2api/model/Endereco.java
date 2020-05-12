@@ -7,6 +7,8 @@ package com.setrem.pratica2api.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,13 +39,8 @@ public class Endereco implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
-    @Column(name = "rua")
-    private String rua;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "numero")
-    private Integer numero;
+    @Column(name = "logradouro")
+    private String logradouro;
 
     @Basic(optional = false)
     @NotNull
@@ -68,10 +65,9 @@ public class Endereco implements Serializable {
         this.id = id;
     }
 
-    public Endereco(Integer id, String rua, Integer numero, String bairro, String cep, Cidade cidadeid) {
+    public Endereco(Integer id, String logradouro, Integer numero, String bairro, String cep, Cidade cidadeid) {
         this.id = id;
-        this.rua = rua;
-        this.numero = numero;
+        this.logradouro = logradouro;
         this.bairro = bairro;
         this.cep = cep;
         this.cidadeid = cidadeid;
@@ -81,32 +77,25 @@ public class Endereco implements Serializable {
         return serialVersionUID;
     }
 
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getRua() {
-        return rua;
+    public String getLogradouro() {
+        return this.logradouro;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getBairro() {
-        return bairro;
+        return this.bairro;
     }
 
     public void setBairro(String bairro) {
@@ -114,7 +103,7 @@ public class Endereco implements Serializable {
     }
 
     public String getCep() {
-        return cep;
+        return this.cep;
     }
 
     public void setCep(String cep) {
@@ -122,7 +111,7 @@ public class Endereco implements Serializable {
     }
 
     public Cidade getCidadeid() {
-        return cidadeid;
+        return this.cidadeid;
     }
 
     public void setCidadeid(Cidade cidadeid) {
@@ -130,63 +119,20 @@ public class Endereco implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
-        result = prime * result + ((cep == null) ? 0 : cep.hashCode());
-        result = prime * result + ((cidadeid == null) ? 0 : cidadeid.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((numero == null) ? 0 : numero.hashCode());
-        result = prime * result + ((rua == null) ? 0 : rua.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(Object o) {
+        if (o == this)
             return true;
-        if (obj == null)
+        if (!(o instanceof Endereco)) {
             return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Endereco other = (Endereco) obj;
-        if (bairro == null) {
-            if (other.bairro != null)
-                return false;
-        } else if (!bairro.equals(other.bairro))
-            return false;
-        if (cep == null) {
-            if (other.cep != null)
-                return false;
-        } else if (!cep.equals(other.cep))
-            return false;
-        if (cidadeid == null) {
-            if (other.cidadeid != null)
-                return false;
-        } else if (!cidadeid.equals(other.cidadeid))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (numero == null) {
-            if (other.numero != null)
-                return false;
-        } else if (!numero.equals(other.numero))
-            return false;
-        if (rua == null) {
-            if (other.rua != null)
-                return false;
-        } else if (!rua.equals(other.rua))
-            return false;
-        return true;
+        }
+        Endereco endereco = (Endereco) o;
+        return Objects.equals(id, endereco.id) && Objects.equals(logradouro, endereco.logradouro) && Objects.equals(bairro, endereco.bairro) && Objects.equals(cep, endereco.cep) && Objects.equals(cidadeid, endereco.cidadeid);
     }
 
     @Override
-    public String toString() {
-        return "com.setrem.pratica2api.model.Endereco[ id=" + id + " ]";
+    public int hashCode() {
+        return Objects.hash(id, logradouro, bairro, cep, cidadeid);
     }
 
+    
 }

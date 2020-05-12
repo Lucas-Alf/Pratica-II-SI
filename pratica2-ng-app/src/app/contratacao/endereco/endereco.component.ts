@@ -27,7 +27,7 @@ export class EnderecoComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'rua', 'numero', 'bairro', 'cep', 'cidadeid.nome', 'cidadeid.estadoid.sigla'];
+  displayedColumns: string[] = ['select', 'id', 'logradouro', 'bairro', 'cep', 'cidadeid.nome', 'cidadeid.estadoid.sigla'];
   storeEndereco = new MatTableDataSource();
   selection = new SelectionModel<Endereco>();
 
@@ -48,13 +48,7 @@ export class EnderecoComponent implements OnInit {
 
   salvar(action: string, data: Endereco): void {
     this.loaderService.show();
-    if (data.rua == undefined || data.rua == "") {
-      this.loaderService.hide();
-      this.snackBar.open('Informe a Rua.', null, { duration: 5000 });
-    } else if (data.numero == undefined || data.numero == null) {
-      this.loaderService.hide();
-      this.snackBar.open('Informe o Número.', null, { duration: 5000 });
-    } else if (data.bairro == undefined || data.bairro == null) {
+    if (data.bairro == undefined || data.bairro == null) {
       this.loaderService.hide();
       this.snackBar.open('Informe o Bairro.', null, { duration: 5000 });
     } else {
@@ -126,7 +120,7 @@ export class EnderecoComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeEndereco.filterPredicate = (data: Endereco, filter) => {
-      return !filter || data.rua.toLowerCase().includes(filter.toLowerCase());
+      return !filter || data.logradouro.toLowerCase().includes(filter.toLowerCase());
     }
 
     //Preenche a tabela

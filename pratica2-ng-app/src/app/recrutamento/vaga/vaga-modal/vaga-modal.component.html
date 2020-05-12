@@ -13,20 +13,27 @@
     <mat-label>Quantidade</mat-label>
     <input type="number" matInput placeholder="Quantidade" [(ngModel)]='quantidade'>
   </mat-form-field>
-
   <mat-form-field>
     <mat-label>Selecione o Prazo</mat-label>
     <input matInput [matDatepicker]="dp3" disabled [(ngModel)]='prazo'>
     <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
   </mat-form-field>
-
   <br>
   <mat-form-field appearance="standard" style="width: 500px;">
     <mat-label>Cargo</mat-label>
     <mat-select [(ngModel)]='cargoid'>
       <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">
         {{cargo.cboid.id}} - {{cargo.descricao}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Departamento</mat-label>
+    <mat-select [(ngModel)]='departamentoid'>
+      <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
+        {{departamento.descricao}}
       </mat-option>
     </mat-select>
   </mat-form-field>

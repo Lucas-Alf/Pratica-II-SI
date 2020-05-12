@@ -24,6 +24,10 @@
             <button mat-raised-button color="primary" style="width: 300px;" (click)="login()">Entrar</button>
           </mat-card-content>
         </mat-card>
+        <mat-card class="z-depth center" flex="50" style="text-align: center; width: 350px;">
+          <button [routerLink]="['/recrutamento/recrutamentoExterno']" mat-raised-button color="primary"
+            style="width: 300px;"><i class="material-icons home-icon">group_add</i> Acesso ao Recrutamento Externo</button>
+        </mat-card>
       </td>
     </tr>
   </table>

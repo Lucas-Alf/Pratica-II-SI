@@ -84,3 +84,11 @@ body {
 .bold {
   font-weight: bold;
 }
+
+.home-img {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  font-size: 250px;
+  color: gray;
+}

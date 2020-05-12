@@ -14,6 +14,12 @@ export interface Cargo {
   }
 }
 
+export interface Departamento {
+  id: number;
+  descricao: string;
+  nome: string;
+}
+
 @Component({
   selector: 'app-vaga-modal',
   templateUrl: './vaga-modal.component.html',
@@ -30,8 +36,10 @@ export class VagaModalComponent implements OnInit {
   prazo: Date;
   tipo: string;
   cargoid: number;
+  departamentoid: number;
 
   cargos: Cargo[];
+  departamentos: Departamento[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -42,6 +50,7 @@ export class VagaModalComponent implements OnInit {
   ) {
     this.apiUrl = this.constant.apiUrl;
     this.listarCargo();
+    this.listarDepartamento();
   }
 
   close(): void {
@@ -49,7 +58,7 @@ export class VagaModalComponent implements OnInit {
   }
 
   save(): void {
-    const dados: Vaga = { id: this.id, descricao: this.descricao, quantidade: this.quantidade, prazo: this.prazo, tipo: this.tipo, cargoid: { id: this.cargoid, descricao: '' } };
+    const dados: Vaga = { id: this.id, descricao: this.descricao, quantidade: this.quantidade, prazo: this.prazo, tipo: this.tipo, cargoid: { id: this.cargoid, descricao: '' }, departamentoid: { id: this.departamentoid, descricao: '' } };
     this.data.component.salvar(this.data.action, dados);
   }
 
@@ -67,6 +76,20 @@ export class VagaModalComponent implements OnInit {
     });
   }
 
+  listarDepartamento(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'departamento/all').then((response) => {
+      if (response && response.data) {
+        this.departamentos = response.data;
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
   ngOnInit(): void {
     if (this.data.info) {
       this.id = this.data.info.id;
@@ -75,6 +98,7 @@ export class VagaModalComponent implements OnInit {
       this.prazo = this.data.info.prazo;
       this.tipo = this.data.info.tipo;
       this.cargoid = this.data.info.cargoid.id;
+      this.departamentoid = this.data.info.departamentoid.id;
     }
   }
 

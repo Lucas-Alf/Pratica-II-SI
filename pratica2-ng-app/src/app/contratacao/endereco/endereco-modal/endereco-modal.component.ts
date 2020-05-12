@@ -27,8 +27,7 @@ export class EnderecoModalComponent implements OnInit {
   apiUrl: string;
 
   id: number;
-  rua: string;
-  numero: number;
+  logradouro: string;
   bairro: string;
   cidadeid: number;
   cep: string;
@@ -51,7 +50,7 @@ export class EnderecoModalComponent implements OnInit {
   }
 
   save(): void {
-    const dados: Endereco = { id: this.id, rua: this.rua, numero: this.numero, bairro: this.bairro, cep: this.cep, cidadeid: { id: this.cidadeid, nome: '', estadoid: { id: 0, nome: '', sigla: '' } } };
+    const dados: Endereco = { id: this.id, logradouro: this.logradouro, bairro: this.bairro, cep: this.cep, cidadeid: { id: this.cidadeid, nome: '', estadoid: { id: 0, nome: '', sigla: '' } } };
     this.data.component.salvar(this.data.action, dados);
   }
 
@@ -73,8 +72,7 @@ export class EnderecoModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.info) {
       this.id = this.data.info.id;
-      this.rua = this.data.info.rua;
-      this.numero = this.data.info.numero;
+      this.logradouro = this.data.info.logradouro;
       this.bairro = this.data.info.bairro;
       this.cep = this.data.info.cep;
       this.cidadeid = this.data.info.cidadeid.id;

@@ -39,14 +39,13 @@ export interface Vaga {
 }
 
 @Component({
-  selector: 'app-recrutamentoInterno',
-  templateUrl: './recrutamentoInterno.component.html',
-  styleUrls: ['./recrutamentoInterno.component.css']
+  selector: 'app-recrutamentoExterno',
+  templateUrl: './recrutamentoExterno.component.html',
+  styleUrls: ['./recrutamentoExterno.component.css']
 })
-export class RecrutamentoInternoComponent implements OnInit {
+export class RecrutamentoExternoComponent implements OnInit {
 
   apiUrl: string;
-  //dialogRef: MatDialogRef<ConhecimentoModalComponent, any>;
   constructor(
     private constant: ConstantsService,
     private snackBar: MatSnackBar,
@@ -57,7 +56,7 @@ export class RecrutamentoInternoComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['id'];
-  storeVagaInterno = new MatTableDataSource();
+  storeVagaExterno = new MatTableDataSource();
   selection = new SelectionModel<Vaga>();
 
   retornaConhecimentos(vaga: Vaga): string {
@@ -86,7 +85,7 @@ export class RecrutamentoInternoComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.storeVagaInterno.filter = filterValue;
+    this.storeVagaExterno.filter = filterValue;
   }
 
   listar(): void {
@@ -94,7 +93,7 @@ export class RecrutamentoInternoComponent implements OnInit {
     axios.get(this.apiUrl + 'vaga/all').then((response) => {
       debugger
       if (response && response.data) {
-        this.storeVagaInterno.data = response.data;
+        this.storeVagaExterno.data = response.data;
         this.loaderService.hide();
       }
     }).catch((error) => {
@@ -105,7 +104,7 @@ export class RecrutamentoInternoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storeVagaInterno.filterPredicate = (data: Vaga, filter) => {
+    this.storeVagaExterno.filterPredicate = (data: Vaga, filter) => {
       return !filter || data.descricao.toLowerCase().includes(filter.toLowerCase());
     }
 
