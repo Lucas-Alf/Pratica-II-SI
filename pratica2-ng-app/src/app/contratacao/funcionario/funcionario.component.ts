@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SelectionModel } from '@angular/cdk/collections';
 import { LoaderService } from 'src/app/services/loader.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Funcionario } from './funcionario';
+import { Pessoa } from './pessoa';
 import { FunionarioModalComponent } from './funionario-modal/funionario-modal.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class FuncionarioComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'cpf', 'nome'];
   storeFuncionario = new MatTableDataSource();
-  selection = new SelectionModel<Funcionario>();
+  selection = new SelectionModel<Pessoa>();
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -39,7 +39,7 @@ export class FuncionarioComponent implements OnInit {
     this.storeFuncionario.filter = filterValue;
   }
   ngOnInit(): void {
-    this.storeFuncionario.filterPredicate = (data: Funcionario, filter) => {
+    this.storeFuncionario.filterPredicate = (data: Pessoa, filter) => {
       return !filter || data.nome.toLowerCase().includes(filter.toLowerCase());
     }
 
@@ -47,7 +47,7 @@ export class FuncionarioComponent implements OnInit {
 
     const initialSelection = [];
     const allowMultiSelect = false;
-    this.selection = new SelectionModel<Funcionario>(allowMultiSelect, initialSelection);
+    this.selection = new SelectionModel<Pessoa>(allowMultiSelect, initialSelection);
   }
   listar(): void {
     this.loaderService.show();
@@ -97,7 +97,7 @@ export class FuncionarioComponent implements OnInit {
     }
   }
 
-  salvar(action: string, data: Funcionario): void {
+  salvar(action: string, data: Pessoa): void {
     this.loaderService.show();
     if (data.nome == undefined || data.nome == "") {
       this.loaderService.hide();

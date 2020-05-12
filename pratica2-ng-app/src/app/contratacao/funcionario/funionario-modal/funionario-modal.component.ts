@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import axios from 'axios';
 import { ConstantsService } from 'src/app/common/services/constants.service';
-import { Funcionario } from '../funcionario';
+import { Pessoa } from '../pessoa';
 import { Pais } from '../pais';
 import { Endereco } from '../../endereco/endereco';
 
@@ -20,8 +20,28 @@ export class FunionarioModalComponent implements OnInit {
   rg: string;
   nome: string;
   paisnascimentoid: number;
+  telefonecelular: number;
+  telefonefixo: number;
+  pispasep: number;
+  pisexpedicao: Date;
+  cnhnumero: number;
+  cnhdata: Date;
+  chntipo: string;
+  ctpsnumero: number;
+  ctpsserie: number;
+  ctpsuf: number;
+  nomepai: string;
+  nomemae: string;
+  tituloeleitornumero: number;
+  tituloeleitoruf: string;
+  tituloeleitorzona: number;
+  tituloeleitorsecao: string;
+  certificadoreservista: number;
+  enderecoid: number;
+  email: string;
+  numero: number;
+
   paises: Pais[];
-  enderecoid: number[];
   enderecos: Endereco[];
 
 
@@ -36,9 +56,25 @@ export class FunionarioModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
   save(): void {
-    const dados: Funcionario = { cpf: this.cpf, rg: this.rg, nome: this.nome, paisnascimentoid: { id: this.paisnascimentoid, nome: '' }, };
+    var testhis: Pessoa = this.data;
+    // const dados: Pessoa = {
+    //   id: this.codigo,
+    //   descricao: this.descricao,
+    //   tipo: this.tipo,
+    //   automatico: this.automatico,
+    //   incidenciaId: {
+    //     id: this.incidenciaId, descricao: ''
+    //   },
+    //   rotinacalculoId: {
+    //     id: this.rotinacalculoId, descricao: ''
+    //   },
+    //   incidenciasAtingidas: this.incidenciasAtingidas.map((x) => ({ incidencia: x }))
+    // };
+    this.data.component.salvar(this.data.action, testhis);
   }
+
 
   listarPais(): void {
     this.loaderService.show();

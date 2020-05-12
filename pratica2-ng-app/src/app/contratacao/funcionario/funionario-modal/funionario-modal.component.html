@@ -81,15 +81,36 @@
                 <mat-label>CNH Tipo</mat-label>
                 <input matInput="text" matInput placeholder="Ex.: AB" [(ngModel)]='rg'>
             </mat-form-field>
+
+            <mat-divider style="margin-bottom:20px"></mat-divider>
+            <mat-form-field appearance="fill" style="width: 350px;" class="normal">
+                <mat-label>Certificado de Reservista</mat-label>
+                <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='rg'>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width:200px;" class="normal">
+                <mat-label>Endereço</mat-label>
+                <mat-select [(ngModel)]='enderecoid'>
+                    <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
+                        {{endereco.logradouro}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 100px;" class="normal">
+                <mat-label>Número</mat-label>
+                <input type="number" matInput placeholder=" rg" [(ngModel)]='rg'>
+            </mat-form-field>
+
             <mat-accordion>
-                <mat-expansion-panel style="margin:5px;">
+                <mat-expansion-panel style="margin:3px;">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             📗 Titulo de Eleitor
                         </mat-panel-title>
-                        <mat-panel-description>
+                        <!-- <mat-panel-description>
                             Informações referentes ao título de eleitor
-                        </mat-panel-description>
+                        </mat-panel-description> -->
                     </mat-expansion-panel-header>
 
                     <mat-form-field appearance="fill" style="width: 300px;" class="normal">
@@ -139,45 +160,20 @@
                 </mat-expansion-panel>
             </mat-accordion>
 
-            <mat-divider style="margin-bottom:20px"></mat-divider>
-
-
-            <mat-divider style="margin-bottom:20px"></mat-divider>
-            <mat-form-field appearance="fill" style="width: 200px;" class="normal">
-                <mat-label>Certificado de Reservista</mat-label>
-                <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='rg'>
-            </mat-form-field>
-
-
-            <br>
-            <mat-form-field appearance="fill" style="width:200px;" class="normal">
-                <mat-label>Endereço</mat-label>
-                <mat-select [(ngModel)]='enderecoid'>
-                    <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
-                        {{endereco.logradouro}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" style="width: 100px;" class="normal">
-                <mat-label>Número</mat-label>
-                <input type="number" matInput placeholder=" rg" [(ngModel)]='rg'>
-            </mat-form-field>
-
             <mat-accordion>
-                <mat-expansion-panel>
+                <mat-expansion-panel style="margin:3px;">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             📘 Carteira de Trabalho
                         </mat-panel-title>
-                        <mat-panel-description>
+                        <!-- <mat-panel-description>
                             Informações referentes a carteira de trabalho
-                        </mat-panel-description>
+                        </mat-panel-description> -->
                     </mat-expansion-panel-header>
 
                     <mat-form-field appearance="fill" style="width: 220px;" class="normal">
                         <mat-label>Pis/Pasep</mat-label>
-                        <input type="number" matInput placeholder=" Pis/Pasep" [(ngModel)]='rg'>
+                        <input type="number" matInput placeholder="Pis/Pasep" [(ngModel)]='rg'>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
@@ -189,11 +185,11 @@
                     <br>
                     <mat-form-field appearance="fill" style="width: 220px;" class="normal">
                         <mat-label>CTPS Número</mat-label>
-                        <input type="number" matInput placeholder=" rg" [(ngModel)]='rg'>
+                        <input type="number" matInput placeholder="Número do endereço" [(ngModel)]='rg'>
                     </mat-form-field>
                     <mat-form-field appearance="fill" style="width: 160px;" class="normal">
                         <mat-label>CTPS Série</mat-label>
-                        <input type="number" matInput placeholder=" rg" [(ngModel)]='rg'>
+                        <input type="number" matInput placeholder="Série" [(ngModel)]='rg'>
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="normal" style="width:200px;">
                         <mat-select required>
