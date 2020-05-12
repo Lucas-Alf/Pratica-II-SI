@@ -1,3 +1,11 @@
+.normal {
+  margin: 5px 25px 5px 0px;
+}
+
+.fim {
+  margin: 5px 5px 5px 0px;
+}
+
 .gravar-button {
     border: 1.5px solid #70cc60;
     background-color: white;
