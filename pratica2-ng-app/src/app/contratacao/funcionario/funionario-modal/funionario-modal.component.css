@@ -1,36 +1,29 @@
-.normal {
-    margin: 5px 25px 5px 0px;
-}
-
-.fim {
-    margin: 5px 5px 5px 0px;
-}
-
-
-/* Chrome, Safari, Edge, Opera */
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-mat-expansion-panel {
-    margin: "5px";
-}
-
-
-/* Firefox */
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-
-/* .mat-form-field-infix {
-    display: block;
-    position: relative;
-    flex: auto;
-    min-width: 0;
-    width: 30px;
-} */
+.gravar-button {
+    border: 1.5px solid #70cc60;
+    background-color: white;
+    width: 90px;
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: black;
+  }
+  
+  .gravar-button:hover {
+    background-color: #70cc60; 
+    color: white;
+  }
+  
+  .cancelar-button {
+    border: 1.5px solid #cc6060;
+    background-color: white;
+    width: 90px;
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: black;
+  }
+  
+  .cancelar-button:hover {
+    background-color: #cc6060; 
+    color: white;
+  }
