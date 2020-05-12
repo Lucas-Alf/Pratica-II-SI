@@ -90,7 +90,7 @@ export class RecrutamentoExternoComponent implements OnInit {
 
   listar(): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'vaga/all').then((response) => {
+    axios.get(this.apiUrl + 'vaga/listar').then((response) => {
       debugger
       if (response && response.data) {
         this.storeVagaExterno.data = response.data;

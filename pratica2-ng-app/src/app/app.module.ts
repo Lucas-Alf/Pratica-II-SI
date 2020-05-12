@@ -89,6 +89,8 @@ import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.componen
 import { UsuarioModalComponent } from './geral/configuracoes/usuario/usuario-modal/usuario-modal.component';
 import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno.component';
 import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno.component';
+import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
+import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal/beneficio-modal.component';
 
 @NgModule({
   declarations: [
@@ -142,7 +144,9 @@ import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno
     UsuarioComponent,
     UsuarioModalComponent,
     RecrutamentoInternoComponent,
-    RecrutamentoExternoComponent
+    RecrutamentoExternoComponent,
+    BeneficioComponent,
+    BeneficioModalComponent
   ],
   imports: [
     BrowserModule,

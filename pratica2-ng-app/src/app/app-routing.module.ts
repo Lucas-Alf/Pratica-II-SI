@@ -25,6 +25,7 @@ import { ParametroEmpresaComponent } from './folhapagamento/parametro-empresa/pa
 import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.component';
 import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno.component';
 import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno.component';
+import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'recrutamento/faixatabelasalarial', component: FaixaTabelaSalarialComponent },
   { path: 'recrutamento/recrutamentoInterno', component: RecrutamentoInternoComponent },
   { path: 'recrutamento/recrutamentoExterno', component: RecrutamentoExternoComponent },
+  { path: 'contratacao/beneficio', component: BeneficioComponent },
 ];
 
 @NgModule({

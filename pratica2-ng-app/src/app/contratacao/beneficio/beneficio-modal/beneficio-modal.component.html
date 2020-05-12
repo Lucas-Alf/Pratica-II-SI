@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>{{data.action}} Benefício</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="standard" style="width: 300px;">
+    <mat-label>Código</mat-label>
+    <input type="number" matInput placeholder="Código" [disabled]="true" [(ngModel)]='id'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Descrição</mat-label>
+    <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Selecione a Data</mat-label>
+    <input matInput [matDatepicker]="dp3" disabled [(ngModel)]='dataModal'>
+    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Valor</mat-label>
+    <input type="number" matInput placeholder="Valor" [(ngModel)]='valor'>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button (click)="save()" mat-button class="gravar-button">Gravar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>
