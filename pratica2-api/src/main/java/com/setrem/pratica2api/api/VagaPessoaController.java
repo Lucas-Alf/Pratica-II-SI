@@ -39,9 +39,6 @@ public class VagaPessoaController {
         data.setId(id);
         data = this.VagaPessoaRepository.save(data);
 
-        //Vaga vaga = new Vaga();
-        //var vagaLista = this.VagaRepository.findById(data.getVagaid().getId());
-
         Optional<Vaga> lista = this.VagaRepository.findById(data.getVagaid().getId());
         Vaga vaga = lista.get();
         int qtd = vaga.getQuantidade() - 1;
