@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { RecrutamentoExternoModalComponent } from './recrutamentoExterno-modal/recrutamentoExterno-modal.component';
 
 export interface Vaga {
   id: number;
@@ -46,6 +47,7 @@ export interface Vaga {
 export class RecrutamentoExternoComponent implements OnInit {
 
   apiUrl: string;
+  dialogRef: MatDialogRef<RecrutamentoExternoModalComponent, any>;
   constructor(
     private constant: ConstantsService,
     private snackBar: MatSnackBar,
@@ -81,6 +83,10 @@ export class RecrutamentoExternoComponent implements OnInit {
       retorno = retorno + ".";
     }
     return retorno;
+  }
+
+  abrirModalRecrutExterno(row): void {
+    this.dialogRef = this.dialog.open(RecrutamentoExternoModalComponent, { data: { row: row, component: this } });
   }
 
   applyFilter(event: Event) {

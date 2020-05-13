@@ -37,7 +37,6 @@ export class RecrutamentoInternoModalComponent implements OnInit {
   }
 
   salvarRecrutInterno(): void {
-    debugger
     const dados: VagaPessoa = { id: 0, cpf: JSON.parse(localStorage.getItem('userData')).pessoa.cpf, vagaid: this.vagaid };
     this.data.component.salvar('Incluir', dados);
   }
