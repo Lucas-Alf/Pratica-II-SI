@@ -12,7 +12,7 @@
           </mat-form-field>
         </div>
       </div>
-      <a class="link-div" href="">
+      <a class="link-div">
       <div class="table-container">
         <table mat-table [dataSource]="storeVagaInterno" class="tabela">
           <ng-container matColumnDef="id">
@@ -27,7 +27,7 @@
               <p class="texto-cha">Atitudes: {{retornaAtitudes(vaga)}}</p>
             </td>
           </ng-container>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row (click)="abrirModalRecrutInterno(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
     </a>

@@ -88,6 +88,7 @@ import { ParametroEmpresaModalComponent } from './folhapagamento/parametro-empre
 import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.component';
 import { UsuarioModalComponent } from './geral/configuracoes/usuario/usuario-modal/usuario-modal.component';
 import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno.component';
+import { RecrutamentoInternoModalComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno-modal/recrutamentoInterno-modal.component';
 import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno.component';
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal/beneficio-modal.component';
@@ -146,7 +147,8 @@ import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal
     RecrutamentoInternoComponent,
     RecrutamentoExternoComponent,
     BeneficioComponent,
-    BeneficioModalComponent
+    BeneficioModalComponent,
+    RecrutamentoInternoModalComponent
   ],
   imports: [
     BrowserModule,

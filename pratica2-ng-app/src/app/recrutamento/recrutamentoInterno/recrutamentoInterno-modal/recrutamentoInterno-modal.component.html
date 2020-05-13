@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{descricao}}</h1>
+<p style="margin-top: -22px;">{{cbo}} - {{cargo}}</p>
+<div mat-dialog-content>
+  <p>Você confirma a condidatura a esta Vaga?</p>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button (click)="salvarRecrutInterno()" mat-button class="gravar-button">Confirmar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>

@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { RecrutamentoInternoModalComponent } from './recrutamentoInterno-modal/recrutamentoInterno-modal.component';
+import { VagaPessoa } from './vagapessoa';
 
 export interface Vaga {
   id: number;
@@ -46,7 +48,7 @@ export interface Vaga {
 export class RecrutamentoInternoComponent implements OnInit {
 
   apiUrl: string;
-  //dialogRef: MatDialogRef<ConhecimentoModalComponent, any>;
+  dialogRef: MatDialogRef<RecrutamentoInternoModalComponent, any>;
   constructor(
     private constant: ConstantsService,
     private snackBar: MatSnackBar,
@@ -84,6 +86,10 @@ export class RecrutamentoInternoComponent implements OnInit {
     return retorno;
   }
 
+  abrirModalRecrutInterno(row): void {
+    this.dialogRef = this.dialog.open(RecrutamentoInternoModalComponent, { data: { row: row, component: this } });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.storeVagaInterno.filter = filterValue;
@@ -102,6 +108,29 @@ export class RecrutamentoInternoComponent implements OnInit {
       console.log(error);
       this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
     });
+  }
+
+  salvar(action: string, data: VagaPessoa): void {
+    debugger
+    this.loaderService.show();
+      axios.post(this.constant.apiUrl + 'vagapessoa/' + action, data).then((response) => {
+        if (response && response.data) {
+          this.loaderService.hide();
+          this.listar();
+          this.dialogRef.close();
+        } else {
+          this.loaderService.hide();
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      }).catch((error) => {
+        this.loaderService.hide();
+        if (error.response) {
+          console.error(error.response.data.message);
+          this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+        } else {
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      });
   }
 
   ngOnInit(): void {
