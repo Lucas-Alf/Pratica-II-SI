@@ -6,11 +6,17 @@
   </mat-form-field><br /> -->
   <mat-form-field appearance="standard" style="width: 450px;">
     <mat-label>Data Inicial</mat-label>
-    <input type="date" matInput placeholder="Data Inicial" [(ngModel)]='dataInicial'>
+    <!--<input type="date" matInput placeholder="Data Inicial" [(ngModel)]='dataInicial'> -->
+    <input matInput [(ngModel)]='dataInicial' disabled [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker disabled="false" #picker></mat-datepicker>
   </mat-form-field><br />
   <mat-form-field appearance="standard" style="width: 450px;">
     <mat-label>Data Final</mat-label>
-    <input type="date" matInput placeholder="Data Final" [(ngModel)]='dataFinal'>
+    <!--<input type="date" matInput placeholder="Data Final" [(ngModel)]='dataFinal'>-->
+    <input matInput disabled [(ngModel)]='dataFinal' [matDatepicker]="picker2">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker disabled="false" #picker2></mat-datepicker>
   </mat-form-field><br />
   <mat-form-field appearance="standard" style="width: 450px;">
     <mat-label>Execução</mat-label>
