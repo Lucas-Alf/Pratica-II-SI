@@ -103,7 +103,7 @@ export class FuncionarioComponent implements OnInit {
       this.loaderService.hide();
       this.snackBar.open('Informe o Nome.', null, { duration: 5000 });
     } else {
-      axios.post(this.constant.apiUrl + 'funcionario/' + action, data).then((response) => {
+      axios.post(this.constant.apiUrl + 'pessoa/' + action, data).then((response) => {
         if (response && response.data) {
           this.loaderService.hide();
           this.listar();

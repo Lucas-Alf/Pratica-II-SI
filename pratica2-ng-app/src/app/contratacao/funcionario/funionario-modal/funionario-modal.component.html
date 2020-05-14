@@ -19,7 +19,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="normal" style="width:150px;">
-                <mat-select required>
+                <mat-select required [(ngModel)]='sexo'>
                     <mat-option value="M">Masculino</mat-option>
                     <mat-option value="F">Feminino</mat-option>
                 </mat-select>
@@ -28,7 +28,7 @@
 
             <mat-form-field appearance="fill" style="width:210px;" class="fim">
                 <mat-label>Data de Nascimento</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input [(ngModel)]='datanascimento' matInput [matDatepicker]="picker">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -36,26 +36,26 @@
 
             <mat-form-field appearance="fill" style="width: 135px;" class="normal">
                 <mat-label>Telefone</mat-label>
-                <input type="number" min="1" matInput placeholder="(55) 9--------" [(ngModel)]='rg'>
+                <input type="number" min="1" matInput placeholder="(55) 9--------" [(ngModel)]='telefonecelular'>
             </mat-form-field>
 
             <mat-form-field appearance="fill" style="width: 160px;" class="normal">
                 <mat-label>Telefone Fixo</mat-label>
-                <input type="number" matInput placeholder=" Telefone Fixo" [(ngModel)]='rg'>
+                <input type="number" matInput placeholder=" Telefone Fixo" [(ngModel)]='telefonefixo'>
             </mat-form-field>
 
             <mat-form-field appearance="fill" style="width: 400px;" class="normal">
                 <mat-label>Nome Mãe</mat-label>
-                <input type="text" matInput placeholder="Nome da Mãe" [(ngModel)]='rg'>
+                <input type="text" matInput placeholder="Nome da Mãe" [(ngModel)]='nomemae'>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 385px;" class="fim">
                 <mat-label>Nome Pai</mat-label>
-                <input matInput="text" matInput placeholder="Nome do Pai" [(ngModel)]='rg'>
+                <input matInput="text" matInput placeholder="Nome do Pai" [(ngModel)]='nomepai'>
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill" style="width: 320px;" class="normal">
                 <mat-label>Email</mat-label>
-                <input matInput="email" matInput placeholder="Email" [(ngModel)]='rg'>
+                <input matInput="email" matInput placeholder="Email" [(ngModel)]='email'>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width:200px;" class="normal">
                 <mat-label>País Nascimento</mat-label>
@@ -69,23 +69,23 @@
             <mat-divider style="margin-bottom:20px"></mat-divider>
             <mat-form-field appearance="fill" style="width: 320px;" class="normal">
                 <mat-label>CNH Número</mat-label>
-                <input type="number" matInput placeholder="Número" [(ngModel)]='rg'>
+                <input type="number" matInput placeholder="Número" [(ngModel)]='ctpsnumero'>
             </mat-form-field>
             <mat-form-field appearance="fill" class="normal">
                 <mat-label>CNH Data</mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input [(ngModel)]='cnhdata' matInput [matDatepicker]="picker3">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 100px;" class="fim">
                 <mat-label>CNH Tipo</mat-label>
-                <input matInput="text" matInput placeholder="Ex.: AB" [(ngModel)]='rg'>
+                <input matInput="text" matInput placeholder="Ex.: AB" [(ngModel)]='chntipo'>
             </mat-form-field>
 
             <mat-divider style="margin-bottom:20px"></mat-divider>
             <mat-form-field appearance="fill" style="width: 350px;" class="normal">
                 <mat-label>Certificado de Reservista</mat-label>
-                <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='rg'>
+                <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='certificadoreservista'>
             </mat-form-field>
 
             <mat-form-field appearance="fill" style="width:200px;" class="normal">
@@ -99,7 +99,7 @@
 
             <mat-form-field appearance="fill" style="width: 100px;" class="normal">
                 <mat-label>Número</mat-label>
-                <input type="number" matInput placeholder=" rg" [(ngModel)]='rg'>
+                <input type="number" matInput placeholder="Número" [(ngModel)]='numero'>
             </mat-form-field>
 
             <mat-accordion>
@@ -115,18 +115,18 @@
 
                     <mat-form-field appearance="fill" style="width: 300px;" class="normal">
                         <mat-label>Número Título de Eleitor</mat-label>
-                        <input type="number" matInput placeholder=" Número Título de Eleitor">
+                        <input type="number" matInput placeholder="Número Título de Eleitor" [(ngModel)]='tituloeleitornumero'>
                     </mat-form-field>
                     <mat-form-field appearance="fill" style="width: 250px;" class="normal">
                         <mat-label>Zona Título de Eleitor</mat-label>
-                        <input type="number" matInput placeholder=" Zona" [(ngModel)]='rg'>
+                        <input type="number" matInput placeholder="Zona" [(ngModel)]='tituloeleitorzona'>
                     </mat-form-field>
                     <mat-form-field appearance="fill" style="width: 250px;" class="normal">
                         <mat-label>Seção Título de Eleitor</mat-label>
-                        <input matInput="text" matInput placeholder="Seção" [(ngModel)]='rg'>
+                        <input matInput="text" matInput placeholder="Seção" [(ngModel)]='tituloeleitorsecao'>
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="normal" style="width:200px;">
-                        <mat-select required>
+                        <mat-select required [(ngModel)]='tituloeleitoruf'>
                             <mat-option value="AC">Acre</mat-option>
                             <mat-option value="AL">Alagoas</mat-option>
                             <mat-option value="AP">Amapá</mat-option>
@@ -173,26 +173,26 @@
 
                     <mat-form-field appearance="fill" style="width: 220px;" class="normal">
                         <mat-label>Pis/Pasep</mat-label>
-                        <input type="number" matInput placeholder="Pis/Pasep" [(ngModel)]='rg'>
+                        <input type="number" matInput placeholder="Pis/Pasep" [(ngModel)]='pispasep'>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Pis Exp.</mat-label>
-                        <input matInput [matDatepicker]="picker">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                        <input [(ngModel)]='pisexpedicao' matInput [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
                     <br>
                     <mat-form-field appearance="fill" style="width: 220px;" class="normal">
                         <mat-label>CTPS Número</mat-label>
-                        <input type="number" matInput placeholder="Número do endereço" [(ngModel)]='rg'>
+                        <input type="number" matInput placeholder="Número do endereço" [(ngModel)]='ctpsnumero'>
                     </mat-form-field>
                     <mat-form-field appearance="fill" style="width: 160px;" class="normal">
                         <mat-label>CTPS Série</mat-label>
-                        <input type="number" matInput placeholder="Série" [(ngModel)]='rg'>
+                        <input type="number" matInput placeholder="Série" [(ngModel)]='ctpsserie'>
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="normal" style="width:200px;">
-                        <mat-select required>
+                        <mat-select required [(ngModel)]='ctpsuf'>
                             <mat-option value="AC">Acre</mat-option>
                             <mat-option value="AL">Alagoas</mat-option>
                             <mat-option value="AP">Amapá</mat-option>

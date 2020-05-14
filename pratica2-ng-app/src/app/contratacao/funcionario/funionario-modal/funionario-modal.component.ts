@@ -19,6 +19,8 @@ export class FunionarioModalComponent implements OnInit {
   cpf: string;
   rg: string;
   nome: string;
+  sexo: string;
+  datanascimento: Date;
   paisnascimentoid: number;
   telefonecelular: number;
   telefonefixo: number;
@@ -29,7 +31,7 @@ export class FunionarioModalComponent implements OnInit {
   chntipo: string;
   ctpsnumero: number;
   ctpsserie: number;
-  ctpsuf: number;
+  ctpsuf: string;
   nomepai: string;
   nomemae: string;
   tituloeleitornumero: number;
@@ -50,7 +52,7 @@ export class FunionarioModalComponent implements OnInit {
     public dialogRef: MatDialogRef<FunionarioModalComponent>, private snackBar: MatSnackBar,
     private loaderService: LoaderService,
     private constant: ConstantsService
-  ) { this.apiUrl = this.constant.apiUrl; this.listarPais();this.listarEndereco(); }
+  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); }
 
   close(): void {
     this.dialogRef.close();
@@ -58,21 +60,45 @@ export class FunionarioModalComponent implements OnInit {
 
 
   save(): void {
-    var testhis: Pessoa = this.data;
-    // const dados: Pessoa = {
-    //   id: this.codigo,
-    //   descricao: this.descricao,
-    //   tipo: this.tipo,
-    //   automatico: this.automatico,
-    //   incidenciaId: {
-    //     id: this.incidenciaId, descricao: ''
-    //   },
-    //   rotinacalculoId: {
-    //     id: this.rotinacalculoId, descricao: ''
-    //   },
-    //   incidenciasAtingidas: this.incidenciasAtingidas.map((x) => ({ incidencia: x }))
-    // };
-    this.data.component.salvar(this.data.action, testhis);
+    //var testhis: Pessoa = this.data;
+    const dados: Pessoa = {
+      cpf: this.cpf,
+      rg: this.rg,
+      nome: this.nome,
+      sexo: this.sexo,
+      datanascimento: this.datanascimento,
+      paisnascimentoid: {
+        id: this.paisnascimentoid,
+        nome: "",
+      },
+      telefonecelular: this.telefonecelular,
+      telefonefixo: this.telefonefixo,
+      pispasep: this.pispasep,
+      pisexpedicao: this.pisexpedicao,
+      cnhnumero: this.cnhnumero,
+      cnhdata: this.cnhdata,
+      chntipo: this.chntipo,
+      ctpsnumero: this.ctpsnumero,
+      ctpsserie: this.ctpsserie,
+      ctpsuf: this.ctpsuf,
+      nomepai: this.nomepai,
+      nomemae: this.nomemae,
+      tituloeleitornumero: this.tituloeleitornumero,
+      tituloeleitoruf: this.tituloeleitoruf,
+      tituloeleitorzona: this.tituloeleitorzona,
+      tituloeleitorsecao: this.tituloeleitorsecao,
+      certificadoreservista: this.certificadoreservista,
+      enderecoid: {
+        id: this.enderecoid,
+        logradouro: '',
+        bairro: '',
+        cep: '',
+        cidadeid: null
+      },
+      email: this.email,
+      numero: this.numero,
+    };
+    this.data.component.salvar(this.data.action, dados);
   }
 
 

@@ -1,13 +1,13 @@
+import { Endereco } from '../endereco/endereco';
+import { Pais } from './pais';
+
 export interface Pessoa {
   cpf: string;
   nome: string;
   rg: string;
   sexo: string;
   datanascimento: Date;
-  paisnascimentoid: {
-    id: number;
-    nome: string;
-  };
+  paisnascimentoid: Pais;
   telefonecelular: number;
   telefonefixo: number;
   pispasep: number;
@@ -17,7 +17,7 @@ export interface Pessoa {
   chntipo: string;
   ctpsnumero: number;
   ctpsserie: number;
-  ctpsuf: number;
+  ctpsuf: string;
   nomepai: string;
   nomemae: string;
   tituloeleitornumero: number;
@@ -25,22 +25,7 @@ export interface Pessoa {
   tituloeleitorzona: number;
   tituloeleitorsecao: string;
   certificadoreservista: number;
-  enderecoid: {
-    id: number;
-    rua: string;
-    numero: number;
-    bairro: string;
-    cep: string;
-    cidadeid: {
-      id: number;
-      nome: string;
-      estadoid: {
-        id: number;
-        nome: string;
-        sigla: string;
-      }
-    }
-  };
+  enderecoid?: Endereco;
   email: string;
   numero: number;
 }
