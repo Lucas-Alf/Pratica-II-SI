@@ -3,13 +3,16 @@ package com.setrem.pratica2api.model;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -133,6 +136,9 @@ public class Pessoa implements Serializable {
 
     @Column(name = "numero")
     private Integer numero;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conhecimento")
+    private List<PessoaConhecimento> pessoaConhecimento;
 
     public Pessoa() {
     }
@@ -545,5 +551,13 @@ public class Pessoa implements Serializable {
             return false;
         return true;
     }
-    
+
+    public List<PessoaConhecimento> getPessoaConhecimento() {
+        return pessoaConhecimento;
+    }
+
+    public void setPessoaConhecimento(List<PessoaConhecimento> pessoaConhecimento) {
+        this.pessoaConhecimento = pessoaConhecimento;
+    }
+
 }

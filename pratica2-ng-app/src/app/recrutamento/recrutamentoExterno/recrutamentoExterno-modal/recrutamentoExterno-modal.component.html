@@ -1,0 +1,96 @@
+<h1 mat-dialog-title>Recrutamento Externo</h1>
+<div>
+  <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Dados Pessoais</ng-template>
+        <mat-form-field>
+          <mat-label>CPF</mat-label>
+          <input matInput placeholder="CPF" name="cpf" formControlName="group1CPF" required>
+        </mat-form-field>
+        <mat-form-field style="width: 400px;">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput placeholder="Nome Completo" name="nome" formControlName="group1Nome" required>
+        </mat-form-field><br>
+        <mat-form-field>
+          <mat-label>Data Nascimento</mat-label>
+          <input matInput [matDatepicker]="dp3" disabled name='datanascimento' formControlName="group1DataNascimento" required>
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="width:150px;">
+          <mat-select name="sexo" formControlName="group1Sexo" required>
+              <mat-option value="M">Masculino</mat-option>
+              <mat-option value="F">Feminino</mat-option>
+          </mat-select>
+          <mat-label>Sexo</mat-label>
+      </mat-form-field><br>
+      <mat-form-field style="width: 400px;">
+        <mat-label>Endereço</mat-label>
+        <mat-select name='enderecoid' formControlName="group1Endereco" required>
+            <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
+              {{endereco.cep}} - {{endereco.logradouro}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width: 100px;" >
+        <mat-label>Número</mat-label>
+        <input type="number" matInput placeholder="Número" name="numero" formControlName="group1Numero" required>
+    </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Formação</ng-template>
+        <mat-form-field style="width: 600px;">
+          <mat-label>Experiências Profissionais (3 últimas)</mat-label>
+          <textarea style="height: 100px;" matInput placeholder="Experiências Profissionais" name="experienciaprofissional" formControlName="group2ExperienciaProfissional" required></textarea>
+        </mat-form-field><br>
+        
+    <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="conhecimentosPessoaChips">
+      <mat-chip-list #chipList aria-label="Conhecimento">
+        <mat-chip
+          *ngFor="let item of pessoaConhecimentos"
+          [selectable]="selectedPessoaConhecimento"
+          [removable]="removableConhecimentoPessoa"
+          (removed)="removePessoaConhecimento(item)">
+          {{item.nome}}
+          <mat-icon matChipRemove *ngIf="removableConhecimentoPessoa">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Conhecimento"
+          #fruitInput
+          [formControl]="ConhecimentoPessoaCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodesConhecimentoPessoa"
+          (matChipInputTokenEnd)="addConhecimentoPessoa($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedPessoaConhecimento($event)">
+        <mat-option *ngFor="let item of filteredConhecimentosPessoa | async" [value]="item">
+          {{item.nome}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious><mat-icon>arrow_back_ios</mat-icon> Voltar</button>
+          <button mat-button matStepperNext>Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Habilidade/Atitude</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious><mat-icon>arrow_back_ios</mat-icon> Voltar</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>

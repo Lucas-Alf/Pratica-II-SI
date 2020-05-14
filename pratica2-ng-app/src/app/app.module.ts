@@ -90,6 +90,7 @@ import { UsuarioModalComponent } from './geral/configuracoes/usuario/usuario-mod
 import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno.component';
 import { RecrutamentoInternoModalComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno-modal/recrutamentoInterno-modal.component';
 import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno.component';
+import { RecrutamentoExternoModalComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno-modal/recrutamentoExterno-modal.component';
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal/beneficio-modal.component';
 
@@ -148,7 +149,8 @@ import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal
     RecrutamentoExternoComponent,
     BeneficioComponent,
     BeneficioModalComponent,
-    RecrutamentoInternoModalComponent
+    RecrutamentoInternoModalComponent,
+    RecrutamentoExternoModalComponent
   ],
   imports: [
     BrowserModule,

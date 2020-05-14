@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PeriodoCalculo } from '../PeriodoCalculo';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-periodo-calculo-modal',
@@ -42,8 +43,8 @@ export class PeriodoCalculoModalComponent implements OnInit {
     ];
     if (this.data.info) {
       this.id = this.data.info.id;
-      this.dataInicial = this.data.info.dataInicial;
-      this.dataFinal = this.data.info.dataFinal;
+      this.dataInicial = moment(this.data.info.dataInicial).toDate();
+      this.dataFinal = moment(this.data.info.dataFinal).toDate();
       this.execucao = this.data.info.execucao;
     }
   }
