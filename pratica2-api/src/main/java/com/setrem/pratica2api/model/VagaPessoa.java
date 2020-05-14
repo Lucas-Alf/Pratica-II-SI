@@ -34,6 +34,9 @@ public class VagaPessoa implements Serializable {
     @JoinColumn(name = "vagaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Vaga vagaid;
+    @Basic(optional = false)
+    @Column(name = "experienciaprofissional")
+    private String experienciaprofissional;
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -63,11 +66,20 @@ public class VagaPessoa implements Serializable {
         this.vagaid = vagaid;
     }
 
+    public String getExperienciaprofissional() {
+        return experienciaprofissional;
+    }
+
+    public void setExperienciaprofissional(String experienciaprofissional) {
+        this.experienciaprofissional = experienciaprofissional;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + ((experienciaprofissional == null) ? 0 : experienciaprofissional.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((vagaid == null) ? 0 : vagaid.hashCode());
         return result;
@@ -87,6 +99,11 @@ public class VagaPessoa implements Serializable {
                 return false;
         } else if (!cpf.equals(other.cpf))
             return false;
+        if (experienciaprofissional == null) {
+            if (other.experienciaprofissional != null)
+                return false;
+        } else if (!experienciaprofissional.equals(other.experienciaprofissional))
+            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -99,7 +116,7 @@ public class VagaPessoa implements Serializable {
             return false;
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "com.setrem.pratica2api.model.VagaPessoa[ id=" + id + " ]";

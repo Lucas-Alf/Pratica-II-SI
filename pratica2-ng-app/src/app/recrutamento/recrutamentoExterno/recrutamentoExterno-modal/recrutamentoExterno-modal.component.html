@@ -45,9 +45,37 @@
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Formação</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
+        <mat-form-field style="width: 600px;">
+          <mat-label>Experiências Profissionais (3 últimas)</mat-label>
+          <textarea style="height: 100px;" matInput placeholder="Experiências Profissionais" name="experienciaprofissional" formControlName="group2ExperienciaProfissional" required></textarea>
+        </mat-form-field><br>
+        
+    <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="conhecimentosPessoaChips">
+      <mat-chip-list #chipList aria-label="Conhecimento">
+        <mat-chip
+          *ngFor="let item of pessoaConhecimentos"
+          [selectable]="selectedPessoaConhecimento"
+          [removable]="removableConhecimentoPessoa"
+          (removed)="removePessoaConhecimento(item)">
+          {{item.nome}}
+          <mat-icon matChipRemove *ngIf="removableConhecimentoPessoa">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Conhecimento"
+          #fruitInput
+          [formControl]="ConhecimentoPessoaCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodesConhecimentoPessoa"
+          (matChipInputTokenEnd)="addConhecimentoPessoa($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedPessoaConhecimento($event)">
+        <mat-option *ngFor="let item of filteredConhecimentosPessoa | async" [value]="item">
+          {{item.nome}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
         <div>
           <button mat-button matStepperPrevious><mat-icon>arrow_back_ios</mat-icon> Voltar</button>
           <button mat-button matStepperNext>Próximo <mat-icon>arrow_forward_ios</mat-icon></button>

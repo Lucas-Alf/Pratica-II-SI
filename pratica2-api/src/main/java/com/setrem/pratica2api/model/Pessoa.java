@@ -2,13 +2,16 @@ package com.setrem.pratica2api.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,8 +62,11 @@ public class Pessoa implements Serializable {
     @ManyToOne
     private Pais paisnascimento;
     @Column(name = "foto")
-    @Type(type="org.hibernate.type.BinaryType")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] foto;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conhecimento")
+    private List<PessoaConhecimento> pessoaConhecimento;
 
     public Pessoa() {
     }
@@ -69,7 +75,8 @@ public class Pessoa implements Serializable {
         this.cpf = cpf;
     }
 
-    public Pessoa(final String cpf, final String nome, final Character sexo, final String rg, final Date datanascimento, final String telefonecelular, final String telefonefixo) {
+    public Pessoa(final String cpf, final String nome, final Character sexo, final String rg, final Date datanascimento,
+            final String telefonecelular, final String telefonefixo) {
         this.cpf = cpf;
         this.nome = nome;
         this.sexo = sexo;
@@ -174,5 +181,13 @@ public class Pessoa implements Serializable {
     public void setFoto(byte[] foto) {
         this.foto = foto;
     }
-    
+
+    public List<PessoaConhecimento> getPessoaConhecimento() {
+        return pessoaConhecimento;
+    }
+
+    public void setPessoaConhecimento(List<PessoaConhecimento> pessoaConhecimento) {
+        this.pessoaConhecimento = pessoaConhecimento;
+    }
+
 }

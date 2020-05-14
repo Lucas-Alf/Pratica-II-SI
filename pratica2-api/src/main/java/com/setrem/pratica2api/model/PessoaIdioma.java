@@ -36,9 +36,6 @@ public class PessoaIdioma implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "nivel")
-    private String descricao;
     @JoinColumn(name = "idiomaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Idioma idiomaid;
@@ -56,14 +53,6 @@ public class PessoaIdioma implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public Idioma getIdiomaid() {
@@ -87,7 +76,6 @@ public class PessoaIdioma implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((idiomaid == null) ? 0 : idiomaid.hashCode());
         return result;
@@ -106,11 +94,6 @@ public class PessoaIdioma implements Serializable {
             if (other.cpf != null)
                 return false;
         } else if (!cpf.equals(other.cpf))
-            return false;
-        if (descricao == null) {
-            if (other.descricao != null)
-                return false;
-        } else if (!descricao.equals(other.descricao))
             return false;
         if (id == null) {
             if (other.id != null)
