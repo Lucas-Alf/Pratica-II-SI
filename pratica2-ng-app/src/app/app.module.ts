@@ -93,6 +93,7 @@ import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno
 import { RecrutamentoExternoModalComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno-modal/recrutamentoExterno-modal.component';
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal/beneficio-modal.component';
+import { CalculoComponent } from './folhapagamento/calculo/calculo.component';
 
 @NgModule({
   declarations: [
@@ -150,7 +151,8 @@ import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal
     BeneficioComponent,
     BeneficioModalComponent,
     RecrutamentoInternoModalComponent,
-    RecrutamentoExternoModalComponent
+    RecrutamentoExternoModalComponent,
+    CalculoComponent
   ],
   imports: [
     BrowserModule,

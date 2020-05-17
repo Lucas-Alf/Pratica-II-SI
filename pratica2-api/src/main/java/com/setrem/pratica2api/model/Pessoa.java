@@ -137,9 +137,6 @@ public class Pessoa implements Serializable {
     @Column(name = "numero")
     private Integer numero;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conhecimento")
-    private List<PessoaConhecimento> pessoaConhecimento;
-
     public Pessoa() {
     }
 
@@ -551,13 +548,4 @@ public class Pessoa implements Serializable {
             return false;
         return true;
     }
-
-    public List<PessoaConhecimento> getPessoaConhecimento() {
-        return pessoaConhecimento;
-    }
-
-    public void setPessoaConhecimento(List<PessoaConhecimento> pessoaConhecimento) {
-        this.pessoaConhecimento = pessoaConhecimento;
-    }
-
 }

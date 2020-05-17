@@ -1,0 +1,69 @@
+<app-folha-menu-lateral></app-folha-menu-lateral>
+<div style="margin-left: 250px;">
+  <app-cabecalho-sistema></app-cabecalho-sistema>
+  <div style="margin: 15px;">
+    <mat-card><b>Cálculo da Folha de Pagamento</b></mat-card>
+    <table>
+      <tr>
+        <td>
+          <mat-card style="margin-top: 5px; height: 546px;">
+            <div style="width: 100%; display:inline-block;">
+              <div style="float: left;">
+                <mat-form-field style="margin-left: 10px;">
+                  <mat-label>🔎 Pesquisar</mat-label>
+                  <input matInput (keyup)="applyFilter($event)">
+                </mat-form-field>
+              </div>
+            </div>
+            <table mat-table [dataSource]="storeFuncionario">
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="cpf">
+                <th style="width: 14%;" mat-header-cell *matHeaderCellDef> CPF </th>
+                <td mat-cell *matCellDef="let funcionario"> {{funcionario.cpf}} </td>
+              </ng-container>
+              <ng-container matColumnDef="nome">
+                <th style="width: 90%;" mat-header-cell *matHeaderCellDef> Nome </th>
+                <td mat-cell *matCellDef="let funcionario"> {{funcionario.nome}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </mat-card>
+        </td>
+        <td>
+          <mat-card style="margin-top: 5px;"><b>Cálculo do Contrato</b></mat-card>
+          <mat-card style="margin-top: 5px; height: 490px;">
+            <table mat-table [dataSource]="storeCalculo">
+              <ng-container matColumnDef="tipo">
+                <th style="width: 15%;" mat-header-cell *matHeaderCellDef> Tipo </th>
+                <td mat-cell *matCellDef="let calculo"> {{calculo.tipo}} </td>
+              </ng-container>
+              <ng-container matColumnDef="evento">
+                <th style="width: 60%;" mat-header-cell *matHeaderCellDef> Evento </th>
+                <td mat-cell *matCellDef="let calculo"> {{calculo.evento}} </td>
+              </ng-container>
+              <ng-container matColumnDef="valor">
+                <th style="width: 25%;" mat-header-cell *matHeaderCellDef> Valor </th>
+                <td mat-cell *matCellDef="let calculo"> {{calculo.valor}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsCalc"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsCalc;"></tr>
+            </table>
+          </mat-card>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <app-rodape-sistema></app-rodape-sistema>
+</div>

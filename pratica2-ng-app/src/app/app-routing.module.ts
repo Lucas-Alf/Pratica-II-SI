@@ -26,6 +26,7 @@ import { UsuarioComponent } from './geral/configuracoes/usuario/usuario.componen
 import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno/recrutamentoInterno.component';
 import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno.component';
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
+import { CalculoComponent } from './folhapagamento/calculo/calculo.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'folhapagamento/rotinacalculo', component: RotinaCalculoComponent },
   { path: 'folhapagamento/periodocalculo', component: PeriodoCalculoComponent },
   { path: 'folhapagamento/parametroempresa', component: ParametroEmpresaComponent },
+  { path: 'folhapagamento/calculo', component: CalculoComponent },
   { path: 'recrutamento', component: RecrutamentoComponent },
   { path: 'recrutamento/cargo', component: CargoComponent },
   { path: 'recrutamento/conhecimento', component: ConhecimentoComponent },
