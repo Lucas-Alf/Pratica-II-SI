@@ -24,7 +24,7 @@ export class FuncionarioComponent implements OnInit {
     private loaderService: LoaderService,
     public dialog: MatDialog) { this.apiUrl = this.constant.apiUrl; }
 
-  displayedColumns: string[] = ['select', 'cpf', 'nome'];
+  displayedColumns: string[] = ['select', 'cpf', 'nome', 'datanascimento', 'sexo'];
   storeFuncionario = new MatTableDataSource();
   selection = new SelectionModel<Pessoa>();
 
@@ -78,7 +78,7 @@ export class FuncionarioComponent implements OnInit {
   excluir(): void {
     if (this.selection.selected.length > 0) {
       this.loaderService.show();
-      axios.delete(this.apiUrl + 'funcionario/delete/' + this.selection.selected[0].cpf).then((response) => {
+      axios.delete(this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf).then((response) => {
         if (response && response.status === 200) {
           this.loaderService.hide();
           this.listar();

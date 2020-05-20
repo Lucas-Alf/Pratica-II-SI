@@ -87,7 +87,7 @@ public class Pessoa implements Serializable {
 
     @Column(name = "cnhdata")
     @Temporal(TemporalType.DATE)
-    private Date pisexpecnhdatadicao;
+    private Date cnhdata;
 
     @Column(name = "chntipo")
     @Size(max = 4)
@@ -136,13 +136,8 @@ public class Pessoa implements Serializable {
 
     @Column(name = "numero")
     private Integer numero;
-
-    public Pessoa() {
-    }
-
-    public Pessoa(final String cpf) {
-        this.cpf = cpf;
-    }
+    
+    public Pessoa() {}
 
     public Pessoa(final String cpf, final String nome, final Character sexo, final String rg, final Date datanascimento,
             final String telefonecelular, final String telefonefixo) {
@@ -159,7 +154,7 @@ public class Pessoa implements Serializable {
         return cpf;
     }
 
-    public void setCpf(final String cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -167,7 +162,7 @@ public class Pessoa implements Serializable {
         return nome;
     }
 
-    public void setNome(final String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -175,7 +170,7 @@ public class Pessoa implements Serializable {
         return sexo;
     }
 
-    public void setSexo(final Character sexo) {
+    public void setSexo(Character sexo) {
         this.sexo = sexo;
     }
 
@@ -183,7 +178,7 @@ public class Pessoa implements Serializable {
         return rg;
     }
 
-    public void setRg(final String rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 
@@ -191,7 +186,7 @@ public class Pessoa implements Serializable {
         return datanascimento;
     }
 
-    public void setDatanascimento(final Date datanascimento) {
+    public void setDatanascimento(Date datanascimento) {
         this.datanascimento = datanascimento;
     }
 
@@ -199,7 +194,7 @@ public class Pessoa implements Serializable {
         return telefonecelular;
     }
 
-    public void setTelefonecelular(final String telefonecelular) {
+    public void setTelefonecelular(String telefonecelular) {
         this.telefonecelular = telefonecelular;
     }
 
@@ -207,15 +202,15 @@ public class Pessoa implements Serializable {
         return telefonefixo;
     }
 
-    public void setTelefonefixo(final String telefonefixo) {
+    public void setTelefonefixo(String telefonefixo) {
         this.telefonefixo = telefonefixo;
     }
 
-    public Pais getPaisnascimento() {
+    public Pais getPaisnascimentoid() {
         return paisnascimentoid;
     }
 
-    public void setPaisnascimento(final Pais paisnascimentoid) {
+    public void setPaisnascimentoid(Pais paisnascimentoid) {
         this.paisnascimentoid = paisnascimentoid;
     }
 
@@ -251,12 +246,12 @@ public class Pessoa implements Serializable {
         this.cnhnumero = cnhnumero;
     }
 
-    public Date getPisexpecnhdatadicao() {
-        return pisexpecnhdatadicao;
+    public Date getCnhdata() {
+        return cnhdata;
     }
 
-    public void setPisexpecnhdatadicao(Date pisexpecnhdatadicao) {
-        this.pisexpecnhdatadicao = pisexpecnhdatadicao;
+    public void setCnhdata(Date cnhdata) {
+        this.cnhdata = cnhdata;
     }
 
     public String getChntipo() {
@@ -377,6 +372,7 @@ public class Pessoa implements Serializable {
         int result = 1;
         result = prime * result + ((certificadoreservista == null) ? 0 : certificadoreservista.hashCode());
         result = prime * result + ((chntipo == null) ? 0 : chntipo.hashCode());
+        result = prime * result + ((cnhdata == null) ? 0 : cnhdata.hashCode());
         result = prime * result + ((cnhnumero == null) ? 0 : cnhnumero.hashCode());
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
         result = prime * result + ((ctpsnumero == null) ? 0 : ctpsnumero.hashCode());
@@ -391,7 +387,6 @@ public class Pessoa implements Serializable {
         result = prime * result + ((nomepai == null) ? 0 : nomepai.hashCode());
         result = prime * result + ((numero == null) ? 0 : numero.hashCode());
         result = prime * result + ((paisnascimentoid == null) ? 0 : paisnascimentoid.hashCode());
-        result = prime * result + ((pisexpecnhdatadicao == null) ? 0 : pisexpecnhdatadicao.hashCode());
         result = prime * result + ((pisexpedicao == null) ? 0 : pisexpedicao.hashCode());
         result = prime * result + ((pispasep == null) ? 0 : pispasep.hashCode());
         result = prime * result + ((rg == null) ? 0 : rg.hashCode());
@@ -423,6 +418,11 @@ public class Pessoa implements Serializable {
             if (other.chntipo != null)
                 return false;
         } else if (!chntipo.equals(other.chntipo))
+            return false;
+        if (cnhdata == null) {
+            if (other.cnhdata != null)
+                return false;
+        } else if (!cnhdata.equals(other.cnhdata))
             return false;
         if (cnhnumero == null) {
             if (other.cnhnumero != null)
@@ -491,11 +491,6 @@ public class Pessoa implements Serializable {
                 return false;
         } else if (!paisnascimentoid.equals(other.paisnascimentoid))
             return false;
-        if (pisexpecnhdatadicao == null) {
-            if (other.pisexpecnhdatadicao != null)
-                return false;
-        } else if (!pisexpecnhdatadicao.equals(other.pisexpecnhdatadicao))
-            return false;
         if (pisexpedicao == null) {
             if (other.pisexpedicao != null)
                 return false;
@@ -548,4 +543,5 @@ public class Pessoa implements Serializable {
             return false;
         return true;
     }
+
 }
