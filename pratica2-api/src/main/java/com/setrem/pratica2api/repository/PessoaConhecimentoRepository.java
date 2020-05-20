@@ -13,12 +13,13 @@ import com.setrem.pratica2api.model.PessoaConhecimento;
 
 @Repository
 public interface PessoaConhecimentoRepository extends JpaRepository<PessoaConhecimento, Integer> {
-    
-    @Query("SELECT i FROM PessoaConhecimento i WHERE i.cpf.id = ?1")
-    public List<PessoaConhecimento> findByConhecimentoId(int conhecimentoid);
+
+    @Query(value = "SELECT coalesce(max(id), 0)+1 FROM PessoaConhecimento", nativeQuery = true)
+    public int maxIdPessoaConhecimento();
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM PessoaConhecimento i WHERE i.cpf.id = ?1")
-    public void deleteByConhecimentoId(int cargoid);
+    @Query(value = "DELETE FROM PessoaConhecimento i WHERE cpf = ?1", nativeQuery = true)
+    public void deleteByCpf(String cpf);
+
 }

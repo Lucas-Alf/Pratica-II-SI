@@ -40,6 +40,7 @@ public class PessoaController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
+        System.out.println(data.getPaisnascimentoid());
         this.PessoaRepository.save(data);
         return data;
     }

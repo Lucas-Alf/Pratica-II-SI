@@ -24,7 +24,7 @@ public class Idioma implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private String id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "descricao")
@@ -37,13 +37,6 @@ public class Idioma implements Serializable {
         return serialVersionUID;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getDescricao() {
         return descricao;
@@ -59,6 +52,21 @@ public class Idioma implements Serializable {
 
     public void setNivel(String nivel) {
         this.nivel = nivel;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "com.setrem.pratica2api.model.Idioma[ id=" + id + " ]";
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
@@ -96,11 +104,6 @@ public class Idioma implements Serializable {
         } else if (!nivel.equals(other.nivel))
             return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.setrem.pratica2api.model.Idioma[ id=" + id + " ]";
     }
 
 }

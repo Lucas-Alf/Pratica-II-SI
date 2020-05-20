@@ -5,6 +5,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 import axios from 'axios';
 import { ConstantsService } from 'src/app/common/services/constants.service';
 import { Vaga } from '../vaga';
+import * as moment from 'moment'
 
 export interface Cargo {
   id: number;
@@ -95,7 +96,7 @@ export class VagaModalComponent implements OnInit {
       this.id = this.data.info.id;
       this.descricao = this.data.info.descricao;
       this.quantidade = this.data.info.quantidade;
-      this.prazo = this.data.info.prazo;
+      this.prazo = moment(this.data.info.prazo).toDate();
       this.tipo = this.data.info.tipo;
       this.cargoid = this.data.info.cargoid.id;
       this.departamentoid = this.data.info.departamentoid.id;

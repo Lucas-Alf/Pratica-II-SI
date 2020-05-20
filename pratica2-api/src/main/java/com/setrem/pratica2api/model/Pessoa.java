@@ -46,7 +46,7 @@ public class Pessoa implements Serializable {
     private Character sexo;
 
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 14)
     @Column(name = "rg")
     private String rg;
@@ -136,8 +136,23 @@ public class Pessoa implements Serializable {
 
     @Column(name = "numero")
     private Integer numero;
-    
-    public Pessoa() {}
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
+    private List<PessoaIdioma> pessoaIdiomas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
+    private List<PessoaConhecimento> pessoaConhecimentos;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
+    private List<PessoaHabilidadesAtitudes> pessoaHabilidadesAtitudes;
+
+    public Pessoa() {
+    }
+
+    public Pessoa(final String cpf) {
+        this.cpf = cpf;
+    }
 
     public Pessoa(final String cpf, final String nome, final Character sexo, final String rg, final Date datanascimento,
             final String telefonecelular, final String telefonefixo) {
@@ -544,4 +559,31 @@ public class Pessoa implements Serializable {
         return true;
     }
 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public List<PessoaIdioma> getPessoaIdiomas() {
+        return pessoaIdiomas;
+    }
+
+    public void setPessoaIdiomas(List<PessoaIdioma> pessoaIdiomas) {
+        this.pessoaIdiomas = pessoaIdiomas;
+    }
+
+    public List<PessoaConhecimento> getPessoaConhecimentos() {
+        return pessoaConhecimentos;
+    }
+
+    public void setPessoaConhecimentos(List<PessoaConhecimento> pessoaConhecimentos) {
+        this.pessoaConhecimentos = pessoaConhecimentos;
+    }
+
+    public List<PessoaHabilidadesAtitudes> getPessoaHabilidadesAtitudes() {
+        return pessoaHabilidadesAtitudes;
+    }
+
+    public void setPessoaHabilidadesAtitudes(List<PessoaHabilidadesAtitudes> pessoaHabilidadesAtitudes) {
+        this.pessoaHabilidadesAtitudes = pessoaHabilidadesAtitudes;
+    }
 }

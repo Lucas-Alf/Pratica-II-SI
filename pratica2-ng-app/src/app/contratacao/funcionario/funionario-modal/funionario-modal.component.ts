@@ -134,8 +134,7 @@ export class FunionarioModalComponent implements OnInit {
     if (this.data.info) {
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;
-      console.log(this.data.info);
-      this.paisnascimentoid = this.data.info.paisnascimento ? this.data.info.paisnascimento.id : null;
+      this.paisnascimentoid = this.data.info.paisnascimentoid.id;
       this.rg = this.data.info.rg;
       this.sexo = this.data.info.sexo;
       this.datanascimento = this.data.info.datanascimento;
@@ -156,7 +155,7 @@ export class FunionarioModalComponent implements OnInit {
       this.tituloeleitorzona = this.data.info.tituloeleitorzona;
       this.tituloeleitorsecao = this.data.info.tituloeleitorsecao;
       this.certificadoreservista = this.data.info.certificadoreservista;
-      this.enderecoid = this.data.info.enderecoid ? this.data.info.enderecoid.id : null;
+      this.enderecoid = this.data.info.enderecoid.id;
       this.email = this.data.info.email;
       this.numero = this.data.info.numero;
     }

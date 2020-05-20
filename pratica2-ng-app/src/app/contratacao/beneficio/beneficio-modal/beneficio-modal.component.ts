@@ -5,6 +5,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 import axios from 'axios';
 import { ConstantsService } from 'src/app/common/services/constants.service';
 import { Beneficio } from '../beneficio';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-beneficio-modal',
@@ -44,7 +45,7 @@ export class BeneficioModalComponent implements OnInit {
     if (this.data.info) {
       this.id = this.data.info.id;
       this.descricao = this.data.info.descricao;
-      this.dataModal = this.data.info.data;
+      this.dataModal = moment(this.data.info.data).toDate();
       this.valor = this.data.info.valor;
     }
   }

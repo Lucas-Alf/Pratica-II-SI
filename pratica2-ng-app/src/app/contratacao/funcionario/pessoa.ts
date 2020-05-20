@@ -7,7 +7,7 @@ export interface Pessoa {
   rg: string;
   sexo: string;
   datanascimento: Date;
-  paisnascimentoid: Pais;
+  paisnascimentoid?: Pais;
   telefonecelular: number;
   telefonefixo: number;
   pispasep: number;
