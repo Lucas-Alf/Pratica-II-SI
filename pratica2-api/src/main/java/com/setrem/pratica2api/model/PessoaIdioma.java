@@ -38,10 +38,16 @@ public class PessoaIdioma implements Serializable {
     @Basic(optional = false)
     @JoinColumn(name = "idiomaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Idioma idiomaid;
+    private Idioma idioma;
+    @JsonIgnore
     @JoinColumn(name = "cpf", referencedColumnName = "cpf")
     @ManyToOne(optional = true)
     private Pessoa cpf;
+
+    @Override
+    public String toString() {
+        return "{" + " id='" + getId() + "'" + ", idioma='" + getIdioma() + "'" + ", cpf='" + getCpf() + "'" + "}";
+    }
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -55,12 +61,12 @@ public class PessoaIdioma implements Serializable {
         this.id = id;
     }
 
-    public Idioma getIdiomaid() {
-        return idiomaid;
+    public Idioma getIdioma() {
+        return idioma;
     }
 
-    public void setIdiomaid(Idioma idiomaid) {
-        this.idiomaid = idiomaid;
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 
     public Pessoa getCpf() {
@@ -77,7 +83,7 @@ public class PessoaIdioma implements Serializable {
         int result = 1;
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((idiomaid == null) ? 0 : idiomaid.hashCode());
+        result = prime * result + ((idioma == null) ? 0 : idioma.hashCode());
         return result;
     }
 
@@ -100,17 +106,12 @@ public class PessoaIdioma implements Serializable {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (idiomaid == null) {
-            if (other.idiomaid != null)
+        if (idioma == null) {
+            if (other.idioma != null)
                 return false;
-        } else if (!idiomaid.equals(other.idiomaid))
+        } else if (!idioma.equals(other.idioma))
             return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.setrem.pratica2api.model.PessoaIdioma[ id=" + id + " ]";
     }
 
 }

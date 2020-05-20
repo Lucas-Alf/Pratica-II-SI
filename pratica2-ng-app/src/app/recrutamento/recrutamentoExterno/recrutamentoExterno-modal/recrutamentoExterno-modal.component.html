@@ -6,20 +6,20 @@
         <ng-template matStepLabel>Dados Pessoais</ng-template>
         <mat-form-field>
           <mat-label>CPF</mat-label>
-          <input matInput placeholder="CPF" name="cpf" formControlName="group1CPF" required>
+          <input matInput placeholder="CPF" [(ngModel)]='cpf' formControlName="group1CPF" required>
         </mat-form-field>
         <mat-form-field style="width: 400px;">
           <mat-label>Nome Completo</mat-label>
-          <input matInput placeholder="Nome Completo" name="nome" formControlName="group1Nome" required>
+          <input matInput placeholder="Nome Completo" [(ngModel)]='nome' formControlName="group1Nome" required>
         </mat-form-field><br>
         <mat-form-field>
           <mat-label>Data Nascimento</mat-label>
-          <input matInput [matDatepicker]="dp3" disabled name='datanascimento' formControlName="group1DataNascimento" required>
+          <input matInput [matDatepicker]="dp3" disabled [(ngModel)]='datanascimento' formControlName="group1DataNascimento" required>
           <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
           <mat-datepicker #dp3 disabled="false"></mat-datepicker>
         </mat-form-field>
         <mat-form-field style="width:150px;">
-          <mat-select name="sexo" formControlName="group1Sexo" required>
+          <mat-select [(ngModel)]='sexo' formControlName="group1Sexo" required>
               <mat-option value="M">Masculino</mat-option>
               <mat-option value="F">Feminino</mat-option>
           </mat-select>
@@ -27,7 +27,7 @@
       </mat-form-field><br>
       <mat-form-field style="width: 400px;">
         <mat-label>Endereço</mat-label>
-        <mat-select name='enderecoid' formControlName="group1Endereco" required>
+        <mat-select [(ngModel)]='enderecoid' formControlName="group1Endereco" required>
             <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
               {{endereco.cep}} - {{endereco.logradouro}}
             </mat-option>
@@ -35,7 +35,7 @@
     </mat-form-field>
     <mat-form-field style="width: 100px;" >
         <mat-label>Número</mat-label>
-        <input type="number" matInput placeholder="Número" name="numero" formControlName="group1Numero" required>
+        <input type="number" matInput placeholder="Número" [(ngModel)]='numero' formControlName="group1Numero" required>
     </mat-form-field>
         <div>
           <button mat-button matStepperNext>Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
@@ -47,7 +47,7 @@
         <ng-template matStepLabel>Formação</ng-template>
         <mat-form-field style="width: 600px;">
           <mat-label>Experiências Profissionais (3 últimas)</mat-label>
-          <textarea style="height: 100px;" matInput placeholder="Experiências Profissionais" name="experienciaprofissional" formControlName="group2ExperienciaProfissional" required></textarea>
+          <textarea style="height: 100px;" matInput placeholder="Experiências Profissionais" [(ngModel)]='experienciaprofissional' formControlName="group2ExperienciaProfissional" required></textarea>
         </mat-form-field><br>
         
     <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="conhecimentosPessoaChips">
@@ -62,7 +62,7 @@
         </mat-chip>
         <input
           placeholder="Conhecimento"
-          #fruitInput
+          #fruitInputConhecimento
           [formControl]="ConhecimentoPessoaCtrl"
           [matAutocomplete]="auto"
           [matChipInputFor]="chipList"
@@ -75,21 +75,76 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
+    <br>
+    <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="pessoaIdiomasChips">
+      <mat-chip-list #chipList2 aria-label="Idioma">
+        <mat-chip
+          *ngFor="let item of pessoaIdiomas"
+          [selectable]="selectedPessoaIdioma"
+          [removable]="removablePessoaIdioma"
+          (removed)="removePessoaIdioma(item)">
+          {{item.descricao}} - {{item.nivel}}
+          <mat-icon matChipRemove *ngIf="removablePessoaIdioma">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Idioma"
+          #fruitInputIdioma
+          [formControl]="PessoaIdiomaCtrl"
+          [matAutocomplete]="auto2"
+          [matChipInputFor]="chipList2"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodesPessoaIdioma"
+          (matChipInputTokenEnd)="addPessoaIdioma($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedPessoaIdioma($event)">
+        <mat-option *ngFor="let item of filteredPessoaIdioma | async" [value]="item">
+          {{item.descricao}} - {{item.nivel}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
         <div>
           <button mat-button matStepperPrevious><mat-icon>arrow_back_ios</mat-icon> Voltar</button>
-          <button mat-button matStepperNext>Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
+          <button mat-button (click)="habilitarBotaoEnviar()" matStepperNext>Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
         </div>
       </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Habilidade/Atitude</ng-template>
-      You are now done.
+      
+      <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="pessoaHabilidadesAtitudesChips">
+        <mat-chip-list #chipList3 aria-label="Habilidade/Atitude">
+          <mat-chip
+            *ngFor="let item of pessoaHabilidadesAtitudes"
+            [selectable]="selectedPessoaHabilidadeAtitude"
+            [removable]="removablePessoaHabilidadeAtitude"
+            (removed)="removePessoaHabilidadeAtitude(item)">
+            {{item.descricao}} - {{item.tipo}}
+            <mat-icon matChipRemove *ngIf="removablePessoaHabilidadeAtitude">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Habilidade/Atitude"
+            #fruitInputHabilidadeAtitude
+            [formControl]="PessoaHabilidadeAtitudeCtrl"
+            [matAutocomplete]="auto3"
+            [matChipInputFor]="chipList3"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodesPessoaHabilidadeAtitude"
+            (matChipInputTokenEnd)="addPessoaHabilidadeAtitude($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto3="matAutocomplete" (optionSelected)="selectedPessoaHabilidadeAtitude($event)">
+          <mat-option *ngFor="let item of filteredPessoaHabilidadeAtitude | async" [value]="item">
+            {{item.descricao}} - {{item.tipo}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
       <div>
         <button mat-button matStepperPrevious><mat-icon>arrow_back_ios</mat-icon> Voltar</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button mat-button (click)="save()" *ngIf="isVisible" class="gravar-button">Enviar</button>
 </div>
 <div mat-dialog-actions style="float: right;">
   <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>

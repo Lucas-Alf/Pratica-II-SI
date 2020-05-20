@@ -7,6 +7,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RecrutamentoExternoModalComponent } from './recrutamentoExterno-modal/recrutamentoExterno-modal.component';
+import { VagaPessoa } from '../recrutamentoInterno/vagapessoa';
 
 export interface Vaga {
   id: number;
@@ -61,6 +62,29 @@ export class RecrutamentoExternoComponent implements OnInit {
   storeVagaExterno = new MatTableDataSource();
   selection = new SelectionModel<Vaga>();
 
+  salvar(action: string, data: VagaPessoa): void {
+    debugger
+    this.loaderService.show();
+    axios.post(this.constant.apiUrl + 'vagapessoa/' + action, data).then((response) => {
+      if (response && response.data) {
+        this.loaderService.hide();
+        this.listar();
+        this.dialogRef.close();
+      } else {
+        this.loaderService.hide();
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      if (error.response) {
+        console.error(error.response.data.message);
+        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+      } else {
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    });
+  }
+
   retornaConhecimentos(vaga: Vaga): string {
     var retorno = vaga.cargoid.cargoConhecimentos.map(x => x.conhecimento.nome).join(', ');
     if (retorno != "") {
@@ -70,7 +94,7 @@ export class RecrutamentoExternoComponent implements OnInit {
   }
 
   retornaHabilidades(vaga: Vaga): string {
-    var retorno = vaga.cargoid.cargoHabilidadeAtitudes.filter(x=>x.habilidadeatitude.tipo == "Habilidade").map(x => x.habilidadeatitude.descricao).join(', ');
+    var retorno = vaga.cargoid.cargoHabilidadeAtitudes.filter(x => x.habilidadeatitude.tipo == "Habilidade").map(x => x.habilidadeatitude.descricao).join(', ');
     if (retorno != "") {
       retorno = retorno + ".";
     }
@@ -78,7 +102,7 @@ export class RecrutamentoExternoComponent implements OnInit {
   }
 
   retornaAtitudes(vaga: Vaga): string {
-    var retorno = vaga.cargoid.cargoHabilidadeAtitudes.filter(x=>x.habilidadeatitude.tipo == "Atitude").map(x => x.habilidadeatitude.descricao).join(', ');
+    var retorno = vaga.cargoid.cargoHabilidadeAtitudes.filter(x => x.habilidadeatitude.tipo == "Atitude").map(x => x.habilidadeatitude.descricao).join(', ');
     if (retorno != "") {
       retorno = retorno + ".";
     }

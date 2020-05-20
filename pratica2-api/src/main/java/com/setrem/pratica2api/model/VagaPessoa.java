@@ -3,6 +3,8 @@ package com.setrem.pratica2api.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -75,51 +77,27 @@ public class VagaPessoa implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-        result = prime * result + ((experienciaprofissional == null) ? 0 : experienciaprofissional.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((vagaid == null) ? 0 : vagaid.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof VagaPessoa)) {
+            return false;
+        }
+        VagaPessoa vagaPessoa = (VagaPessoa) o;
+        return Objects.equals(id, vagaPessoa.id) && Objects.equals(cpf, vagaPessoa.cpf)
+                && Objects.equals(vagaid, vagaPessoa.vagaid)
+                && Objects.equals(experienciaprofissional, vagaPessoa.experienciaprofissional);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        VagaPessoa other = (VagaPessoa) obj;
-        if (cpf == null) {
-            if (other.cpf != null)
-                return false;
-        } else if (!cpf.equals(other.cpf))
-            return false;
-        if (experienciaprofissional == null) {
-            if (other.experienciaprofissional != null)
-                return false;
-        } else if (!experienciaprofissional.equals(other.experienciaprofissional))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (vagaid == null) {
-            if (other.vagaid != null)
-                return false;
-        } else if (!vagaid.equals(other.vagaid))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(id, cpf, vagaid, experienciaprofissional);
     }
 
     @Override
     public String toString() {
-        return "com.setrem.pratica2api.model.VagaPessoa[ id=" + id + " ]";
+        return "{" + " id='" + getId() + "'" + ", cpf='" + getCpf() + "'" + ", vagaid='" + getVagaid() + "'"
+                + ", experienciaprofissional='" + getExperienciaprofissional() + "'" + "}";
     }
 
 }

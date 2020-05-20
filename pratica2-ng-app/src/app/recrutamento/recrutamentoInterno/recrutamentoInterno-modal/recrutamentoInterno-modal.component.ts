@@ -4,8 +4,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import axios from 'axios';
 import { ConstantsService } from 'src/app/common/services/constants.service';
-import { VagaPessoa } from '../vagapessoa';
+//import { VagaPessoa } from '../vagapessoa';
 
+export interface VagaPessoa {
+  id: number;
+  cpf: string;
+  vagaid: number;
+}
 
 @Component({
   selector: 'app-recrutamentoInterno-modal',

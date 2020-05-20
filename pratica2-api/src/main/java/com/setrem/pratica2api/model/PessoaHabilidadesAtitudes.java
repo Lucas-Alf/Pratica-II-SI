@@ -19,8 +19,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "pessoaconhecimento")
-public class PessoaConhecimento implements Serializable {
+@Table(name = "pessoahabilidadesatitudes")
+public class PessoaHabilidadesAtitudes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -28,9 +28,9 @@ public class PessoaConhecimento implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @JoinColumn(name = "conhecimentoid", referencedColumnName = "id")
+    @JoinColumn(name = "habilidadesatitudesid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Conhecimento conhecimento;
+    private HabilidadeAtitude habilidadeAtitude;
     @JsonIgnore
     @JoinColumn(name = "cpf", referencedColumnName = "cpf")
     @ManyToOne(optional = false)
@@ -38,7 +38,7 @@ public class PessoaConhecimento implements Serializable {
 
     @Override
     public String toString() {
-        return "{" + " id='" + getId() + "'" + ", conhecimento='" + getConhecimento() + "'" + ", cpf='" + getCpf() + "'" + "}";
+        return "{" + " id='" + getId() + "'" + ", habilidadeAtitude='" + getHabilidadeAtitude() + "'" + ", cpf='" + getCpf() + "'" + "}";
     }
 
     public static long getSerialversionuid() {
@@ -53,12 +53,12 @@ public class PessoaConhecimento implements Serializable {
         this.id = id;
     }
 
-    public Conhecimento getConhecimento() {
-        return conhecimento;
+    public HabilidadeAtitude getHabilidadeAtitude() {
+        return habilidadeAtitude;
     }
 
-    public void setConhecimento(Conhecimento conhecimento) {
-        this.conhecimento = conhecimento;
+    public void setHabilidadeAtitude(HabilidadeAtitude habilidadeAtitude) {
+        this.habilidadeAtitude = habilidadeAtitude;
     }
 
     public Pessoa getCpf() {
@@ -73,8 +73,8 @@ public class PessoaConhecimento implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((conhecimento == null) ? 0 : conhecimento.hashCode());
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + ((habilidadeAtitude == null) ? 0 : habilidadeAtitude.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
@@ -87,16 +87,16 @@ public class PessoaConhecimento implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PessoaConhecimento other = (PessoaConhecimento) obj;
-        if (conhecimento == null) {
-            if (other.conhecimento != null)
-                return false;
-        } else if (!conhecimento.equals(other.conhecimento))
-            return false;
+        PessoaHabilidadesAtitudes other = (PessoaHabilidadesAtitudes) obj;
         if (cpf == null) {
             if (other.cpf != null)
                 return false;
         } else if (!cpf.equals(other.cpf))
+            return false;
+        if (habilidadeAtitude == null) {
+            if (other.habilidadeAtitude != null)
+                return false;
+        } else if (!habilidadeAtitude.equals(other.habilidadeAtitude))
             return false;
         if (id == null) {
             if (other.id != null)
