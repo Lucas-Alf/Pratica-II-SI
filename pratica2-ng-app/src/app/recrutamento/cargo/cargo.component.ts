@@ -52,9 +52,12 @@ export class CargoComponent implements OnInit {
     if (data.descricao == undefined || data.descricao == "") {
       this.loaderService.hide();
       this.snackBar.open('Informe a Descrição.', null, { duration: 5000 });
-    } else if (data.cboid == undefined || data.cboid == null) {
+    } else if (data.cboid.id == undefined || data.cboid.id == null) {
       this.loaderService.hide();
       this.snackBar.open('Informe o CBO.', null, { duration: 5000 });
+    } else if (data.faixatabelasalarial.id == undefined || data.faixatabelasalarial.id == null) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe a Faixa Tabela Salarial', null, { duration: 5000 });
     } else {
       axios.post(this.constant.apiUrl + 'cargo/' + action, data).then((response) => {
         if (response && response.data) {
