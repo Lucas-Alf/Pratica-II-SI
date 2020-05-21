@@ -46,7 +46,7 @@ public class Pessoa implements Serializable {
     private Character sexo;
 
     @Basic(optional = false)
-    //@NotNull
+    // @NotNull
     @Size(min = 1, max = 14)
     @Column(name = "rg")
     private String rg;
@@ -67,8 +67,8 @@ public class Pessoa implements Serializable {
     @Column(name = "telefonefixo")
     private String telefonefixo;
 
-    @JoinColumn(name = "paisnascimentoid", referencedColumnName = "id")
-    @ManyToOne
+    @JoinColumn(name = "paisnascimentoid", referencedColumnName = "id", nullable = true)
+    @ManyToOne(optional = true) // , cascade = CascadeType.ALL
     private Pais paisnascimentoid;
 
     @Column(name = "foto")
@@ -136,7 +136,6 @@ public class Pessoa implements Serializable {
 
     @Column(name = "numero")
     private Integer numero;
-
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
     private List<PessoaIdioma> pessoaIdiomas;

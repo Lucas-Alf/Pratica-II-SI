@@ -22,12 +22,11 @@ public class Pais implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    // @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
+    // @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "nome")
     private String nome;
 

@@ -3,7 +3,8 @@
     <mat-tab-group>
         <mat-tab label="Informações do Funcionário">
             <br>
-            <mat-form-field appearance="fill" class="normal" style="width: 135px;">
+            <!-- <form [formGroup]="validador"> -->
+            <mat-form-field appearance="fill" class="normal" style="width: 135px;" required>
                 <mat-label>CPF</mat-label>
                 <input type="text" matInput placeholder="CPF" [(ngModel)]='cpf'>
             </mat-form-field>
@@ -88,7 +89,7 @@
                 <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='certificadoreservista'>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" style="width:200px;" class="normal">
+            <mat-form-field appearance="fill" style="width:200px;" class="normal" required>
                 <mat-label>Endereço</mat-label>
                 <mat-select [(ngModel)]='enderecoid'>
                     <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
@@ -225,7 +226,7 @@
                     </mat-form-field>
                 </mat-expansion-panel>
             </mat-accordion>
-
+            <!-- </form> -->
         </mat-tab>
         <mat-tab label="Contrato"> Contrato </mat-tab>
     </mat-tab-group>

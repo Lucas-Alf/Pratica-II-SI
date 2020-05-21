@@ -7,6 +7,7 @@ import { ConstantsService } from 'src/app/common/services/constants.service';
 import { Pessoa } from '../pessoa';
 import { Pais } from '../pais';
 import { Endereco } from '../../endereco/endereco';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-funionario-modal',
@@ -46,12 +47,14 @@ export class FunionarioModalComponent implements OnInit {
   paises: Pais[];
   enderecos: Endereco[];
 
+  validador: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<FunionarioModalComponent>, private snackBar: MatSnackBar,
     private loaderService: LoaderService,
-    private constant: ConstantsService
+    private constant: ConstantsService,
+    private _formBuilder: FormBuilder
   ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); }
 
   close(): void {
@@ -61,16 +64,14 @@ export class FunionarioModalComponent implements OnInit {
 
   save(): void {
     //var testhis: Pessoa = this.data;
+    var teste = this.paisnascimentoid ? { id: this.paisnascimentoid, nome: "" } : null;
     const dados: Pessoa = {
       cpf: this.cpf,
       rg: this.rg,
       nome: this.nome,
       sexo: this.sexo,
       datanascimento: this.datanascimento,
-      paisnascimentoid: {
-        id: this.paisnascimentoid,
-        nome: "",
-      },
+      paisnascimentoid: teste,
       telefonecelular: this.telefonecelular,
       telefonefixo: this.telefonefixo,
       pispasep: this.pispasep,
@@ -134,7 +135,7 @@ export class FunionarioModalComponent implements OnInit {
     if (this.data.info) {
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;
-      this.paisnascimentoid = this.data.info.paisnascimentoid.id;
+      this.paisnascimentoid = this.data.info.paisnascimentoid ? this.data.info.paisnascimentoid.id : null;
       this.rg = this.data.info.rg;
       this.sexo = this.data.info.sexo;
       this.datanascimento = this.data.info.datanascimento;
@@ -159,6 +160,17 @@ export class FunionarioModalComponent implements OnInit {
       this.email = this.data.info.email;
       this.numero = this.data.info.numero;
     }
+
+
+    this.validador = new FormGroup({
+      //cpf: new FormControl('', Validators.required)
+    });
+    // this.validador = this._formBuilder.group({
+    //   cpfteste: ['', Validators.required],
+    //   // nome: ['', Validators.required],
+    //   // enderecoid: ['', Validators.required],
+    //   // sexo: ['', Validators.required],
+    // });
   }
 
 }
