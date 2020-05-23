@@ -9,7 +9,15 @@ export class RodapeSistemaComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  anoAtual = 2020;
 
+  usuario = '';
+
+  ngOnInit(): void {
+    this.anoAtual = new Date().getFullYear();
+    if (localStorage.getItem('userData')) {
+        const info = JSON.parse(localStorage.getItem('userData'));
+        this.usuario = info.pessoa.nome;
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cabecalho-sistema',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CabecalhoSistemaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {
+
+  }
+
+  sair(): void {
+    if (localStorage.getItem('userData')) {
+      this.router.navigate(['/home/']);
+    } else {
+      this.router.navigate(['/index/']);
+    }
+  }
 
   ngOnInit(): void {
   }

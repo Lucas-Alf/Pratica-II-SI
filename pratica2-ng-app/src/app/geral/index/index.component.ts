@@ -52,5 +52,6 @@ export class IndexComponent implements OnInit {
     this.snackBar.open('Essa função ainda não foi implementada. 😥', null, { duration: 5000 });
   }
   ngOnInit() {
+    localStorage.removeItem('userData');
   }
 }
