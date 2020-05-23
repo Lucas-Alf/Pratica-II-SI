@@ -24,6 +24,12 @@ public class PessoaController {
         return empresas;
     }
 
+    @GetMapping("/contratos") //
+    public List<Pessoa> contratos() {
+        var empresas = this.PessoaRepository.findAll();
+        return empresas;
+    }
+
     @PostMapping("/Incluir")
     public Pessoa add(@RequestBody Pessoa data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
