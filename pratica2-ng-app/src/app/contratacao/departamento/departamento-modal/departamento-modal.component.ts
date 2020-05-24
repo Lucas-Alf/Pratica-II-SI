@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Departamento } from '../departamento';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-departamento-modal',
@@ -11,11 +12,11 @@ export class DepartamentoModalComponent implements OnInit {
   id: number;
   nome: string;
   descricao: string;
-
+  form: FormGroup;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<DepartamentoModalComponent>
-  ) {  }
+  ) { }
 
   close(): void {
     this.dialogRef.close();
@@ -33,6 +34,12 @@ export class DepartamentoModalComponent implements OnInit {
       this.descricao = this.data.info.descricao;
       this.nome = this.data.info.nome;
     }
+    this.form = new FormGroup(
+      {
+        descricao: new FormControl("", Validators.required),
+        nome: new FormControl()
+      }
+    );
   }
 
 }

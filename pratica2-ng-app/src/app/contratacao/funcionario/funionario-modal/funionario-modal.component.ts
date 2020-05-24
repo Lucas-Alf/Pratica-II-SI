@@ -159,18 +159,18 @@ export class FunionarioModalComponent implements OnInit {
       this.enderecoid = this.data.info.enderecoid.id;
       this.email = this.data.info.email;
       this.numero = this.data.info.numero;
+      
+          // this.validador = new FormGroup({
+          //   cpfteste: new FormControl('', Validators.required)
+          // });
+          // this.validador = this._formBuilder.group({
+          //   cpfteste: ['', Validators.required],
+          //   nome: ['', Validators.required],
+          //   enderecoid: ['', Validators.required],
+          //   sexo: ['', Validators.required],
+          // });
     }
 
-
-    this.validador = new FormGroup({
-      //cpf: new FormControl('', Validators.required)
-    });
-    // this.validador = this._formBuilder.group({
-    //   cpfteste: ['', Validators.required],
-    //   // nome: ['', Validators.required],
-    //   // enderecoid: ['', Validators.required],
-    //   // sexo: ['', Validators.required],
-    // });
   }
 
 }

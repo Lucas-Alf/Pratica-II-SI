@@ -4,11 +4,11 @@
         <mat-tab label="Informações do Funcionário">
             <br>
             <!-- <form [formGroup]="validador"> -->
-            <mat-form-field appearance="fill" class="normal" style="width: 135px;" required>
+            <mat-form-field appearance="fill" class="normal" style="width: 135px;" formControlName="cpfteste" required>
                 <mat-label>CPF</mat-label>
                 <input type="text" matInput placeholder="CPF" [(ngModel)]='cpf'>
             </mat-form-field>
-
+            <!-- </form> -->
             <mat-form-field appearance="fill" style="width: 160px;" class="normal">
                 <mat-label>RG</mat-label>
                 <input type="text" matInput placeholder="RG" [(ngModel)]='rg'>
@@ -84,16 +84,12 @@
             </mat-form-field>
 
             <mat-divider style="margin-bottom:20px"></mat-divider>
-            <mat-form-field appearance="fill" style="width: 350px;" class="normal">
-                <mat-label>Certificado de Reservista</mat-label>
-                <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='certificadoreservista'>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" style="width:200px;" class="normal" required>
+            <mat-form-field appearance="fill" style="width:500px;" class="normal" required>
                 <mat-label>Endereço</mat-label>
                 <mat-select [(ngModel)]='enderecoid'>
                     <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
-                        {{endereco.logradouro}}
+                        {{endereco.logradouro + ', ' + endereco.bairro }}
+                        <div style="float: right;">Cidade: {{endereco.cidadeid.nome}}</div>
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -101,6 +97,11 @@
             <mat-form-field appearance="fill" style="width: 100px;" class="normal">
                 <mat-label>Número</mat-label>
                 <input type="number" matInput placeholder="Número" [(ngModel)]='numero'>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 350px;" class="normal">
+                <mat-label>Certificado de Reservista</mat-label>
+                <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='certificadoreservista'>
             </mat-form-field>
 
             <mat-accordion>
@@ -226,7 +227,7 @@
                     </mat-form-field>
                 </mat-expansion-panel>
             </mat-accordion>
-            <!-- </form> -->
+
         </mat-tab>
         <mat-tab label="Contrato"> Contrato </mat-tab>
     </mat-tab-group>
