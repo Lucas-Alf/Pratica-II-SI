@@ -11,4 +11,7 @@ export interface ParametroEmpresa {
   eventofgts: Evento;
   eventohoraextra50: Evento;
   eventohoraextra100: Evento;
+  eventototaldescontos: Evento;
+  eventototalvencimentos: Evento;
+  eventototalliquido: Evento;
 }

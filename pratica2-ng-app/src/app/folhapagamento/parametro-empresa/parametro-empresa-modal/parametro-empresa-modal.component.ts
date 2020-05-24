@@ -27,6 +27,9 @@ export class ParametroEmpresaModalComponent implements OnInit {
   eventoirrfId: number;
   eventohoraextra50Id: number;
   eventohoraextra100Id: number;
+  eventototaldescontosId: number;
+  eventototalvencimentosId: number;
+  eventototalliquidoId: number;
 
   constructor(
     private router: Router,
@@ -104,6 +107,33 @@ export class ParametroEmpresaModalComponent implements OnInit {
         incidenciasAtingidas: null,
         rotinacalculoId: null,
         tipo: null
+      },
+      eventototaldescontos: {
+        id: this.eventototaldescontosId,
+        automatico: null,
+        descricao: '',
+        incidenciaId: null,
+        incidenciasAtingidas: null,
+        rotinacalculoId: null,
+        tipo: null
+      },
+      eventototalvencimentos: {
+        id: this.eventototalvencimentosId,
+        automatico: null,
+        descricao: '',
+        incidenciaId: null,
+        incidenciasAtingidas: null,
+        rotinacalculoId: null,
+        tipo: null
+      },
+      eventototalliquido: {
+        id: this.eventototalliquidoId,
+        automatico: null,
+        descricao: '',
+        incidenciaId: null,
+        incidenciasAtingidas: null,
+        rotinacalculoId: null,
+        tipo: null
       }
     };
     axios.post(this.apiUrl + 'parametroempresa/save', dados).then((response) => {
@@ -131,13 +161,36 @@ export class ParametroEmpresaModalComponent implements OnInit {
     axios.get(this.apiUrl + 'parametroempresa/get').then((response) => {
       const dados = response.data;
       if (dados) {
-        this.periodocalculoId = dados.periodocalculo.id;
-        this.eventosalarioId = dados.eventosalario.id;
-        this.eventoinssId = dados.eventoinss.id;
-        this.eventoirrfId = dados.eventoirrf.id;
-        this.eventofgtsId = dados.eventofgts.id;
-        this.eventohoraextra50Id = dados.eventohoraextra50.id;
-        this.eventohoraextra100Id = dados.eventohoraextra100.id;
+        if (dados.periodocalculo) {
+          this.periodocalculoId = dados.periodocalculo.id;
+        }
+        if (dados.eventosalario) {
+          this.eventosalarioId = dados.eventosalario.id;
+        }
+        if (dados.eventoinss) {
+          this.eventoinssId = dados.eventoinss.id;
+        }
+        if (dados.eventoirrf) {
+          this.eventoirrfId = dados.eventoirrf.id;
+        }
+        if (dados.eventofgts) {
+          this.eventofgtsId = dados.eventofgts.id;
+        }
+        if (dados.eventohoraextra50) {
+          this.eventohoraextra50Id = dados.eventohoraextra50.id;
+        }
+        if (dados.eventohoraextra100) {
+          this.eventohoraextra100Id = dados.eventohoraextra100.id;
+        }
+        if (dados.eventototaldescontos) {
+          this.eventototaldescontosId = dados.eventototaldescontos.id;
+        }
+        if (dados.eventototalvencimentos) {
+          this.eventototalvencimentosId = dados.eventototalvencimentos.id;
+        }
+        if (dados.eventototalliquido) {
+          this.eventototalliquidoId = dados.eventototalliquido.id;
+        }
       }
       this.loader.hide();
     }).catch((error) => {

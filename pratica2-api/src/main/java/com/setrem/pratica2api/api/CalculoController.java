@@ -22,4 +22,10 @@ public class CalculoController {
         var calculos = this.calculoRepository.findByContrato(matricula);
         return calculos;
     }
+
+    @PostMapping("/calcular")
+    public List<Calculo> calcular(int matricula) {
+        var calculos = this.calculoRepository.findByContrato(matricula);
+        return calculos;
+    }
 }

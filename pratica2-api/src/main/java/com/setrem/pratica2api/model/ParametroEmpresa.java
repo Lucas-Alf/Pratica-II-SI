@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -50,6 +48,18 @@ public class ParametroEmpresa implements Serializable {
     @JoinColumn(name = "eventofgts", referencedColumnName = "id")
     @ManyToOne
     private Evento eventofgts;
+
+    @JoinColumn(name = "eventototaldescontos", referencedColumnName = "id")
+    @ManyToOne
+    private Evento eventototaldescontos;
+    
+    @JoinColumn(name = "eventototalvencimentos", referencedColumnName = "id")
+    @ManyToOne
+    private Evento eventototalvencimentos;
+    
+    @JoinColumn(name = "eventototalliquido", referencedColumnName = "id")
+    @ManyToOne
+    private Evento eventototalliquido;
 
     public Integer getId() {
         return id;
@@ -115,6 +125,38 @@ public class ParametroEmpresa implements Serializable {
         this.eventohoraextra100 = eventohoraextra100;
     }
 
+    public Evento getEventofgts() {
+        return eventofgts;
+    }
+
+    public void setEventofgts(Evento eventofgts) {
+        this.eventofgts = eventofgts;
+    }
+
+    public Evento getEventototaldescontos() {
+        return eventototaldescontos;
+    }
+
+    public void setEventototaldescontos(Evento eventototaldescontos) {
+        this.eventototaldescontos = eventototaldescontos;
+    }
+
+    public Evento getEventototalvencimentos() {
+        return eventototalvencimentos;
+    }
+
+    public void setEventototalvencimentos(Evento eventototalvencimentos) {
+        this.eventototalvencimentos = eventototalvencimentos;
+    }
+
+    public Evento getEventototalliquido() {
+        return eventototalliquido;
+    }
+
+    public void setEventototalliquido(Evento eventototalliquido) {
+        this.eventototalliquido = eventototalliquido;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -126,6 +168,9 @@ public class ParametroEmpresa implements Serializable {
         result = prime * result + ((eventoinss == null) ? 0 : eventoinss.hashCode());
         result = prime * result + ((eventoirrf == null) ? 0 : eventoirrf.hashCode());
         result = prime * result + ((eventosalario == null) ? 0 : eventosalario.hashCode());
+        result = prime * result + ((eventototaldescontos == null) ? 0 : eventototaldescontos.hashCode());
+        result = prime * result + ((eventototalliquido == null) ? 0 : eventototalliquido.hashCode());
+        result = prime * result + ((eventototalvencimentos == null) ? 0 : eventototalvencimentos.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((periodocalculo == null) ? 0 : periodocalculo.hashCode());
         return result;
@@ -175,6 +220,21 @@ public class ParametroEmpresa implements Serializable {
                 return false;
         } else if (!eventosalario.equals(other.eventosalario))
             return false;
+        if (eventototaldescontos == null) {
+            if (other.eventototaldescontos != null)
+                return false;
+        } else if (!eventototaldescontos.equals(other.eventototaldescontos))
+            return false;
+        if (eventototalliquido == null) {
+            if (other.eventototalliquido != null)
+                return false;
+        } else if (!eventototalliquido.equals(other.eventototalliquido))
+            return false;
+        if (eventototalvencimentos == null) {
+            if (other.eventototalvencimentos != null)
+                return false;
+        } else if (!eventototalvencimentos.equals(other.eventototalvencimentos))
+            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -186,13 +246,5 @@ public class ParametroEmpresa implements Serializable {
         } else if (!periodocalculo.equals(other.periodocalculo))
             return false;
         return true;
-    }
-
-    public Evento getEventofgts() {
-        return eventofgts;
-    }
-
-    public void setEventofgts(Evento eventofgts) {
-        this.eventofgts = eventofgts;
     }
 }

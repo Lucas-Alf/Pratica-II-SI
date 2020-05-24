@@ -45,7 +45,7 @@
           </mat-select>
         </mat-form-field>
       </td>
-      <td style="padding-left: 25px; vertical-align: initial;">
+      <td style="padding-left: 25px; vertical-align: initial; max-width: 400px;">
         <mat-form-field appearance="standard" style="width: 400px;">
           <mat-label>Evento de Hora Extra 50%</mat-label>
           <mat-select [(ngModel)]='eventohoraextra50Id'>
@@ -57,6 +57,30 @@
         <mat-form-field appearance="standard" style="width: 400px;">
           <mat-label>Evento de Hora Extra 100%</mat-label>
           <mat-select [(ngModel)]='eventohoraextra100Id'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento Total de Vencimentos</mat-label>
+          <mat-select [(ngModel)]='eventototalvencimentosId'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento Total de Descontos</mat-label>
+          <mat-select [(ngModel)]='eventototaldescontosId'>
+            <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+              {{evento.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Evento Total Líquido</mat-label>
+          <mat-select [(ngModel)]='eventototalliquidoId'>
             <mat-option *ngFor="let evento of eventos" [value]="evento.id">
               {{evento.descricao}}
             </mat-option>
