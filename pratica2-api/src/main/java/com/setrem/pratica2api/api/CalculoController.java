@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.setrem.pratica2api.model.Calculo;
 import com.setrem.pratica2api.repository.CalculoRepository;
+import com.setrem.pratica2api.service.CalculoService;
 
 import java.util.List;
 
@@ -11,21 +12,20 @@ import java.util.List;
 @RequestMapping("/api/calculo")
 @CrossOrigin
 public class CalculoController {
-    private CalculoRepository calculoRepository;
+    private CalculoService CalculoService;
 
-    public CalculoController(CalculoRepository calculoRepository) {
-        this.calculoRepository = calculoRepository;
+    public CalculoController(CalculoService calculoService) {
+        this.CalculoService = calculoService;
     }
 
     @GetMapping("/buscaPorContrato")
     public List<Calculo> buscaPorContrato(int matricula) {
-        var calculos = this.calculoRepository.findByContrato(matricula);
+        var calculos = this.CalculoService.findByContrato(matricula);
         return calculos;
     }
 
-    @PostMapping("/calcular")
-    public List<Calculo> calcular(int matricula) {
-        var calculos = this.calculoRepository.findByContrato(matricula);
-        return calculos;
+    @GetMapping("/calcular")
+    public void calcular(int matricula) throws Exception {
+        this.CalculoService.Calcular(matricula);
     }
 }

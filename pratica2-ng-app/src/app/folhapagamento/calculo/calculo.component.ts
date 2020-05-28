@@ -24,6 +24,7 @@ export class CalculoComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
+  isLoading: boolean = false;
   displayedColumns: string[] = ['select', 'situacao', 'matricula', 'nome'];
   displayedColumnsCalc: string[] = ['tipo', 'evento', 'valor'];
   storeFuncionario = new MatTableDataSource();
@@ -31,7 +32,25 @@ export class CalculoComponent implements OnInit {
   selection = new SelectionModel<any>();
 
   calcular(): void {
-
+    if (this.selection.selected.length > 0) {
+      this.loaderService.show();
+      axios.get(this.apiUrl + 'calculo/calcular?matricula=' + this.selection.selected[0].matricula).then((response) => {
+        if (response && response.data) {
+          this.loaderService.hide();
+        } else {
+          this.loaderService.hide();
+          this.snackBar.open('Ocorreu um erro durrante o processamento. 😢', null, { duration: 5000 });
+        }
+      }).catch((error) => {
+        this.loaderService.hide();
+        if (error.response) {
+          console.error(error.response.data.message);
+        }
+        this.snackBar.open('Ocorreu um erro durrante o processamento. 😬', null, { duration: 5000 });
+      });
+    } else {
+      this.snackBar.open('Selecione um contrato. 🤦‍♂️', null, { duration: 5000 });
+    }
   }
 
   isAllSelected() {
@@ -65,13 +84,17 @@ export class CalculoComponent implements OnInit {
   }
 
   buscaCalculo(row): void {
+    this.isLoading = true;
+    this.storeCalculo = new MatTableDataSource();
     this.selection.select(row);
     axios.get(this.apiUrl + 'calculo/buscaPorContrato?matricula=' + row.matricula).then((response) => {
       if (response && response.data) {
         this.storeCalculo.data = response.data;
+        this.isLoading = false;
       }
     }).catch((error) => {
       console.log(error);
+      this.isLoading = false;
       this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
     });
   }
