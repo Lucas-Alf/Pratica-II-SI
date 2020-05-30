@@ -26,6 +26,8 @@ import com.setrem.pratica2api.repository.EventoRepository;
 import com.setrem.pratica2api.repository.EventoVariavelRepository;
 import com.setrem.pratica2api.repository.ParametroEmpresaRepository;
 import com.setrem.pratica2api.repository.ReciboRepository;
+import com.setrem.pratica2api.service.Rotinas.RotinaFGTS;
+import com.setrem.pratica2api.service.Rotinas.RotinaINSS;
 import com.setrem.pratica2api.service.Rotinas.RotinaSalario;
 import com.setrem.pratica2api.service.Rotinas.RotinaValorFixo;
 
@@ -76,6 +78,12 @@ public class CalculoService {
                 switch (evento.getRotinacalculoid()) {
                     case 1:
                         incidencias = new RotinaSalario().Calcula(conexao, cache, evento, contrato, incidencias);
+                        break;
+                    case 3:
+                        incidencias = new RotinaINSS().Calcula(evento, incidencias);
+                        break;
+                    case 4:
+                        incidencias = new RotinaFGTS().Calcula(evento, incidencias);
                         break;
                     case 5:
                         incidencias = new RotinaValorFixo().Calcula(evento, incidencias);
