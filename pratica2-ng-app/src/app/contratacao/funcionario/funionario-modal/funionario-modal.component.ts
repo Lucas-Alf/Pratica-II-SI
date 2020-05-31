@@ -8,6 +8,10 @@ import { Pessoa } from '../pessoa';
 import { Pais } from '../pais';
 import { Endereco } from '../../endereco/endereco';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Departamento } from 'src/app/recrutamento/cargo/cargo-modal/cargo-modal.component';
+import { Contrato } from '../contrato';
 
 @Component({
   selector: 'app-funionario-modal',
@@ -44,9 +48,10 @@ export class FunionarioModalComponent implements OnInit {
   email: string;
   numero: number;
 
+  departamentoid: number;
   paises: Pais[];
   enderecos: Endereco[];
-
+  departamentos: Departamento[];
   validador: FormGroup;
 
   constructor(
@@ -55,12 +60,28 @@ export class FunionarioModalComponent implements OnInit {
     private loaderService: LoaderService,
     private constant: ConstantsService,
     private _formBuilder: FormBuilder
-  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); }
+  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); }
+  
+  displayedColumns: string[] = ['select','matricula', 'dataadmissao', 'regimeprevidencia', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
+  storeContrato = new MatTableDataSource();
+  selection = new SelectionModel<Contrato>();
 
   close(): void {
     this.dialogRef.close();
   }
-
+  listarDepartamento(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'departamento/all').then((response) => {
+      if (response && response.data) {
+        this.departamentos = response.data;
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
 
   save(): void {
     //var testhis: Pessoa = this.data;
@@ -131,6 +152,13 @@ export class FunionarioModalComponent implements OnInit {
     });
   }
 
+  incluir(): void {
+  }
+  alterar(): void {
+  }
+  cancelar(): void {
+  }
+
   ngOnInit(): void {
     if (this.data.info) {
       this.cpf = this.data.info.cpf;
@@ -159,16 +187,16 @@ export class FunionarioModalComponent implements OnInit {
       this.enderecoid = this.data.info.enderecoid.id;
       this.email = this.data.info.email;
       this.numero = this.data.info.numero;
-      
-          // this.validador = new FormGroup({
-          //   cpfteste: new FormControl('', Validators.required)
-          // });
-          // this.validador = this._formBuilder.group({
-          //   cpfteste: ['', Validators.required],
-          //   nome: ['', Validators.required],
-          //   enderecoid: ['', Validators.required],
-          //   sexo: ['', Validators.required],
-          // });
+
+      // this.validador = new FormGroup({
+      //   cpfteste: new FormControl('', Validators.required)
+      // });
+      // this.validador = this._formBuilder.group({
+      //   cpfteste: ['', Validators.required],
+      //   nome: ['', Validators.required],
+      //   enderecoid: ['', Validators.required],
+      //   sexo: ['', Validators.required],
+      // });
     }
 
   }
