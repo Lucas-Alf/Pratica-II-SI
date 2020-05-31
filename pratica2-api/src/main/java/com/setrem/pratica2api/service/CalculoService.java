@@ -28,6 +28,7 @@ import com.setrem.pratica2api.repository.ParametroEmpresaRepository;
 import com.setrem.pratica2api.repository.ReciboRepository;
 import com.setrem.pratica2api.service.Rotinas.RotinaFGTS;
 import com.setrem.pratica2api.service.Rotinas.RotinaINSS;
+import com.setrem.pratica2api.service.Rotinas.RotinaIRRF;
 import com.setrem.pratica2api.service.Rotinas.RotinaSalario;
 import com.setrem.pratica2api.service.Rotinas.RotinaValorFixo;
 
@@ -79,6 +80,9 @@ public class CalculoService {
                     case 1:
                         incidencias = new RotinaSalario().Calcula(conexao, cache, evento, contrato, incidencias);
                         break;
+                    case 2:
+                        incidencias = new RotinaIRRF().Calcula(conexao, contrato, evento, incidencias);
+                        break;
                     case 3:
                         incidencias = new RotinaINSS().Calcula(evento, incidencias);
                         break;
@@ -92,15 +96,17 @@ public class CalculoService {
                         throw new Exception("Rotina não implementada.");
                 }
             }
-
+            // Salva o recibo
             var contratoRecibo = new Contrato();
             contratoRecibo.setMatricula(contrato);
             var recibo = new Recibo();
             recibo.setContrato(contratoRecibo);
             recibo.setExecucao(cache.getPeriodoCalculo().getExecucao());
             recibo.setData(LocalDate.now());
+            recibo.setDatapagamento(LocalDate.now());
             ReciboRepository.save(recibo);
 
+            // Salva os cálculos do recibo
             for (EventoCalculoDTO evento : eventosCalculo) {
                 var calculo = new Calculo();
                 var eventoCalculo = new Evento();
@@ -108,10 +114,38 @@ public class CalculoService {
                 calculo.setEvento(eventoCalculo);
                 calculo.setRecibo(recibo);
                 double valorCalculo = 0;
-                for (IncidenciaDTO incidencia : incidencias) {
-                    if (incidencia.getId() == evento.getIncidenciaid()) {
-                        valorCalculo += incidencia.getValor();
-                    }
+
+                // Soma total de vencimentos
+                if (evento.getId() == cache.getEventoTotalVencimentos().getId()) {
+                    double totalVencimentos = incidencias.stream()
+                            .filter(x -> x.getId() == cache.getEventoTotalVencimentos().getIncidenciaId().getId())
+                            .findFirst().get().getValor();
+                    evento.setValor(totalVencimentos);
+                    valorCalculo = evento.getValor();
+                } else
+
+                // Soma total de descontos
+                if (evento.getId() == cache.getEventoTotalDescontos().getId()) {
+                    double totalDescontos = incidencias.stream()
+                            .filter(x -> x.getId() == cache.getEventoTotalDescontos().getIncidenciaId().getId())
+                            .findFirst().get().getValor();
+                    evento.setValor(totalDescontos);
+                    valorCalculo = evento.getValor();
+                } else
+
+                // Total líquido
+                if (evento.getId() == cache.getEventoTotalLiquido().getId()) {
+                    double totalVencimentos = incidencias.stream()
+                            .filter(x -> x.getId() == cache.getEventoTotalVencimentos().getIncidenciaId().getId())
+                            .findFirst().get().getValor();
+                    double totalDescontos = incidencias.stream()
+                            .filter(x -> x.getId() == cache.getEventoTotalDescontos().getIncidenciaId().getId())
+                            .findFirst().get().getValor();
+                    evento.setValor(totalVencimentos - totalDescontos);
+                    valorCalculo = evento.getValor();
+                } else {
+                    // Demais eventos
+                    valorCalculo = evento.getValor();
                 }
                 calculo.setValor(valorCalculo);
                 CalculoRepository.save(calculo);

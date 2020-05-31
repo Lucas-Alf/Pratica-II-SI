@@ -59,9 +59,11 @@ public class RotinaINSS {
                 }
 
                 //Arredonda casas decimais
-                String result = String.format("%.2f", valorINSS);
+                String result = String.format("%.2f", valorINSS).replace(',', '.');
                 valorINSS = Double.parseDouble(result);
             }
+
+            evento.setValor(valorINSS);
 
             for (IncidenciaDTO incidencia : incidencias) {
                 if (incidencia.getId() == incidenciaAtingida) {

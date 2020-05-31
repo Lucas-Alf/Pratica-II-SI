@@ -22,8 +22,14 @@ public class RotinaFGTS {
                     valorIncidencia += incidencia.getValor();
                 }
             }
-            //FGTS = 8% do Salário
-            double valorFGTS = valorIncidencia * 0.08; 
+            // FGTS = 8% do Salário
+            double valorFGTS = valorIncidencia * 0.08;
+
+            // Arredonda casas decimais
+            String result = String.format("%.2f", valorFGTS).replace(',', '.');
+            valorFGTS = Double.parseDouble(result);
+            evento.setValor(valorFGTS);
+            
             for (IncidenciaDTO incidencia : incidencias) {
                 if (incidencia.getId() == incidenciaAtingida) {
                     Double valorIncidenciaAtingida = incidencia.getValor();

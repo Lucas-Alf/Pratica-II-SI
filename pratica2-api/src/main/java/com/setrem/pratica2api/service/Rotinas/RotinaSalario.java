@@ -22,6 +22,7 @@ public class RotinaSalario {
         ResultSet rs = statement.executeQuery();
         rs.next();
         var salario = Double.parseDouble(rs.getString("salario"));
+        evento.setValor(salario);
 
         for (int incidenciaAtingida : evento.getIncidenciasAtingidas()) {
             if (incidencias.stream().filter(x -> x.getId() == incidenciaAtingida).collect(Collectors.toList())

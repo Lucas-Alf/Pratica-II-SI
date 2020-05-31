@@ -35,12 +35,8 @@ export class CalculoComponent implements OnInit {
     if (this.selection.selected.length > 0) {
       this.loaderService.show();
       axios.get(this.apiUrl + 'calculo/calcular?matricula=' + this.selection.selected[0].matricula).then((response) => {
-        if (response && response.data) {
-          this.loaderService.hide();
-        } else {
-          this.loaderService.hide();
-          this.snackBar.open('Ocorreu um erro durrante o processamento. 😢', null, { duration: 5000 });
-        }
+        this.loaderService.hide();
+        this.buscaCalculo(this.selection.selected[0]);
       }).catch((error) => {
         this.loaderService.hide();
         if (error.response) {
