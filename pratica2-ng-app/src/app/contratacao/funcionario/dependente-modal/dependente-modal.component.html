@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{data.action}} Dependente</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>Nome</mat-label>
+    <input type="text" matInput placeholder="Nome" [(ngModel)]='nome'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="standard" style="width: 500px;">
+    <mat-label>CPF</mat-label>
+    <input type="text" matInput placeholder="CPF" [(ngModel)]='cpf'>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" class="normal" style="width:150px;">
+    <mat-select required [(ngModel)]='sexo'>
+        <mat-option value="M">Masculino</mat-option>
+        <mat-option value="F">Feminino</mat-option>
+    </mat-select>
+    <mat-label>Sexo</mat-label>
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill" style="width:500px;" class="normal" required>
+    <mat-label>Endereço</mat-label>
+    <mat-select [(ngModel)]='enderecoid'>
+        <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
+            {{endereco.logradouro + ', ' + endereco.bairro }}
+            <div style="float: right;">Cidade: {{endereco.cidadeid.nome}}</div>
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div mat-dialog-actions style="float: left;">
+  <button (click)="save()" mat-button class="gravar-button">Gravar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>
