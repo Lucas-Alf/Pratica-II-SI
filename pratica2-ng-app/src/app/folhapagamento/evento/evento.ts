@@ -5,6 +5,7 @@ export interface Evento {
   descricao: string;
   tipo: string;
   automatico: boolean;
+  percentual: number;
   incidenciaId: {
     id: number;
     descricao: string

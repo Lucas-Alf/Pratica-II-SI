@@ -32,6 +32,8 @@ public class EventoVariavel implements Serializable {
     private double valor;
     @Column(name = "data")
     private LocalDate data;
+    @Column(name = "referencia")
+    private Double referencia;
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -77,6 +79,14 @@ public class EventoVariavel implements Serializable {
         this.data = data;
     }
 
+    public Double getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(Double referencia) {
+        this.referencia = referencia;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -85,6 +95,7 @@ public class EventoVariavel implements Serializable {
         result = prime * result + ((data == null) ? 0 : data.hashCode());
         result = prime * result + ((evento == null) ? 0 : evento.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((referencia == null) ? 0 : referencia.hashCode());
         long temp;
         temp = Double.doubleToLongBits(valor);
         result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -116,6 +127,11 @@ public class EventoVariavel implements Serializable {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
+            return false;
+        if (referencia == null) {
+            if (other.referencia != null)
+                return false;
+        } else if (!referencia.equals(other.referencia))
             return false;
         if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
             return false;

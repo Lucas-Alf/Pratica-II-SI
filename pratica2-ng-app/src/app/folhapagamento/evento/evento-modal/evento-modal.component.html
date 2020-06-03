@@ -20,6 +20,13 @@
           </mat-select>
         </mat-form-field><br />
         <mat-form-field appearance="standard" style="width: 400px;">
+          <mat-label>Percentual</mat-label>
+          <input type="number" matInput placeholder="Percentual" [(ngModel)]='percentual'>
+        </mat-form-field><br />
+        <mat-checkbox [(checked)]='automatico' (change)="automatico = !automatico">Automático</mat-checkbox>
+      </td>
+      <td style="padding-left: 25px; vertical-align: initial;">
+        <mat-form-field appearance="standard" style="width: 400px;">
           <mat-label>Rotina de Cálculo</mat-label>
           <mat-select [(ngModel)]='rotinacalculoId'>
             <mat-option *ngFor="let rotina of rotinas" [value]="rotina.id">
@@ -27,9 +34,6 @@
             </mat-option>
           </mat-select>
         </mat-form-field><br />
-        <mat-checkbox [(checked)]='automatico' (change)="automatico = !automatico">Automático</mat-checkbox>
-      </td>
-      <td style="padding-left: 25px; vertical-align: initial;">
         <mat-form-field appearance="standard" style="width: 400px;">
           <mat-label>Incidência recebida</mat-label>
           <mat-select [(ngModel)]='incidenciaId'>
