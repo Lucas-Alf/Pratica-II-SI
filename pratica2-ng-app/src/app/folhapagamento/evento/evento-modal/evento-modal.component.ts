@@ -28,6 +28,7 @@ export class EventoModalComponent implements OnInit {
   automatico: boolean;
   incidenciaId: number;
   rotinacalculoId: number;
+  percentual: number;
 
 
   visible = true;
@@ -66,6 +67,7 @@ export class EventoModalComponent implements OnInit {
       descricao: this.descricao,
       tipo: this.tipo,
       automatico: this.automatico,
+      percentual: this.percentual,
       incidenciaId: {
         id: this.incidenciaId, descricao: ''
       },
@@ -165,6 +167,7 @@ export class EventoModalComponent implements OnInit {
       this.codigo = this.data.info.id;
       this.descricao = this.data.info.descricao;
       this.tipo = this.data.info.tipo;
+      this.percentual = this.data.info.percentual;
       this.automatico = this.data.info.automatico;
       this.incidenciaId = this.data.info.incidenciaId.id;
       this.rotinacalculoId = this.data.info.rotinacalculoId.id;

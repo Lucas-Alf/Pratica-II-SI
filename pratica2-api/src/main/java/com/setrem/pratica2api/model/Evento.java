@@ -2,7 +2,6 @@ package com.setrem.pratica2api.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -14,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -37,6 +35,8 @@ public class Evento implements Serializable {
     @Size(min = 1, max = 1)
     @Column(name = "tipo")
     private String tipo;
+    @Column(name = "percentual")
+    private Double percentual;
     // @JsonIgnore
     @JoinColumn(name = "incidenciaid", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -114,27 +114,86 @@ public class Evento implements Serializable {
         this.rotinacalculoId = rotinacalculoId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Evento)) {
-            return false;
-        }
-        Evento evento = (Evento) o;
-        return Objects.equals(id, evento.id) && Objects.equals(descricao, evento.descricao)
-                && Objects.equals(tipo, evento.tipo) && Objects.equals(incidenciaId, evento.incidenciaId)
-                && automatico == evento.automatico;
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Double getPercentual() {
+        return percentual;
+    }
+
+    public void setPercentual(Double percentual) {
+        this.percentual = percentual;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, descricao, tipo, incidenciaId, automatico);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (automatico ? 1231 : 1237);
+        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((incidenciaId == null) ? 0 : incidenciaId.hashCode());
+        result = prime * result + ((incidenciasAtingidas == null) ? 0 : incidenciasAtingidas.hashCode());
+        result = prime * result + ((percentual == null) ? 0 : percentual.hashCode());
+        result = prime * result + ((rotinacalculoId == null) ? 0 : rotinacalculoId.hashCode());
+        result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Evento other = (Evento) obj;
+        if (automatico != other.automatico)
+            return false;
+        if (descricao == null) {
+            if (other.descricao != null)
+                return false;
+        } else if (!descricao.equals(other.descricao))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (incidenciaId == null) {
+            if (other.incidenciaId != null)
+                return false;
+        } else if (!incidenciaId.equals(other.incidenciaId))
+            return false;
+        if (incidenciasAtingidas == null) {
+            if (other.incidenciasAtingidas != null)
+                return false;
+        } else if (!incidenciasAtingidas.equals(other.incidenciasAtingidas))
+            return false;
+        if (percentual == null) {
+            if (other.percentual != null)
+                return false;
+        } else if (!percentual.equals(other.percentual))
+            return false;
+        if (rotinacalculoId == null) {
+            if (other.rotinacalculoId != null)
+                return false;
+        } else if (!rotinacalculoId.equals(other.rotinacalculoId))
+            return false;
+        if (tipo == null) {
+            if (other.tipo != null)
+                return false;
+        } else if (!tipo.equals(other.tipo))
+            return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "{" + " id='" + getId() + "'" + ", descricao='" + getDescricao() + "'" + ", tipo='" + getTipo() + "'"
-                + ", incidenciaId='" + getIncidenciaId() + "'" + ", automatico='" + isAutomatico() + "'" + "}";
+        return "Evento [automatico=" + automatico + ", descricao=" + descricao + ", id=" + id + ", incidenciaId="
+                + incidenciaId + ", incidenciasAtingidas=" + incidenciasAtingidas + ", percentual=" + percentual
+                + ", rotinacalculoId=" + rotinacalculoId + ", tipo=" + tipo + "]";
     }
 }
