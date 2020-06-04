@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import axios from 'axios';
@@ -12,6 +12,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Departamento } from 'src/app/recrutamento/cargo/cargo-modal/cargo-modal.component';
 import { Contrato } from '../contrato';
+import { DependenteModalComponent } from '../dependente-modal/dependente-modal.component';
+import { find } from 'rxjs/operators';
 
 @Component({
   selector: 'app-funionario-modal',
@@ -53,13 +55,14 @@ export class FunionarioModalComponent implements OnInit {
   enderecos: Endereco[];
   departamentos: Departamento[];
   validador: FormGroup;
-
+  dialogRef2: MatDialogRef<DependenteModalComponent, any>;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<FunionarioModalComponent>, private snackBar: MatSnackBar,
     private loaderService: LoaderService,
     private constant: ConstantsService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); }
   
   displayedColumns: string[] = ['select','matricula', 'dataadmissao', 'regimeprevidencia', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
@@ -157,9 +160,13 @@ export class FunionarioModalComponent implements OnInit {
   alterar(): void {
   }
   cancelar(): void {
-  }
 
+  }
+  incluirDependente(): void{
+      this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
+  }
   ngOnInit(): void {
+   // this.listarContrato();
     if (this.data.info) {
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;

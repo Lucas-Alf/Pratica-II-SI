@@ -29,7 +29,7 @@ export class DependenteModalComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
-    public dialogRef: MatDialogRef<DependenteModalComponent>, private snackBar: MatSnackBar,
+    public dialogRef2: MatDialogRef<DependenteModalComponent>, private snackBar: MatSnackBar,
     private loaderService: LoaderService,
     private constant: ConstantsService,
     private _formBuilder: FormBuilder
@@ -37,7 +37,7 @@ export class DependenteModalComponent implements OnInit {
 
 
   close(): void {
-    this.dialogRef.close();
+    this.dialogRef2.close();
   }
 
   listarEndereco(): void {
