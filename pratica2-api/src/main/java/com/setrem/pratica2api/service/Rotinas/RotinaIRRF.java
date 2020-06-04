@@ -43,12 +43,16 @@ public class RotinaIRRF {
             if (valorIncidencia > valorMinimo) {
                 if (valorIncidencia > valorMinimo && valorIncidencia <= 2826.65) {
                     valorIRRF = (valorIncidencia * 7.5 / 100) - 142.80;
+                    evento.setReferencia(7.5);
                 } else if (valorIncidencia >= 2826.66 && valorIncidencia <= 3751.05) {
                     valorIRRF = (valorIncidencia * 15.0 / 100) - 354.80;
+                    evento.setReferencia(15.0);
                 } else if (valorIncidencia >= 3751.06 && valorIncidencia <= 4664.68) {
                     valorIRRF = (valorIncidencia * 22.5 / 100) - 636.13;
+                    evento.setReferencia(22.5);
                 } else if (valorIncidencia > 4664.68) {
                     valorIRRF = (valorIncidencia * 27.5 / 100) - 869.36;
+                    evento.setReferencia(27.5);
                 }
                 // Arredonda casas decimais
                 String result = String.format("%.2f", valorIRRF).replace(',', '.');

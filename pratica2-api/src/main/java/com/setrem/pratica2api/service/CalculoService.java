@@ -27,6 +27,7 @@ import com.setrem.pratica2api.repository.EventoVariavelRepository;
 import com.setrem.pratica2api.repository.ParametroEmpresaRepository;
 import com.setrem.pratica2api.repository.ReciboRepository;
 import com.setrem.pratica2api.service.Rotinas.RotinaFGTS;
+import com.setrem.pratica2api.service.Rotinas.RotinaHoraExtra;
 import com.setrem.pratica2api.service.Rotinas.RotinaINSS;
 import com.setrem.pratica2api.service.Rotinas.RotinaIRRF;
 import com.setrem.pratica2api.service.Rotinas.RotinaSalario;
@@ -69,9 +70,9 @@ public class CalculoService {
 
         var cache = criaCache();
         Connection conexao = openConnection();
-        for (Integer contrato : contratos) {
-
-            List<EventoCalculoDTO> eventosCalculo = buscaEventosContrato(conexao, contrato,
+        for (Integer contratoMatricula : contratos) {
+            var contrato = ContratoRepository.findById(contratoMatricula).get();
+            List<EventoCalculoDTO> eventosCalculo = buscaEventosContrato(conexao, contratoMatricula,
                     cache.getPeriodoCalculo().getDataInicial(), cache.getPeriodoCalculo().getDataFinal());
 
             List<IncidenciaDTO> incidencias = new ArrayList<IncidenciaDTO>();
@@ -81,7 +82,7 @@ public class CalculoService {
                         incidencias = new RotinaSalario().Calcula(conexao, cache, evento, contrato, incidencias);
                         break;
                     case 2:
-                        incidencias = new RotinaIRRF().Calcula(conexao, contrato, evento, incidencias);
+                        incidencias = new RotinaIRRF().Calcula(conexao, contratoMatricula, evento, incidencias);
                         break;
                     case 3:
                         incidencias = new RotinaINSS().Calcula(evento, incidencias);
@@ -92,13 +93,16 @@ public class CalculoService {
                     case 5:
                         incidencias = new RotinaValorFixo().Calcula(evento, incidencias);
                         break;
+                    case 6:
+                        incidencias = new RotinaHoraExtra().Calcula(evento, incidencias, contrato);
+                        break;
                     default:
                         throw new Exception("Rotina não implementada.");
                 }
             }
             // Salva o recibo
             var contratoRecibo = new Contrato();
-            contratoRecibo.setMatricula(contrato);
+            contratoRecibo.setMatricula(contratoMatricula);
             var recibo = new Recibo();
             recibo.setContrato(contratoRecibo);
             recibo.setExecucao(cache.getPeriodoCalculo().getExecucao());
@@ -148,6 +152,7 @@ public class CalculoService {
                     valorCalculo = evento.getValor();
                 }
                 calculo.setValor(valorCalculo);
+                calculo.setReferencia(evento.getReferencia());
                 CalculoRepository.save(calculo);
             }
         }
@@ -202,7 +207,7 @@ public class CalculoService {
     public List<EventoCalculoDTO> buscaEventosContrato(Connection conexao, int contrato, LocalDate dataInicial,
             LocalDate dataFinal) throws SQLException {
         PreparedStatement statement = conexao.prepareStatement(
-                "select * from( select id, descricao, tipo, incidenciaid, automatico, rotinacalculoid, 0 as valor from evento where automatico = true union select evento.id, evento.descricao, evento.tipo, evento.rotinacalculoid, false as automatico, evento.rotinacalculoid, valor from eventofixo inner join evento on evento.id = eventofixo.eventoid where contratomatricula = ? and (datainicial <= cast(? as date) and (datafinal is null or datafinal >= cast(? as date))) union select evento.id, evento.descricao, evento.tipo, evento.rotinacalculoid, false as automatico, evento.rotinacalculoid, valor from eventovariavel inner join evento on evento.id = eventovariavel.eventoid where contratomatricula = ? and data between cast(? as date) and cast(? as date)) as eventoscontrato order by eventoscontrato.tipo desc, eventoscontrato.id asc");
+                "SELECT * FROM( SELECT id, descricao, tipo, incidenciaid, automatico, rotinacalculoid, 0 AS valor, coalesce(percentual,0) as percentual, 0 AS referencia FROM evento WHERE automatico = TRUE UNION SELECT evento.id, evento.descricao, evento.tipo, evento.incidenciaid, FALSE AS automatico, evento.rotinacalculoid, coalesce(valor, 0) as valor, coalesce(evento.percentual,0) as percentual, coalesce(eventofixo.referencial,0) as referencial FROM eventofixo INNER JOIN evento ON evento.id = eventofixo.eventoid WHERE contratomatricula = ? AND (datainicial <= CAST(? AS date) AND (datafinal IS NULL OR datafinal >= CAST(? AS date))) UNION SELECT evento.id, evento.descricao, evento.tipo, evento.rotinacalculoid, FALSE AS automatico, evento.rotinacalculoid, coalesce(valor,0) as valor, coalesce(evento.percentual,0) as percentual, coalesce(referencia,0) as referencia FROM eventovariavel INNER JOIN evento ON evento.id = eventovariavel.eventoid WHERE contratomatricula = ? AND DATA BETWEEN CAST(? AS date) AND CAST(? AS date)) AS eventoscontrato ORDER BY eventoscontrato.tipo DESC, eventoscontrato.id ASC");
         statement.setInt(1, contrato);
         statement.setString(2, dataInicial.toString());
         statement.setString(3, dataFinal.toString());
@@ -220,6 +225,8 @@ public class CalculoService {
             evento.setAutomatico(Boolean.parseBoolean(rs.getString("automatico")));
             evento.setValor(Double.parseDouble(rs.getString("valor")));
             evento.setRotinacalculoid(Integer.parseInt(rs.getString("rotinacalculoid")));
+            evento.setPercentual(Double.parseDouble(rs.getString("percentual")));
+            evento.setReferencia(Double.parseDouble(rs.getString("referencia")));
 
             PreparedStatement statementIncidenciasAtingidas = conexao.prepareStatement(
                     "select * from incidencia where id in (select incidenciaid from incidenciaevento where incidenciaevento.eventoid = ?)");

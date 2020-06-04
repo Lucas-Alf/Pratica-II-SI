@@ -65,6 +65,10 @@
                 <th style="width: 40%;" mat-header-cell *matHeaderCellDef> Evento </th>
                 <td mat-cell *matCellDef="let calculo"> {{calculo.evento.descricao}} </td>
               </ng-container>
+              <ng-container matColumnDef="referencia">
+                <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Ref. </th>
+                <td mat-cell *matCellDef="let calculo">{{calculo.referencia > 0 ? calculo.referencia : ''}}</td>
+              </ng-container>
               <ng-container matColumnDef="valor">
                 <th id="headerValor" style="width: 10%;" mat-header-cell *matHeaderCellDef> Valor </th>
                 <td style="text-align: right;" mat-cell *matCellDef="let calculo">

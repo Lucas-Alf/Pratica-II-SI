@@ -23,6 +23,9 @@ public class Calculo implements Serializable {
     
     @Column(name = "valor")
     private Double valor;
+    
+    @Column(name = "referencia")
+    private Double referencia;
 
     @JoinColumn(name = "reciboid", referencedColumnName = "id")
     @ManyToOne
@@ -68,6 +71,14 @@ public class Calculo implements Serializable {
         this.evento = evento;
     }
 
+    public Double getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(Double referencia) {
+        this.referencia = referencia;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -75,6 +86,7 @@ public class Calculo implements Serializable {
         result = prime * result + ((evento == null) ? 0 : evento.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((recibo == null) ? 0 : recibo.hashCode());
+        result = prime * result + ((referencia == null) ? 0 : referencia.hashCode());
         result = prime * result + ((valor == null) ? 0 : valor.hashCode());
         return result;
     }
@@ -102,6 +114,11 @@ public class Calculo implements Serializable {
             if (other.recibo != null)
                 return false;
         } else if (!recibo.equals(other.recibo))
+            return false;
+        if (referencia == null) {
+            if (other.referencia != null)
+                return false;
+        } else if (!referencia.equals(other.referencia))
             return false;
         if (valor == null) {
             if (other.valor != null)

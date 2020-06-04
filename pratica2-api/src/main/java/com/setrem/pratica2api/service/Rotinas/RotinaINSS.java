@@ -58,7 +58,7 @@ public class RotinaINSS {
                     valorINSS += valorFaixa4;
                 }
 
-                //Arredonda casas decimais
+                // Arredonda casas decimais
                 String result = String.format("%.2f", valorINSS).replace(',', '.');
                 valorINSS = Double.parseDouble(result);
             }

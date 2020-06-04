@@ -3,11 +3,12 @@ package com.setrem.pratica2api.service.Rotinas;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.setrem.pratica2api.model.Contrato;
 import com.setrem.pratica2api.model.EventoCalculoDTO;
 import com.setrem.pratica2api.model.IncidenciaDTO;
 
-public class RotinaFGTS {
-    public List<IncidenciaDTO> Calcula(EventoCalculoDTO evento, List<IncidenciaDTO> incidencias) {
+public class RotinaHoraExtra {
+    public List<IncidenciaDTO> Calcula(EventoCalculoDTO evento, List<IncidenciaDTO> incidencias, Contrato contrato) {
         for (int incidenciaAtingida : evento.getIncidenciasAtingidas()) {
             if (incidencias.stream().filter(x -> x.getId() == incidenciaAtingida).collect(Collectors.toList())
                     .size() == 0) {
@@ -22,19 +23,20 @@ public class RotinaFGTS {
                     valorIncidencia += incidencia.getValor();
                 }
             }
-            // FGTS = 8% do Salário
-            double valorFGTS = valorIncidencia * 0.08;
+
+            double valorHora = valorIncidencia / contrato.getHorastrabalho();
+            double valorHoraComBonus = valorHora * (evento.getPercentual() / 100);
+            double valorHoraExtra = valorHoraComBonus * evento.getReferencia();
 
             // Arredonda casas decimais
-            String result = String.format("%.2f", valorFGTS).replace(',', '.');
-            valorFGTS = Double.parseDouble(result);
-            evento.setValor(valorFGTS);
-            evento.setReferencia(8.0);
+            String result = String.format("%.2f", valorHoraExtra).replace(',', '.');
+            valorHoraExtra = Double.parseDouble(result);
+            evento.setValor(valorHoraExtra);
 
             for (IncidenciaDTO incidencia : incidencias) {
                 if (incidencia.getId() == incidenciaAtingida) {
                     Double valorIncidenciaAtingida = incidencia.getValor();
-                    incidencia.setValor(valorIncidenciaAtingida + valorFGTS);
+                    incidencia.setValor(valorIncidenciaAtingida + valorHoraExtra);
                 }
             }
         }

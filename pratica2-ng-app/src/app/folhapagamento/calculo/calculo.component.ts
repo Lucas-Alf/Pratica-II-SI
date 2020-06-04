@@ -26,7 +26,7 @@ export class CalculoComponent implements OnInit {
 
   isLoading: boolean = false;
   displayedColumns: string[] = ['select', 'situacao', 'matricula', 'nome'];
-  displayedColumnsCalc: string[] = ['tipo', 'evento', 'valor'];
+  displayedColumnsCalc: string[] = ['tipo', 'evento', 'referencia', 'valor'];
   storeFuncionario = new MatTableDataSource();
   storeCalculo = new MatTableDataSource();
   selection = new SelectionModel<any>();

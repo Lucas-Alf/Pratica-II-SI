@@ -10,6 +10,8 @@ public class EventoCalculoDTO {
     private boolean automatico;
     private int rotinacalculoid;
     private double valor;
+    private double percentual;
+    private double referencia;
     private List<Integer> incidenciasAtingidas; 
 
     public int getId() {
@@ -128,5 +130,21 @@ public class EventoCalculoDTO {
         if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
             return false;
         return true;
+    }
+
+    public double getPercentual() {
+        return percentual;
+    }
+
+    public void setPercentual(double percentual) {
+        this.percentual = percentual;
+    }
+
+    public double getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(double referencia) {
+        this.referencia = referencia;
     }
 }
