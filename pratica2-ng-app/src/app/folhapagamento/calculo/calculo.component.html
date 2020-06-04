@@ -13,8 +13,8 @@
                 <input matInput (keyup)="applyFilter($event)">
               </mat-form-field>
               <div style="float: right">
-                <button (click)="calcular()" mat-button class="calcular-button">Cálcular</button>
-                <button style="margin-left: 5px;" (click)="calcular()" mat-button class="imprimir-button">Imprimir</button>
+                <button (click)="calcular()" mat-button class="calcular-button">Calcular</button>
+                <button style="margin-left: 5px;" (click)="imprimir()" mat-button class="imprimir-button">Imprimir</button>
               </div>
             </div>
             <table mat-table [dataSource]="storeFuncionario">
