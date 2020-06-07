@@ -288,7 +288,7 @@
                 <span style="color: grey;">Selecione o contrato que deseja alterar</span>
             </div>
             <div class="table-container">
-                <table mat-table [dataSource]="storeContrato" style="width: 100%">
+                <mat-table [dataSource]="storeContrato" style="width: 100%">
                     <ng-container matColumnDef="select">
                         <th style="width: 9%;" mat-header-cell *matHeaderCellDef>
                             <!-- <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
@@ -337,7 +337,7 @@
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+                </mat-table>
             </div>
         </mat-tab>
         <mat-tab label="Dependentes">

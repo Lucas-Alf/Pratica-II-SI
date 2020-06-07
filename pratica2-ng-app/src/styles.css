@@ -92,3 +92,16 @@ body {
   font-size: 250px;
   color: gray;
 }
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mat-cell {
+  vertical-align: middle !important;
+}
+
+.mat-header-row {
+  height: 35px !important;
+}

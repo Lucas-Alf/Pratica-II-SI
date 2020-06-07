@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="table-container">
-        <table mat-table [dataSource]="storeCargo">
+        <mat-table [dataSource]="storeCargo">
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef style="width: 10%;">
               <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"
@@ -49,7 +49,7 @@
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        </mat-table>
       </div>
     </mat-card>
   </div>
