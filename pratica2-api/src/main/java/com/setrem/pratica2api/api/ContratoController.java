@@ -23,6 +23,11 @@ public class ContratoController {
     public List<Contrato> all() {
         return this.ContratoRepository.findAll();
     }
+ 
+    @GetMapping("/findByCpf")
+    public List<Contrato> findByCpf(String cpf) {
+       return this.ContratoRepository.findByCpf(cpf);
+    }
 
     @PostMapping("/Incluir")
     public Contrato add(@RequestBody Contrato data, BindingResult bindingResult) throws Exception {

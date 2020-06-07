@@ -7,7 +7,7 @@
 }
 
 .crud-button {
-    margin-left: 8px;
+    margin-right: 8px;
     padding-left: 8px;
 }
 
@@ -43,7 +43,12 @@
 
 .table-container {
     position: relative;
-    max-height: 130px;
+    /* max-height: 630px; */
     /* width: 1300px; */
-    overflow: auto;
+    overflow: hidden;
+    /* margin: 0; */
+}
+
+.obriga {
+    background-color: rgba(255, 29, 29, 0.15) !important;
 }

@@ -24,9 +24,6 @@ public class Contrato implements Serializable {
     @Column(name = "dataadmissao")
     private LocalDate dataadmissao;
 
-    @Column(name = "regimeprevidencia")
-    private Integer regimeprevidencia;
-
     @Column(name = "regimetrabalho")
     private Integer regimetrabalho;
 
@@ -66,14 +63,6 @@ public class Contrato implements Serializable {
 
     public void setDataadmissao(LocalDate dataadmissao) {
         this.dataadmissao = dataadmissao;
-    }
-
-    public Integer getRegimeprevidencia() {
-        return regimeprevidencia;
-    }
-
-    public void setRegimeprevidencia(Integer regimeprevidencia) {
-        this.regimeprevidencia = regimeprevidencia;
     }
 
     public Integer getRegimetrabalho() {
@@ -126,7 +115,6 @@ public class Contrato implements Serializable {
         result = prime * result + ((horastrabalho == null) ? 0 : horastrabalho.hashCode());
         result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
         result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
-        result = prime * result + ((regimeprevidencia == null) ? 0 : regimeprevidencia.hashCode());
         result = prime * result + ((regimetrabalho == null) ? 0 : regimetrabalho.hashCode());
         result = prime * result + ((situacao == null) ? 0 : situacao.hashCode());
         return result;
@@ -170,11 +158,6 @@ public class Contrato implements Serializable {
             if (other.pessoa != null)
                 return false;
         } else if (!pessoa.equals(other.pessoa))
-            return false;
-        if (regimeprevidencia == null) {
-            if (other.regimeprevidencia != null)
-                return false;
-        } else if (!regimeprevidencia.equals(other.regimeprevidencia))
             return false;
         if (regimetrabalho == null) {
             if (other.regimetrabalho != null)

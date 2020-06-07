@@ -5,7 +5,6 @@ export interface Contrato {
     matricula: number;
     situacao: number;
     dataadmissao: Date;
-    regimeprevidencia: number;
     regimetrabalho: number;
     horastrabalho: number;
     cpf: Pessoa;

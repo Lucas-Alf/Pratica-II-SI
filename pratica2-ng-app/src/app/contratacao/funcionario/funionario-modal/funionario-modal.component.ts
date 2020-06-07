@@ -50,7 +50,14 @@ export class FunionarioModalComponent implements OnInit {
   email: string;
   numero: number;
 
+  matricula: number;
+  situacao: number;
+  dataadmissao: Date;
+  regimetrabalho: number;
+  horastrabalho: number;
   departamentoid: number;
+  datademissao: Date;
+
   paises: Pais[];
   enderecos: Endereco[];
   departamentos: Departamento[];
@@ -64,8 +71,8 @@ export class FunionarioModalComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public dialog: MatDialog
   ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); }
-  
-  displayedColumns: string[] = ['select','matricula', 'dataadmissao', 'regimeprevidencia', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
+
+  displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamento', 'datademissao'];
   storeContrato = new MatTableDataSource();
   selection = new SelectionModel<Contrato>();
 
@@ -85,6 +92,22 @@ export class FunionarioModalComponent implements OnInit {
       this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
     });
   }
+
+  listarContrato(cpf): void {
+    this.loaderService.show();//this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf
+    // calculo/buscaPorContrato?matricula=
+    axios.get(this.apiUrl + 'contrato/findByCpf?cpf=' + cpf).then((response) => {
+      if (response && response.data) {
+        this.storeContrato.data = response.data;
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
 
   save(): void {
     //var testhis: Pessoa = this.data;
@@ -158,16 +181,30 @@ export class FunionarioModalComponent implements OnInit {
   incluir(): void {
   }
   alterar(): void {
+    setTimeout(() => {
+      var r = this.selection.selected[0];
+      console.log(r);
+      this.situacao = 2;
+     // this.dataadmissao.setDate(new Date(r.dataadmissao);
+      this.regimetrabalho = r.regimetrabalho;
+      this.horastrabalho = r.horastrabalho;
+      this.departamentoid = r.departamentoid.id;
+    }, 300);
   }
   cancelar(): void {
-
+    this.situacao = null;
+    this.dataadmissao = null;
+    this.regimetrabalho = null;
+    this.horastrabalho = null;
+    this.departamentoid = null;
+    this.selection.clear();
   }
-  incluirDependente(): void{
-      this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
+  incluirDependente(): void {
+    this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
   }
   ngOnInit(): void {
-   // this.listarContrato();
     if (this.data.info) {
+      this.listarContrato(this.data.info.cpf);
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;
       this.paisnascimentoid = this.data.info.paisnascimentoid ? this.data.info.paisnascimentoid.id : null;

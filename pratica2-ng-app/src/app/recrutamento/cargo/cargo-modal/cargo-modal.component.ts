@@ -20,7 +20,7 @@ export interface Cbo {
 }
 
 export interface Departamento {
-  id: string;
+  id: number;
   nome: string;
   descricao: string;
 }

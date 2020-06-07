@@ -1,22 +1,22 @@
 <h1 mat-dialog-title>{{data.action}} Funcionário</h1>
 <div mat-dialog-content>
     <mat-tab-group>
-        <mat-tab label="Informações do Funcionário">
+        <mat-tab style="height:450px;" label="Informações do Funcionário">
             <br>
             <!-- <form [formGroup]="validador">  formControlName="cpfteste"-->
-            <mat-form-field appearance="fill" class="normal" style="width: 135px;" required>
+            <mat-form-field appearance="fill" class="normal" style="width: 135px;">
                 <mat-label>CPF</mat-label>
-                <input type="text" matInput placeholder="CPF" [(ngModel)]='cpf'>
+                <input type="text" matInput placeholder="CPF" required [(ngModel)]='cpf'>
             </mat-form-field>
             <!-- </form> -->
             <mat-form-field appearance="fill" style="width: 160px;" class="normal">
                 <mat-label>RG</mat-label>
-                <input type="text" matInput placeholder="RG" [(ngModel)]='rg'>
+                <input type="text" matInput placeholder="RG" required [(ngModel)]='rg'>
             </mat-form-field>
 
             <mat-form-field appearance="fill" style="width: 400px;" class="normal">
                 <mat-label>Nome</mat-label>
-                <input type="text" matInput placeholder="Nome Completo" [(ngModel)]='nome'>
+                <input type="text" matInput placeholder="Nome Completo" required [(ngModel)]='nome'>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="normal" style="width:150px;">
@@ -27,9 +27,9 @@
                 <mat-label>Sexo</mat-label>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" style="width:210px;" class="fim">
-                <mat-label>Data de Nascimento</mat-label>
-                <input [(ngModel)]='datanascimento' disabled matInput [matDatepicker]="picker">
+            <mat-form-field appearance="fill" style="width:210px;" class="fim" required>
+                <mat-label>Data de Nascimento *</mat-label>
+                <input required [(ngModel)]='datanascimento' disabled matInput [matDatepicker]="picker">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker disabled="false"></mat-datepicker>
             </mat-form-field>
@@ -84,9 +84,9 @@
             </mat-form-field>
 
             <mat-divider style="margin-bottom:20px"></mat-divider>
-            <mat-form-field appearance="fill" style="width:500px;" class="normal" required>
+            <mat-form-field appearance="fill" style="width:500px;" class="normal">
                 <mat-label>Endereço</mat-label>
-                <mat-select [(ngModel)]='enderecoid'>
+                <mat-select required [(ngModel)]='enderecoid'>
                     <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
                         {{endereco.logradouro + ', ' + endereco.bairro }}
                         <div style="float: right;">Cidade: {{endereco.cidadeid.nome}}</div>
@@ -240,13 +240,13 @@
                 <mat-label>Situação</mat-label>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 200px;" class="normal">
-                <mat-label>Data Admissão</mat-label>
+                <mat-label>Data Admissão *</mat-label>
                 <input [(ngModel)]='pisexpedicao' disabled matInput [matDatepicker]="picker22">
                 <mat-datepicker-toggle matSuffix [for]="picker22"></mat-datepicker-toggle>
                 <mat-datepicker #picker22 disabled="false"></mat-datepicker>
             </mat-form-field>
             <mat-form-field appearance="fill" class="normal" style="width:150px;">
-                <mat-select required [(ngModel)]='sexo'>
+                <mat-select required [(ngModel)]='regimetrabalho'>
                     <mat-option value="1">Celetista</mat-option>
                     <mat-option value="2">Estagiário</mat-option>
                 </mat-select>
@@ -254,24 +254,24 @@
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 100px;" class="normal">
                 <mat-label>Horas</mat-label>
-                <input type="number" matInput placeholder="Horas" [(ngModel)]='telefonefixo'>
+                <input type="number" required matInput placeholder="hrs" [(ngModel)]='horastrabalho'>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 250px;" class="normal">
                 <mat-label>Departamento</mat-label>
-                <mat-select [(ngModel)]='departamentoid'>
+                <mat-select required [(ngModel)]='departamentoid'>
                     <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
-                        {{departamento.descricao}}
+                        {{departamento.nome}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 200px;" class="fim">
                 <mat-label style="color:red">Data Demissão</mat-label>
-                <input [(ngModel)]='pisexpedicao' disabled matInput [matDatepicker]="picker23">
+                <input [(ngModel)]='datademissao' disabled matInput [matDatepicker]="picker23">
                 <mat-datepicker-toggle matSuffix [for]="picker23"></mat-datepicker-toggle>
                 <mat-datepicker #picker23 disabled="false"></mat-datepicker>
             </mat-form-field>
 
-            <div style="width: 100%; display:inline-block;">
+            <div style="width: 100%;">
                 <button (click)="incluir()" mat-stroked-button class="crud-button">
                     <mat-icon>add</mat-icon> Incluir
                 </button>
@@ -281,47 +281,59 @@
                 <button (click)="cancelar()" mat-stroked-button class="crud-button">
                     <mat-icon>cancel</mat-icon> Cancelar
                 </button>
-                <!-- <span style="color: grey; margin: '5px 0 0 20px';">Selecione o contrato que deseja alterar</span> -->
+                <button (click)="cancelar()" mat-stroked-button class="crud-button" style="float: right;">
+                    <mat-icon>mediation</mat-icon> Cargo
+                </button>
+                <mat-divider style="margin-top:40px;margin-bottom:5px"></mat-divider>
+                <span style="color: grey;">Selecione o contrato que deseja alterar</span>
             </div>
             <div class="table-container">
-                <table mat-table [dataSource]="storeContrato">
+                <table mat-table [dataSource]="storeContrato" style="width: 100%">
                     <ng-container matColumnDef="select">
-                        <th style="width: 5%;" mat-header-cell *matHeaderCellDef>
+                        <th style="width: 9%;" mat-header-cell *matHeaderCellDef>
                             <!-- <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
                             </mat-checkbox> -->
                         </th>
-                        <td mat-cell *matCellDef="let row">
-                            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
-                            </mat-checkbox>
+                        <td mat-cell *matCellDef="let row" [ngSwitch]="row.situacao">
+                            <mat-checkbox *ngSwitchCase="1" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" (click)="alterar()"></mat-checkbox>
+                            <mat-checkbox *ngSwitchCase="2" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" (click)="alterar()"></mat-checkbox>
+                        </td>
+                        <!-- <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"></mat-checkbox>
+                        </td> -->
+                    </ng-container>
+                    <ng-container matColumnDef="situacao">
+                        <th style="width: 6%;" mat-header-cell *matHeaderCellDef> Sit. </th>
+                        <td mat-cell *matCellDef="let contrato" [ngSwitch]="contrato.situacao">
+                            <img *ngSwitchCase="1" style="height: 20px;" src="../../assets/img/circuloverde.png" matTooltip="Ativo" />
+                            <img *ngSwitchCase="2" style="height: 20px;" src="../../assets/img/circuloamarelo.png" matTooltip="Afastado" />
+                            <img *ngSwitchCase="3" style="height: 20px;" src="../../assets/img/circulovermelho.png" matTooltip="Demitido" />
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="matricula">
-                        <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Matricula </th>
+                        <th style="width: 5%;" mat-header-cell *matHeaderCellDef> Matricula </th>
                         <td mat-cell *matCellDef="let contrato"> {{contrato.matricula}} </td>
                     </ng-container>
                     <ng-container matColumnDef="dataadmissao">
-                        <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Data de Admissão </th>
-                        <td mat-cell *matCellDef="let contrato"> {{contrato.dataadmissao | date: 'dd/MM/yyyy'}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="regimeprevidencia">
-                        <th style="width: 20%;" mat-header-cell *matHeaderCellDef> Regime </th>
-                        <td mat-cell *matCellDef="let contrato"> {{contrato.regimeprevidencia}} </td>
+                        <th style="width: 15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data de Admissão </th>
+                        <td style="text-align: center;" mat-cell *matCellDef="let contrato"> {{contrato.dataadmissao | date: 'dd/MM/yyyy'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="regimetrabalho">
                         <th style="width: 15%;" mat-header-cell *matHeaderCellDef> Regime de Trabalho </th>
-                        <td mat-cell *matCellDef="let contrato"> {{contrato.regimetrabalho}} </td>
+                        <td mat-cell *matCellDef="let contrato">
+                            {{(contrato.regimetrabalho == 1) ? 'Celetista' : 'Estagiário'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="horastrabalho">
-                        <th style="width: 5%;" mat-header-cell *matHeaderCellDef> Horas </th>
-                        <td mat-cell *matCellDef="let contrato"> {{contrato.horastrabalho}} + "hrs"</td>
+                        <th style="width: 10%;text-align: center;" mat-header-cell *matHeaderCellDef> Horas </th>
+                        <td style="text-align: center;" mat-cell *matCellDef="let contrato"> {{contrato.horastrabalho}} hrs</td>
                     </ng-container>
-                    <ng-container matColumnDef="departamentoid">
+                    <ng-container matColumnDef="departamento">
                         <th style="width: 25%;" mat-header-cell *matHeaderCellDef> Departamento </th>
-                        <td mat-cell *matCellDef="let contrato"> {{contrato.departamentoid.descricao}} </td>
+                        <td mat-cell *matCellDef="let contrato"> {{contrato.departamento.nome}} </td>
                     </ng-container>
                     <ng-container matColumnDef="datademissao">
-                        <th style="width: 15%;" mat-header-cell *matHeaderCellDef> Data Demissão </th>
-                        <td mat-cell *matCellDef="let contrato"> {{contrato.datademissao | date: 'dd/MM/yyyy'}} </td>
+                        <th style="width: 15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data Demissão </th>
+                        <td style="text-align: center;" mat-cell *matCellDef="let contrato"> {{contrato.datademissao | date: 'dd/MM/yyyy'}} </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
