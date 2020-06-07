@@ -51,9 +51,9 @@ export class FunionarioModalComponent implements OnInit {
   numero: number;
 
   matricula: number;
-  situacao: number;
+  situacao: string;
   dataadmissao: Date;
-  regimetrabalho: number;
+  regimetrabalho: string;
   horastrabalho: number;
   departamentoid: number;
   datademissao: Date;
@@ -182,14 +182,17 @@ export class FunionarioModalComponent implements OnInit {
   }
   alterar(): void {
     setTimeout(() => {
+      console.log('ANTES sit ' + this.situacao + ' dataadmissao ' +  this.dataadmissao + ' regimetrabalho '+  this.regimetrabalho );
+
       var r = this.selection.selected[0];
       console.log(r);
-      this.situacao = 2;
-     // this.dataadmissao.setDate(new Date(r.dataadmissao);
-      this.regimetrabalho = r.regimetrabalho;
+      this.situacao = r.situacao.toString();
+      this.dataadmissao = r.dataadmissao;
+      this.regimetrabalho = r.regimetrabalho.toString();
       this.horastrabalho = r.horastrabalho;
-      //this.departamentoid = r.departamento.id;
       this.departamentoid = r.departamentoid.id;
+
+      console.log('ALTEROU sit ' + this.situacao + ' dataadmissao ' +  this.dataadmissao + ' regimetrabalho '+  this.regimetrabalho );
     }, 300);
   }
   cancelar(): void {
@@ -198,12 +201,15 @@ export class FunionarioModalComponent implements OnInit {
     this.regimetrabalho = null;
     this.horastrabalho = null;
     this.departamentoid = null;
+    this.datademissao = null;
     this.selection.clear();
+    console.log('CANCELOU sit ' + this.situacao + ' dataadmissao ' +  this.dataadmissao + ' regimetrabalho '+  this.regimetrabalho );
   }
   incluirDependente(): void {
     this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
   }
   ngOnInit(): void {
+    console.log("SEXO " +  this.sexo + " -"  + this.data.info.sexo);
     if (this.data.info) {
       this.listarContrato(this.data.info.cpf);
       this.cpf = this.data.info.cpf;

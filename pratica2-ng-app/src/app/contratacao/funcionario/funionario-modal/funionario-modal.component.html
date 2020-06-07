@@ -232,7 +232,7 @@
         <mat-tab label="Contrato">
             <br>
             <mat-form-field appearance="fill" class="normal" style="width:140px;">
-                <mat-select required [(ngModel)]='sexo'>
+                <mat-select required [(ngModel)]='situacao'>
                     <mat-option value="1">Ativo</mat-option>
                     <mat-option value="2">Afastado</mat-option>
                     <mat-option value="3">Desligado</mat-option>
@@ -241,7 +241,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 200px;" class="normal">
                 <mat-label>Data Admissão *</mat-label>
-                <input [(ngModel)]='pisexpedicao' disabled matInput [matDatepicker]="picker22">
+                <input [(ngModel)]='dataadmissao' disabled matInput [matDatepicker]="picker22">
                 <mat-datepicker-toggle matSuffix [for]="picker22"></mat-datepicker-toggle>
                 <mat-datepicker #picker22 disabled="false"></mat-datepicker>
             </mat-form-field>
@@ -273,11 +273,11 @@
 
             <div style="width: 100%;">
                 <button (click)="incluir()" mat-stroked-button class="crud-button">
-                    <mat-icon>add</mat-icon> Incluir
+                    <mat-icon>check</mat-icon> Gravar
                 </button>
-                <button (click)="alterar()" mat-stroked-button class="crud-button">
+                <!-- <button (click)="alterar()" mat-stroked-button class="crud-button">
                     <mat-icon>edit</mat-icon> Alterar
-                </button>
+                </button> -->
                 <button (click)="cancelar()" mat-stroked-button class="crud-button">
                     <mat-icon>cancel</mat-icon> Cancelar
                 </button>
