@@ -49,6 +49,26 @@ export class CalculoComponent implements OnInit {
     }
   }
 
+  imprimir(): void {
+    if (this.selection.selected.length > 0) {
+      this.loaderService.show();
+      axios.get(this.apiUrl + 'calculo/imprimir?matricula=' + this.selection.selected[0].matricula, {responseType: 'blob'}).then((response) => {
+        this.loaderService.hide();
+        var blob = new Blob([response.data],{type: 'application/pdf'});
+        var url = window.URL.createObjectURL(blob);
+        window.open(url);
+      }).catch((error) => {
+        this.loaderService.hide();
+        if (error.response) {
+          console.error(error.response.data.message);
+        }
+        this.snackBar.open('Ocorreu um erro durrante o processamento. 😬', null, { duration: 5000 });
+      });
+    } else {
+      this.snackBar.open('Selecione um contrato. 🤦‍♂️', null, { duration: 5000 });
+    }
+  }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.storeFuncionario.data.length;
