@@ -27,6 +27,7 @@ import { RecrutamentoInternoComponent } from './recrutamento/recrutamentoInterno
 import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno.component';
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 import { CalculoComponent } from './folhapagamento/calculo/calculo.component';
+import { EventoVariavelComponent } from './folhapagamento/evento-variavel/evento-variavel.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'folhapagamento/periodocalculo', component: PeriodoCalculoComponent },
   { path: 'folhapagamento/parametroempresa', component: ParametroEmpresaComponent },
   { path: 'folhapagamento/calculo', component: CalculoComponent },
+  { path: 'folhapagamento/eventovariavel', component: EventoVariavelComponent },
   { path: 'recrutamento', component: RecrutamentoComponent },
   { path: 'recrutamento/cargo', component: CargoComponent },
   { path: 'recrutamento/conhecimento', component: ConhecimentoComponent },

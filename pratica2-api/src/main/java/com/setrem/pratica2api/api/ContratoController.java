@@ -7,7 +7,7 @@ import javax.validation.ValidationException;
 import java.util.List;
 
 import com.setrem.pratica2api.model.Contrato;
-import com.setrem.pratica2api.repository.ContratoRepository;;
+import com.setrem.pratica2api.repository.ContratoRepository;
 
 @RestController
 @RequestMapping("/api/contrato")

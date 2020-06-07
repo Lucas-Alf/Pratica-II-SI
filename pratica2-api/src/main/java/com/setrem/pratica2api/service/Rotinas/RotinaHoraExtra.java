@@ -25,7 +25,7 @@ public class RotinaHoraExtra {
             }
 
             double valorHora = valorIncidencia / contrato.getHorastrabalho();
-            double valorHoraComBonus = valorHora * (evento.getPercentual() / 100);
+            double valorHoraComBonus = valorHora + (valorHora * (evento.getPercentual() / 100));
             double valorHoraExtra = valorHoraComBonus * evento.getReferencia();
 
             // Arredonda casas decimais

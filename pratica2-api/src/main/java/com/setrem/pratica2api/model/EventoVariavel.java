@@ -23,8 +23,9 @@ public class EventoVariavel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "contratomatricula")
-    private int contratoMatricula;
+    @JoinColumn(name = "contratomatricula", referencedColumnName = "matricula")
+    @ManyToOne
+    private Contrato contratoMatricula;
     @JoinColumn(name = "eventoid", referencedColumnName = "id")
     @ManyToOne
     private Evento evento;
@@ -47,11 +48,11 @@ public class EventoVariavel implements Serializable {
         this.id = id;
     }
 
-    public int getContratoMatricula() {
+    public Contrato getContratoMatricula() {
         return contratoMatricula;
     }
 
-    public void setContratoMatricula(int contratoMatricula) {
+    public void setContratoMatricula(Contrato contratoMatricula) {
         this.contratoMatricula = contratoMatricula;
     }
 
@@ -91,7 +92,7 @@ public class EventoVariavel implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + contratoMatricula;
+        result = prime * result + ((contratoMatricula == null) ? 0 : contratoMatricula.hashCode());
         result = prime * result + ((data == null) ? 0 : data.hashCode());
         result = prime * result + ((evento == null) ? 0 : evento.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -111,7 +112,10 @@ public class EventoVariavel implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         EventoVariavel other = (EventoVariavel) obj;
-        if (contratoMatricula != other.contratoMatricula)
+        if (contratoMatricula == null) {
+            if (other.contratoMatricula != null)
+                return false;
+        } else if (!contratoMatricula.equals(other.contratoMatricula))
             return false;
         if (data == null) {
             if (other.data != null)

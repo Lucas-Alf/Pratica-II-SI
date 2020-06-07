@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>{{data.action}} Evento Variável</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Contrato</mat-label>
+    <mat-select [(ngModel)]='contratoMatricula'>
+      <mat-option *ngFor="let contrato of contratos" [value]="contrato.matricula">
+        {{contrato.matricula + ' - '+ contrato.pessoa.nome}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Evento</mat-label>
+    <mat-select [(ngModel)]='evento'>
+      <mat-option *ngFor="let evento of eventos" [value]="evento.id">
+        {{evento.descricao}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Data</mat-label>
+    <input type="date" matInput placeholder="Data" [(ngModel)]='dataTemp'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Referencia</mat-label>
+    <input type="number" matInput placeholder="Referência" [(ngModel)]='referencia'>
+  </mat-form-field><br />
+  <mat-form-field appearance="standard" style="width: 450px;">
+    <mat-label>Valor</mat-label>
+    <input type="number" matInput placeholder="Valor" [(ngModel)]='valor'>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: left;">
+  <button (click)="save()" mat-button class="gravar-button">Gravar</button>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+</div>
