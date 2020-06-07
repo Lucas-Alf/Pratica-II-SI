@@ -39,7 +39,7 @@ public class Contrato implements Serializable {
     
     @JoinColumn(name = "departamentoid", referencedColumnName = "id")
     @ManyToOne
-    private Departamento departamento;
+    private Departamento departamentoid;
 
     public Integer getMatricula() {
         return matricula;
@@ -97,13 +97,13 @@ public class Contrato implements Serializable {
         this.pessoa = pessoa;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
+	public Departamento getDepartamentoid() {
+		return departamentoid;
+	}
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
+	public void setDepartamentoid(Departamento departamentoid) {
+		this.departamentoid = departamentoid;
+	}
 
     @Override
     public int hashCode() {
@@ -111,7 +111,7 @@ public class Contrato implements Serializable {
         int result = 1;
         result = prime * result + ((dataadmissao == null) ? 0 : dataadmissao.hashCode());
         result = prime * result + ((datademissao == null) ? 0 : datademissao.hashCode());
-        result = prime * result + ((departamento == null) ? 0 : departamento.hashCode());
+        result = prime * result + ((departamentoid == null) ? 0 : departamentoid.hashCode());
         result = prime * result + ((horastrabalho == null) ? 0 : horastrabalho.hashCode());
         result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
         result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
@@ -139,10 +139,10 @@ public class Contrato implements Serializable {
                 return false;
         } else if (!datademissao.equals(other.datademissao))
             return false;
-        if (departamento == null) {
-            if (other.departamento != null)
+        if (departamentoid == null) {
+            if (other.departamentoid != null)
                 return false;
-        } else if (!departamento.equals(other.departamento))
+        } else if (!departamentoid.equals(other.departamentoid))
             return false;
         if (horastrabalho == null) {
             if (other.horastrabalho != null)
@@ -171,5 +171,6 @@ public class Contrato implements Serializable {
             return false;
         return true;
     }
+
 
 }

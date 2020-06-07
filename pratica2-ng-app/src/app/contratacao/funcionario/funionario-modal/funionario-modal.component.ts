@@ -72,7 +72,7 @@ export class FunionarioModalComponent implements OnInit {
     public dialog: MatDialog
   ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); }
 
-  displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamento', 'datademissao'];
+  displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
   storeContrato = new MatTableDataSource();
   selection = new SelectionModel<Contrato>();
 
@@ -188,6 +188,7 @@ export class FunionarioModalComponent implements OnInit {
      // this.dataadmissao.setDate(new Date(r.dataadmissao);
       this.regimetrabalho = r.regimetrabalho;
       this.horastrabalho = r.horastrabalho;
+      //this.departamentoid = r.departamento.id;
       this.departamentoid = r.departamentoid.id;
     }, 300);
   }
