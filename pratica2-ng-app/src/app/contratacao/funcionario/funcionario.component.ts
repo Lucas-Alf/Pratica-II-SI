@@ -8,6 +8,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Pessoa } from './pessoa';
 import { FunionarioModalComponent } from './funionario-modal/funionario-modal.component';
+import { Contrato } from './contrato';
 
 @Component({
   selector: 'app-funcionario',
@@ -123,4 +124,5 @@ export class FuncionarioComponent implements OnInit {
       });
     }
   }
+  
 }

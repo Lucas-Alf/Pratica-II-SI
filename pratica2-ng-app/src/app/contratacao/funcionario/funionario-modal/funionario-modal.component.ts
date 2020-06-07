@@ -178,21 +178,87 @@ export class FunionarioModalComponent implements OnInit {
     });
   }
 
-  incluir(): void {
+  gravar(): void {
+    var teste = this.paisnascimentoid ? { id: this.paisnascimentoid, nome: "" } : null;
+    const pessoa: Pessoa = {
+      cpf: this.cpf,
+      rg: this.rg,
+      nome: this.nome,
+      sexo: this.sexo,
+      datanascimento: this.datanascimento,
+      paisnascimentoid: teste,
+      telefonecelular: this.telefonecelular,
+      telefonefixo: this.telefonefixo,
+      pispasep: this.pispasep,
+      pisexpedicao: this.pisexpedicao,
+      cnhnumero: this.cnhnumero,
+      cnhdata: this.cnhdata,
+      chntipo: this.chntipo,
+      ctpsnumero: this.ctpsnumero,
+      ctpsserie: this.ctpsserie,
+      ctpsuf: this.ctpsuf,
+      nomepai: this.nomepai,
+      nomemae: this.nomemae,
+      tituloeleitornumero: this.tituloeleitornumero,
+      tituloeleitoruf: this.tituloeleitoruf,
+      tituloeleitorzona: this.tituloeleitorzona,
+      tituloeleitorsecao: this.tituloeleitorsecao,
+      certificadoreservista: this.certificadoreservista,
+      enderecoid: {
+        id: this.enderecoid,
+        logradouro: '',
+        bairro: '',
+        cep: '',
+        cidadeid: null
+      },
+      email: this.email,
+      numero: this.numero,
+    };
+    const dados: Contrato = {
+      matricula: this.matricula,
+      situacao: parseInt(this.situacao),
+      dataadmissao: this.dataadmissao,
+      regimetrabalho: parseInt(this.regimetrabalho),
+      horastrabalho: this.horastrabalho,
+      datademissao: this.datademissao,
+      departamentoid: { id: this.departamentoid, nome: '', descricao: '' },
+      pessoa: pessoa,
+    };
+    this.salvarContrato(dados);
+  }
+
+  salvarContrato(data: Contrato): void {
+    this.loaderService.show();
+    axios.post(this.constant.apiUrl + 'contrato/' + (data.matricula ? 'Alterar' : 'Incluir'), data).then((response) => {
+      if (response && response.data) {
+        this.loaderService.hide();
+        this.listarContrato(this.cpf);
+        this.cancelar();
+      } else {
+        this.loaderService.hide();
+        this.snackBar.open('Ocorreu um erro ao salvar o contrato. 😬', null, { duration: 5000 });
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      if (error.response) {
+        console.error(error.response.data.message);
+        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+      } else {
+        this.snackBar.open('Ocorreu um erro ao salvar o contrato. 😬', null, { duration: 5000 });
+      }
+    });
   }
   alterar(): void {
     setTimeout(() => {
-      console.log('ANTES sit ' + this.situacao + ' dataadmissao ' +  this.dataadmissao + ' regimetrabalho '+  this.regimetrabalho );
-
       var r = this.selection.selected[0];
-      console.log(r);
       this.situacao = r.situacao.toString();
       this.dataadmissao = r.dataadmissao;
       this.regimetrabalho = r.regimetrabalho.toString();
       this.horastrabalho = r.horastrabalho;
       this.departamentoid = r.departamentoid.id;
+      this.matricula = r.matricula;
 
-      console.log('ALTEROU sit ' + this.situacao + ' dataadmissao ' +  this.dataadmissao + ' regimetrabalho '+  this.regimetrabalho );
+      console.log('ALTEROU ' + this.matricula);
     }, 300);
   }
   cancelar(): void {
@@ -202,14 +268,15 @@ export class FunionarioModalComponent implements OnInit {
     this.horastrabalho = null;
     this.departamentoid = null;
     this.datademissao = null;
+    this.matricula = null;
     this.selection.clear();
-    console.log('CANCELOU sit ' + this.situacao + ' dataadmissao ' +  this.dataadmissao + ' regimetrabalho '+  this.regimetrabalho );
+    console.log('CANCELOU  ' + this.matricula);
   }
   incluirDependente(): void {
     this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
   }
   ngOnInit(): void {
-    console.log("SEXO " +  this.sexo + " -"  + this.data.info.sexo);
+    console.log("SEXO " + this.sexo + " -" + this.data.info.sexo);
     if (this.data.info) {
       this.listarContrato(this.data.info.cpf);
       this.cpf = this.data.info.cpf;

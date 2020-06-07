@@ -265,14 +265,14 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill" style="width: 200px;" class="fim">
-                <mat-label style="color:red">Data Demissão</mat-label>
+                <mat-label style="color:darkslateblue">Data Demissão</mat-label>
                 <input [(ngModel)]='datademissao' disabled matInput [matDatepicker]="picker23">
                 <mat-datepicker-toggle matSuffix [for]="picker23"></mat-datepicker-toggle>
                 <mat-datepicker #picker23 disabled="false"></mat-datepicker>
             </mat-form-field>
 
             <div style="width: 100%;">
-                <button (click)="incluir()" mat-stroked-button class="crud-button">
+                <button (click)="gravar()" mat-stroked-button class="crud-button">
                     <mat-icon>check</mat-icon> Gravar
                 </button>
                 <!-- <button (click)="alterar()" mat-stroked-button class="crud-button">
@@ -285,10 +285,10 @@
                     <mat-icon>mediation</mat-icon> Cargo
                 </button>
                 <mat-divider style="margin-top:40px;margin-bottom:5px"></mat-divider>
-                <span style="color: grey;">Selecione o contrato que deseja alterar</span>
+                <span style="color: darkslateblue;">Selecione o contrato que deseja alterar.</span>
             </div>
             <div class="table-container">
-                <mat-table [dataSource]="storeContrato" style="width: 100%">
+                <table mat-table [dataSource]="storeContrato" style="width: 100%">
                     <ng-container matColumnDef="select">
                         <th style="width: 9%;" mat-header-cell *matHeaderCellDef>
                             <!-- <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
@@ -337,7 +337,7 @@
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </mat-table>
+                </table>
             </div>
         </mat-tab>
         <mat-tab label="Dependentes">
