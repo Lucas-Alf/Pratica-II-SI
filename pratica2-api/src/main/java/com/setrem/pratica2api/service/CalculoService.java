@@ -101,6 +101,14 @@ public class CalculoService {
                         throw new Exception("Rotina não implementada.");
                 }
             }
+
+            // Exclui Recibos e Cálculos Antigos
+            var excluirStatement = conexao.createStatement();
+            excluirStatement.executeUpdate("DELETE FROM recibo WHERE contratomatricula = " + contratoMatricula
+                    + " AND \"data\" BETWEEN CAST('" + cache.getPeriodoCalculo().getDataInicial().toString()
+                    + "' AS date) AND CAST('" + cache.getPeriodoCalculo().getDataFinal().toString()
+                    + "' AS date) AND execucao = " + cache.getPeriodoCalculo().getExecucao());
+
             // Salva o recibo
             var contratoRecibo = new Contrato();
             contratoRecibo.setMatricula(contratoMatricula);
