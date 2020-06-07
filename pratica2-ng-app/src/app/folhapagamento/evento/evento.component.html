@@ -21,27 +21,23 @@
           </mat-form-field>
         </div>
       </div>
-      <table mat-table [dataSource]="storeEvento">
+      <mat-table [dataSource]="storeEvento">
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
             </mat-checkbox>
           </th>
           <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
             </mat-checkbox>
           </td>
         </ng-container>
         <ng-container matColumnDef="tipo">
           <th style="width: 5%;" mat-header-cell *matHeaderCellDef> Tipo </th>
           <td mat-cell *matCellDef="let evento" [ngSwitch]="evento.tipo">
-            <img *ngSwitchCase="'V'" style="height: 20px;" src="../../assets/img/vencimento.png"
-              matTooltip="Vencimento" />
+            <img *ngSwitchCase="'V'" style="height: 20px;" src="../../assets/img/vencimento.png" matTooltip="Vencimento" />
             <img *ngSwitchCase="'B'" style="height: 20px;" src="../../assets/img/base.png" matTooltip="Base" />
-            <img *ngSwitchCase="'D'" style="height: 20px;" src="../../assets/img/desconto.png"
-              matTooltip="Desconto" />
+            <img *ngSwitchCase="'D'" style="height: 20px;" src="../../assets/img/desconto.png" matTooltip="Desconto" />
           </td>
         </ng-container>
         <ng-container matColumnDef="id">
@@ -69,7 +65,7 @@
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+      </mat-table>
     </mat-card>
   </div>
   <app-rodape-sistema></app-rodape-sistema>
