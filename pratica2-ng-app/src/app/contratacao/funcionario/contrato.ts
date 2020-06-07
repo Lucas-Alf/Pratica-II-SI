@@ -1,5 +1,5 @@
 import { Pessoa } from './pessoa';
-import { Departamento } from 'src/app/recrutamento/cargo/cargo-modal/cargo-modal.component';
+import { Departamento } from '../departamento/departamento';
 
 export interface Contrato {
   matricula: number;
