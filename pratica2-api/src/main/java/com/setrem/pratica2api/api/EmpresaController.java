@@ -38,6 +38,8 @@ public class EmpresaController {
     @CrossOrigin(origins = "*", methods = { RequestMethod.POST })
     @PostMapping("/Alterar")
     public Empresa update(@RequestBody Empresa data, BindingResult bindingResult) throws Exception {
+        Empresa empresa = this.EmpresaRepository.findAll().get(0);
+        if (empresa != null) data.setCnpj(empresa.getCnpj());
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
