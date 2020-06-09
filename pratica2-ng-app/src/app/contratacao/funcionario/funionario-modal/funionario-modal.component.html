@@ -232,7 +232,7 @@
         <mat-tab label="Contrato">
             <br>
             <mat-form-field appearance="fill" class="normal" style="width:140px;">
-                <mat-select required [(ngModel)]='situacao'>
+                <mat-select required [(ngModel)]='situacao' (change)="verificaDataDem()">
                     <mat-option value="1">Ativo</mat-option>
                     <mat-option value="2">Afastado</mat-option>
                     <mat-option value="3">Desligado</mat-option>

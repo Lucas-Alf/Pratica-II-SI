@@ -275,6 +275,9 @@ export class FunionarioModalComponent implements OnInit {
   incluirDependente(): void {
     this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
   }
+  verificaDataDem():void{
+
+  }
   ngOnInit(): void {
     console.log("SEXO " + this.sexo + " -" + this.data.info.sexo);
     if (this.data.info) {
