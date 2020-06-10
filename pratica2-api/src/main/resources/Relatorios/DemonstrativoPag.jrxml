@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DemonstrativoPag" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true" uuid="ee578027-a995-481f-9c81-f15b8df85aa9">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="praticaII"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Postgre Prática II"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="Matricula" class="java.lang.Integer"/>
-	<parameter name="Imagem" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT evento.id as CodEvento, evento.descricao as DescEvento, evento.tipo as TipoEvento, calculo.valor as ValCalculo, 
-	pessoa.nome as NomePessoa, cargo.descricao as DescCargo, contrato.matricula as MatContrato, cargo.cboid as CboCargo, pessoa.cpf as CPFPessoa, contrato.horastrabalho as horaContrato, pessoa.pispasep as PisPasepPessoa, to_char(contrato.dataadmissao, 'DD/MM/YYYY') as AdmiDataContrato, departamento.nome as NomeDepart, 
+	pessoa.nome as NomePessoa, calculo.referencia AS referencia, cargo.descricao as DescCargo, contrato.matricula as MatContrato, cargo.cboid as CboCargo, pessoa.cpf as CPFPessoa, contrato.horastrabalho as horaContrato, pessoa.pispasep as PisPasepPessoa, to_char(contrato.dataadmissao, 'DD/MM/YYYY') as AdmiDataContrato, departamento.nome as NomeDepart, 
 	(case when recibo.execucao = 1 then 'Mensal' when recibo.execucao = 2 then 'Férias' when recibo.execucao = 3 then 'Adt. 13º' when recibo.execucao = 4 then '13ª Final' when recibo.execucao = 5 then 'Desligamento' when recibo.execucao = 6 then 'Folha Avulsa' else 'Adt. Quinzenal' end) as execucao,
 	(select ((percentual/100) * valorbase) as salario from faixatabelasalarial inner join tabelasalarial on tabelasalarial.id = faixatabelasalarial.id where faixatabelasalarial.id = ( select faixatabelasalarialid from cargo where id = ( select cargoid from historicocargocontrato where matricula = contrato.matricula and data <= (SELECT datafinal
           FROM periodocalculo
@@ -143,6 +142,7 @@ ORDER BY evento.tipo DESC,
 	<field name="periodo" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="periodo"/>
 	</field>
+	<field name="referencia" class="java.lang.Double"/>
 	<variable name="TotVenc" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[(($F{tipoevento}.equalsIgnoreCase( "v" ))? $F{valcalculo}:0)]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
@@ -157,16 +157,12 @@ ORDER BY evento.tipo DESC,
 	<pageHeader>
 		<band height="158" splitType="Stretch">
 			<frame>
-				<reportElement x="471" y="0" width="79" height="80" uuid="e18b8bb7-d870-4b9d-9709-d1a31be49985">
+				<reportElement x="470" y="0" width="80" height="80" uuid="e18b8bb7-d870-4b9d-9709-d1a31be49985">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
-				<image>
-					<reportElement x="1" y="17" width="78" height="46" uuid="11e3c78e-43a9-461c-ac25-ee4645442538"/>
-					<imageExpression><![CDATA[""+$P{Imagem}+""]]></imageExpression>
-				</image>
 			</frame>
 			<frame>
 				<reportElement x="0" y="0" width="80" height="80" uuid="3b32b238-8ffa-4c59-8456-126b336c514b">
@@ -177,8 +173,8 @@ ORDER BY evento.tipo DESC,
 					<pen lineWidth="1.0"/>
 				</box>
 				<image>
-					<reportElement x="1" y="17" width="79" height="46" uuid="e329cacd-ce69-4f57-8140-be4bcd083b9a"/>
-					<imageExpression><![CDATA[""+$P{Imagem}+""]]></imageExpression>
+					<reportElement x="4" y="19" width="76" height="44" uuid="e329cacd-ce69-4f57-8140-be4bcd083b9a"/>
+					<imageExpression><![CDATA["http://localhost:4200/assets/img/logos/ColoridoOriginal.png"]]></imageExpression>
 				</image>
 			</frame>
 			<frame>
@@ -324,7 +320,7 @@ ORDER BY evento.tipo DESC,
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="19" splitType="Stretch">
 			<frame>
 				<reportElement x="0" y="0" width="30" height="19" uuid="5f995a32-65e7-4b8c-9408-5f8136d220c6"/>
 				<staticText>
@@ -342,9 +338,9 @@ ORDER BY evento.tipo DESC,
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="30" y="0" width="260" height="19" uuid="85e91e98-185d-442b-8007-f81f6c67f820"/>
+				<reportElement x="30" y="0" width="204" height="19" uuid="85e91e98-185d-442b-8007-f81f6c67f820"/>
 				<staticText>
-					<reportElement x="0" y="0" width="260" height="19" uuid="55a0c46c-8c79-4e74-b542-48af164e6042">
+					<reportElement x="0" y="0" width="204" height="19" uuid="55a0c46c-8c79-4e74-b542-48af164e6042">
 						<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 					</reportElement>
 					<box>
@@ -383,15 +379,31 @@ ORDER BY evento.tipo DESC,
 					<text><![CDATA[Descontos]]></text>
 				</staticText>
 			</frame>
+			<staticText>
+				<reportElement x="234" y="0" width="57" height="19" uuid="61a5d2ac-380c-4556-a599-3e30820b16d6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c415af63-dd43-4a58-b5a6-537fae662579"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ref.]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField isBlankWhenNull="true">
-				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="30" height="21" isRemoveLineWhenBlank="true" uuid="6fb18ee5-28e1-448c-b54c-dcbb05fb5d7f">
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="30" height="18" isRemoveLineWhenBlank="true" uuid="6fb18ee5-28e1-448c-b54c-dcbb05fb5d7f">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="0.0"/>
@@ -403,8 +415,9 @@ ORDER BY evento.tipo DESC,
 				<textFieldExpression><![CDATA[$F{codevento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement isPrintRepeatedValues="false" x="30" y="0" width="260" height="21" isRemoveLineWhenBlank="true" uuid="55620bd6-e59d-4775-b0e2-94d077194c14">
+				<reportElement isPrintRepeatedValues="false" x="30" y="0" width="204" height="18" isRemoveLineWhenBlank="true" uuid="55620bd6-e59d-4775-b0e2-94d077194c14">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
@@ -413,9 +426,10 @@ ORDER BY evento.tipo DESC,
 				<textFieldExpression><![CDATA[$F{descevento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement isPrintRepeatedValues="false" x="290" y="0" width="130" height="21" isRemoveLineWhenBlank="true" uuid="956249ea-6152-45a5-96f1-125e7d03fd8b">
+				<reportElement isPrintRepeatedValues="false" x="290" y="0" width="130" height="18" isRemoveLineWhenBlank="true" uuid="956249ea-6152-45a5-96f1-125e7d03fd8b">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$F{tipoevento}.equalsIgnoreCase( "v" )]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -425,9 +439,10 @@ ORDER BY evento.tipo DESC,
 				<textFieldExpression><![CDATA[$F{valcalculo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement isPrintRepeatedValues="false" x="420" y="0" width="130" height="21" isRemoveLineWhenBlank="true" uuid="b7423e32-7b3b-4837-bf9b-2ae7af7f16f9">
+				<reportElement isPrintRepeatedValues="false" x="420" y="0" width="130" height="18" isRemoveLineWhenBlank="true" uuid="b7423e32-7b3b-4837-bf9b-2ae7af7f16f9">
 					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$F{tipoevento}.equalsIgnoreCase( "d" )]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -437,19 +452,29 @@ ORDER BY evento.tipo DESC,
 				<textFieldExpression><![CDATA[$F{valcalculo}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="550" y="-1" width="1" height="22" uuid="c60bb7e3-cead-45d4-9bf1-d48f52955945">
+				<reportElement x="550" y="0" width="1" height="18" uuid="c60bb7e3-cead-45d4-9bf1-d48f52955945">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="0" y="-1" width="1" height="22" uuid="229cc064-d94a-4b2d-8635-f9c7919378ce">
+				<reportElement x="0" y="0" width="1" height="18" uuid="229cc064-d94a-4b2d-8635-f9c7919378ce">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="234" y="0" width="56" height="18" uuid="2ea22f05-088f-4e32-b0a7-304fcdbeec78">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c415af63-dd43-4a58-b5a6-537fae662579"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{referencia}>0?$F{referencia}:null]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
