@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -13,7 +13,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Departamento } from 'src/app/recrutamento/cargo/cargo-modal/cargo-modal.component';
 import { Contrato } from '../contrato';
 import { DependenteModalComponent } from '../dependente-modal/dependente-modal.component';
-import { find } from 'rxjs/operators';
+import { find, startWith, map } from 'rxjs/operators';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { Observable } from 'rxjs';
+import { Dependente } from '../dependente';
 
 @Component({
   selector: 'app-funionario-modal',
@@ -58,11 +63,24 @@ export class FunionarioModalComponent implements OnInit {
   departamentoid: number;
   datademissao: Date;
 
+  dependente: Pessoa;
+
   paises: Pais[];
   enderecos: Endereco[];
   departamentos: Departamento[];
+  //dependentes: Pessoa[];
   validador: FormGroup;
   dialogRef2: MatDialogRef<DependenteModalComponent, any>;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  DependentesCtrl = new FormControl();
+  filteredDependentes: Observable<Dependente[]>;
+  dependentes: any[] = [];
+  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<FunionarioModalComponent>, private snackBar: MatSnackBar,
@@ -70,7 +88,7 @@ export class FunionarioModalComponent implements OnInit {
     private constant: ConstantsService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog
-  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); }
+  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); this.listarDependentes();}
 
   displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
   storeContrato = new MatTableDataSource();
@@ -93,6 +111,56 @@ export class FunionarioModalComponent implements OnInit {
     });
   }
 
+  listarDependentes(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'pessoa/findDepedente').then((response) => {
+      if (response && response.data) {
+           this.dependentes = response.data;
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
+  listarDependente(cpf): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'dependente/all').then((response) => {
+      if (response && response.data) {
+        this.dependentes = response.data;
+        if (this.cpf) {
+          this.filteredDependentes = this.DependentesCtrl.valueChanges.pipe(
+            startWith(null),
+            map((item: string | null) => item ? this._filter(item) : this.dependentes.filter(x => x.pessoacpf != this.cpf).slice()));
+        } else {
+          this.filteredDependentes = this.DependentesCtrl.valueChanges.pipe(
+            startWith(null),
+            map((item: string | null) => item ? this._filter(item) : this.dependentes.slice()));
+        }
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
+  private _filter(value: any): Dependente[] {
+    if (value && value.pessoacpf.nome) {
+      value = value.pessoacpf.nome;
+    }
+    if (value) {
+      const filterValue = value.toLowerCase();
+      if (this.cpf) {
+        return this.dependentes.filter(item => item.pessoacpf.cpf != this.cpf && item.nome.toLowerCase().includes(filterValue));
+      } else {
+        return this.dependentes.filter(item => item.pessoacpf.nome.toLowerCase().includes(filterValue));
+      }
+    }
+  }
   listarContrato(cpf): void {
     this.loaderService.show();//this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf
     // calculo/buscaPorContrato?matricula=
@@ -272,16 +340,49 @@ export class FunionarioModalComponent implements OnInit {
     this.selection.clear();
     console.log('CANCELOU  ' + this.matricula);
   }
+  verificaDataDem(): void {
+
+  }
   incluirDependente(): void {
     this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
   }
-  verificaDataDem():void{
 
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      // this.incidenciasAtingidas.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.DependentesCtrl.setValue(null);
+  }
+
+  remove(item: Pessoa): void {
+    const index = this.dependentes.indexOf(item);
+
+    if (index >= 0) {
+      this.dependentes.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    if (!this.dependentes.includes(event.option.value)) {
+      this.dependentes.push(event.option.value);
+    }
+    this.fruitInput.nativeElement.value = '';
+    this.DependentesCtrl.setValue(null);
   }
   ngOnInit(): void {
     console.log("SEXO " + this.sexo + " -" + this.data.info.sexo);
     if (this.data.info) {
       this.listarContrato(this.data.info.cpf);
+      this.listarDependente(this.data.info.cpf);
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;
       this.paisnascimentoid = this.data.info.paisnascimentoid ? this.data.info.paisnascimentoid.id : null;

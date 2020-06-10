@@ -36,6 +36,10 @@
     color: black;
 }
 
+.example-chip-list {
+    width: 90%;
+}
+
 .cancelar-button:hover {
     background-color: #cc6060;
     color: white;

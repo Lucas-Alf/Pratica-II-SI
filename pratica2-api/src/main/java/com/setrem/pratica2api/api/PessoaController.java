@@ -23,7 +23,18 @@ public class PessoaController {
         var empresas = this.PessoaRepository.findAll();
         return empresas;
     }
+    @GetMapping("/findDepedente") // Teste: http://localhost:8080/api/empresa/all
+    public List<Pessoa> findDepedente() {
+        var dependentes = this.PessoaRepository.findDepedentes();
+        return dependentes;
+    }
 
+    @GetMapping("/findDepedentesCpf") 
+    public List<Pessoa> findDepedentesCpf(String cpf) {
+        var dependentes = this.PessoaRepository.findDepedentesCpf(cpf);
+        return dependentes;
+    }
+    
     @GetMapping("/contratos") //
     public List<Pessoa> contratos() {
         var empresas = this.PessoaRepository.findAll();

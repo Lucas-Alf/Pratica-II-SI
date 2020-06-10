@@ -103,6 +103,24 @@
                 <mat-label>Certificado de Reservista</mat-label>
                 <input type="number" matInput placeholder=" Certificado de Reservista" [(ngModel)]='certificadoreservista'>
             </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="example-chip-list" id="dependenteChips">
+                <mat-chip-list #chipList aria-label="Dependente(s)">
+                    <mat-chip *ngFor="let item of dependentes" [selectable]="selectable" [removable]="removable" (removed)="remove(item)">
+                        {{item.nome}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Dependente" #fruitInput [formControl]="DependentesCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let item of filteredDependentes | async" [value]="item">
+                        {{item.nome}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <button (click)="incluirDependente()" style="margin-left: 20px;" mat-stroked-button class="crud-button" matTooltip="Utilize essa função caso o dependente não esteja no sistema.">
+                <mat-icon>add</mat-icon> Novo
+            </button>
 
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true" style="margin:3px;">
@@ -315,8 +333,10 @@
                         <td mat-cell *matCellDef="let contrato"> {{contrato.matricula}} </td>
                     </ng-container>
                     <ng-container matColumnDef="dataadmissao">
-                        <th style="width: 15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data de Admissão </th>
-                        <td style="text-align: center;" mat-cell *matCellDef="let contrato"> {{contrato.dataadmissao | date: 'dd/MM/yyyy'}} </td>
+                        <th style="width: 15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data de Admissão
+                        </th>
+                        <td style="text-align: center;" mat-cell *matCellDef="let contrato">
+                            {{contrato.dataadmissao | date: 'dd/MM/yyyy'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="regimetrabalho">
                         <th style="width: 15%;" mat-header-cell *matHeaderCellDef> Regime de Trabalho </th>
@@ -325,29 +345,66 @@
                     </ng-container>
                     <ng-container matColumnDef="horastrabalho">
                         <th style="width: 10%;text-align: center;" mat-header-cell *matHeaderCellDef> Horas </th>
-                        <td style="text-align: center;" mat-cell *matCellDef="let contrato"> {{contrato.horastrabalho}} hrs</td>
+                        <td style="text-align: center;" mat-cell *matCellDef="let contrato"> {{contrato.horastrabalho}} hrs
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="departamentoid">
                         <th style="width: 25%;" mat-header-cell *matHeaderCellDef> Departamento </th>
                         <td mat-cell *matCellDef="let contrato"> {{contrato.departamentoid.nome}} </td>
                     </ng-container>
                     <ng-container matColumnDef="datademissao">
-                        <th style="width: 15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data Demissão </th>
-                        <td style="text-align: center;" mat-cell *matCellDef="let contrato"> {{contrato.datademissao | date: 'dd/MM/yyyy'}} </td>
+                        <th style="width: 15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data Demissão
+                        </th>
+                        <td style="text-align: center;" mat-cell *matCellDef="let contrato">
+                            {{contrato.datademissao | date: 'dd/MM/yyyy'}} </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
         </mat-tab>
-        <mat-tab label="Dependentes">
-            <button (click)="incluirDependente()" mat-stroked-button class="crud-button">
-                <mat-icon>add</mat-icon> Incluir
+        <!-- <mat-tab label="Dependentes">
+            <br>
+            <button (click)="incluirDependente()" mat-stroked-button class="crud-button" matTooltip="Utilize essa função caso o dependente não esteja no sistema.">
+                <mat-icon>add</mat-icon> Novo
+            </button>
+            <mat-form-field class="example-chip-list" id="dependenteChips">
+                <mat-chip-list #chipList aria-label="Dependente(s)">
+                    <mat-chip *ngFor="let item of dependentes" [selectable]="selectable" [removable]="removable" (removed)="remove(item)">
+                        {{item.nome}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Dependente" #fruitInput [formControl]="DependentesCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let item of filteredDependentes | async" [value]="item">
+                        {{item.nome}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="fill" style="width: 550px;" class="normal">
+                <mat-label>Dependente</mat-label>
+                <mat-select required [(ngModel)]='dependente'>
+                    <mat-option *ngFor="let pessoa of dependentes" [value]="pessoa.nome">
+                        {{pessoa.nome}}
+                        <div style="float: right;">Cpf: {{pessoa.cpf}}</div>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button (click)="incluirDependente()" mat-stroked-button class="crud-button" matTooltip="Utilize essa função caso o dependente não esteja no sistema.">
+                <mat-icon >add</mat-icon> Novo
+            </button>
+            <br>
+            <button (click)="gravar()" mat-stroked-button class="crud-button">
+                <mat-icon>check</mat-icon> Gravar
             </button>
             <button (click)="cancelar()" mat-stroked-button class="crud-button">
                 <mat-icon>delete</mat-icon> Excluir
             </button>
-        </mat-tab>
+        </mat-tab> -->
     </mat-tab-group>
 </div>
 <div mat-dialog-actions style="float: left;">
