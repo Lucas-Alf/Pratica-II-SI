@@ -13,11 +13,10 @@
       </div>
       <a class="link-div">
         <div class="table-container">
-          <mat-table [dataSource]="storeVagaExterno" class="tabela">
+          <table mat-table [dataSource]="storeVagaExterno" class="tabela">
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef class="th-tabela"></th>
-              <td mat-cell *matCellDef="let vaga" class="td-tabela"> <b class="link-vaga"
-                  href="#">{{vaga.descricao}}</b>
+              <td mat-cell *matCellDef="let vaga" class="td-tabela"> <b class="link-vaga" href="#">{{vaga.descricao}}</b>
 
                 <p class="texto-vaga">{{vaga.quantidade}} Vagas - Disponível até {{vaga.prazo | date: 'dd/MM/yyyy'}}</p>
                 <p class="texto-cargo"><b>Cargo:</b> {{vaga.cargoid.cboid.id}} - {{vaga.cargoid.descricao}} |
@@ -29,7 +28,7 @@
               </td>
             </ng-container>
             <tr mat-row (click)="abrirModalRecrutExterno(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
-          </mat-table>
+          </table>
         </div>
       </a>
     </mat-card>

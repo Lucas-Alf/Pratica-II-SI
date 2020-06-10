@@ -6,14 +6,14 @@
         <mat-card style="margin-top: 13px;">
             <div style="width: 100%; display:inline-block;">
                 <button (click)="incluir()" mat-stroked-button class="crud-button">
-          <mat-icon>add</mat-icon> Incluir
-        </button>
+                    <mat-icon>add</mat-icon> Incluir
+                </button>
                 <button (click)="alterar()" mat-stroked-button class="crud-button">
-          <mat-icon>edit</mat-icon> Alterar
-        </button>
+                    <mat-icon>edit</mat-icon> Alterar
+                </button>
                 <button (click)="excluir()" mat-stroked-button class="crud-button">
-          <mat-icon>delete</mat-icon> Excluir
-        </button>
+                    <mat-icon>delete</mat-icon> Excluir
+                </button>
                 <div style="float: right;">
                     <mat-form-field style="margin-right: 10px;">
                         <mat-label>🔎 Pesquisar</mat-label>
@@ -21,7 +21,7 @@
                     </mat-form-field>
                 </div>
             </div>
-            <mat-table [dataSource]="storeBeneficio">
+            <table mat-table [dataSource]="storeBeneficio">
                 <ng-container matColumnDef="select">
                     <th mat-header-cell *matHeaderCellDef>
                         <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
@@ -50,7 +50,7 @@
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </mat-table>
+            </table>
         </mat-card>
     </div>
     <app-rodape-sistema></app-rodape-sistema>
