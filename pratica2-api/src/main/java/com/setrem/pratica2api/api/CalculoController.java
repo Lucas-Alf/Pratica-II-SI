@@ -48,7 +48,6 @@ public class CalculoController {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
         parametros.put("Matricula", matricula);
-        parametros.put("Imagem", "/relatorios/ColoridoOriginal.png");
 
         byte[] reportBytes = null;
         SessionFactory sessionFactory = new SessionFactory();
