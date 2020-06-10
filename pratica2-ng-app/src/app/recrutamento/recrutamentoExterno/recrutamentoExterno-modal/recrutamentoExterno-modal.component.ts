@@ -221,6 +221,7 @@ export class RecrutamentoExternoModalComponent implements OnInit {
     this.loaderService.show();
     axios.get(this.apiUrl + 'idioma/all').then((response) => {
       if (response && response.data) {
+        debugger
         this.idiomas = response.data;
         if (this.idiomaId) {
           this.filteredPessoaIdioma = this.PessoaIdiomaCtrl.valueChanges.pipe(
@@ -253,6 +254,7 @@ export class RecrutamentoExternoModalComponent implements OnInit {
   }
 
   removePessoaIdioma(item: Idioma): void {
+    debugger
     const index = this.pessoaIdiomas.indexOf(item);
 
     if (index >= 0) {
@@ -279,6 +281,7 @@ export class RecrutamentoExternoModalComponent implements OnInit {
   }
 
   private _filterPessoaIdioma(value: any): Idioma[] {
+    debugger
     if (value && value.descricao) {
       value = value.descricao;
     }

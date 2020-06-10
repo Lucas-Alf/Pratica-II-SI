@@ -97,6 +97,7 @@ import { CalculoComponent } from './folhapagamento/calculo/calculo.component';
 import { DependenteModalComponent } from './contratacao/funcionario/dependente-modal/dependente-modal.component';
 import { EventoVariavelComponent } from './folhapagamento/evento-variavel/evento-variavel.component';
 import { EventoVariavelModalComponent } from './folhapagamento/evento-variavel/evento-variavel-modal/evento-variavel-modal.component';
+import { SelecaoCandidatoComponent } from './recrutamento/selecaoCandidato/selecaoCandidato.component';
 
 @NgModule({
   declarations: [
@@ -158,7 +159,8 @@ import { EventoVariavelModalComponent } from './folhapagamento/evento-variavel/e
     CalculoComponent,
     DependenteModalComponent,
     EventoVariavelComponent,
-    EventoVariavelModalComponent
+    EventoVariavelModalComponent,
+    SelecaoCandidatoComponent
   ],
   imports: [
     BrowserModule,
