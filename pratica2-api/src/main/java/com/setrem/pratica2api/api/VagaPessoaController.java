@@ -2,10 +2,15 @@ package com.setrem.pratica2api.api;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
 
 import javax.validation.ValidationException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.setrem.pratica2api.model.PessoaConhecimento;
 import com.setrem.pratica2api.model.PessoaHabilidadesAtitudes;
@@ -45,6 +50,47 @@ public class VagaPessoaController {
         return this.VagaPessoaRepository.findAll();
     }
 
+    @GetMapping("/listarSelecao")
+    public List<VagaPessoa> listarSelecao(/*List<String> idioma*/) {
+        //String filtros = " and c.idiomaid = 2 ";
+        //String filtros = "";
+        return this.VagaPessoaRepository.ListarSelecao();
+    }
+
+    @GetMapping("/listarSelecao2")
+    public List<VagaPessoa> listarSelecao2(String valorCPF, String valorNome, String valorSexo, String valorVaga,
+    String idioma, String habilidadeAtitude, String conhecimento) {
+        List<Integer> filtroIdioma = Arrays.asList();
+        if (idioma != "") {
+            List<String> filtroI = new ArrayList<String>(Arrays.asList(idioma.split(",")));
+            filtroIdioma = filtroI.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+        }
+
+        List<Integer> filtroHabilidadeAtitude = Arrays.asList();
+        if (habilidadeAtitude != "") {
+            List<String> filtroHA = new ArrayList<String>(Arrays.asList(habilidadeAtitude.split(",")));
+            filtroHabilidadeAtitude = filtroHA.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+        }
+
+        List<Integer> filtroConhecimento = Arrays.asList();
+        if (conhecimento != "") {
+            List<String> filtroC = new ArrayList<String>(Arrays.asList(conhecimento.split(",")));
+            filtroConhecimento = filtroC.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+        }
+
+        if (filtroIdioma.size() != 0 && filtroHabilidadeAtitude.size() == 0 && filtroConhecimento.size() == 0) {
+            return this.VagaPessoaRepository.ListarSelecao_Idioma(valorCPF, valorNome, valorSexo, valorVaga, filtroIdioma);
+        } else if (filtroIdioma.size() == 0 && filtroHabilidadeAtitude.size() != 0 && filtroConhecimento.size() == 0) {
+            return this.VagaPessoaRepository.ListarSelecao_HabilidadeAtitude(valorCPF, valorNome, valorSexo, valorVaga, filtroHabilidadeAtitude);
+        } else if (filtroIdioma.size() == 0 && filtroHabilidadeAtitude.size() == 0 && filtroConhecimento.size() != 0) {
+            return this.VagaPessoaRepository.ListarSelecao_Conhecimento(valorCPF, valorNome, valorSexo, valorVaga, filtroConhecimento);
+        } else if (filtroIdioma.size() != 0 && filtroHabilidadeAtitude.size() != 0 && filtroConhecimento.size() != 0) {
+            return this.VagaPessoaRepository.ListarSelecao_TodosFiltros(valorCPF, valorNome, valorSexo, valorVaga, filtroIdioma, filtroHabilidadeAtitude, filtroConhecimento);
+        } else {
+            return this.VagaPessoaRepository.ListarSelecaoTodos(valorCPF, valorNome, valorSexo, valorVaga);
+        }
+    }
+
     @PostMapping("/Incluir")
     public VagaPessoa add(@RequestBody VagaPessoa data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
@@ -67,8 +113,6 @@ public class VagaPessoaController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-
-        //this.PessoaRepository.save(data.getCpf());
 
         PessoaIdiomaRepository.deleteByCpf(data.getCpf().getCpf());
         for (PessoaIdioma pessoaIdioma : data.getCpf().getPessoaIdiomas()) {

@@ -23,10 +23,15 @@ public class ContratoController {
     public List<Contrato> all() {
         return this.ContratoRepository.findAll();
     }
- 
+
+    @GetMapping("/listagemFolhaPagamento")
+    public List<Contrato> listagemFolhaPagamento() {
+        return this.ContratoRepository.RetornaParaFolhaDePagamento();
+    }
+
     @GetMapping("/findByCpf")
     public List<Contrato> findByCpf(String cpf) {
-       return this.ContratoRepository.findByCpf(cpf);
+        return this.ContratoRepository.findByCpf(cpf);
     }
 
     @PostMapping("/Incluir")

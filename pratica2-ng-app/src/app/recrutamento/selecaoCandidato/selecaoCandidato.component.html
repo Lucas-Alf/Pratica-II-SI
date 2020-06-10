@@ -1,0 +1,99 @@
+<app-recrutamento-menu-lateral></app-recrutamento-menu-lateral>
+<div style="margin-left: 250px;">
+  <app-cabecalho-sistema></app-cabecalho-sistema>
+  <div style="margin: 15px;">
+    <mat-card><b>Seleção de Candidatos</b></mat-card>
+    <mat-card style="margin-top: 13px;">
+
+      <mat-form-field style="width: 20%; margin-right: 10px;">
+        <mat-label>CPF</mat-label>
+        <input matInput [(ngModel)]='valorCPF'>
+      </mat-form-field>
+      <mat-form-field style="width: 78%;">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]='valorNome'>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="standard" class="normal" style="width: 20%; margin-right: 10px;">
+        <mat-select [(ngModel)]='valorSexo'>
+          <mat-option value="">Ambos</mat-option>
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Feminino</mat-option>
+        </mat-select>
+        <mat-label>Sexo</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" style="width: 30%; margin-right: 10px;">
+        <mat-label>Vaga</mat-label>
+        <mat-select [(ngModel)]='valorVaga'>
+          <mat-option *ngFor="let vaga of vagas" [value]="vaga.id">
+            {{vaga.descricao}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 48%;">
+        <mat-label>Idioma</mat-label>
+        <mat-select multiple [(ngModel)]='valorIdioma'>
+          <mat-option *ngFor="let idioma of idiomas" [value]="idioma.id">
+            {{idioma.descricao}} - {{idioma.nivel}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field><br>
+
+      <mat-form-field style="width: 49.5%; margin-right: 10px;">
+        <mat-label>Habilidade/Atitude</mat-label>
+        <mat-select multiple [(ngModel)]='valorHabilidadeAtitude'>
+          <mat-option *ngFor="let habilidadeAtitude of habilidadeAtitudes" [value]="habilidadeAtitude.id">
+            {{habilidadeAtitude.descricao}} - {{habilidadeAtitude.tipo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 49.5%;">
+        <mat-label>Conhecimento</mat-label>
+        <mat-select multiple [(ngModel)]='valorConhecimento'>
+          <mat-option *ngFor="let conhecimento of conhecimentos" [value]="conhecimento.id">
+            {{conhecimento.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> <br>
+
+      <button (click)="pesquisar()" mat-stroked-button class="crud-button">
+        <mat-icon>search</mat-icon> Pesquisar
+      </button>
+
+      <div class="table-container">
+        <table mat-table [dataSource]="storeSelecaoCandidato">
+          <ng-container matColumnDef="cpf.cpf">
+            <th style="width: 5%;" mat-header-cell *matHeaderCellDef> CPF </th>
+            <td mat-cell *matCellDef="let vagaPessoa"> {{vagaPessoa.cpf.cpf}} </td>
+          </ng-container>
+          <ng-container matColumnDef="cpf.nome">
+            <th style="width: 20%;" mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let vagaPessoa"> {{vagaPessoa.cpf.nome}} </td>
+          </ng-container>
+          <ng-container matColumnDef="cpf.datanascimento">
+            <th style="width: 5%;" mat-header-cell *matHeaderCellDef> Data Nasc. </th>
+            <td mat-cell *matCellDef="let vagaPessoa"> {{vagaPessoa.cpf.datanascimento | date: 'dd/MM/yyyy'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="cpf.sexo">
+            <th style="width: 5%;" mat-header-cell *matHeaderCellDef> Sexo </th>
+            <td mat-cell *matCellDef="let vagaPessoa" [ngSwitch]="vagaPessoa.cpf.sexo">
+              <span *ngSwitchCase="'M'">Masculino</span>
+              <span *ngSwitchCase="'F'">Feminino</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="vagaid.descricao">
+            <th style="width: 15%;" mat-header-cell *matHeaderCellDef> Vaga </th>
+            <td mat-cell *matCellDef="let vagaPessoa"> {{vagaPessoa.vagaid.descricao}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+    </mat-card>
+  </div>
+  <app-rodape-sistema></app-rodape-sistema>
+</div>

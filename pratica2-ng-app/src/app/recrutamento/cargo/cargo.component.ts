@@ -38,6 +38,7 @@ export class CargoComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
+    debugger
     const filterValue = (event.target as HTMLInputElement).value;
     this.storeCargo.filter = filterValue;
   }

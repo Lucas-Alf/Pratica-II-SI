@@ -82,7 +82,7 @@ export class CalculoComponent implements OnInit {
 
   listar(): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'contrato/all').then((response) => {
+    axios.get(this.apiUrl + 'contrato/listagemFolhaPagamento').then((response) => {
       if (response && response.data) {
         this.storeFuncionario.data = response.data;
         this.loaderService.hide();

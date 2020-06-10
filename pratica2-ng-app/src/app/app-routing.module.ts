@@ -28,6 +28,7 @@ import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 import { CalculoComponent } from './folhapagamento/calculo/calculo.component';
 import { EventoVariavelComponent } from './folhapagamento/evento-variavel/evento-variavel.component';
+import { SelecaoCandidatoComponent } from './recrutamento/selecaoCandidato/selecaoCandidato.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'recrutamento/recrutamentoInterno', component: RecrutamentoInternoComponent },
   { path: 'recrutamento/recrutamentoExterno', component: RecrutamentoExternoComponent },
   { path: 'contratacao/beneficio', component: BeneficioComponent },
+  { path: 'recrutamento/selecaoCandidato', component: SelecaoCandidatoComponent },
 ];
 
 @NgModule({

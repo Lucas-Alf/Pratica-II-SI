@@ -17,7 +17,7 @@ public class RotinaSalario {
             List<IncidenciaDTO> incidencias) throws SQLException {
 
         PreparedStatement statement = conexao.prepareStatement(
-                "select ((percentual/100) * valorbase) as salario from faixatabelasalarial inner join tabelasalarial on tabelasalarial.id = faixatabelasalarial.id where faixatabelasalarial.id = ( select faixatabelasalarialid from cargo where id = ( select cargoid from historicocargocontrato where matricula = ? and data <= cast(? as date) order by data desc, id desc limit 1) )");
+                "select ((percentual/100) * valorbase) as salario from faixatabelasalarial inner join tabelasalarial on tabelasalarial.id = faixatabelasalarial.tabelasalarialid where faixatabelasalarial.id = ( select faixatabelasalarialid from cargo where id = ( select cargoid from historicocargocontrato where matricula = ? and data <= cast(? as date) order by data desc, id desc limit 1) )");
         statement.setInt(1, contrato.getMatricula());
         statement.setString(2, cache.getPeriodoCalculo().getDataFinal().toString());
         ResultSet rs = statement.executeQuery();
