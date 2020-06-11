@@ -4,11 +4,12 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Postgre Prática II"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="Matricula" class="java.lang.Integer"/>
+	<parameter name="LOGO_EMPRESA" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[SELECT evento.id as CodEvento, evento.descricao as DescEvento, evento.tipo as TipoEvento, calculo.valor as ValCalculo, 
 	pessoa.nome as NomePessoa, calculo.referencia AS referencia, cargo.descricao as DescCargo, contrato.matricula as MatContrato, cargo.cboid as CboCargo, pessoa.cpf as CPFPessoa, contrato.horastrabalho as horaContrato, pessoa.pispasep as PisPasepPessoa, to_char(contrato.dataadmissao, 'DD/MM/YYYY') as AdmiDataContrato, departamento.nome as NomeDepart, 
 	(case when recibo.execucao = 1 then 'Mensal' when recibo.execucao = 2 then 'Férias' when recibo.execucao = 3 then 'Adt. 13º' when recibo.execucao = 4 then '13ª Final' when recibo.execucao = 5 then 'Desligamento' when recibo.execucao = 6 then 'Folha Avulsa' else 'Adt. Quinzenal' end) as execucao,
-	(select ((percentual/100) * valorbase) as salario from faixatabelasalarial inner join tabelasalarial on tabelasalarial.id = faixatabelasalarial.id where faixatabelasalarial.id = ( select faixatabelasalarialid from cargo where id = ( select cargoid from historicocargocontrato where matricula = contrato.matricula and data <= (SELECT datafinal
+	(select ((percentual/100) * valorbase) as salario from faixatabelasalarial inner join tabelasalarial on tabelasalarial.id = faixatabelasalarial.tabelasalarialid where faixatabelasalarial.id = ( select faixatabelasalarialid from cargo where id = ( select cargoid from historicocargocontrato where matricula = contrato.matricula and data <= (SELECT datafinal
           FROM periodocalculo
           WHERE id =
               (SELECT periodocalculoid
@@ -174,7 +175,7 @@ ORDER BY evento.tipo DESC,
 				</box>
 				<image>
 					<reportElement x="4" y="19" width="76" height="44" uuid="e329cacd-ce69-4f57-8140-be4bcd083b9a"/>
-					<imageExpression><![CDATA["http://localhost:4200/assets/img/logos/ColoridoOriginal.png"]]></imageExpression>
+					<imageExpression><![CDATA[$P{LOGO_EMPRESA}]]></imageExpression>
 				</image>
 			</frame>
 			<frame>
@@ -185,40 +186,27 @@ ORDER BY evento.tipo DESC,
 					<pen lineWidth="1.0"/>
 				</box>
 				<staticText>
-					<reportElement x="0" y="1" width="390" height="18" uuid="9aaf52ee-9a1d-4371-abf5-15794e1ded2b"/>
+					<reportElement x="0" y="5" width="390" height="18" uuid="9aaf52ee-9a1d-4371-abf5-15794e1ded2b"/>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" size="15" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Folha de Pagamento]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="11" y="58" width="49" height="18" uuid="fc63cfd8-4c20-4fc1-a987-9a4b66a383a3"/>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
-					</textElement>
-					<text><![CDATA[Período:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="208" y="58" width="58" height="18" uuid="42eed4a5-af4e-49be-ae62-f2c37f6052a5"/>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
-					</textElement>
-					<text><![CDATA[Execução:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="10" y="20" width="380" height="18" uuid="09dc5f91-4483-4b1e-83e5-653314b0089b"/>
+					<reportElement x="10" y="29" width="380" height="18" uuid="09dc5f91-4483-4b1e-83e5-653314b0089b"/>
 					<textElement textAlignment="Left">
 						<font fontName="Arial" size="13" isBold="true"/>
 					</textElement>
 					<text><![CDATA[RocketRH]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="54" y="58" width="100" height="18" uuid="a8bcf60b-030d-4bc6-8316-86e918c870c3"/>
-					<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+					<reportElement x="10" y="58" width="144" height="18" uuid="a8bcf60b-030d-4bc6-8316-86e918c870c3"/>
+					<textFieldExpression><![CDATA["Período: "+ $F{periodo}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="261" y="58" width="100" height="18" uuid="0a26b8b5-12ec-4fba-a424-adb2073dbd3b"/>
-					<textFieldExpression><![CDATA[$F{execucao}]]></textFieldExpression>
+					<reportElement x="220" y="58" width="157" height="18" uuid="0a26b8b5-12ec-4fba-a424-adb2073dbd3b"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Execução: "+$F{execucao}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -228,13 +216,6 @@ ORDER BY evento.tipo DESC,
 				<box>
 					<pen lineWidth="1.0"/>
 				</box>
-				<staticText>
-					<reportElement x="12" y="11" width="38" height="18" uuid="317d8fec-5f3a-41eb-a25b-ff83cfcb24c5"/>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
-					</textElement>
-					<text><![CDATA[Nome:]]></text>
-				</staticText>
 				<staticText>
 					<reportElement x="11" y="51" width="66" height="18" uuid="cb7b44ed-c146-44d6-a4ee-9056d3b5359a"/>
 					<textElement textAlignment="Left">
@@ -263,31 +244,18 @@ ORDER BY evento.tipo DESC,
 					</textElement>
 					<text><![CDATA[Cargo:]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="467" y="11" width="33" height="18" uuid="4e5be660-19aa-4c4d-abe7-c4063ca6d3e4"/>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
-					</textElement>
-					<text><![CDATA[CBO:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="422" y="51" width="68" height="18" uuid="8acb71d8-426b-478c-8528-69eaa02018d2"/>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
-					</textElement>
-					<text><![CDATA[Hr. Mensais:]]></text>
-				</staticText>
 				<textField>
-					<reportElement x="47" y="11" width="100" height="18" uuid="8d366829-964b-4eb9-829f-6cfd6b248a19"/>
-					<textFieldExpression><![CDATA[$F{matcontrato} + " - " + $F{nomepessoa}]]></textFieldExpression>
+					<reportElement x="12" y="11" width="202" height="18" uuid="8d366829-964b-4eb9-829f-6cfd6b248a19"/>
+					<textFieldExpression><![CDATA["Nome: "+ $F{nomepessoa}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="251" y="11" width="206" height="18" uuid="532f5b99-5b9a-49cc-8ed3-ddaf3ceb73b0"/>
 					<textFieldExpression><![CDATA[$F{desccargo}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="496" y="11" width="50" height="18" uuid="7ff7cae2-07e8-4239-b75f-54baabd865a0"/>
-					<textFieldExpression><![CDATA[$F{cbocargo}]]></textFieldExpression>
+					<reportElement x="457" y="11" width="89" height="18" uuid="7ff7cae2-07e8-4239-b75f-54baabd865a0"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["CBO: " + $F{cbocargo}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement x="74" y="51" width="70" height="18" uuid="a341887a-d831-4c7e-8392-ff8ea88acc2b"/>
@@ -302,19 +270,13 @@ ORDER BY evento.tipo DESC,
 					<textFieldExpression><![CDATA[$F{admidatacontrato}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="485" y="51" width="53" height="18" uuid="2b09a459-5541-48a6-ad9d-1cfd0b43c7bc"/>
-					<textFieldExpression><![CDATA[$F{horacontrato}]]></textFieldExpression>
+					<reportElement x="410" y="51" width="136" height="18" uuid="2b09a459-5541-48a6-ad9d-1cfd0b43c7bc"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Hr. Mensais: "+$F{horacontrato}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement x="12" y="31" width="78" height="18" uuid="a70cd74b-dcd5-4963-9ff9-82b0b339d357"/>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
-					</textElement>
-					<text><![CDATA[Departamento:]]></text>
-				</staticText>
 				<textField>
-					<reportElement x="88" y="31" width="146" height="18" uuid="ed33c174-accf-4b10-b501-1937f0871c91"/>
-					<textFieldExpression><![CDATA[$F{nomedepart}]]></textFieldExpression>
+					<reportElement x="12" y="31" width="534" height="18" uuid="ed33c174-accf-4b10-b501-1937f0871c91"/>
+					<textFieldExpression><![CDATA["Departamento: " +$F{nomedepart}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -330,7 +292,7 @@ ORDER BY evento.tipo DESC,
 					<box>
 						<pen lineWidth="1.0"/>
 					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font isBold="true"/>
 						<paragraph firstLineIndent="5"/>
 					</textElement>
@@ -485,14 +447,14 @@ ORDER BY evento.tipo DESC,
 					<pen lineWidth="1.0"/>
 				</box>
 				<staticText>
-					<reportElement x="2" y="66" width="279" height="25" uuid="1eaf9a00-9fe3-4782-b8c3-c9557a3d1976"/>
+					<reportElement x="4" y="66" width="277" height="25" uuid="1eaf9a00-9fe3-4782-b8c3-c9557a3d1976"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
 					<text><![CDATA[Declaro ter recebido a Importância líquida discriminada neste recibo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="94" width="200" height="30" uuid="bce5c4f1-dda3-4584-b101-ee3166be9b7e"/>
+					<reportElement x="4" y="94" width="198" height="30" uuid="bce5c4f1-dda3-4584-b101-ee3166be9b7e"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
@@ -524,7 +486,7 @@ Data]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="1" y="22" width="128" height="17" uuid="68c288b7-18ca-4844-a949-611671f1ff30"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textElement textAlignment="Center" verticalAlignment="Top"/>
 					<textFieldExpression><![CDATA[$V{TotDesc}]]></textFieldExpression>
 				</textField>
 			</frame>
@@ -540,11 +502,11 @@ Data]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Top">
 						<paragraph spacingBefore="2"/>
 					</textElement>
-					<text><![CDATA[Total de Vencimentos:]]></text>
+					<text><![CDATA[Total de Vencimentos]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="1" y="22" width="128" height="18" uuid="4e09361e-2c30-4892-92b9-5576f057b6d1"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<reportElement x="1" y="21" width="128" height="18" uuid="4e09361e-2c30-4892-92b9-5576f057b6d1"/>
+					<textElement textAlignment="Center" verticalAlignment="Top"/>
 					<textFieldExpression><![CDATA[$V{TotVenc}]]></textFieldExpression>
 				</textField>
 			</frame>
@@ -557,18 +519,18 @@ Data]]></text>
 					<reportElement x="4" y="0" width="100" height="20" uuid="3f6b5739-2b93-4156-a7aa-10d7c0919936">
 						<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 					</reportElement>
-					<textElement textAlignment="Center" verticalAlignment="Top">
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 						<paragraph spacingBefore="2"/>
 					</textElement>
 					<text><![CDATA[Valor Liquído:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="91" y="1" width="168" height="19" uuid="2a8d4d06-4e26-4359-9cfa-a5d2f087f4e3">
+					<reportElement x="104" y="1" width="155" height="19" uuid="2a8d4d06-4e26-4359-9cfa-a5d2f087f4e3">
 						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 					</reportElement>
-					<textElement textAlignment="Right" verticalAlignment="Top">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font isBold="true"/>
 						<paragraph leftIndent="0" rightIndent="5"/>
 					</textElement>
@@ -640,7 +602,7 @@ Data]]></text>
 					</textElement>
 					<text><![CDATA[Faixa IRRF]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="4" y="23" width="73" height="18" uuid="44f161e5-5857-4a63-86a8-d34b90dfce42"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{salariobase}]]></textFieldExpression>
