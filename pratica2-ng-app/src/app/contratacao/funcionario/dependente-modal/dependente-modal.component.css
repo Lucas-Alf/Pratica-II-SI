@@ -1,0 +1,58 @@
+.normal {
+    margin: 5px 25px 5px 0px;
+}
+
+.fim {
+    margin: 5px 5px 5px 0px;
+}
+
+.crud-button {
+    margin-right: 8px;
+    padding-left: 8px;
+}
+
+.gravar-button {
+    border: 1.5px solid #70cc60;
+    background-color: white;
+    width: 90px;
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: black;
+}
+
+.gravar-button:hover {
+    background-color: #70cc60;
+    color: white;
+}
+
+.cancelar-button {
+    border: 1.5px solid #cc6060;
+    background-color: white;
+    width: 90px;
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: black;
+}
+
+.example-chip-list {
+    width: 90%;
+}
+
+.cancelar-button:hover {
+    background-color: #cc6060;
+    color: white;
+}
+
+.table-container {
+    position: relative;
+    /* max-height: 630px; */
+    /* width: 1300px; */
+    overflow: hidden;
+    /* margin: 0; */
+}
+
+.obriga {
+    background-color: rgba(255, 29, 29, 0.15) !important;
+}

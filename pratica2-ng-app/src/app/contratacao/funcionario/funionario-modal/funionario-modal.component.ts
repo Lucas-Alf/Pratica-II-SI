@@ -89,7 +89,7 @@ export class FunionarioModalComponent implements OnInit {
     private constant: ConstantsService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog
-  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento();this.listarDependentes();}
+  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); this.listarDependentes(); }
 
   displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
   storeContrato = new MatTableDataSource();
@@ -346,7 +346,7 @@ export class FunionarioModalComponent implements OnInit {
 
   }
   incluirDependente(): void {
-    this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
+    this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this, dependentes: this.dependentes } });
   }
 
   add(event: MatChipInputEvent): void {
@@ -381,7 +381,7 @@ export class FunionarioModalComponent implements OnInit {
     this.DependentesCtrl.setValue(null);
   }
   ngOnInit(): void {
-    console.log("SEXO " + this.sexo + " -" + this.data.info.sexo);
+    //sconsole.log("SEXO " + this.sexo + " -" + this.data.info.sexo);
     if (this.data.info) {
       this.listarContrato(this.data.info.cpf);
       this.cpf = this.data.info.cpf;

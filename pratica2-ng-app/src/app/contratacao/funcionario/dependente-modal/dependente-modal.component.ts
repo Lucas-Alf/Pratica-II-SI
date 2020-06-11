@@ -23,6 +23,9 @@ export class DependenteModalComponent implements OnInit {
   sexo: string;
   datanascimento: Date;
   enderecoid: number;
+  rg: string;
+  nomemae: string;
+
 
 
   enderecos: Endereco[];
@@ -33,7 +36,7 @@ export class DependenteModalComponent implements OnInit {
     private loaderService: LoaderService,
     private constant: ConstantsService,
     private _formBuilder: FormBuilder
-  ) { this.apiUrl = this.constant.apiUrl;  this.listarEndereco(); }
+  ) { this.apiUrl = this.constant.apiUrl; this.listarEndereco(); }
 
 
   close(): void {
@@ -59,7 +62,7 @@ export class DependenteModalComponent implements OnInit {
     //var teste = this.paisnascimentoid ? { id: this.paisnascimentoid, nome: "" } : null;
     const dados: Pessoa = {
       cpf: this.cpf,
-      rg: null,
+      rg: this.rg,
       nome: this.nome,
       sexo: this.sexo,
       datanascimento: this.datanascimento,
@@ -75,7 +78,7 @@ export class DependenteModalComponent implements OnInit {
       ctpsserie: null,
       ctpsuf: null,
       nomepai: null,
-      nomemae: null,
+      nomemae: this.nomemae,
       tituloeleitornumero: null,
       tituloeleitoruf: null,
       tituloeleitorzona: null,
@@ -91,7 +94,40 @@ export class DependenteModalComponent implements OnInit {
       email: null,
       numero: null,
     };
-    this.data.component.salvar(this.data.action, dados);
+    axios.post(this.constant.apiUrl + 'pessoa/' + this.data.action, dados).then((response) => {
+      if (response && response.data) {  
+        this.loaderService.hide();      
+        this.close();
+        this.listarDependente();
+        
+      } else {
+        this.loaderService.hide();
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      if (error.response) {
+        console.error(error.response.data.message);
+        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+      } else {
+        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+      }
+    });
+    //this.data.component.salvar(this.data.action, dados);
+  }
+
+  listarDependente(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'dependente/all').then((response) => {
+      if (response && response.data) {
+        this.data.dependentes = response.data;      
+        this.loaderService.hide(); 
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
   }
 
   ngOnInit(): void {
@@ -99,7 +135,9 @@ export class DependenteModalComponent implements OnInit {
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;
       this.sexo = this.data.info.sexo;
-      this.datanascimento = this.data.info.datanascimento;    
+      this.rg = this.data.info.rg;
+      this.nomemae = this.data.info.nomemae;
+      this.datanascimento = this.data.info.datanascimento;
       this.enderecoid = this.data.info.enderecoid.id;
     }
   }
