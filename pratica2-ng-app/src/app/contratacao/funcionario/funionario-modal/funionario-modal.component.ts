@@ -79,6 +79,7 @@ export class FunionarioModalComponent implements OnInit {
   DependentesCtrl = new FormControl();
   filteredDependentes: Observable<Dependente[]>;
   dependentes: any[] = [];
+  pessoas: any[] = [];
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   constructor(
@@ -88,7 +89,7 @@ export class FunionarioModalComponent implements OnInit {
     private constant: ConstantsService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog
-  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); this.listarDependentes();}
+  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento();this.listarDependentes();}
 
   displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
   storeContrato = new MatTableDataSource();
@@ -115,9 +116,10 @@ export class FunionarioModalComponent implements OnInit {
     this.loaderService.show();
     axios.get(this.apiUrl + 'pessoa/findDepedente').then((response) => {
       if (response && response.data) {
-           this.dependentes = response.data;
+        this.pessoas = response.data;
         this.loaderService.hide();
       }
+      this.listarDependente();
     }).catch((error) => {
       this.loaderService.hide();
       console.log(error);
@@ -125,21 +127,21 @@ export class FunionarioModalComponent implements OnInit {
     });
   }
 
-  listarDependente(cpf): void {
+  listarDependente(): void {
     this.loaderService.show();
     axios.get(this.apiUrl + 'dependente/all').then((response) => {
       if (response && response.data) {
         this.dependentes = response.data;
+        debugger;
         if (this.cpf) {
           this.filteredDependentes = this.DependentesCtrl.valueChanges.pipe(
             startWith(null),
-            map((item: string | null) => item ? this._filter(item) : this.dependentes.filter(x => x.pessoacpf != this.cpf).slice()));
+            map((item: string | null) => item ? this._filter(item) : this.pessoas.filter(x => x.cpf != this.cpf).slice()));
         } else {
           this.filteredDependentes = this.DependentesCtrl.valueChanges.pipe(
             startWith(null),
-            map((item: string | null) => item ? this._filter(item) : this.dependentes.slice()));
+            map((item: string | null) => item ? this._filter(item) : this.pessoas.slice()));
         }
-        this.loaderService.hide();
       }
     }).catch((error) => {
       this.loaderService.hide();
@@ -148,16 +150,16 @@ export class FunionarioModalComponent implements OnInit {
     });
   }
 
-  private _filter(value: any): Dependente[] {
-    if (value && value.pessoacpf.nome) {
-      value = value.pessoacpf.nome;
+  private _filter(value: any): Pessoa[] {
+    if (value && value.nome) {
+      value = value.nome;
     }
     if (value) {
       const filterValue = value.toLowerCase();
       if (this.cpf) {
-        return this.dependentes.filter(item => item.pessoacpf.cpf != this.cpf && item.nome.toLowerCase().includes(filterValue));
+        return this.dependentes.filter(item => item.cpf != this.cpf && item.nome.toLowerCase().includes(filterValue));
       } else {
-        return this.dependentes.filter(item => item.pessoacpf.nome.toLowerCase().includes(filterValue));
+        return this.dependentes.filter(item => item.nome.toLowerCase().includes(filterValue));
       }
     }
   }
@@ -382,7 +384,6 @@ export class FunionarioModalComponent implements OnInit {
     console.log("SEXO " + this.sexo + " -" + this.data.info.sexo);
     if (this.data.info) {
       this.listarContrato(this.data.info.cpf);
-      this.listarDependente(this.data.info.cpf);
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;
       this.paisnascimentoid = this.data.info.paisnascimentoid ? this.data.info.paisnascimentoid.id : null;
