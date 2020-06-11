@@ -1,29 +1,23 @@
 package com.setrem.pratica2api.service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.setrem.pratica2api.model.CacheFolha;
 import com.setrem.pratica2api.model.Calculo;
 import com.setrem.pratica2api.model.Contrato;
 import com.setrem.pratica2api.model.Evento;
 import com.setrem.pratica2api.model.EventoCalculoDTO;
-import com.setrem.pratica2api.model.Incidencia;
 import com.setrem.pratica2api.model.IncidenciaDTO;
 import com.setrem.pratica2api.model.Recibo;
 import com.setrem.pratica2api.repository.CalculoRepository;
 import com.setrem.pratica2api.repository.ContratoRepository;
-import com.setrem.pratica2api.repository.EventoFixoRepository;
 import com.setrem.pratica2api.repository.EventoRepository;
-import com.setrem.pratica2api.repository.EventoVariavelRepository;
 import com.setrem.pratica2api.repository.ParametroEmpresaRepository;
 import com.setrem.pratica2api.repository.ReciboRepository;
 import com.setrem.pratica2api.service.Rotinas.RotinaFGTS;
@@ -40,20 +34,15 @@ public class CalculoService {
     private CalculoRepository CalculoRepository;
     private ParametroEmpresaRepository ParametroEmpresaRepository;
     private EventoRepository EventoRepository;
-    private EventoFixoRepository EventoFixoRepository;
-    private EventoVariavelRepository EventoVariavelRepository;
     private ContratoRepository ContratoRepository;
     private ReciboRepository ReciboRepository;
 
     public CalculoService(CalculoRepository calculoRepository, ParametroEmpresaRepository parametroEmpresaRepository,
-            EventoRepository eventoRepository, EventoFixoRepository eventoFixoRepository,
-            EventoVariavelRepository eventoVariavelRepository, ContratoRepository contratoRepository,
+            EventoRepository eventoRepository, ContratoRepository contratoRepository,
             ReciboRepository reciboRepository) {
         this.CalculoRepository = calculoRepository;
         this.ParametroEmpresaRepository = parametroEmpresaRepository;
         this.EventoRepository = eventoRepository;
-        this.EventoFixoRepository = eventoFixoRepository;
-        this.EventoVariavelRepository = eventoVariavelRepository;
         this.ContratoRepository = contratoRepository;
         this.ReciboRepository = reciboRepository;
     }
@@ -61,7 +50,7 @@ public class CalculoService {
     public void Calcular(Integer matricula) throws Exception {
         List<Integer> contratos = new ArrayList<Integer>();
         if (matricula == null) {
-            ContratoRepository.findAll().forEach((x) -> {
+            ContratoRepository.RetornaParaFolhaDePagamento().forEach((x) -> {
                 contratos.add(x.getMatricula());
             });
         } else {

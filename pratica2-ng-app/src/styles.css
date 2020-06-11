@@ -55,7 +55,6 @@ body {
 
 .material-text {
   color: #000000;
-  opacity: 87%;
   font-family: Roboto
 }
 
@@ -65,19 +64,16 @@ body {
 }
 .material-text-medium {
   color: #000000;
-  opacity: 60%;
   font-family: Roboto
 }
 
 .material-text-disabled {
   color: #000000;
-  opacity: 38%;
   font-family: Roboto
 }
 
 .material-text-error {
   color: #B00020;
-  opacity: 100%;
   font-family: Roboto
 }
 
