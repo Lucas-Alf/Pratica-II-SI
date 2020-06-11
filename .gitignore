@@ -58,3 +58,4 @@ npm-debug.log
 yarn-error.log
 testem.log
 /pratica2-ng-app/typings
+/pratica2-api/src/main/resources/META-INF/resources

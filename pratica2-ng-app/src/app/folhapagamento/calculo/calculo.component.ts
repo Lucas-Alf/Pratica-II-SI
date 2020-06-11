@@ -32,29 +32,33 @@ export class CalculoComponent implements OnInit {
   selection = new SelectionModel<any>();
 
   calcular(): void {
+    var contratoMatricula = null;
     if (this.selection.selected.length > 0) {
-      this.loaderService.show();
-      axios.get(this.apiUrl + 'calculo/calcular?matricula=' + this.selection.selected[0].matricula).then((response) => {
-        this.loaderService.hide();
-        this.buscaCalculo(this.selection.selected[0]);
-      }).catch((error) => {
-        this.loaderService.hide();
-        if (error.response) {
-          console.error(error.response.data.message);
-        }
-        this.snackBar.open('Ocorreu um erro durrante o processamento. 😬', null, { duration: 5000 });
-      });
-    } else {
-      this.snackBar.open('Selecione um contrato. 🤦‍♂️', null, { duration: 5000 });
+      contratoMatricula = this.selection.selected[0].matricula;
     }
+    this.loaderService.show();
+    axios.get(encodeURI(this.apiUrl + 'calculo/calcular?matricula=' + contratoMatricula)).then((response) => {
+      this.loaderService.hide();
+      if (this.selection.selected.length > 0) {
+        this.buscaCalculo(this.selection.selected[0]);
+      } else {
+        this.buscaCalculo(this.storeFuncionario.data[0]);
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      if (error.response) {
+        console.error(error.response.data.message);
+      }
+      this.snackBar.open('Ocorreu um erro durrante o processamento. 😬', null, { duration: 5000 });
+    });
   }
 
   imprimir(): void {
     if (this.selection.selected.length > 0) {
       this.loaderService.show();
-      axios.get(this.apiUrl + 'calculo/imprimir?matricula=' + this.selection.selected[0].matricula, {responseType: 'blob'}).then((response) => {
+      axios.get(this.apiUrl + 'calculo/imprimir?matricula=' + this.selection.selected[0].matricula, { responseType: 'blob' }).then((response) => {
         this.loaderService.hide();
-        var blob = new Blob([response.data],{type: 'application/pdf'});
+        var blob = new Blob([response.data], { type: 'application/pdf' });
         var url = window.URL.createObjectURL(blob);
         window.open(url);
       }).catch((error) => {

@@ -39,8 +39,12 @@ public class CalculoController {
     }
 
     @GetMapping("/calcular")
-    public void calcular(int matricula) throws Exception {
-        this.CalculoService.Calcular(matricula);
+    public void calcular(String matricula) throws Exception {
+        if (matricula.equals("null") || matricula == null || matricula.equals("")) {
+            this.CalculoService.Calcular(null);
+        } else {
+            this.CalculoService.Calcular(Integer.parseInt(matricula));
+        }
     }
 
     @GetMapping("/imprimir")
@@ -54,7 +58,7 @@ public class CalculoController {
         Connection conexao = sessionFactory.OpenConnection();
         try {
             InputStream io = this.getClass().getResourceAsStream("/relatorios/DemonstrativoPag.jasper");
-            JasperPrint Jp = JasperFillManager.fillReport(io, parametros,conexao);
+            JasperPrint Jp = JasperFillManager.fillReport(io, parametros, conexao);
             reportBytes = JasperExportManager.exportReportToPdf(Jp);
         } catch (JRException ex) {
             return ResponseEntity.noContent().build();

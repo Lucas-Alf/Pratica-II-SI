@@ -1,7 +1,8 @@
 
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ConstantsService{
-    readonly apiUrl: string = 'http://localhost:8080/api/';
+    readonly apiUrl: string = environment.serverUrl;
 }
