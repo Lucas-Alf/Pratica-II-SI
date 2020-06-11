@@ -24,7 +24,11 @@
               <mat-option value="F">Feminino</mat-option>
           </mat-select>
           <mat-label>Sexo</mat-label>
-      </mat-form-field><br>
+      </mat-form-field>
+      <mat-form-field style="width: 150px;" class="normal">
+        <mat-label>Telefone</mat-label>
+        <input type="number" min="1" matInput placeholder="(55) 9--------" [(ngModel)]='telefone' formControlName="group1Telefone" required>
+    </mat-form-field><br>
       <mat-form-field style="width: 400px;">
         <mat-label>Endereço</mat-label>
         <mat-select [(ngModel)]='enderecoid' formControlName="group1Endereco" required>

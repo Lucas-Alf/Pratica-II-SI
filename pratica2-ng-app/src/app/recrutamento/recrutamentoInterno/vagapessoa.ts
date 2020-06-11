@@ -4,6 +4,7 @@ export interface VagaPessoa {
     cpf: string,
     nome: string,
     sexo: string,
+    telefonecelular: number,
     datanascimento: Date,
     numero: number,
     enderecoid: {

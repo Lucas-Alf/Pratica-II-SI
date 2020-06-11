@@ -1,5 +1,8 @@
 package com.setrem.pratica2api.api;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
@@ -8,9 +11,25 @@ import javax.validation.ValidationException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
+import com.setrem.pratica2api.model.Calculo;
+import com.setrem.pratica2api.repository.CalculoRepository;
+import com.setrem.pratica2api.service.CalculoService;
+import com.setrem.pratica2api.service.SessionFactory;
+
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import com.setrem.pratica2api.model.PessoaConhecimento;
 import com.setrem.pratica2api.model.PessoaHabilidadesAtitudes;
@@ -23,6 +42,7 @@ import com.setrem.pratica2api.repository.PessoaIdiomaRepository;
 import com.setrem.pratica2api.repository.PessoaRepository;
 import com.setrem.pratica2api.repository.VagaPessoaRepository;
 import com.setrem.pratica2api.repository.VagaRepository;
+import com.setrem.pratica2api.service.SessionFactory;
 
 @RestController
 @RequestMapping("/api/vagapessoa")
@@ -141,6 +161,50 @@ public class VagaPessoaController {
         vaga.setQuantidade(qtd);
         this.VagaRepository.save(vaga);
         return data;
+    }
+
+    @GetMapping("/imprimir")
+    public ResponseEntity<byte[]> relatorio(String valorCPF, String valorNome, String valorSexo, String valorVaga,
+    String idioma, String habilidadeAtitude, String conhecimento) {
+        String sql = "";
+        if (valorCPF != "") {
+            sql += " and b.cpf like '%" + valorCPF + "%'";
+        }
+        if (valorNome != "") {
+            sql += " and b.nome like '%" + valorNome + "%'";
+        }
+        if (valorSexo != "") {
+            sql += " and b.sexo like '%" + valorSexo + "%'";
+        }
+        if (valorVaga != "") {
+            sql += " and a.vagaid like '%" + valorVaga + "%'";
+        }
+        if (idioma != "") {
+            sql += " and exists (select idiomaid from pessoaidioma where cpf = b.cpf and idiomaid in (" + idioma + ")) ";
+        }
+        if (habilidadeAtitude != "") {
+            sql += " and exists (select habilidadesatitudesid from pessoahabilidadesatitudes where cpf = b.cpf and habilidadesatitudesid in (" + habilidadeAtitude + ")) ";
+        }
+        if (conhecimento != "") {
+            sql += " and exists (select conhecimentoid from pessoaconhecimento where cpf = b.cpf and conhecimentoid in (" + conhecimento + ")) ";
+        }
+
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
+        parametros.put("sql", sql);
+        
+        byte[] reportBytes = null;
+        SessionFactory sessionFactory = new SessionFactory();
+        Connection conexao = sessionFactory.OpenConnection();
+        try {
+            InputStream io = this.getClass().getResourceAsStream("/relatorios/SelecaoCandidatos.jasper");
+            JasperPrint Jp = JasperFillManager.fillReport(io, parametros,conexao);
+            reportBytes = JasperExportManager.exportReportToPdf(Jp);
+        } catch (JRException ex) {
+            return ResponseEntity.noContent().build();
+        }
+        sessionFactory.CloseConnection(conexao);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE).body(reportBytes);
     }
 
 }

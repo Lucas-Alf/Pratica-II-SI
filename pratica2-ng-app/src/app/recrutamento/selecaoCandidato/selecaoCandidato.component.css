@@ -14,11 +14,43 @@ table {
 }
 
 .crud-button {
-  margin-left: 8px;
-  padding-left: 8px;
+  margin-right: 8px;
 }
 
 .mat-column-select {
   overflow: initial;
   width: 50px;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: #f5f5f5;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.element-description {
+  padding: 16px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
+
+.texto {
+  margin-bottom: 10px;
 }

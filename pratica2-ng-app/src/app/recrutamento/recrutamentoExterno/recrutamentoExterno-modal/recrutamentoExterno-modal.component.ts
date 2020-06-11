@@ -37,6 +37,7 @@ export class RecrutamentoExternoModalComponent implements OnInit {
   cpf: string;
   nome: string;
   sexo: string;
+  telefone: number;
   datanascimento: Date;
   enderecoid: number;
   numero: number;
@@ -116,6 +117,7 @@ export class RecrutamentoExternoModalComponent implements OnInit {
         cpf: this.cpf,
         nome: this.nome,
         sexo: this.sexo,
+        telefonecelular: this.telefone,
         datanascimento: this.datanascimento,
         numero: this.numero,
         enderecoid: {
@@ -369,6 +371,7 @@ export class RecrutamentoExternoModalComponent implements OnInit {
       group1Nome: ['', Validators.required],
       group1DataNascimento: ['', Validators.required],
       group1Sexo: ['', Validators.required],
+      group1Telefone: ['', Validators.required],
       group1Endereco: ['', Validators.required],
       group1Numero: ['', Validators.required],
     });

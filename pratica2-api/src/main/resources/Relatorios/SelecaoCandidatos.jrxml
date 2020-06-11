@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SelecaoCandidatos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a70708c-125e-49f0-92b8-ead870d03f15">
+	<parameter name="sql" class="java.lang.String"/>
+	<parameter name="sqlCompleta" class="java.lang.String">
+		<defaultValueExpression><![CDATA["SELECT a.cpf, b.nome, (case when b.sexo = 'M' then 'Masculino' when b.sexo = 'F' then 'Feminino' end) as sexo, b.datanascimento, b.telefonecelular, c.descricao as vaga FROM vagapessoa a inner join Pessoa b on (a.cpf = b.cpf) inner join Vaga c on (a.vagaid = c.id) where b.rg is null " + $P{sql} + " order by b.nome"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[ $P!{sqlCompleta} ]]>
+	</queryString>
+	<field name="cpf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cpf"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nome"/>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sexo"/>
+	</field>
+	<field name="datanascimento" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="datanascimento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="datanascimento"/>
+	</field>
+	<field name="telefonecelular" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telefonecelular"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="telefonecelular"/>
+	</field>
+	<field name="vaga" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vaga"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="descricao"/>
+	</field>
+	<variable name="totalCandidatos" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{cpf}]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="100" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="96" height="64" uuid="1f1366eb-985a-4bad-9bca-a18e3ecfea18">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["http://localhost:4200/assets/img/logos/ColoridoOriginal.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="101" y="1" width="390" height="18" uuid="8d013810-d4e5-4caf-8827-dcd3440bba43"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recrutamento e Seleção]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="20" width="390" height="24" uuid="c5354254-11f8-44c7-9a3e-f6e9369ba210"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROCKET RH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="45" width="390" height="18" uuid="9afc4a0c-3699-4d28-a21d-0c4e2eadfd98"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Candidatos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="70" width="555" height="1" uuid="b2291e3b-7f87-4ca6-aeef-80f34a95d8cf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="80" width="66" height="20" backcolor="#D3D3D3" uuid="768a0f22-93a7-4826-94da-f9b366626c08">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="66" y="80" width="140" height="20" backcolor="#D3D3D3" uuid="69553870-4d94-4535-8d36-25a1374a36f6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="206" y="80" width="50" height="20" backcolor="#D3D3D3" uuid="90d25dfe-e4d4-49c8-9e8d-111d97e587cd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="256" y="80" width="62" height="20" backcolor="#D3D3D3" uuid="9988ba3e-3287-46c0-9a0f-6192cb16fafd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Nasc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="317" y="80" width="71" height="20" backcolor="#D3D3D3" uuid="aa13e5f3-dc82-4f97-a830-f822bc7a199b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="388" y="80" width="167" height="20" backcolor="#D3D3D3" uuid="2721f51b-f6c4-4346-a81b-9ef2906fb0a5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vaga]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="66" height="20" uuid="f7de97e8-fee5-4c2d-84ce-da3d6376ce52">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="66" y="0" width="140" height="20" uuid="89b99270-49b5-4f25-88ca-269931f74c4e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="206" y="0" width="50" height="20" uuid="322f86b9-e2bd-4b99-b98f-2ec10c3384e2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="257" y="0" width="59" height="20" uuid="811ddc7e-1249-4d8d-959c-2c7c3976f46b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datanascimento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="316" y="0" width="72" height="20" uuid="19eb3ec4-c1c0-49df-9059-6a263debc5d7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefonecelular}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="388" y="0" width="167" height="20" uuid="2bc5295a-819f-4e77-9ea0-d78c34c66bb0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vaga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="b42ef40c-d9c3-4266-a58f-f2e78c46b7ba">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="108" height="20" uuid="fbf62754-1cf6-4f35-9132-598726b22a13">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Candidatos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="108" y="2" width="100" height="20" uuid="7dc6c832-db4d-4bda-87e8-4e9cca69be35">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalCandidatos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

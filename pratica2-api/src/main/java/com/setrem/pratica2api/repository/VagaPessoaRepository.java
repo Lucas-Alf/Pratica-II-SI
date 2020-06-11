@@ -17,7 +17,7 @@ public interface VagaPessoaRepository extends JpaRepository<VagaPessoa, Integer>
     public int maxIdVagaPessoa();
 
     @Query(value = "SELECT * FROM vagapessoa a inner join Pessoa b on (a.cpf = b.cpf) where b.rg is null order by b.nome", nativeQuery = true)
-    public List<VagaPessoa> ListarSelecao(/*@Param("filtros") String filtros*/);
+    public List<VagaPessoa> ListarSelecao();
 
     @Query(value = "SELECT * FROM vagapessoa a inner join Pessoa b on (a.cpf = b.cpf) where b.rg is null and b.cpf like %:valorCPF% and b.nome like %:valorNome% and b.sexo like %:valorSexo% and cast(a.vagaid as varchar) like %:valorVaga%", nativeQuery = true)
     public List<VagaPessoa> ListarSelecaoTodos(@Param("valorCPF") String valorCPF, @Param("valorNome") String valorNome, @Param("valorSexo") String valorSexo, @Param("valorVaga") String valorVaga);
