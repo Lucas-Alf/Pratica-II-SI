@@ -33,7 +33,6 @@ public class Dependente implements Serializable {
     @ManyToOne(optional = false)
     private Pessoa pessoacpf;
 
-    @JsonIgnore
     @JoinColumn(name = "dependentecpf", referencedColumnName = "cpf")
     @ManyToOne(optional = false)
     private Pessoa dependentecpf;
@@ -73,5 +72,29 @@ public class Dependente implements Serializable {
         } else if (!pessoacpf.equals(other.pessoacpf))
             return false;
         return true;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Pessoa getPessoacpf() {
+        return pessoacpf;
+    }
+
+    public void setPessoacpf(Pessoa pessoacpf) {
+        this.pessoacpf = pessoacpf;
+    }
+
+    public Pessoa getDependentecpf() {
+        return dependentecpf;
+    }
+
+    public void setDependentecpf(Pessoa dependentecpf) {
+        this.dependentecpf = dependentecpf;
     }
 }

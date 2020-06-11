@@ -27,8 +27,7 @@ public class DependenteController {
     }
     @GetMapping("/all") 
     public List<Dependente> all() {
-        var ret = this.DependenteRepository.findAll();
-        return ret;
+        return this.DependenteRepository.findAll();
     }
     @PostMapping("/Incluir")
     public Dependente add(@RequestBody Dependente data, BindingResult bindingResult) throws Exception {
