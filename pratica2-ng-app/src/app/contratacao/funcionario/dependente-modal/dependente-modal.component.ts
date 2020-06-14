@@ -98,7 +98,7 @@ export class DependenteModalComponent implements OnInit {
       if (response && response.data) {  
         this.loaderService.hide();      
         this.close();
-        this.listarDependente();
+        this.data.component.listarDependentes();
         
       } else {
         this.loaderService.hide();
@@ -116,19 +116,6 @@ export class DependenteModalComponent implements OnInit {
     //this.data.component.salvar(this.data.action, dados);
   }
 
-  listarDependente(): void {
-    this.loaderService.show();
-    axios.get(this.apiUrl + 'dependente/all').then((response) => {
-      if (response && response.data) {
-        this.data.dependentes = response.data;      
-        this.loaderService.hide(); 
-      }
-    }).catch((error) => {
-      this.loaderService.hide();
-      console.log(error);
-      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
-    });
-  }
 
   ngOnInit(): void {
     if (this.data.info) {

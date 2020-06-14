@@ -3,13 +3,12 @@
   <mat-form-field appearance="fill" style="width: 500px;">
     <mat-label>Nome</mat-label>
     <input type="text" matInput placeholder="Nome" required [(ngModel)]='nome'>
-  </mat-form-field>
+  </mat-form-field> 
   <br>
   <mat-form-field appearance="fill" style="width: 250px;">
     <mat-label>CPF</mat-label>
     <input type="text" matInput placeholder="CPF" required [(ngModel)]='cpf'>
   </mat-form-field>
-  <br>
   <mat-form-field appearance="fill" style="width: 250px;" class="normal">
     <mat-label>RG</mat-label>
     <input type="text" matInput placeholder="RG" required [(ngModel)]='rg'>
@@ -29,6 +28,7 @@
     <mat-datepicker #picker disabled="false"></mat-datepicker>
   </mat-form-field>
   <br>
+
   <mat-form-field appearance="fill" style="width: 400px;" class="normal">
     <mat-label>Nome Mãe</mat-label>
     <input type="text" matInput placeholder="Nome da Mãe" [(ngModel)]='nomemae'>

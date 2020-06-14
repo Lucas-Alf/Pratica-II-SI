@@ -346,7 +346,7 @@ export class FunionarioModalComponent implements OnInit {
 
   }
   incluirDependente(): void {
-    this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this, dependentes: this.dependentes } });
+    this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this} });
   }
 
   add(event: MatChipInputEvent): void {
