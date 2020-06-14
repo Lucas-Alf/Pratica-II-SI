@@ -27,6 +27,12 @@ public class PessoaController {
         var empresas = this.PessoaRepository.findAll();
         return empresas;
     }
+
+     @GetMapping("/allAtivo") // Teste: http://localhost:8080/api/empresa/all
+    public List<Pessoa> allAtivo() {
+        var empresas = this.PessoaRepository.allAtivo();
+        return empresas;
+    }
     @GetMapping("/findDepedente") // Teste: http://localhost:8080/api/empresa/all
     public List<Pessoa> findDepedente() {
         var dependentes = this.PessoaRepository.findDepedentes();
@@ -72,9 +78,24 @@ public class PessoaController {
         return data;
     }
 
+    // @CrossOrigin(origins = "*", methods = { RequestMethod.PUT })
+    // @PutMapping("/inativa")
+    // public Pessoa inativa(@RequestBody Pessoa data, BindingResult bindingResult) throws Exception {
+    //     if (bindingResult.hasErrors()) {
+    //         throw new ValidationException();
+    //     }
+    //     this.PessoaRepository.desativaPessoa(data.getCpf());
+    //     return data;
+    // }
+    @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
+    @DeleteMapping("/inativa/{id}")
+    public void inativa(@PathVariable String id) {
+        this.PessoaRepository.desativaPessoa(id);
+    }
+
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
-        this.PessoaRepository.deleteById(id);
+       this.PessoaRepository.deleteById(id);
     }
 }
