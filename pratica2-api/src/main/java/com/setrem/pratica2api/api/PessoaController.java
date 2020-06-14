@@ -4,7 +4,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.ValidationException;
 import java.util.List;
+
+import com.setrem.pratica2api.model.Dependente;
 import com.setrem.pratica2api.model.Pessoa;
+import com.setrem.pratica2api.repository.DependenteRepository;
 import com.setrem.pratica2api.repository.PessoaRepository;;
 
 @RestController
@@ -12,10 +15,11 @@ import com.setrem.pratica2api.repository.PessoaRepository;;
 @CrossOrigin
 public class PessoaController {
     private PessoaRepository PessoaRepository;
-    private Pessoa pes = new Pessoa();
+    private DependenteRepository DependenteRepository;
 
-    public PessoaController(PessoaRepository PessoaRepository) {
+    public PessoaController(PessoaRepository PessoaRepository, DependenteRepository DependenteRepository) {
         this.PessoaRepository = PessoaRepository;
+        this.DependenteRepository = DependenteRepository;
     }
 
     @GetMapping("/all") // Teste: http://localhost:8080/api/empresa/all
@@ -46,7 +50,10 @@ public class PessoaController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        System.out.println(data.getPaisnascimentoid());
+        DependenteRepository.deleteByPessoaCpf(data.getCpf());
+        for (Dependente  dep : data.getDependente()) {
+            dep.setPessoacpf(data);
+        }
         data = this.PessoaRepository.save(data);
         return data;
     }
@@ -57,7 +64,10 @@ public class PessoaController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        System.out.println(data.getPaisnascimentoid());
+        DependenteRepository.deleteByPessoaCpf(data.getCpf());
+        for (Dependente  dep : data.getDependente()) {
+            dep.setPessoacpf(data);
+        }
         this.PessoaRepository.save(data);
         return data;
     }

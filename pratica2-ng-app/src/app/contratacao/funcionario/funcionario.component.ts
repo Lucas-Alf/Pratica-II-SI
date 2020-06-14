@@ -97,7 +97,7 @@ export class FuncionarioComponent implements OnInit {
       this.snackBar.open('Selecione um registro para excluir. 🤦‍♂️', null, { duration: 5000 });
     }
   }
-
+  teste(){}
   salvar(action: string, data: Pessoa): void {
     this.loaderService.show();
     if (data.nome == undefined || data.nome == "") {

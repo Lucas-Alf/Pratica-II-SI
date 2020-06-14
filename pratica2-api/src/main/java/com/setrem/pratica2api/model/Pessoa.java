@@ -9,6 +9,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +21,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.Type;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "pessoa")
@@ -132,6 +137,7 @@ public class Pessoa implements Serializable {
 
     @Column(name = "email")
     @Email
+    @Nullable
     private String email;
 
     @Column(name = "numero")
@@ -143,8 +149,11 @@ public class Pessoa implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
     private List<PessoaConhecimento> pessoaConhecimentos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf", fetch = FetchType.LAZY)
     private List<PessoaHabilidadesAtitudes> pessoaHabilidadesAtitudes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoacpf", fetch = FetchType.LAZY)
+    private List<Dependente> dependente;
 
     public Pessoa() {
     }
@@ -584,5 +593,13 @@ public class Pessoa implements Serializable {
 
     public void setPessoaHabilidadesAtitudes(List<PessoaHabilidadesAtitudes> pessoaHabilidadesAtitudes) {
         this.pessoaHabilidadesAtitudes = pessoaHabilidadesAtitudes;
+    }
+
+    public List<Dependente> getDependente() {
+        return dependente;
+    }
+
+    public void setDependente(List<Dependente> dependente) {
+        this.dependente = dependente;
     }
 }

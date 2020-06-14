@@ -28,4 +28,5 @@ export interface Pessoa {
   enderecoid?: Endereco;
   email: string;
   numero: number;
+  dependente: any[];
 }
