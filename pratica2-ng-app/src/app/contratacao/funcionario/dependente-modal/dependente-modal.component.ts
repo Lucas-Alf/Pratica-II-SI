@@ -101,7 +101,7 @@ export class DependenteModalComponent implements OnInit {
       if (response && response.data) {  
         this.loaderService.hide();      
         this.close();
-        this.data.component.listarDependentes();
+        //this.data.component.listarDependentes();
         
       } else {
         this.loaderService.hide();
