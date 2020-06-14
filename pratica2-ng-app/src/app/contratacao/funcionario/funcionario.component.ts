@@ -28,20 +28,19 @@ export class FuncionarioComponent implements OnInit {
   displayedColumns: string[] = ['select', 'cpf', 'nome', 'datanascimento', 'sexo'];
   storeFuncionario = new MatTableDataSource();
   selection = new SelectionModel<Pessoa>();
-
+  filtroFuncionario: boolean = true;
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.storeFuncionario.data.length;
     return numSelected == numRows;
   }
-
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.storeFuncionario.filter = filterValue;
+    const filterValue = (event.target as HTMLInputElement) ? (event.target as HTMLInputElement).value : '';
+    this.storeFuncionario.filter = filterValue || 'gambiara';
   }
   ngOnInit(): void {
     this.storeFuncionario.filterPredicate = (data: Pessoa, filter) => {
-      return !filter || data.nome.toLowerCase().includes(filter.toLowerCase());
+      return (this.filtroFuncionario ? data.ctpsnumero : true) && (filter == 'gambiara' || !filter || data.nome.toLowerCase().includes(filter.toLowerCase()));
     }
 
     this.listar();
@@ -55,6 +54,7 @@ export class FuncionarioComponent implements OnInit {
     axios.get(this.apiUrl + 'pessoa/allAtivo').then((response) => {
       if (response && response.data) {
         this.storeFuncionario.data = response.data;
+        this.storeFuncionario.filter = 'gambiara';
         this.loaderService.hide();
       }
     }).catch((error) => {
