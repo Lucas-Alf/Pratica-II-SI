@@ -28,20 +28,19 @@ export class FuncionarioComponent implements OnInit {
   displayedColumns: string[] = ['select', 'cpf', 'nome', 'datanascimento', 'sexo'];
   storeFuncionario = new MatTableDataSource();
   selection = new SelectionModel<Pessoa>();
-
+  filtroFuncionario: boolean = true;
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.storeFuncionario.data.length;
     return numSelected == numRows;
   }
-
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.storeFuncionario.filter = filterValue;
+    const filterValue = (event.target as HTMLInputElement) ? (event.target as HTMLInputElement).value : '';
+    this.storeFuncionario.filter = filterValue || 'gambiara';
   }
   ngOnInit(): void {
     this.storeFuncionario.filterPredicate = (data: Pessoa, filter) => {
-      return !filter || data.nome.toLowerCase().includes(filter.toLowerCase());
+      return (this.filtroFuncionario ? data.ctpsnumero : true) && (filter == 'gambiara' || !filter || data.nome.toLowerCase().includes(filter.toLowerCase()));
     }
 
     this.listar();
@@ -52,9 +51,10 @@ export class FuncionarioComponent implements OnInit {
   }
   listar(): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'pessoa/all').then((response) => {
+    axios.get(this.apiUrl + 'pessoa/allAtivo').then((response) => {
       if (response && response.data) {
         this.storeFuncionario.data = response.data;
+        this.storeFuncionario.filter = 'gambiara';
         this.loaderService.hide();
       }
     }).catch((error) => {
@@ -79,25 +79,36 @@ export class FuncionarioComponent implements OnInit {
   excluir(): void {
     if (this.selection.selected.length > 0) {
       this.loaderService.show();
-      axios.delete(this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf).then((response) => {
+      axios.delete(this.constant.apiUrl + 'pessoa/inativa/' + this.selection.selected[0].cpf).then((response) => {
         if (response && response.status === 200) {
           this.loaderService.hide();
           this.listar();
+          this.dialogRef.close();
         } else {
           this.loaderService.hide();
-          console.log('response -> ', response);
-          this.snackBar.open('Ocorreu um erro ao excluir o registro. 🤔', null, { duration: 5000 });
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
         }
-      }).catch((error) => {
-        this.loaderService.hide();
-        console.log(error);
-        this.snackBar.open('Ocorreu um erro ao excluir o registro. 🤔', null, { duration: 5000 });
+
       });
+      // axios.delete(this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf).then((response) => {
+      //   if (response && response.status === 200) {
+      //     this.loaderService.hide();
+      //     this.listar();
+      //   } else {
+      //     this.loaderService.hide();
+      //     console.log('response -> ', response);
+      //     this.snackBar.open('Ocorreu um erro ao excluir o registro. 🤔', null, { duration: 5000 });
+      //   }
+      // }).catch((error) => {
+      //   this.loaderService.hide();
+      //   console.log(error);
+      //   this.snackBar.open('Ocorreu um erro ao excluir o registro. 🤔', null, { duration: 5000 });
+      // });
     } else {
       this.snackBar.open('Selecione um registro para excluir. 🤦‍♂️', null, { duration: 5000 });
     }
   }
-
+  teste() { }
   salvar(action: string, data: Pessoa): void {
     this.loaderService.show();
     if (data.nome == undefined || data.nome == "") {
@@ -124,5 +135,5 @@ export class FuncionarioComponent implements OnInit {
       });
     }
   }
-  
+
 }

@@ -12,8 +12,11 @@
                     <mat-icon>edit</mat-icon> Alterar
                 </button>
                 <button (click)="excluir()" mat-stroked-button class="crud-button">
-                    <mat-icon>delete</mat-icon> Excluir
+                    <mat-icon>delete</mat-icon> Desativar
                 </button>
+                <mat-slide-toggle style="margin-left: 100px;" [(ngModel)]="filtroFuncionario" (change)="applyFilter($event)">
+                    Apenas Funcionários
+                </mat-slide-toggle>
                 <div style="float: right;">
                     <mat-form-field style="margin-right: 10px;">
                         <mat-label>🔎 Pesquisar</mat-label>

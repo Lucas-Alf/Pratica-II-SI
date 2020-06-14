@@ -9,6 +9,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +21,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.Type;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "pessoa")
@@ -76,7 +81,7 @@ public class Pessoa implements Serializable {
     private byte[] foto;
 
     @Column(name = "pispasep")
-    private Integer pispasep;
+    private String pispasep;
 
     @Column(name = "pisexpedicao")
     @Temporal(TemporalType.DATE)
@@ -94,7 +99,7 @@ public class Pessoa implements Serializable {
     private String chntipo;
 
     @Column(name = "ctpsnumero")
-    private Integer ctpsnumero;
+    private String ctpsnumero;
 
     @Column(name = "ctpsserie")
     private Integer ctpsserie;
@@ -110,7 +115,7 @@ public class Pessoa implements Serializable {
     private String nomemae;
 
     @Column(name = "tituloeleitornumero")
-    private Integer tituloeleitornumero;
+    private String tituloeleitornumero;
 
     @Column(name = "tituloeleitoruf")
     @Size(max = 2)
@@ -123,7 +128,10 @@ public class Pessoa implements Serializable {
     private String tituloeleitorsecao;
 
     @Column(name = "certificadoreservista")
-    private Integer certificadoreservista;
+    private String certificadoreservista;
+    
+    @Column(name = "ativo")
+    private boolean ativo;
 
     @JoinColumn(name = "enderecoid", referencedColumnName = "id")
     @ManyToOne
@@ -132,6 +140,7 @@ public class Pessoa implements Serializable {
 
     @Column(name = "email")
     @Email
+    @Nullable
     private String email;
 
     @Column(name = "numero")
@@ -143,8 +152,11 @@ public class Pessoa implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
     private List<PessoaConhecimento> pessoaConhecimentos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpf", fetch = FetchType.LAZY)
     private List<PessoaHabilidadesAtitudes> pessoaHabilidadesAtitudes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoacpf", fetch = FetchType.LAZY)
+    private List<Dependente> dependente;
 
     public Pessoa() {
     }
@@ -236,14 +248,6 @@ public class Pessoa implements Serializable {
         this.foto = foto;
     }
 
-    public Integer getPispasep() {
-        return pispasep;
-    }
-
-    public void setPispasep(Integer pispasep) {
-        this.pispasep = pispasep;
-    }
-
     public Date getPisexpedicao() {
         return pisexpedicao;
     }
@@ -274,14 +278,6 @@ public class Pessoa implements Serializable {
 
     public void setChntipo(String chntipo) {
         this.chntipo = chntipo;
-    }
-
-    public Integer getCtpsnumero() {
-        return ctpsnumero;
-    }
-
-    public void setCtpsnumero(Integer ctpsnumero) {
-        this.ctpsnumero = ctpsnumero;
     }
 
     public Integer getCtpsserie() {
@@ -316,14 +312,6 @@ public class Pessoa implements Serializable {
         this.nomemae = nomemae;
     }
 
-    public Integer getTituloeleitornumero() {
-        return tituloeleitornumero;
-    }
-
-    public void setTituloeleitornumero(Integer tituloeleitornumero) {
-        this.tituloeleitornumero = tituloeleitornumero;
-    }
-
     public String getTituloeleitoruf() {
         return tituloeleitoruf;
     }
@@ -346,14 +334,6 @@ public class Pessoa implements Serializable {
 
     public void setTituloeleitorsecao(String tituloeleitorsecao) {
         this.tituloeleitorsecao = tituloeleitorsecao;
-    }
-
-    public Integer getCertificadoreservista() {
-        return certificadoreservista;
-    }
-
-    public void setCertificadoreservista(Integer certificadoreservista) {
-        this.certificadoreservista = certificadoreservista;
     }
 
     public Endereco getEnderecoid() {
@@ -584,5 +564,53 @@ public class Pessoa implements Serializable {
 
     public void setPessoaHabilidadesAtitudes(List<PessoaHabilidadesAtitudes> pessoaHabilidadesAtitudes) {
         this.pessoaHabilidadesAtitudes = pessoaHabilidadesAtitudes;
+    }
+
+    public List<Dependente> getDependente() {
+        return dependente;
+    }
+
+    public void setDependente(List<Dependente> dependente) {
+        this.dependente = dependente;
+    }
+
+    public String getPispasep() {
+        return pispasep;
+    }
+
+    public void setPispasep(String pispasep) {
+        this.pispasep = pispasep;
+    }
+
+    public String getCtpsnumero() {
+        return ctpsnumero;
+    }
+
+    public void setCtpsnumero(String ctpsnumero) {
+        this.ctpsnumero = ctpsnumero;
+    }
+
+    public String getTituloeleitornumero() {
+        return tituloeleitornumero;
+    }
+
+    public void setTituloeleitornumero(String tituloeleitornumero) {
+        this.tituloeleitornumero = tituloeleitornumero;
+    }
+
+    public String getCertificadoreservista() {
+        return certificadoreservista;
+    }
+
+    public void setCertificadoreservista(String certificadoreservista) {
+        this.certificadoreservista = certificadoreservista;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

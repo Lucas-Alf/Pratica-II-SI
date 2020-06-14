@@ -41,6 +41,8 @@ export class DependenteModalComponent implements OnInit {
 
   close(): void {
     this.dialogRef2.close();
+    //this.data.component.teste();
+    this.data.component.listarDependente();
   }
 
   listarEndereco(): void {
@@ -93,6 +95,7 @@ export class DependenteModalComponent implements OnInit {
       },
       email: null,
       numero: null,
+      dependente: null
     };
     axios.post(this.constant.apiUrl + 'pessoa/' + this.data.action, dados).then((response) => {
       if (response && response.data) {  

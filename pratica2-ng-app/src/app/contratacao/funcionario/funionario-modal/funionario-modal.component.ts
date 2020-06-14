@@ -36,21 +36,21 @@ export class FunionarioModalComponent implements OnInit {
   paisnascimentoid: number;
   telefonecelular: number;
   telefonefixo: number;
-  pispasep: number;
+  pispasep: string;
   pisexpedicao: Date;
-  cnhnumero: number;
+  cnhnumero: string;
   cnhdata: Date;
   chntipo: string;
-  ctpsnumero: number;
+  ctpsnumero: string;
   ctpsserie: number;
   ctpsuf: string;
   nomepai: string;
   nomemae: string;
-  tituloeleitornumero: number;
+  tituloeleitornumero: string;
   tituloeleitoruf: string;
   tituloeleitorzona: number;
   tituloeleitorsecao: string;
-  certificadoreservista: number;
+  certificadoreservista: string;
   enderecoid: number;
   email: string;
   numero: number;
@@ -103,7 +103,7 @@ export class FunionarioModalComponent implements OnInit {
     axios.get(this.apiUrl + 'departamento/all').then((response) => {
       if (response && response.data) {
         this.departamentos = response.data;
-        this.loaderService.hide();
+        //this.loaderService.hide();
       }
     }).catch((error) => {
       this.loaderService.hide();
@@ -117,7 +117,9 @@ export class FunionarioModalComponent implements OnInit {
     axios.get(this.apiUrl + 'pessoa/findDepedente').then((response) => {
       if (response && response.data) {
         this.pessoas = response.data;
-        this.loaderService.hide();
+        this.filteredDependentes = this.DependentesCtrl.valueChanges.pipe(
+          startWith(null),
+          map((item: string | null) => item ? this._filter(item) : this.pessoas.slice()));
       }
       this.listarDependente();
     }).catch((error) => {
@@ -128,20 +130,11 @@ export class FunionarioModalComponent implements OnInit {
   }
 
   listarDependente(): void {
-    this.loaderService.show();
-    axios.get(this.apiUrl + 'dependente/all').then((response) => {
+    axios.get(this.apiUrl + 'dependente/findDepedentesCpf?cpf=' + (this.cpf || '0')).then((response) => {
       if (response && response.data) {
-        this.dependentes = response.data;
-        debugger;
-        if (this.cpf) {
-          this.filteredDependentes = this.DependentesCtrl.valueChanges.pipe(
-            startWith(null),
-            map((item: string | null) => item ? this._filter(item) : this.pessoas.filter(x => x.cpf != this.cpf).slice()));
-        } else {
-          this.filteredDependentes = this.DependentesCtrl.valueChanges.pipe(
-            startWith(null),
-            map((item: string | null) => item ? this._filter(item) : this.pessoas.slice()));
-        }
+        this.dependentes = response.data.map((x)=> ( x.dependentecpf));
+
+        this.loaderService.hide();
       }
     }).catch((error) => {
       this.loaderService.hide();
@@ -156,11 +149,7 @@ export class FunionarioModalComponent implements OnInit {
     }
     if (value) {
       const filterValue = value.toLowerCase();
-      if (this.cpf) {
-        return this.dependentes.filter(item => item.cpf != this.cpf && item.nome.toLowerCase().includes(filterValue));
-      } else {
-        return this.dependentes.filter(item => item.nome.toLowerCase().includes(filterValue));
-      }
+      return this.pessoas.filter(item => item.nome.toLowerCase().includes(filterValue));
     }
   }
   listarContrato(cpf): void {
@@ -169,7 +158,7 @@ export class FunionarioModalComponent implements OnInit {
     axios.get(this.apiUrl + 'contrato/findByCpf?cpf=' + cpf).then((response) => {
       if (response && response.data) {
         this.storeContrato.data = response.data;
-        this.loaderService.hide();
+        //this.loaderService.hide();
       }
     }).catch((error) => {
       this.loaderService.hide();
@@ -215,6 +204,7 @@ export class FunionarioModalComponent implements OnInit {
       },
       email: this.email,
       numero: this.numero,
+      dependente: this.dependentes.map((x) => ({ dependentecpf: x }))
     };
     this.data.component.salvar(this.data.action, dados);
   }
@@ -225,7 +215,7 @@ export class FunionarioModalComponent implements OnInit {
     axios.get(this.apiUrl + 'pais/all').then((response) => {
       if (response && response.data) {
         this.paises = response.data;
-        this.loaderService.hide();
+        // this.loaderService.hide();
       }
     }).catch((error) => {
       this.loaderService.hide();
@@ -239,7 +229,7 @@ export class FunionarioModalComponent implements OnInit {
     axios.get(this.apiUrl + 'endereco/all').then((response) => {
       if (response && response.data) {
         this.enderecos = response.data;
-        this.loaderService.hide();
+        //this.loaderService.hide();
       }
     }).catch((error) => {
       this.loaderService.hide();
@@ -283,6 +273,7 @@ export class FunionarioModalComponent implements OnInit {
       },
       email: this.email,
       numero: this.numero,
+      dependente: this.dependentes.map((x) => ({ dependentecpf: x }))
     };
     const dados: Contrato = {
       matricula: this.matricula,
@@ -301,9 +292,9 @@ export class FunionarioModalComponent implements OnInit {
     this.loaderService.show();
     axios.post(this.constant.apiUrl + 'contrato/' + (data.matricula ? 'Alterar' : 'Incluir'), data).then((response) => {
       if (response && response.data) {
-        this.loaderService.hide();
         this.listarContrato(this.cpf);
         this.cancelar();
+        this.loaderService.hide();
       } else {
         this.loaderService.hide();
         this.snackBar.open('Ocorreu um erro ao salvar o contrato. 😬', null, { duration: 5000 });
@@ -328,7 +319,6 @@ export class FunionarioModalComponent implements OnInit {
       this.departamentoid = r.departamentoid.id;
       this.matricula = r.matricula;
 
-      console.log('ALTEROU ' + this.matricula);
     }, 300);
   }
   cancelar(): void {
@@ -340,7 +330,6 @@ export class FunionarioModalComponent implements OnInit {
     this.datademissao = null;
     this.matricula = null;
     this.selection.clear();
-    console.log('CANCELOU  ' + this.matricula);
   }
   verificaDataDem(): void {
 
@@ -381,7 +370,6 @@ export class FunionarioModalComponent implements OnInit {
     this.DependentesCtrl.setValue(null);
   }
   ngOnInit(): void {
-    //sconsole.log("SEXO " + this.sexo + " -" + this.data.info.sexo);
     if (this.data.info) {
       this.listarContrato(this.data.info.cpf);
       this.cpf = this.data.info.cpf;
