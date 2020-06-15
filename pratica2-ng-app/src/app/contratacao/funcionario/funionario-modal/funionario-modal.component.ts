@@ -19,6 +19,7 @@ import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { Dependente } from '../dependente';
+import { CargoHistModalComponent } from '../cargo-hist-modal/cargo-hist-modal.component';
 
 @Component({
   selector: 'app-funionario-modal',
@@ -71,7 +72,7 @@ export class FunionarioModalComponent implements OnInit {
   //dependentes: Pessoa[];
   validador: FormGroup;
   dialogRef2: MatDialogRef<DependenteModalComponent, any>;
-
+  dialogCargo: MatDialogRef<CargoHistModalComponent, any>;
   visible = true;
   selectable = true;
   removable = true;
@@ -132,7 +133,7 @@ export class FunionarioModalComponent implements OnInit {
   listarDependente(): void {
     axios.get(this.apiUrl + 'dependente/findDepedentesCpf?cpf=' + (this.cpf || '0')).then((response) => {
       if (response && response.data) {
-        this.dependentes = response.data.map((x)=> ( x.dependentecpf));
+        this.dependentes = response.data.map((x) => (x.dependentecpf));
 
         this.loaderService.hide();
       }
@@ -152,13 +153,13 @@ export class FunionarioModalComponent implements OnInit {
       return this.pessoas.filter(item => item.nome.toLowerCase().includes(filterValue));
     }
   }
-  listarContrato(cpf): void {
-    this.loaderService.show();//this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf
+  listarContrato(cpf, mascaraLoad): void {
+   // this.loaderService.show();//this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf
     // calculo/buscaPorContrato?matricula=
     axios.get(this.apiUrl + 'contrato/findByCpf?cpf=' + cpf).then((response) => {
       if (response && response.data) {
         this.storeContrato.data = response.data;
-        //this.loaderService.hide();
+        if (mascaraLoad) this.loaderService.hide();
       }
     }).catch((error) => {
       this.loaderService.hide();
@@ -292,9 +293,8 @@ export class FunionarioModalComponent implements OnInit {
     this.loaderService.show();
     axios.post(this.constant.apiUrl + 'contrato/' + (data.matricula ? 'Alterar' : 'Incluir'), data).then((response) => {
       if (response && response.data) {
-        this.listarContrato(this.cpf);
+        this.listarContrato(this.cpf, true);
         this.cancelar();
-        this.loaderService.hide();
       } else {
         this.loaderService.hide();
         this.snackBar.open('Ocorreu um erro ao salvar o contrato. 😬', null, { duration: 5000 });
@@ -337,7 +337,9 @@ export class FunionarioModalComponent implements OnInit {
   incluirDependente(): void {
     this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this, dependentes: this.dependentes } });
   }
-
+  incluirCargo(): void {
+    this.dialogCargo = this.dialog.open(CargoHistModalComponent, { data: { action: 'Incluir', component: this} });
+  }
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -371,7 +373,7 @@ export class FunionarioModalComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.data.info) {
-      this.listarContrato(this.data.info.cpf);
+      this.listarContrato(this.data.info.cpf, false);
       this.cpf = this.data.info.cpf;
       this.nome = this.data.info.nome;
       this.paisnascimentoid = this.data.info.paisnascimentoid ? this.data.info.paisnascimentoid.id : null;

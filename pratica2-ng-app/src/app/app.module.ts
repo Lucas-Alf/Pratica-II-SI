@@ -98,6 +98,7 @@ import { DependenteModalComponent } from './contratacao/funcionario/dependente-m
 import { EventoVariavelComponent } from './folhapagamento/evento-variavel/evento-variavel.component';
 import { EventoVariavelModalComponent } from './folhapagamento/evento-variavel/evento-variavel-modal/evento-variavel-modal.component';
 import { SelecaoCandidatoComponent } from './recrutamento/selecaoCandidato/selecaoCandidato.component';
+import { CargoHistModalComponent } from './contratacao/funcionario/cargo-hist-modal/cargo-hist-modal.component';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,8 @@ import { SelecaoCandidatoComponent } from './recrutamento/selecaoCandidato/selec
     DependenteModalComponent,
     EventoVariavelComponent,
     EventoVariavelModalComponent,
-    SelecaoCandidatoComponent
+    SelecaoCandidatoComponent,
+    CargoHistModalComponent
   ],
   imports: [
     BrowserModule,
