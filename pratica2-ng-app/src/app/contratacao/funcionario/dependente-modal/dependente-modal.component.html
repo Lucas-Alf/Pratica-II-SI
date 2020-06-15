@@ -1,16 +1,15 @@
 <h1 mat-dialog-title>{{data.action}} Dependente</h1>
 <div mat-dialog-content>
-  <mat-form-field appearance="fill" style="width: 500px;">
+  <mat-form-field appearance="fill" style="width: 600px;">
     <mat-label>Nome</mat-label>
     <input type="text" matInput placeholder="Nome" required [(ngModel)]='nome'>
   </mat-form-field>
   <br>
-  <mat-form-field appearance="fill" style="width: 250px;">
+  <mat-form-field appearance="fill" class="normal" style="width: 200px;">
     <mat-label>CPF</mat-label>
     <input type="text" matInput placeholder="CPF" required [(ngModel)]='cpf'>
   </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill" style="width: 250px;" class="normal">
+  <mat-form-field appearance="fill" class="normal" style="width: 200px;" class="normal">
     <mat-label>RG</mat-label>
     <input type="text" matInput placeholder="RG" required [(ngModel)]='rg'>
   </mat-form-field>
@@ -29,7 +28,8 @@
     <mat-datepicker #picker disabled="false"></mat-datepicker>
   </mat-form-field>
   <br>
-  <mat-form-field appearance="fill" style="width: 400px;" class="normal">
+
+  <mat-form-field appearance="fill" style="width: 600px;" class="normal">
     <mat-label>Nome Mãe</mat-label>
     <input type="text" matInput placeholder="Nome da Mãe" [(ngModel)]='nomemae'>
   </mat-form-field>
