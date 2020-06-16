@@ -154,7 +154,7 @@ export class FunionarioModalComponent implements OnInit {
     }
   }
   listarContrato(cpf, mascaraLoad): void {
-   // this.loaderService.show();//this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf
+    // this.loaderService.show();//this.apiUrl + 'pessoa/delete/' + this.selection.selected[0].cpf
     // calculo/buscaPorContrato?matricula=
     axios.get(this.apiUrl + 'contrato/findByCpf?cpf=' + cpf).then((response) => {
       if (response && response.data) {
@@ -205,6 +205,7 @@ export class FunionarioModalComponent implements OnInit {
       },
       email: this.email,
       numero: this.numero,
+      ativo: true,
       dependente: this.dependentes.map((x) => ({ dependentecpf: x }))
     };
     this.data.component.salvar(this.data.action, dados);
@@ -274,6 +275,7 @@ export class FunionarioModalComponent implements OnInit {
       },
       email: this.email,
       numero: this.numero,
+      ativo: true,
       dependente: this.dependentes.map((x) => ({ dependentecpf: x }))
     };
     const dados: Contrato = {
@@ -335,10 +337,14 @@ export class FunionarioModalComponent implements OnInit {
 
   }
   incluirDependente(): void {
-    this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this} });
+    this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
   }
   incluirCargo(): void {
-    this.dialogCargo = this.dialog.open(CargoHistModalComponent, { data: { action: 'Incluir', component: this} });
+    if (this.selection.selected.length > 0) {
+      this.dialogCargo = this.dialog.open(CargoHistModalComponent, { data: { action: 'Incluir', component: this, info: this.selection.selected[0] } });
+    } else {
+      this.snackBar.open('Selecione um contrato para adicionar o cargo. 🤦‍♂️', null, { duration: 5000 });
+    }
   }
   add(event: MatChipInputEvent): void {
     const input = event.input;

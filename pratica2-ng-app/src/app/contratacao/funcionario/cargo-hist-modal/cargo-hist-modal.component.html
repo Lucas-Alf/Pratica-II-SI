@@ -6,7 +6,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
     </mat-form-field>
-    <mat-form-field appearance="fill" style="width: 500px;">
+    <mat-form-field appearance="fill" style="width: 400px;">
         <mat-label>Cargo</mat-label>
         <mat-select [(ngModel)]='cargoid'>
             <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">
@@ -22,35 +22,35 @@
         <!-- <button (click)="alterar()" mat-stroked-button class="crud-button">
             <mat-icon>edit</mat-icon> Alterar
         </button> -->
-        <button (click)="cancelar()" mat-stroked-button class="crud-button">
+        <!-- <button (click)="cancelar()" mat-stroked-button class="crud-button">
             <mat-icon>cancel</mat-icon> Cancelar
-        </button>
-        <!-- <mat-divider style="margin-top:40px;margin-bottom:5px"></mat-divider>
-        <span style="color: darkslateblue;">Selecione o historicocargocontrato que deseja alterar.</span> -->
+        </button> -->
+        <mat-divider style="margin-top:40px;margin-bottom:5px"></mat-divider>
+        <!--    <span style="color: darkslateblue;">Selecione o historicocargocontrato que deseja alterar.</span> -->
     </div>
     <div class="table-container">
         <table mat-table [dataSource]="storeHistCargoCont" style="width: 100%">
-            <ng-container matColumnDef="select">
+            <!-- <ng-container matColumnDef="select">
                 <th style="width: 9%;" mat-header-cell *matHeaderCellDef>
-                    <!-- <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-                    </mat-checkbox> -->
+                    <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
                 </th>
-                <!-- <td mat-cell *matCellDef="let row" [ngSwitch]="row.situacao">
+                <td mat-cell *matCellDef="let row" [ngSwitch]="row.situacao">
                     <mat-checkbox *ngSwitchCase="1" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" (click)="alterar()"></mat-checkbox>
                     <mat-checkbox *ngSwitchCase="2" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" (click)="alterar()"></mat-checkbox>
-                </td> -->
+                </td>
                 <td mat-cell *matCellDef="let row">
                     <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"></mat-checkbox>
                 </td>
-            </ng-container>
+            </ng-container> -->
             <ng-container matColumnDef="data">
-                <th style="width:31%;text-align: center;" mat-header-cell *matHeaderCellDef> Data
+                <th style="width:20%;text-align: center;" mat-header-cell *matHeaderCellDef> Data
                 </th>
                 <td style="text-align: center;" mat-cell *matCellDef="let historicocargocontrato">
                     {{historicocargocontrato.data | date: 'dd/MM/yyyy'}} </td>
             </ng-container>
             <ng-container matColumnDef="cargoid">
-                <th style="width: 60%;" mat-header-cell *matHeaderCellDef> Cargo </th>
+                <th style="width: 80%;" mat-header-cell *matHeaderCellDef> Cargo </th>
                 <td mat-cell *matCellDef="let historicocargocontrato"> {{historicocargocontrato.cargoid.descricao}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -58,9 +58,9 @@
         </table>
     </div>
 </div>
-<div mat-dialog-actions style="float: left;">
+<!-- <div mat-dialog-actions style="float: left;">
     <button (click)="save()" mat-button class="gravar-button">Gravar</button>
-</div>
+</div> -->
 <div mat-dialog-actions style="float: right;">
-    <button (click)="close()" mat-button class="cancelar-button">Cancelar</button>
+    <button (click)="close()" mat-button class="cancelar-button">Fechar</button>
 </div>

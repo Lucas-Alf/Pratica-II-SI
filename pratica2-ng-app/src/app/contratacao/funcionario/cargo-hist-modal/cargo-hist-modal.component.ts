@@ -18,11 +18,11 @@ import axios from 'axios';
 })
 export class CargoHistModalComponent implements OnInit {
   apiUrl: string;
-  
+
   id: number;
   data: Date;
-  matricula: Contrato;
-  cargoid: Cargo;
+  matricula: number;
+  cargoid: number;
 
   cargos: Cargo[];
   constructor(
@@ -33,24 +33,49 @@ export class CargoHistModalComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public dialog: MatDialog
   ) { this.apiUrl = this.constant.apiUrl; this.listarCargo(); }
-  displayedColumns: string[] = ['select', 'data', 'cargoid'];
+  displayedColumns: string[] = ['data', 'cargoid'];
   storeHistCargoCont = new MatTableDataSource();
   selection = new SelectionModel<Historicocargocontrato>();
 
-  gravar(){}
-  alterar(){}
-  cancelar(){}
+  gravar() {
+    const dados: Historicocargocontrato = {
+      id: null,
+      data: this.data,
+      matricula: {
+        situacao: null,
+        dataadmissao: null,
+        regimetrabalho: null,
+        horastrabalho: null,
+        datademissao: null,
+        departamentoid: null,
+        pessoa: null,
+        matricula: this.matricula,
+      },
+      cargoid: {
+        descricao: null,
+        cboid: null,
+        faixatabelasalarial: null,
+        cargoConhecimentos: null,
+        id: this.cargoid,
+        cargoHabilidadeAtitudes: null
+      }
+    };
+    console.log(dados);
+    this.salvarCargoContrato(dados);
+  }
+
+  alterar() { }
+  cancelar() { }
   save() { }
   close(): void {
     this.dialogCargo.close();
   }
 
-
-  listarCargo(): void {
+  listar(matricula): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'cargo/all').then((response) => {
+    axios.get(this.apiUrl + 'historicocargocontrato/allMatricula?matricula=' + matricula).then((response) => {
       if (response && response.data) {
-        this.cargos = response.data;
+        this.storeHistCargoCont.data = response.data;
         this.loaderService.hide();
       }
     }).catch((error) => {
@@ -59,8 +84,42 @@ export class CargoHistModalComponent implements OnInit {
       this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
     });
   }
+  listarCargo(): void {
+    //this.loaderService.show();
+    axios.get(this.apiUrl + 'cargo/all').then((response) => {
+      if (response && response.data) {
+        this.cargos = response.data;
+        // this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
 
+  salvarCargoContrato(data: Historicocargocontrato): void {
+    this.loaderService.show();
+    axios.post(this.constant.apiUrl + 'historicocargocontrato/Incluir', data).then((response) => {
+      if (response && response.data) {
+        this.listar(this.matricula);
+      } else {
+        this.loaderService.hide();
+        this.snackBar.open('Ocorreu um erro ao salvar o cargo do contrato. 😬', null, { duration: 5000 });
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      if (error.response) {
+        console.error(error.response.data.message);
+        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+      } else {
+        this.snackBar.open('Ocorreu um erro ao salvar o cargo do contrato. 😬', null, { duration: 5000 });
+      }
+    });
+  }
   ngOnInit(): void {
+    this.matricula = this.dataD.info.matricula;
+    this.listar(this.dataD.info.matricula);
   }
 
 }
