@@ -188,14 +188,14 @@ ORDER BY evento.tipo DESC,
 				<staticText>
 					<reportElement x="0" y="5" width="390" height="18" uuid="9aaf52ee-9a1d-4371-abf5-15794e1ded2b"/>
 					<textElement textAlignment="Center">
-						<font fontName="Arial" size="15" isBold="true"/>
+						<font fontName="SansSerif" size="15" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Folha de Pagamento]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="10" y="29" width="380" height="18" uuid="09dc5f91-4483-4b1e-83e5-653314b0089b"/>
 					<textElement textAlignment="Left">
-						<font fontName="Arial" size="13" isBold="true"/>
+						<font fontName="SansSerif" size="13" isBold="true"/>
 					</textElement>
 					<text><![CDATA[RocketRH]]></text>
 				</staticText>
@@ -219,28 +219,28 @@ ORDER BY evento.tipo DESC,
 				<staticText>
 					<reportElement x="11" y="51" width="66" height="18" uuid="cb7b44ed-c146-44d6-a4ee-9056d3b5359a"/>
 					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<text><![CDATA[PIS/PASEP:]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="161" y="51" width="29" height="18" uuid="5d09a07d-eafd-440d-83fe-7f7f0c3a54c9"/>
 					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<text><![CDATA[CPF:]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="277" y="51" width="53" height="18" uuid="ed2be396-2697-458b-a0e5-3fdd5401abab"/>
 					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<text><![CDATA[Admissão:]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="214" y="11" width="36" height="18" uuid="20116e7a-64e3-4035-99f9-35e2a9e08f1d"/>
 					<textElement textAlignment="Left">
-						<font fontName="Arial" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<text><![CDATA[Cargo:]]></text>
 				</staticText>
