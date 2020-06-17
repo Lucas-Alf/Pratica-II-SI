@@ -93,12 +93,14 @@ import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno
 import { RecrutamentoExternoModalComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno-modal/recrutamentoExterno-modal.component';
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal/beneficio-modal.component';
+import { EventoFixoModalComponent } from './contratacao/funcionario/beneficio-hist-modal/eventofixo-modal/eventofixo-modal.component';
 import { CalculoComponent } from './folhapagamento/calculo/calculo.component';
 import { DependenteModalComponent } from './contratacao/funcionario/dependente-modal/dependente-modal.component';
 import { EventoVariavelComponent } from './folhapagamento/evento-variavel/evento-variavel.component';
 import { EventoVariavelModalComponent } from './folhapagamento/evento-variavel/evento-variavel-modal/evento-variavel-modal.component';
 import { SelecaoCandidatoComponent } from './recrutamento/selecaoCandidato/selecaoCandidato.component';
 import { CargoHistModalComponent } from './contratacao/funcionario/cargo-hist-modal/cargo-hist-modal.component';
+import { BeneficioHistModalComponent } from './contratacao/funcionario/beneficio-hist-modal/beneficio-hist-modal.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +164,9 @@ import { CargoHistModalComponent } from './contratacao/funcionario/cargo-hist-mo
     EventoVariavelComponent,
     EventoVariavelModalComponent,
     SelecaoCandidatoComponent,
-    CargoHistModalComponent
+    CargoHistModalComponent,
+    BeneficioHistModalComponent,
+    EventoFixoModalComponent
   ],
   imports: [
     BrowserModule,

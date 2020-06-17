@@ -15,4 +15,7 @@ public interface EventoFixoRepository extends JpaRepository<EventoFixo, Integer>
 
     @Query(value = "select * from eventofixo where contratomatricula = ?1 and datainicial <= ?2 and (datafinal is null or datafinal <= ?3)", nativeQuery = true)
     public List<EventoFixo> RetornaPorContrato(int contrato, LocalDate dataInicial, LocalDate dataFinal);
+
+    @Query(value = "SELECT * FROM eventofixo WHERE contratomatricula = ?1 ORDER BY id desc ", nativeQuery = true)
+    public List<EventoFixo> findByContrato(int matricula);
 }

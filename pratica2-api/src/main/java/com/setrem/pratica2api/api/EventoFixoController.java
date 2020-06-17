@@ -37,6 +37,12 @@ public class EventoFixoController {
         return eventos;
     }
 
+    @GetMapping("/buscaPorContrato")
+    public List<EventoFixo> buscaPorContrato(int matricula) {
+        var eventos = this.EventoFixoRepository.findByContrato(matricula);
+        return eventos;
+    }
+
     @PostMapping("/Incluir")
     public EventoFixo add(@RequestBody EventoFixo data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {

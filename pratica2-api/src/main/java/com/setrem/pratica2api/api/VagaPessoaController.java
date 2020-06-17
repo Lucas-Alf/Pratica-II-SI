@@ -177,7 +177,7 @@ public class VagaPessoaController {
             sql += " and b.sexo like '%" + valorSexo + "%'";
         }
         if (valorVaga != "") {
-            sql += " and a.vagaid like '%" + valorVaga + "%'";
+            sql += " and a.vagaid = " + valorVaga;
         }
         if (idioma != "") {
             sql += " and exists (select idiomaid from pessoaidioma where cpf = b.cpf and idiomaid in (" + idioma + ")) ";
@@ -192,7 +192,7 @@ public class VagaPessoaController {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
         parametros.put("sql", sql);
-        
+
         byte[] reportBytes = null;
         SessionFactory sessionFactory = new SessionFactory();
         Connection conexao = sessionFactory.OpenConnection();
