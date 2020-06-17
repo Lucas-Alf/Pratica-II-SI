@@ -20,6 +20,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { Dependente } from '../dependente';
 import { CargoHistModalComponent } from '../cargo-hist-modal/cargo-hist-modal.component';
+import { BeneficioHistModalComponent } from '../beneficio-hist-modal/beneficio-hist-modal.component';
 
 @Component({
   selector: 'app-funionario-modal',
@@ -73,6 +74,7 @@ export class FunionarioModalComponent implements OnInit {
   validador: FormGroup;
   dialogRef2: MatDialogRef<DependenteModalComponent, any>;
   dialogCargo: MatDialogRef<CargoHistModalComponent, any>;
+  dialogBeneficio: MatDialogRef<BeneficioHistModalComponent, any>;
   visible = true;
   selectable = true;
   removable = true;
@@ -344,6 +346,13 @@ export class FunionarioModalComponent implements OnInit {
       this.dialogCargo = this.dialog.open(CargoHistModalComponent, { data: { action: 'Incluir', component: this, info: this.selection.selected[0] } });
     } else {
       this.snackBar.open('Selecione um contrato para adicionar o cargo. 🤦‍♂️', null, { duration: 5000 });
+    }
+  }
+  incluirBeneficio(): void {
+    if (this.selection.selected.length > 0) {
+      this.dialogBeneficio = this.dialog.open(BeneficioHistModalComponent, { data: { action: 'Incluir', component: this, info: this.selection.selected[0] } });
+    } else {
+      this.snackBar.open('Selecione um contrato para adicionar o beneficio. 🤦‍♂️', null, { duration: 5000 });
     }
   }
   add(event: MatChipInputEvent): void {
