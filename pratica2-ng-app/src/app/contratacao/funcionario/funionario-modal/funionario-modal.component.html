@@ -121,7 +121,58 @@
             <button (click)="incluirDependente()" style="margin-left: 20px;" mat-stroked-button class="crud-button" matTooltip="Utilize essa função caso o dependente não esteja no sistema.">
                 <mat-icon>add</mat-icon> Novo
             </button>
-
+            <br>
+            <!-- <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="conhecimentosPessoaChips">
+                <mat-chip-list #chipList aria-label="Conhecimento">
+                <mat-chip
+                    *ngFor="let item of pessoaConhecimentos"
+                    [selectable]="selectedPessoaConhecimento"
+                    [removable]="removableConhecimentoPessoa"
+                    (removed)="removePessoaConhecimento(item)">
+                    {{item.nome}}
+                    <mat-icon matChipRemove *ngIf="removableConhecimentoPessoa">cancel</mat-icon>
+                </mat-chip>
+                <input
+                    placeholder="Conhecimento"
+                    #fruitInputConhecimento
+                    [formControl]="ConhecimentoPessoaCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodesConhecimentoPessoa"
+                    (matChipInputTokenEnd)="addConhecimentoPessoa($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedPessoaConhecimento($event)">
+                <mat-option *ngFor="let item of filteredConhecimentosPessoa | async" [value]="item">
+                    {{item.nome}}
+                </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+  <br>
+  <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="pessoaIdiomasChips">
+    <mat-chip-list #chipList2 aria-label="Idioma">
+      <mat-chip
+        *ngFor="let item of pessoaIdiomas"
+        [selectable]="selectedPessoaIdioma"
+        [removable]="removablePessoaIdioma"
+        (removed)="removePessoaIdioma(item)">
+        {{item.descricao}} - {{item.nivel}}
+        <mat-icon matChipRemove *ngIf="removablePessoaIdioma">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Idioma"
+        #fruitInputIdioma
+        [formControl]="PessoaIdiomaCtrl"
+        [matAutocomplete]="auto2"
+        [matChipInputFor]="chipList2"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodesPessoaIdioma"
+        (matChipInputTokenEnd)="addPessoaIdioma($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedPessoaIdioma($event)">
+      <mat-option *ngFor="let item of filteredPessoaIdioma | async" [value]="item">
+        {{item.descricao}} - {{item.nivel}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> -->
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true" style="margin:3px;">
                     <mat-expansion-panel-header>
