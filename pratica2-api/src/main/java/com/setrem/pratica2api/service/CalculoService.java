@@ -24,6 +24,7 @@ import com.setrem.pratica2api.service.Rotinas.RotinaFGTS;
 import com.setrem.pratica2api.service.Rotinas.RotinaHoraExtra;
 import com.setrem.pratica2api.service.Rotinas.RotinaINSS;
 import com.setrem.pratica2api.service.Rotinas.RotinaIRRF;
+import com.setrem.pratica2api.service.Rotinas.RotinaPorcentagem;
 import com.setrem.pratica2api.service.Rotinas.RotinaSalario;
 import com.setrem.pratica2api.service.Rotinas.RotinaValorFixo;
 
@@ -85,6 +86,9 @@ public class CalculoService {
                         break;
                     case 6:
                         incidencias = new RotinaHoraExtra().Calcula(evento, incidencias, contrato);
+                        break;
+                    case 7:
+                        incidencias = new RotinaPorcentagem().Calcula(evento, incidencias);
                         break;
                     default:
                         throw new Exception("Rotina não implementada.");
