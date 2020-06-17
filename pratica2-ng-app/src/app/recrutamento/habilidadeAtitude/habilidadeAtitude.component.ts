@@ -41,7 +41,7 @@ export class HabilidadeAtitudeComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.storeHabilidadeAtitude.filter = filterValue;
   }
-
+  
   incluir(): void {
     this.dialogRef = this.dialog.open(HabilidadeAtitudeModalComponent, { data: { action: 'Incluir', component: this } });
   }
@@ -124,7 +124,7 @@ export class HabilidadeAtitudeComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeHabilidadeAtitude.filterPredicate = (data: HabilidadeAtitude, filter) => {
-      return !filter || data.descricao.toLowerCase().includes(filter.toLowerCase());
+      return !filter || data.descricao.toLowerCase().includes(filter.toLowerCase()) && data.tipo.toLowerCase().includes("");
     }
 
     //Preenche a tabela

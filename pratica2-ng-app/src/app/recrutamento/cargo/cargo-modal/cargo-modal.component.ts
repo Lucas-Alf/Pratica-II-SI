@@ -112,7 +112,7 @@ export class CargoModalComponent implements OnInit {
 
   listarCbo(): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'cbo/all').then((response) => {
+    axios.get(this.apiUrl + 'cbo/lista').then((response) => {
       if (response && response.data) {
         this.cbos = response.data;
         this.loaderService.hide();

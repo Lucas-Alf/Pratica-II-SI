@@ -27,7 +27,7 @@ export class FaixaTabelaSalarialComponent implements OnInit {
     this.apiUrl = this.constant.apiUrl;
   }
 
-  displayedColumns: string[] = ['select', 'id', 'tabelasalarial.descricao', 'tabelasalarial.valorbase','nivel', 'percentual'];
+  displayedColumns: string[] = ['select', 'id', 'tabelasalarial.descricao', 'tabelasalarial.valorbase', 'percentual'];
   storeFaixaTabelaSalarial = new MatTableDataSource();
   selection = new SelectionModel<FaixaTabelaSalarial>();
 
@@ -114,7 +114,6 @@ export class FaixaTabelaSalarialComponent implements OnInit {
   listar(): void {
     this.loaderService.show();
     axios.get(this.apiUrl + 'FaixaTabelaSalarial/all').then((response) => {
-      debugger
       if (response && response.data) {
         this.storeFaixaTabelaSalarial.data = response.data;
         this.loaderService.hide();

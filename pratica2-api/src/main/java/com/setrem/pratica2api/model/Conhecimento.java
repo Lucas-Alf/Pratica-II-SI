@@ -30,7 +30,6 @@ public class Conhecimento implements Serializable {
     @Size(min = 1, max = 150)
     @Column(name = "nome")
     private String nome;
-    @Size(min = 1, max = 150)
     @Column(name = "especializacao")
     private String especializacao;
     @NotNull

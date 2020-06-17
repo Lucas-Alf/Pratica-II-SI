@@ -25,6 +25,11 @@ public class CboController {
         return cbos;
     }
 
+    @GetMapping("/lista")
+    public List<Cbo> lista() {
+        return this.CboRepository.ListaCbo();
+    }
+
     @PostMapping
     public Cbo save(@RequestBody Cbo data, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

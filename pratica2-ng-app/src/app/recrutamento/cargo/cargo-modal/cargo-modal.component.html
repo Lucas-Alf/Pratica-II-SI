@@ -4,12 +4,12 @@
     <mat-label>Código</mat-label>
     <input type="number" matInput placeholder="Código" [disabled]="true" [(ngModel)]='id'>
   </mat-form-field><br />
-  <mat-form-field appearance="standard" style="width: 500px;">
+  <mat-form-field appearance="standard" style="width: 700px;">
     <mat-label>Descrição</mat-label>
     <input type="text" matInput placeholder="Descrição" [(ngModel)]='descricao'>
   </mat-form-field>
   <br>
-  <mat-form-field appearance="standard" style="width: 500px;">
+  <mat-form-field appearance="standard" style="width: 700px;">
     <mat-label>CBO</mat-label>
     <mat-select [(ngModel)]='cboid'>
       <mat-option *ngFor="let cbo of cbos" [value]="cbo.id">
@@ -18,7 +18,7 @@
     </mat-select>
   </mat-form-field>
   <br>
-  <mat-form-field appearance="standard" style="width: 500px;">
+  <mat-form-field appearance="standard" style="width: 700px;">
     <mat-label>Faixa Tabela Salarial</mat-label>
     <mat-select [(ngModel)]='faixatabelasalarialid'>
       <mat-option *ngFor="let faixa of faixaTabelaSalarialList" [value]="faixa.id" style="display: flex;">
@@ -28,7 +28,7 @@
   </mat-form-field>
   <br>
 
-  <mat-form-field style="margin-right: 10px;" class="example-chip-list" id="conhecimentosChips">
+  <mat-form-field style="width: 345px; margin-right: 10px;" class="example-chip-list" id="conhecimentosChips">
     <mat-chip-list #chipList aria-label="Conhecimento">
       <mat-chip
         *ngFor="let item of cargoConhecimentos"
@@ -54,7 +54,7 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <mat-form-field class="example-chip-list" id="habilidadesChips">
+  <mat-form-field style="width: 345px;" class="example-chip-list" id="habilidadesChips">
     <mat-chip-list #chipList2 aria-label="Habilidade/Atitude">
       <mat-chip
         *ngFor="let item2 of cargoHabilidadeAtitudes"
