@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>Histórico de Benefícios</h1>
 <div mat-dialog-content>
     <div style="width: 100%;">
-        <button mat-stroked-button class="crud-button">
+        <button (click)="incluir()" mat-stroked-button class="crud-button">
             <mat-icon>add</mat-icon> Incluir
         </button>
-        <button mat-stroked-button class="crud-button">
+        <button (click)="alterar()" mat-stroked-button class="crud-button">
             <mat-icon>edit</mat-icon> Alterar
         </button>
         <button (click)="excluir()" mat-stroked-button class="crud-button">

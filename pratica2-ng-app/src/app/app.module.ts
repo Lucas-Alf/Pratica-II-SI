@@ -93,6 +93,7 @@ import { RecrutamentoExternoComponent } from './recrutamento/recrutamentoExterno
 import { RecrutamentoExternoModalComponent } from './recrutamento/recrutamentoExterno/recrutamentoExterno-modal/recrutamentoExterno-modal.component';
 import { BeneficioComponent } from './contratacao/beneficio/beneficio.component';
 import { BeneficioModalComponent } from './contratacao/beneficio/beneficio-modal/beneficio-modal.component';
+import { EventoFixoModalComponent } from './contratacao/funcionario/beneficio-hist-modal/eventofixo-modal/eventofixo-modal.component';
 import { CalculoComponent } from './folhapagamento/calculo/calculo.component';
 import { DependenteModalComponent } from './contratacao/funcionario/dependente-modal/dependente-modal.component';
 import { EventoVariavelComponent } from './folhapagamento/evento-variavel/evento-variavel.component';
@@ -164,7 +165,8 @@ import { BeneficioHistModalComponent } from './contratacao/funcionario/beneficio
     EventoVariavelModalComponent,
     SelecaoCandidatoComponent,
     CargoHistModalComponent,
-    BeneficioHistModalComponent
+    BeneficioHistModalComponent,
+    EventoFixoModalComponent
   ],
   imports: [
     BrowserModule,
