@@ -14,7 +14,7 @@ public interface HabilidadeAtitudeRepository extends JpaRepository<HabilidadeAti
     @Query(value = "SELECT coalesce(max(id), 0)+1 FROM habilidadeatitude", nativeQuery = true)
     public int maxIdHabilidadeAtitude();
 
-    //@Query(value = "SELECT * habilidadeatitude where tipo = 'Habilidade'", nativeQuery = true)
-    //public List<HabilidadeAtitude> listarHabilidade();
+    @Query(value = "SELECT * habilidadeatitude order by descricao", nativeQuery = true)
+    public List<HabilidadeAtitude> Listar();
     
 }

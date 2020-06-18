@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import axios from 'axios';
 import { ConstantsService } from 'src/app/common/services/constants.service';
@@ -43,7 +43,7 @@ export class EnderecoComponent implements OnInit {
   }
 
   incluir(): void {
-    this.dialogRef = this.dialog.open(EnderecoModalComponent, { data: { action: 'Incluir', component: this } });
+    this.dialogRef = this.dialog.open(EnderecoModalComponent, { data: { action: 'Incluir', component: this, teste: 0 } });
   }
 
   salvar(action: string, data: Endereco): void {

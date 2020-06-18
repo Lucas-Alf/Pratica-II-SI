@@ -29,7 +29,7 @@
         <mat-label>Telefone</mat-label>
         <input type="number" min="1" matInput placeholder="(55) 9--------" [(ngModel)]='telefone' formControlName="group1Telefone" required>
     </mat-form-field><br>
-      <mat-form-field style="width: 400px;">
+      <mat-form-field style="width: 350px;">
         <mat-label>Endereço</mat-label>
         <mat-select [(ngModel)]='enderecoid' formControlName="group1Endereco" required>
             <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">
@@ -41,6 +41,9 @@
         <mat-label>Número</mat-label>
         <input type="number" matInput placeholder="Número" [(ngModel)]='numero' formControlName="group1Numero" required>
     </mat-form-field>
+    <button (click)="incluirEndereco()" style="margin-left: 20px;" mat-stroked-button class="crud-button" matTooltip="Utilize essa função para incluir um novo endereço">
+      <mat-icon>add</mat-icon> Novo
+    </button>
         <div>
           <button mat-button matStepperNext>Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
         </div>
