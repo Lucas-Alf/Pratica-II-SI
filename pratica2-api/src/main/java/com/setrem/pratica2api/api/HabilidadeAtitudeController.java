@@ -25,9 +25,9 @@ public class HabilidadeAtitudeController {
         return this.habilidadeAtitudeRepository.findAll();
     }
 
-    /*@GetMapping("/listarHabilidade")
-    public List<HabilidadeAtitude> listarHabilidade() {
-        return this.habilidadeAtitudeRepository.listarHabilidade();
+    /*@GetMapping("/listar")
+    public List<HabilidadeAtitude> listar() {
+        return this.habilidadeAtitudeRepository.Listar();
     }*/
     
     @PostMapping("/Incluir")

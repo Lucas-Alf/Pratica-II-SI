@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoaderService } from 'src/app/services/loader.service';
 import axios from 'axios';
@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HabilidadeAtitude } from '../../habilidadeAtitude/habilidadeAtitude';
 import { Pessoa } from 'src/app/contratacao/funcionario/pessoa';
+import { EnderecoModalComponent } from 'src/app/contratacao/endereco/endereco-modal/endereco-modal.component';
+import { EnderecoComponent } from 'src/app/contratacao/endereco/endereco.component';
 
 export interface Idioma {
   id: number;
@@ -94,6 +96,8 @@ export class RecrutamentoExternoModalComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<RecrutamentoExternoModalComponent>,
+    public dialogEndereco: MatDialogRef<EnderecoModalComponent, any>,
+    public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,
     private constant: ConstantsService,
@@ -104,6 +108,10 @@ export class RecrutamentoExternoModalComponent implements OnInit {
     this.listarConhecimentosPessoa();
     this.listarPessoaIdioma();
     this.listarHabilidadesAtitudes();
+  }
+
+  incluirEndereco(): void {
+    this.dialogEndereco = this.dialog.open(EnderecoModalComponent, { data: { action: 'Incluir', component: EnderecoComponent, teste: 1 } });
   }
 
   habilitarBotaoEnviar() {

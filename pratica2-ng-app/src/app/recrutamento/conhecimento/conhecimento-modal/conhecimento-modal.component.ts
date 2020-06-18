@@ -25,6 +25,7 @@ export class ConhecimentoModalComponent implements OnInit {
     { descricao: 'Ensino Fundamental Completo' },
     { descricao: 'Ensino Médio Completo' },
     { descricao: 'Ensino Superior Completo' },
+    { descricao: 'Ensino Técnico' },
   ];
 
   constructor(
