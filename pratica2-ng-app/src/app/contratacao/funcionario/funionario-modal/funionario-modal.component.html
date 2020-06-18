@@ -122,33 +122,38 @@
                 <mat-icon>add</mat-icon> Novo
             </button>
             <br>
-            <!-- <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="conhecimentosPessoaChips">
-                <mat-chip-list #chipList aria-label="Conhecimento">
-                <mat-chip
-                    *ngFor="let item of pessoaConhecimentos"
-                    [selectable]="selectedPessoaConhecimento"
-                    [removable]="removableConhecimentoPessoa"
-                    (removed)="removePessoaConhecimento(item)">
-                    {{item.nome}}
-                    <mat-icon matChipRemove *ngIf="removableConhecimentoPessoa">cancel</mat-icon>
-                </mat-chip>
-                <input
-                    placeholder="Conhecimento"
-                    #fruitInputConhecimento
-                    [formControl]="ConhecimentoPessoaCtrl"
-                    [matAutocomplete]="auto"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodesConhecimentoPessoa"
-                    (matChipInputTokenEnd)="addConhecimentoPessoa($event)">
+            <mat-form-field appearance="fill" class="example-chip-list" id="conhecimentosPessoaChips">
+                <mat-chip-list #chipList4 aria-label="Conhecimento">
+                    <mat-chip *ngFor="let item of pessoaConhecimentos" [selectable]="selectedPessoaConhecimento" [removable]="removableConhecimentoPessoa" (removed)="removePessoaConhecimento(item)">
+                        {{item.nome}}
+                        <mat-icon matChipRemove *ngIf="removableConhecimentoPessoa">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Conhecimento" #fruitInputConhecimento [formControl]="ConhecimentoPessoaCtrl" [matAutocomplete]="auto4" [matChipInputFor]="chipList4" [matChipInputSeparatorKeyCodes]="separatorKeysCodesConhecimentoPessoa" (matChipInputTokenEnd)="addConhecimentoPessoa($event)">
                 </mat-chip-list>
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedPessoaConhecimento($event)">
-                <mat-option *ngFor="let item of filteredConhecimentosPessoa | async" [value]="item">
-                    {{item.nome}}
-                </mat-option>
+                <mat-autocomplete #auto4="matAutocomplete" (optionSelected)="selectedPessoaConhecimento($event)">
+                    <mat-option *ngFor="let item of filteredConhecimentosPessoa | async" [value]="item">
+                        {{item.nome}}
+                    </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-  <br>
-  <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="pessoaIdiomasChips">
+
+            <br>
+            <mat-form-field appearance="fill" class="example-chip-list" id="pessoaHabilidadesAtitudesChips">
+                <mat-chip-list #chipList3 aria-label="Habilidade/Atitude">
+                    <mat-chip *ngFor="let item of pessoaHabilidadesAtitudes" [selectable]="selectedPessoaHabilidadeAtitude" [removable]="removablePessoaHabilidadeAtitude" (removed)="removePessoaHabilidadeAtitude(item)">
+                        {{item.descricao}} - {{item.tipo}}
+                        <mat-icon matChipRemove *ngIf="removablePessoaHabilidadeAtitude">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Habilidade/Atitude" #fruitInputHabilidadeAtitude [formControl]="PessoaHabilidadeAtitudeCtrl" [matAutocomplete]="auto3" [matChipInputFor]="chipList3" [matChipInputSeparatorKeyCodes]="separatorKeysCodesPessoaHabilidadeAtitude" (matChipInputTokenEnd)="addPessoaHabilidadeAtitude($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto3="matAutocomplete" (optionSelected)="selectedPessoaHabilidadeAtitude($event)">
+                    <mat-option *ngFor="let item of filteredPessoaHabilidadeAtitude | async" [value]="item">
+                        {{item.descricao}} - {{item.tipo}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <br>
+            <!-- <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="pessoaIdiomasChips">
     <mat-chip-list #chipList2 aria-label="Idioma">
       <mat-chip
         *ngFor="let item of pessoaIdiomas"
@@ -172,7 +177,9 @@
         {{item.descricao}} - {{item.nivel}}
       </mat-option>
     </mat-autocomplete>
-  </mat-form-field> -->
+  </mat-form-field>
+  <br> -->
+
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true" style="margin:3px;">
                     <mat-expansion-panel-header>

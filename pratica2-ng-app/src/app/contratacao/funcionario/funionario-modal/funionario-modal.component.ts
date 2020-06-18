@@ -21,6 +21,8 @@ import { Observable } from 'rxjs';
 import { Dependente } from '../dependente';
 import { CargoHistModalComponent } from '../cargo-hist-modal/cargo-hist-modal.component';
 import { BeneficioHistModalComponent } from '../beneficio-hist-modal/beneficio-hist-modal.component';
+import { Conhecimento } from 'src/app/recrutamento/conhecimento/conhecimento';
+import { HabilidadeAtitude } from 'src/app/recrutamento/habilidadeAtitude/habilidadeAtitude';
 
 @Component({
   selector: 'app-funionario-modal',
@@ -66,7 +68,7 @@ export class FunionarioModalComponent implements OnInit {
   datademissao: Date;
 
   dependente: Pessoa;
-
+  habilidadesAtitudes: HabilidadeAtitude[];
   paises: Pais[];
   enderecos: Endereco[];
   departamentos: Departamento[];
@@ -83,6 +85,25 @@ export class FunionarioModalComponent implements OnInit {
   filteredDependentes: Observable<Dependente[]>;
   dependentes: any[] = [];
   pessoas: any[] = [];
+
+  pessoaConhecimentos: any[] = [];
+  removableConhecimentoPessoa = true;
+  ConhecimentoPessoaCtrl = new FormControl();
+  filteredConhecimentosPessoa: Observable<Conhecimento[]>;
+  separatorKeysCodesConhecimentoPessoa: number[] = [ENTER, COMMA];
+  conhecimentos: Conhecimento[];
+
+  visiblePessoaHabilidadeAtitude = true;
+  selectablePessoaHabilidadeAtitude = true;
+  removablePessoaHabilidadeAtitude = true;
+  separatorKeysCodesPessoaHabilidadeAtitude: number[] = [ENTER, COMMA];
+  PessoaHabilidadeAtitudeCtrl = new FormControl();
+  filteredPessoaHabilidadeAtitude: Observable<HabilidadeAtitude[]>;
+  pessoaHabilidadesAtitudes: any[] = [];
+  //conhecimentoId: number; //remover depois
+
+  @ViewChild('fruitInputConhecimento') fruitInputConhecimento: ElementRef<HTMLInputElement>;
+  @ViewChild('fruitInputHabilidadeAtitude') fruitInputHabilidadeAtitude: ElementRef<HTMLInputElement>;
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   constructor(
@@ -92,7 +113,8 @@ export class FunionarioModalComponent implements OnInit {
     private constant: ConstantsService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog
-  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento(); this.listarDependentes(); }
+  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento();
+     this.listarDependentes();this.listarConhecimentosPessoa(), this.listarHabilidadesAtitudes() }
 
   displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
   storeContrato = new MatTableDataSource();
@@ -208,7 +230,10 @@ export class FunionarioModalComponent implements OnInit {
       email: this.email,
       numero: this.numero,
       ativo: true,
-      dependente: this.dependentes.map((x) => ({ dependentecpf: x }))
+      dependente: this.dependentes.map((x) => ({ dependentecpf: x })),
+      pessoaConhecimentos: this.pessoaConhecimentos.map((x) => ({ conhecimento: x })),
+     // pessoaIdiomas: this.pessoaIdiomas.map((x) => ({ idioma: x })),
+      pessoaHabilidadesAtitudes: this.pessoaHabilidadesAtitudes.map((x) => ({ habilidadeAtitude: x }))
     };
     this.data.component.salvar(this.data.action, dados);
   }
@@ -278,7 +303,10 @@ export class FunionarioModalComponent implements OnInit {
       email: this.email,
       numero: this.numero,
       ativo: true,
-      dependente: this.dependentes.map((x) => ({ dependentecpf: x }))
+      dependente: this.dependentes.map((x) => ({ dependentecpf: x })),
+      pessoaConhecimentos: this.pessoaConhecimentos.map((x) => ({ conhecimento: x })),
+      // pessoaIdiomas: this.pessoaIdiomas.map((x) => ({ idioma: x })),
+       pessoaHabilidadesAtitudes: this.pessoaHabilidadesAtitudes.map((x) => ({ habilidadeAtitude: x }))
     };
     const dados: Contrato = {
       matricula: this.matricula,
@@ -386,6 +414,135 @@ export class FunionarioModalComponent implements OnInit {
     this.fruitInput.nativeElement.value = '';
     this.DependentesCtrl.setValue(null);
   }
+  listarConhecimentosPessoa(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'conhecimento/all').then((response) => {
+      if (response && response.data) {
+        this.conhecimentos = response.data;
+        // if (this.conhecimentoId) {
+        //   this.filteredConhecimentosPessoa = this.ConhecimentoPessoaCtrl.valueChanges.pipe(
+        //     startWith(null),
+        //     map((item: string | null) => item ? this._filterPessoaConhecimento(item) : this.conhecimentos.filter(x => x.id != this.conhecimentoId).slice()));
+        // } else {
+          this.filteredConhecimentosPessoa = this.ConhecimentoPessoaCtrl.valueChanges.pipe(
+            startWith(null),
+            map((item: string | null) => item ? this._filterPessoaConhecimento(item) : this.conhecimentos.slice()));
+        // }
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
+  private _filterPessoaConhecimento(value: any): Conhecimento[] {
+    if (value && value.nome) {
+      value = value.nome;
+    }
+    if (value) {
+      const filterValue = value.toLowerCase();
+      // if (this.conhecimentoId) {
+      //   return this.conhecimentos.filter(item => item.id != this.conhecimentoId && item.nome.toLowerCase().includes(filterValue));
+      // } else {
+        return this.conhecimentos.filter(item => item.nome.toLowerCase().includes(filterValue));
+    //  }
+    }
+  }
+  addConhecimentoPessoa(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    if ((value || '').trim()) {
+      // this.incidenciasAtingidas.push(value.trim());
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.ConhecimentoPessoaCtrl.setValue(null);
+  }
+
+  removePessoaConhecimento(item: Conhecimento): void {
+    const index = this.pessoaConhecimentos.indexOf(item);
+
+    if (index >= 0) {
+      this.pessoaConhecimentos.splice(index, 1);
+    }
+  }
+
+  selectedPessoaConhecimento(event: MatAutocompleteSelectedEvent): void {
+    if (!this.pessoaConhecimentos.includes(event.option.value)) {
+      this.pessoaConhecimentos.push(event.option.value);
+    }
+    this.fruitInputConhecimento.nativeElement.value = '';
+    this.ConhecimentoPessoaCtrl.setValue(null);
+  }
+
+  
+  // Habilidades
+  listarHabilidadesAtitudes(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'habilidadeAtitude/all').then((response) => {
+      if (response && response.data) {
+        this.habilidadesAtitudes = response.data;
+        // if (this.habilidadeId) {
+        //   this.filteredPessoaHabilidadeAtitude = this.PessoaHabilidadeAtitudeCtrl.valueChanges.pipe(
+        //     startWith(null),
+        //     map((item: string | null) => item ? this._filterPessoaHabilidadeAtitude(item) : this.habilidadesAtitudes.filter(x => x.id != this.habilidadeId).slice()));
+        // } else {
+          this.filteredPessoaHabilidadeAtitude = this.PessoaHabilidadeAtitudeCtrl.valueChanges.pipe(
+            startWith(null),
+            map((item: string | null) => item ? this._filterPessoaHabilidadeAtitude(item) : this.habilidadesAtitudes.slice()));
+       // }
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
+  addPessoaHabilidadeAtitude(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    if ((value || '').trim()) {
+      // this.incidenciasAtingidas.push(value.trim());
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.PessoaHabilidadeAtitudeCtrl.setValue(null);
+  }
+
+  removePessoaHabilidadeAtitude(item: HabilidadeAtitude): void {
+    const index = this.pessoaHabilidadesAtitudes.indexOf(item);
+    if (index >= 0) {
+      this.pessoaHabilidadesAtitudes.splice(index, 1);
+    }
+  }
+
+  selectedPessoaHabilidadeAtitude(event: MatAutocompleteSelectedEvent): void {
+    if (!this.pessoaHabilidadesAtitudes.includes(event.option.value)) {
+      this.pessoaHabilidadesAtitudes.push(event.option.value);
+    }
+    this.fruitInputHabilidadeAtitude.nativeElement.value = '';
+    this.PessoaHabilidadeAtitudeCtrl.setValue(null);
+  }
+
+  private _filterPessoaHabilidadeAtitude(value: any): HabilidadeAtitude[] {
+    if (value && value.descricao) {
+      value = value.descricao;
+    }
+    if (value) {
+      const filterValue = value.toLowerCase();
+      // if (this.habilidadeId) {
+      //   return this.habilidadesAtitudes.filter(item => item.id != this.habilidadeId && item.descricao.toLowerCase().includes(filterValue));
+      // } else {
+        return this.habilidadesAtitudes.filter(item => item.descricao.toLowerCase().includes(filterValue));
+    //  }
+    }
+  }
   ngOnInit(): void {
     if (this.data.info) {
       this.listarContrato(this.data.info.cpf, false);
@@ -415,6 +572,8 @@ export class FunionarioModalComponent implements OnInit {
       this.enderecoid = this.data.info.enderecoid.id;
       this.email = this.data.info.email;
       this.numero = this.data.info.numero;
+      this.pessoaConhecimentos = this.data.info.pessoaConhecimentos.map(x=>x.conhecimento);
+      this.pessoaHabilidadesAtitudes = this.data.info.pessoaHabilidadesAtitudes.map(x=>x.habilidadeAtitude);
 
       // this.validador = new FormGroup({
       //   cpfteste: new FormControl('', Validators.required)

@@ -36,8 +36,12 @@
     color: black;
 }
 
-.example-chip-list {
+#dependenteChips {
     width: 90%;
+}
+
+.example-chip-list {
+    width: 100%;
 }
 
 .cancelar-button:hover {

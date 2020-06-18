@@ -7,7 +7,13 @@ import java.util.List;
 
 import com.setrem.pratica2api.model.Dependente;
 import com.setrem.pratica2api.model.Pessoa;
+import com.setrem.pratica2api.model.PessoaConhecimento;
+import com.setrem.pratica2api.model.PessoaHabilidadesAtitudes;
+import com.setrem.pratica2api.model.PessoaIdioma;
 import com.setrem.pratica2api.repository.DependenteRepository;
+import com.setrem.pratica2api.repository.PessoaConhecimentoRepository;
+import com.setrem.pratica2api.repository.PessoaHabilidadesAtitudesRepository;
+import com.setrem.pratica2api.repository.PessoaIdiomaRepository;
 import com.setrem.pratica2api.repository.PessoaRepository;;
 
 @RestController
@@ -16,10 +22,15 @@ import com.setrem.pratica2api.repository.PessoaRepository;;
 public class PessoaController {
     private PessoaRepository PessoaRepository;
     private DependenteRepository DependenteRepository;
-
-    public PessoaController(PessoaRepository PessoaRepository, DependenteRepository DependenteRepository) {
+    private PessoaConhecimentoRepository PessoaConhecimentoRepository;
+    private PessoaIdiomaRepository PessoaIdiomaRepository;
+    private PessoaHabilidadesAtitudesRepository PessoaHabilidadesAtitudesRepository;
+    public PessoaController(PessoaRepository PessoaRepository, DependenteRepository DependenteRepository, PessoaConhecimentoRepository PessoaConhecimentoRepository,  PessoaIdiomaRepository PessoaIdiomaRepository,  PessoaHabilidadesAtitudesRepository PessoaHabilidadesAtitudesRepository) {
         this.PessoaRepository = PessoaRepository;
         this.DependenteRepository = DependenteRepository;
+        this.PessoaConhecimentoRepository = PessoaConhecimentoRepository;
+        this.PessoaIdiomaRepository = PessoaIdiomaRepository;
+        this.PessoaHabilidadesAtitudesRepository = PessoaHabilidadesAtitudesRepository;
     }
 
     @GetMapping("/all") // Teste: http://localhost:8080/api/empresa/all
@@ -73,6 +84,21 @@ public class PessoaController {
         DependenteRepository.deleteByPessoaCpf(data.getCpf());
         for (Dependente  dep : data.getDependente()) {
             dep.setPessoacpf(data);
+        }
+        
+        // PessoaIdiomaRepository.deleteByCpf(data.getCpf());
+        // for (PessoaIdioma pessoaIdioma : data.getPessoaIdiomas()) {
+        //     pessoaIdioma.setCpf(data);
+        // }
+
+        PessoaConhecimentoRepository.deleteByCpf(data.getCpf());
+        for (PessoaConhecimento pessoaConhecimento : data.getPessoaConhecimentos()) {
+            pessoaConhecimento.setCpf(data);
+        }
+
+        PessoaHabilidadesAtitudesRepository.deleteByCpf(data.getCpf());
+        for (PessoaHabilidadesAtitudes pessoaHabilidadesAtitudes : data.getPessoaHabilidadesAtitudes()) {
+            pessoaHabilidadesAtitudes.setCpf(data);
         }
         this.PessoaRepository.save(data);
         return data;

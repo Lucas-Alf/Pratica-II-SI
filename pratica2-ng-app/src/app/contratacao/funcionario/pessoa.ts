@@ -29,5 +29,7 @@ export interface Pessoa {
   email: string;
   numero: number;
   dependente: any[];
+  pessoaConhecimentos?: any[];
+  pessoaHabilidadesAtitudes?: any[];
   ativo?: boolean;
 }
