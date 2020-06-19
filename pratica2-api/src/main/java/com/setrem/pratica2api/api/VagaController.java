@@ -29,6 +29,11 @@ public class VagaController {
         return this.VagaRepository.lista();
     }
 
+    @GetMapping("/listarInterno")
+    public List<Vaga> listarInterno() {
+        return this.VagaRepository.listaInterno();
+    }
+
     @PostMapping("/Incluir")
     public Vaga add(@RequestBody Vaga data, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {

@@ -97,7 +97,7 @@ export class RecrutamentoInternoComponent implements OnInit {
 
   listar(): void {
     this.loaderService.show();
-    axios.get(this.apiUrl + 'vaga/listar').then((response) => {
+    axios.get(this.apiUrl + 'vaga/listarInterno').then((response) => {
       debugger
       if (response && response.data) {
         this.storeVagaInterno.data = response.data;

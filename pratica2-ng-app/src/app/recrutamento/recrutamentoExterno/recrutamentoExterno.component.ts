@@ -64,25 +64,51 @@ export class RecrutamentoExternoComponent implements OnInit {
 
   salvar(action: string, data: VagaPessoa): void {
     debugger
-    this.loaderService.show();
-    axios.post(this.constant.apiUrl + 'vagapessoa/' + action, data).then((response) => {
-      if (response && response.data) {
-        this.loaderService.hide();
-        this.listar();
-        this.dialogRef.close();
-      } else {
-        this.loaderService.hide();
-        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
-      }
-    }).catch((error) => {
+    if (data.cpf.cpf == undefined || data.cpf.cpf == "") {
       this.loaderService.hide();
-      if (error.response) {
-        console.error(error.response.data.message);
-        this.snackBar.open(error.response.data.message, null, { duration: 5000 });
-      } else {
-        this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
-      }
-    });
+      this.snackBar.open('Informe o CPF.', null, { duration: 5000 });
+    } else if (data.cpf.nome == undefined || data.cpf.nome == "") {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Nome Completo.', null, { duration: 5000 });
+    } else if (data.cpf.datanascimento == undefined || data.cpf.datanascimento == null) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe a Data de Nascimento.', null, { duration: 5000 });
+    } else if (data.cpf.sexo == undefined || data.cpf.sexo == "") {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Sexo.', null, { duration: 5000 });
+    } else if (data.cpf.telefonecelular == undefined || data.cpf.telefonecelular == null) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Telefone.', null, { duration: 5000 });
+    } else if (data.cpf.enderecoid.id == undefined || data.cpf.enderecoid.id == null) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Endereço.', null, { duration: 5000 });
+    } else if (data.cpf.numero == undefined || data.cpf.numero == null) {
+      this.loaderService.hide();
+      this.snackBar.open('Informe o Número.', null, { duration: 5000 });
+    } else if (data.experienciaprofissional == undefined || data.experienciaprofissional == "") {
+      this.loaderService.hide();
+      this.snackBar.open('Informe as Experiências Profissionais.', null, { duration: 5000 });
+    } else {
+      this.loaderService.show();
+      axios.post(this.constant.apiUrl + 'vagapessoa/' + action, data).then((response) => {
+        if (response && response.data) {
+          this.loaderService.hide();
+          this.listar();
+          this.dialogRef.close();
+        } else {
+          this.loaderService.hide();
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      }).catch((error) => {
+        this.loaderService.hide();
+        if (error.response) {
+          console.error(error.response.data.message);
+          this.snackBar.open(error.response.data.message, null, { duration: 5000 });
+        } else {
+          this.snackBar.open('Ocorreu um erro ao salvar. 😬', null, { duration: 5000 });
+        }
+      });
+    }
   }
 
   retornaConhecimentos(vaga: Vaga): string {

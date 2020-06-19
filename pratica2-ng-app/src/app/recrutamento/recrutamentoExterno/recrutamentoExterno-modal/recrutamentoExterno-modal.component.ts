@@ -115,7 +115,8 @@ export class RecrutamentoExternoModalComponent implements OnInit {
   }
 
   habilitarBotaoEnviar() {
-      this.isVisible = !this.isVisible;
+    debugger
+    this.isVisible = !this.isVisible;
   }
 
   save(): void {

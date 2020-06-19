@@ -26,6 +26,7 @@
       <mat-form-field appearance="standard" style="width: 30%; margin-right: 10px;">
         <mat-label>Vaga</mat-label>
         <mat-select [(ngModel)]='valorVaga'>
+          <mat-option [value]=""> Todos </mat-option>
           <mat-option *ngFor="let vaga of vagas" [value]="vaga.id">
             {{vaga.descricao}}
           </mat-option>

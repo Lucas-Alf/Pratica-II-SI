@@ -4,7 +4,7 @@ table {
 
 .table-container {
   position: relative;
-  max-height: 400px;
+  max-height: 240px;
   overflow: auto;
 }
 
