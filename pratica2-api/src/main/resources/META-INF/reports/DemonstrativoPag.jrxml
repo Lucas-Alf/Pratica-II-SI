@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DemonstrativoPag" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true" uuid="ee578027-a995-481f-9c81-f15b8df85aa9">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Postgre Prática II"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RocketRH Local"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="Matricula" class="java.lang.Integer"/>
 	<parameter name="LOGO_EMPRESA" class="java.lang.Object"/>
@@ -122,7 +122,7 @@ ORDER BY evento.tipo DESC,
 		<property name="com.jaspersoft.studio.field.label" value="horacontrato"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
 	</field>
-	<field name="pispaseppessoa" class="java.lang.Integer">
+	<field name="pispaseppessoa" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="pispaseppessoa"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
 	</field>
