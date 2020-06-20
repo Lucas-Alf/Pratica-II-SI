@@ -149,11 +149,12 @@ public class VagaPessoaController {
             pessoaHabilidadesAtitudes.setCpf(data.getCpf());
         }
 
+        data.getCpf().setAtivo(true);
         this.PessoaRepository.save(data.getCpf());
 
         int id = this.VagaPessoaRepository.maxIdVagaPessoa();
         data.setId(id);
-        data.getCpf().setAtivo(true);
+        //data.getCpf().setAtivo(true);
         this.VagaPessoaRepository.save(data);
 
         Optional<Vaga> lista = this.VagaRepository.findById(data.getVagaid().getId());
