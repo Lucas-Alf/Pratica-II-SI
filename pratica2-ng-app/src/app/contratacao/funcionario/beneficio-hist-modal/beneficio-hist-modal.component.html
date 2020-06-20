@@ -14,7 +14,7 @@
     </div>
 </div>
 <div class="table-container">
-    <table mat-table [dataSource]="storeEventosFixos" style="width: 600px">
+    <table mat-table [dataSource]="storeEventosFixos" style="width: 800px">
         <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
                 <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
@@ -26,16 +26,16 @@
             </td>
         </ng-container>
         <ng-container matColumnDef="evento">
-            <th style="width: 20%;" mat-header-cell *matHeaderCellDef> Evento </th>
+            <th style="width: 25%;" mat-header-cell *matHeaderCellDef> Evento </th>
             <td mat-cell *matCellDef="let eventoFixo"> {{eventoFixo.evento.descricao}} </td>
         </ng-container>
         <ng-container matColumnDef="dataInicial">
-            <th style="width:20%;text-align: center;" mat-header-cell *matHeaderCellDef> Data Inicial</th>
+            <th style="width:15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data Inicial</th>
             <td style="text-align: center;" mat-cell *matCellDef="let eventoFixo">
                 {{eventoFixo.dataInicial | date: 'dd/MM/yyyy'}} </td>
         </ng-container>
         <ng-container matColumnDef="dataFinal">
-            <th style="width:20%;text-align: center;" mat-header-cell *matHeaderCellDef> Data Final</th>
+            <th style="width:15%;text-align: center;" mat-header-cell *matHeaderCellDef> Data Final</th>
             <td style="text-align: center;" mat-cell *matCellDef="let eventoFixo">
                 {{eventoFixo.dataFinal | date: 'dd/MM/yyyy'}} </td>
         </ng-container>
