@@ -6,7 +6,7 @@
             <!-- <form [formGroup]="validador">  formControlName="cpfteste"-->
             <mat-form-field appearance="fill" class="normal" style="width: 135px;">
                 <mat-label>CPF</mat-label>
-                <input type="text" matInput placeholder="CPF" required [(ngModel)]='cpf'>
+                <input type="text" matInput placeholder="CPF" [disabled]="!cpfHabilitado" required [(ngModel)]='cpf'>
             </mat-form-field>
             <!-- </form> -->
             <mat-form-field appearance="fill" style="width: 160px;" class="normal">
@@ -121,7 +121,7 @@
             <button (click)="incluirDependente()" style="margin-left: 20px;" mat-stroked-button class="crud-button" matTooltip="Utilize essa função caso o dependente não esteja no sistema.">
                 <mat-icon>add</mat-icon> Novo
             </button>
-            <br>
+            <mat-divider style="margin-bottom:20px"></mat-divider>
             <mat-form-field appearance="fill" class="example-chip-list" id="conhecimentosPessoaChips">
                 <mat-chip-list #chipList4 aria-label="Conhecimento">
                     <mat-chip *ngFor="let item of pessoaConhecimentos" [selectable]="selectedPessoaConhecimento" [removable]="removableConhecimentoPessoa" (removed)="removePessoaConhecimento(item)">
@@ -153,32 +153,21 @@
                 </mat-autocomplete>
             </mat-form-field>
             <br>
-            <!-- <mat-form-field style="margin-right: 10px; width: 600px;" class="example-chip-list" id="pessoaIdiomasChips">
-    <mat-chip-list #chipList2 aria-label="Idioma">
-      <mat-chip
-        *ngFor="let item of pessoaIdiomas"
-        [selectable]="selectedPessoaIdioma"
-        [removable]="removablePessoaIdioma"
-        (removed)="removePessoaIdioma(item)">
-        {{item.descricao}} - {{item.nivel}}
-        <mat-icon matChipRemove *ngIf="removablePessoaIdioma">cancel</mat-icon>
-      </mat-chip>
-      <input
-        placeholder="Idioma"
-        #fruitInputIdioma
-        [formControl]="PessoaIdiomaCtrl"
-        [matAutocomplete]="auto2"
-        [matChipInputFor]="chipList2"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodesPessoaIdioma"
-        (matChipInputTokenEnd)="addPessoaIdioma($event)">
-    </mat-chip-list>
-    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedPessoaIdioma($event)">
-      <mat-option *ngFor="let item of filteredPessoaIdioma | async" [value]="item">
-        {{item.descricao}} - {{item.nivel}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <br> -->
+            <mat-form-field appearance="fill" class="example-chip-list" id="pessoaIdiomasChips">
+                <mat-chip-list #chipList2 aria-label="Idioma">
+                    <mat-chip *ngFor="let item of pessoaIdiomas" [selectable]="selectedPessoaIdioma" [removable]="removablePessoaIdioma" (removed)="removePessoaIdioma(item)">
+                        {{item.descricao}} - {{item.nivel}}
+                        <mat-icon matChipRemove *ngIf="removablePessoaIdioma">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Idioma" #fruitInputIdioma [formControl]="PessoaIdiomaCtrl" [matAutocomplete]="auto2" [matChipInputFor]="chipList2" [matChipInputSeparatorKeyCodes]="separatorKeysCodesPessoaIdioma" (matChipInputTokenEnd)="addPessoaIdioma($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedPessoaIdioma($event)">
+                    <mat-option *ngFor="let item of filteredPessoaIdioma | async" [value]="item">
+                        {{item.descricao}} - {{item.nivel}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <br>
 
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true" style="margin:3px;">
@@ -308,7 +297,8 @@
         <mat-tab label="Contrato">
             <br>
             <mat-form-field appearance="fill" class="normal" style="width:140px;">
-                <mat-select required [(ngModel)]='situacao' (change)="verificaDataDem()">
+                <mat-select required [(ngModel)]='situacao'>
+                    <!-- //(ngModelChange)="verificaDataDem()" -->
                     <mat-option value="1">Ativo</mat-option>
                     <mat-option value="2">Afastado</mat-option>
                     <mat-option value="3">Desligado</mat-option>
@@ -343,8 +333,8 @@
             <mat-form-field appearance="fill" style="width: 200px;" class="fim">
                 <mat-label style="color:darkslateblue">Data Demissão</mat-label>
                 <input [(ngModel)]='datademissao' disabled matInput [matDatepicker]="picker23">
-                <mat-datepicker-toggle matSuffix [for]="picker23"></mat-datepicker-toggle>
-                <mat-datepicker #picker23 disabled="false"></mat-datepicker>
+                <mat-datepicker-toggle [hidden]="(situacao != '3')" matSuffix [for]="picker23"></mat-datepicker-toggle>
+                <mat-datepicker [hidden]="(situacao != '3')" #picker23 disabled="false"></mat-datepicker>
             </mat-form-field>
 
             <div style="width: 100%;">
@@ -364,10 +354,10 @@
                     <mat-icon>mediation</mat-icon> Cargo
                 </button>
                 <mat-divider style="margin-top:40px;margin-bottom:5px"></mat-divider>
-                <span style="color: darkslateblue;">Selecione o contrato que deseja alterar.</span>
+                <span style="color: #f99909;">{{descricaoContrato}}</span>
             </div>
             <div class="table-container">
-                <table mat-table [dataSource]="storeContrato" style="width: 100%">
+                <table [hidden]="!mostraTabela" mat-table [dataSource]="storeContrato" style="width: 100%">
                     <ng-container matColumnDef="select">
                         <th style="width: 9%;" mat-header-cell *matHeaderCellDef>
                             <!-- <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
@@ -420,7 +410,7 @@
                             {{contrato.datademissao | date: 'dd/MM/yyyy'}} </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-row (click)="alterarRow(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
         </mat-tab>

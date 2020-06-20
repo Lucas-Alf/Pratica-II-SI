@@ -25,7 +25,10 @@ public class PessoaController {
     private PessoaConhecimentoRepository PessoaConhecimentoRepository;
     private PessoaIdiomaRepository PessoaIdiomaRepository;
     private PessoaHabilidadesAtitudesRepository PessoaHabilidadesAtitudesRepository;
-    public PessoaController(PessoaRepository PessoaRepository, DependenteRepository DependenteRepository, PessoaConhecimentoRepository PessoaConhecimentoRepository,  PessoaIdiomaRepository PessoaIdiomaRepository,  PessoaHabilidadesAtitudesRepository PessoaHabilidadesAtitudesRepository) {
+
+    public PessoaController(PessoaRepository PessoaRepository, DependenteRepository DependenteRepository,
+            PessoaConhecimentoRepository PessoaConhecimentoRepository, PessoaIdiomaRepository PessoaIdiomaRepository,
+            PessoaHabilidadesAtitudesRepository PessoaHabilidadesAtitudesRepository) {
         this.PessoaRepository = PessoaRepository;
         this.DependenteRepository = DependenteRepository;
         this.PessoaConhecimentoRepository = PessoaConhecimentoRepository;
@@ -39,23 +42,24 @@ public class PessoaController {
         return empresas;
     }
 
-     @GetMapping("/allAtivo") // Teste: http://localhost:8080/api/empresa/all
+    @GetMapping("/allAtivo") // Teste: http://localhost:8080/api/empresa/all
     public List<Pessoa> allAtivo() {
         var empresas = this.PessoaRepository.allAtivo();
         return empresas;
     }
+
     @GetMapping("/findDepedente") // Teste: http://localhost:8080/api/empresa/all
     public List<Pessoa> findDepedente() {
         var dependentes = this.PessoaRepository.findDepedentes();
         return dependentes;
     }
 
-    @GetMapping("/findDepedentesCpf") 
+    @GetMapping("/findDepedentesCpf")
     public List<Pessoa> findDepedentesCpf(String cpf) {
         var dependentes = this.PessoaRepository.findDepedentesCpf(cpf);
         return dependentes;
     }
-    
+
     @GetMapping("/contratos") //
     public List<Pessoa> contratos() {
         var empresas = this.PessoaRepository.findAll();
@@ -67,10 +71,29 @@ public class PessoaController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
-        DependenteRepository.deleteByPessoaCpf(data.getCpf());
-        for (Dependente  dep : data.getDependente()) {
-            dep.setPessoacpf(data);
-        }
+        // DependenteRepository.deleteByPessoaCpf(data.getCpf());
+        if (data.getDependente() != null)
+            for (Dependente dep : data.getDependente()) {
+                dep.setPessoacpf(data);
+            }
+        // PessoaIdiomaRepository.deleteByCpf(data.getCpf());
+
+        if (data.getPessoaIdiomas() != null)
+            for (PessoaIdioma pessoaIdioma : data.getPessoaIdiomas()) {
+                pessoaIdioma.setCpf(data);
+            }
+
+        // PessoaConhecimentoRepository.deleteByCpf(data.getCpf());
+        if (data.getPessoaConhecimentos() != null)
+            for (PessoaConhecimento pessoaConhecimento : data.getPessoaConhecimentos()) {
+                pessoaConhecimento.setCpf(data);
+            }
+
+        // PessoaHabilidadesAtitudesRepository.deleteByCpf(data.getCpf());
+        if (data.getPessoaHabilidadesAtitudes() != null)
+            for (PessoaHabilidadesAtitudes pessoaHabilidadesAtitudes : data.getPessoaHabilidadesAtitudes()) {
+                pessoaHabilidadesAtitudes.setCpf(data);
+            }
         data = this.PessoaRepository.save(data);
         return data;
     }
@@ -82,14 +105,14 @@ public class PessoaController {
             throw new ValidationException();
         }
         DependenteRepository.deleteByPessoaCpf(data.getCpf());
-        for (Dependente  dep : data.getDependente()) {
+        for (Dependente dep : data.getDependente()) {
             dep.setPessoacpf(data);
         }
-        
-        // PessoaIdiomaRepository.deleteByCpf(data.getCpf());
-        // for (PessoaIdioma pessoaIdioma : data.getPessoaIdiomas()) {
-        //     pessoaIdioma.setCpf(data);
-        // }
+
+        PessoaIdiomaRepository.deleteByCpf(data.getCpf());
+        for (PessoaIdioma pessoaIdioma : data.getPessoaIdiomas()) {
+            pessoaIdioma.setCpf(data);
+        }
 
         PessoaConhecimentoRepository.deleteByCpf(data.getCpf());
         for (PessoaConhecimento pessoaConhecimento : data.getPessoaConhecimentos()) {
@@ -106,12 +129,13 @@ public class PessoaController {
 
     // @CrossOrigin(origins = "*", methods = { RequestMethod.PUT })
     // @PutMapping("/inativa")
-    // public Pessoa inativa(@RequestBody Pessoa data, BindingResult bindingResult) throws Exception {
-    //     if (bindingResult.hasErrors()) {
-    //         throw new ValidationException();
-    //     }
-    //     this.PessoaRepository.desativaPessoa(data.getCpf());
-    //     return data;
+    // public Pessoa inativa(@RequestBody Pessoa data, BindingResult bindingResult)
+    // throws Exception {
+    // if (bindingResult.hasErrors()) {
+    // throw new ValidationException();
+    // }
+    // this.PessoaRepository.desativaPessoa(data.getCpf());
+    // return data;
     // }
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
     @DeleteMapping("/inativa/{id}")
@@ -122,6 +146,6 @@ public class PessoaController {
     @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE })
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable String id) {
-       this.PessoaRepository.deleteById(id);
+        this.PessoaRepository.deleteById(id);
     }
 }

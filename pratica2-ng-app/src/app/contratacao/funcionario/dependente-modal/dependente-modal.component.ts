@@ -42,7 +42,7 @@ export class DependenteModalComponent implements OnInit {
   close(): void {
     this.dialogRef2.close();
     //this.data.component.teste();
-    this.data.component.listarDependente();
+    this.data.component.listarDependentes();
   }
 
   listarEndereco(): void {
@@ -64,7 +64,7 @@ export class DependenteModalComponent implements OnInit {
     //var teste = this.paisnascimentoid ? { id: this.paisnascimentoid, nome: "" } : null;
     const dados: Pessoa = {
       cpf: this.cpf,
-      rg: this.rg,
+      rg: null,
       nome: this.nome,
       sexo: this.sexo,
       datanascimento: this.datanascimento,
@@ -95,7 +95,11 @@ export class DependenteModalComponent implements OnInit {
       },
       email: null,
       numero: null,
-      dependente: null
+      dependente: null,
+      ativo: true,
+      pessoaConhecimentos: null,
+       pessoaIdiomas: null,
+       pessoaHabilidadesAtitudes: null
     };
     axios.post(this.constant.apiUrl + 'pessoa/' + this.data.action, dados).then((response) => {
       if (response && response.data) {  

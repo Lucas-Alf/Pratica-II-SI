@@ -23,7 +23,11 @@ import { CargoHistModalComponent } from '../cargo-hist-modal/cargo-hist-modal.co
 import { BeneficioHistModalComponent } from '../beneficio-hist-modal/beneficio-hist-modal.component';
 import { Conhecimento } from 'src/app/recrutamento/conhecimento/conhecimento';
 import { HabilidadeAtitude } from 'src/app/recrutamento/habilidadeAtitude/habilidadeAtitude';
-
+export interface Idioma {
+  id: number;
+  descricao: string;
+  nivel: string;
+}
 @Component({
   selector: 'app-funionario-modal',
   templateUrl: './funionario-modal.component.html',
@@ -31,7 +35,7 @@ import { HabilidadeAtitude } from 'src/app/recrutamento/habilidadeAtitude/habili
 })
 export class FunionarioModalComponent implements OnInit {
   apiUrl: string;
-
+  cpfHabilitado: boolean;
   cpf: string;
   rg: string;
   nome: string;
@@ -66,6 +70,7 @@ export class FunionarioModalComponent implements OnInit {
   horastrabalho: number;
   departamentoid: number;
   datademissao: Date;
+  permiteDataDem: boolean = false;
 
   dependente: Pessoa;
   habilidadesAtitudes: HabilidadeAtitude[];
@@ -102,6 +107,19 @@ export class FunionarioModalComponent implements OnInit {
   pessoaHabilidadesAtitudes: any[] = [];
   //conhecimentoId: number; //remover depois
 
+  visiblePessoaIdioma = true;
+  selectablePessoaIdioma = true;
+  removablePessoaIdioma = true;
+  separatorKeysCodesPessoaIdioma: number[] = [ENTER, COMMA];
+  PessoaIdiomaCtrl = new FormControl();
+  filteredPessoaIdioma: Observable<Idioma[]>;
+  pessoaIdiomas: any[] = [];
+
+  idiomas: Idioma[];
+
+  descricaoContrato: string;
+  mostraTabela: boolean;
+  @ViewChild('fruitInputIdioma') fruitInputIdioma: ElementRef<HTMLInputElement>;
   @ViewChild('fruitInputConhecimento') fruitInputConhecimento: ElementRef<HTMLInputElement>;
   @ViewChild('fruitInputHabilidadeAtitude') fruitInputHabilidadeAtitude: ElementRef<HTMLInputElement>;
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
@@ -113,8 +131,10 @@ export class FunionarioModalComponent implements OnInit {
     private constant: ConstantsService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog
-  ) { this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento();
-     this.listarDependentes();this.listarConhecimentosPessoa(), this.listarHabilidadesAtitudes() }
+  ) {
+    this.apiUrl = this.constant.apiUrl; this.listarPais(); this.listarEndereco(); this.listarDepartamento();
+    this.listarDependentes(); this.listarConhecimentosPessoa(), this.listarHabilidadesAtitudes(), this.listarPessoaIdioma()
+  }
 
   displayedColumns: string[] = ['select', 'situacao', 'matricula', 'dataadmissao', 'regimetrabalho', 'horastrabalho', 'departamentoid', 'datademissao'];
   storeContrato = new MatTableDataSource();
@@ -183,6 +203,13 @@ export class FunionarioModalComponent implements OnInit {
     axios.get(this.apiUrl + 'contrato/findByCpf?cpf=' + cpf).then((response) => {
       if (response && response.data) {
         this.storeContrato.data = response.data;
+        if (this.storeContrato.data.length = 0) {
+          this.descricaoContrato = "Adicione um novo contrato para poder vincular cargo e benefícios.";
+          this.mostraTabela = false;
+        } else {
+          this.descricaoContrato = "Selecione o contrato que deseja manipular.";
+          this.mostraTabela = true;
+        }
         if (mascaraLoad) this.loaderService.hide();
       }
     }).catch((error) => {
@@ -232,7 +259,7 @@ export class FunionarioModalComponent implements OnInit {
       ativo: true,
       dependente: this.dependentes.map((x) => ({ dependentecpf: x })),
       pessoaConhecimentos: this.pessoaConhecimentos.map((x) => ({ conhecimento: x })),
-     // pessoaIdiomas: this.pessoaIdiomas.map((x) => ({ idioma: x })),
+      pessoaIdiomas: this.pessoaIdiomas.map((x) => ({ idioma: x })),
       pessoaHabilidadesAtitudes: this.pessoaHabilidadesAtitudes.map((x) => ({ habilidadeAtitude: x }))
     };
     this.data.component.salvar(this.data.action, dados);
@@ -305,8 +332,8 @@ export class FunionarioModalComponent implements OnInit {
       ativo: true,
       dependente: this.dependentes.map((x) => ({ dependentecpf: x })),
       pessoaConhecimentos: this.pessoaConhecimentos.map((x) => ({ conhecimento: x })),
-      // pessoaIdiomas: this.pessoaIdiomas.map((x) => ({ idioma: x })),
-       pessoaHabilidadesAtitudes: this.pessoaHabilidadesAtitudes.map((x) => ({ habilidadeAtitude: x }))
+      pessoaIdiomas: this.pessoaIdiomas.map((x) => ({ idioma: x })),
+      pessoaHabilidadesAtitudes: this.pessoaHabilidadesAtitudes.map((x) => ({ habilidadeAtitude: x }))
     };
     const dados: Contrato = {
       matricula: this.matricula,
@@ -326,6 +353,7 @@ export class FunionarioModalComponent implements OnInit {
     axios.post(this.constant.apiUrl + 'contrato/' + (data.matricula ? 'Alterar' : 'Incluir'), data).then((response) => {
       if (response && response.data) {
         this.listarContrato(this.cpf, true);
+        this.mostraTabela = true;
         this.cancelar();
       } else {
         this.loaderService.hide();
@@ -340,6 +368,10 @@ export class FunionarioModalComponent implements OnInit {
         this.snackBar.open('Ocorreu um erro ao salvar o contrato. 😬', null, { duration: 5000 });
       }
     });
+  }
+  alterarRow(row): void {
+    this.selection.select(row);
+    this.alterar();
   }
   alterar(): void {
     setTimeout(() => {
@@ -362,9 +394,6 @@ export class FunionarioModalComponent implements OnInit {
     this.datademissao = null;
     this.matricula = null;
     this.selection.clear();
-  }
-  verificaDataDem(): void {
-
   }
   incluirDependente(): void {
     this.dialogRef2 = this.dialog.open(DependenteModalComponent, { data: { action: 'Incluir', component: this } });
@@ -424,9 +453,9 @@ export class FunionarioModalComponent implements OnInit {
         //     startWith(null),
         //     map((item: string | null) => item ? this._filterPessoaConhecimento(item) : this.conhecimentos.filter(x => x.id != this.conhecimentoId).slice()));
         // } else {
-          this.filteredConhecimentosPessoa = this.ConhecimentoPessoaCtrl.valueChanges.pipe(
-            startWith(null),
-            map((item: string | null) => item ? this._filterPessoaConhecimento(item) : this.conhecimentos.slice()));
+        this.filteredConhecimentosPessoa = this.ConhecimentoPessoaCtrl.valueChanges.pipe(
+          startWith(null),
+          map((item: string | null) => item ? this._filterPessoaConhecimento(item) : this.conhecimentos.slice()));
         // }
         this.loaderService.hide();
       }
@@ -446,8 +475,8 @@ export class FunionarioModalComponent implements OnInit {
       // if (this.conhecimentoId) {
       //   return this.conhecimentos.filter(item => item.id != this.conhecimentoId && item.nome.toLowerCase().includes(filterValue));
       // } else {
-        return this.conhecimentos.filter(item => item.nome.toLowerCase().includes(filterValue));
-    //  }
+      return this.conhecimentos.filter(item => item.nome.toLowerCase().includes(filterValue));
+      //  }
     }
   }
   addConhecimentoPessoa(event: MatChipInputEvent): void {
@@ -478,7 +507,7 @@ export class FunionarioModalComponent implements OnInit {
     this.ConhecimentoPessoaCtrl.setValue(null);
   }
 
-  
+
   // Habilidades
   listarHabilidadesAtitudes(): void {
     this.loaderService.show();
@@ -490,10 +519,10 @@ export class FunionarioModalComponent implements OnInit {
         //     startWith(null),
         //     map((item: string | null) => item ? this._filterPessoaHabilidadeAtitude(item) : this.habilidadesAtitudes.filter(x => x.id != this.habilidadeId).slice()));
         // } else {
-          this.filteredPessoaHabilidadeAtitude = this.PessoaHabilidadeAtitudeCtrl.valueChanges.pipe(
-            startWith(null),
-            map((item: string | null) => item ? this._filterPessoaHabilidadeAtitude(item) : this.habilidadesAtitudes.slice()));
-       // }
+        this.filteredPessoaHabilidadeAtitude = this.PessoaHabilidadeAtitudeCtrl.valueChanges.pipe(
+          startWith(null),
+          map((item: string | null) => item ? this._filterPessoaHabilidadeAtitude(item) : this.habilidadesAtitudes.slice()));
+        // }
         this.loaderService.hide();
       }
     }).catch((error) => {
@@ -539,8 +568,85 @@ export class FunionarioModalComponent implements OnInit {
       // if (this.habilidadeId) {
       //   return this.habilidadesAtitudes.filter(item => item.id != this.habilidadeId && item.descricao.toLowerCase().includes(filterValue));
       // } else {
-        return this.habilidadesAtitudes.filter(item => item.descricao.toLowerCase().includes(filterValue));
-    //  }
+      return this.habilidadesAtitudes.filter(item => item.descricao.toLowerCase().includes(filterValue));
+      //  }
+    }
+  }
+  // Pessoa Idioma
+  listarPessoaIdioma(): void {
+    this.loaderService.show();
+    axios.get(this.apiUrl + 'idioma/all').then((response) => {
+      if (response && response.data) {
+        this.idiomas = response.data;
+        // if (this.idiomaId) {
+        //   this.filteredPessoaIdioma = this.PessoaIdiomaCtrl.valueChanges.pipe(
+        //     startWith(null),
+        //     map((item: string | null) => item ? this._filterPessoaIdioma(item) : this.idiomas.filter(x => x.id != this.idiomaId).slice()));
+        // } else {
+        this.filteredPessoaIdioma = this.PessoaIdiomaCtrl.valueChanges.pipe(
+          startWith(null),
+          map((item: string | null) => item ? this._filterPessoaIdioma(item) : this.idiomas.slice()));
+        //  }
+        this.loaderService.hide();
+      }
+    }).catch((error) => {
+      this.loaderService.hide();
+      console.log(error);
+      this.snackBar.open('Ocorreu um erro ao buscar os dados. 😭', null, { duration: 5000 });
+    });
+  }
+
+  addPessoaIdioma(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    if ((value || '').trim()) {
+      // this.incidenciasAtingidas.push(value.trim());
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.PessoaIdiomaCtrl.setValue(null);
+  }
+
+  removePessoaIdioma(item: Idioma): void {
+    debugger
+    const index = this.pessoaIdiomas.indexOf(item);
+
+    if (index >= 0) {
+      this.pessoaIdiomas.splice(index, 1);
+    }
+  }
+
+  selectedPessoaIdioma(event: MatAutocompleteSelectedEvent): void {
+    if (!this.pessoaIdiomas.includes(event.option.value)) {
+      var achou = 0;
+      for (let index = 0; index < this.pessoaIdiomas.length; index++) {
+        var idioma = this.pessoaIdiomas[index].descricao;
+        var novoIdioma = event.option.value.descricao;
+        if (idioma == novoIdioma) {
+          achou++;
+        }
+      }
+      if (achou == 0) {
+        this.pessoaIdiomas.push(event.option.value);
+      }
+    }
+    this.fruitInputIdioma.nativeElement.value = '';
+    this.PessoaIdiomaCtrl.setValue(null);
+  }
+
+  private _filterPessoaIdioma(value: any): Idioma[] {
+    debugger
+    if (value && value.descricao) {
+      value = value.descricao;
+    }
+    if (value) {
+      const filterValue = value.toLowerCase();
+      // if (this.idiomaId) {
+      //   return this.idiomas.filter(item => item.id != this.idiomaId && item.descricao.toLowerCase().includes(filterValue));
+      // } else {
+      return this.idiomas.filter(item => item.descricao.toLowerCase().includes(filterValue));
+      //  }
     }
   }
   ngOnInit(): void {
@@ -572,9 +678,12 @@ export class FunionarioModalComponent implements OnInit {
       this.enderecoid = this.data.info.enderecoid.id;
       this.email = this.data.info.email;
       this.numero = this.data.info.numero;
-      this.pessoaConhecimentos = this.data.info.pessoaConhecimentos.map(x=>x.conhecimento);
-      this.pessoaHabilidadesAtitudes = this.data.info.pessoaHabilidadesAtitudes.map(x=>x.habilidadeAtitude);
-
+      this.pessoaConhecimentos = this.data.info.pessoaConhecimentos.map(x => x.conhecimento);
+      this.pessoaHabilidadesAtitudes = this.data.info.pessoaHabilidadesAtitudes.map(x => x.habilidadeAtitude);
+      this.pessoaIdiomas = this.data.info.pessoaIdiomas.map(x => x.idioma);
+      this.cpfHabilitado = false;
+      this.descricaoContrato = "Selecione o contrato que deseja manipular.";
+      this.mostraTabela = true;
       // this.validador = new FormGroup({
       //   cpfteste: new FormControl('', Validators.required)
       // });
@@ -584,6 +693,10 @@ export class FunionarioModalComponent implements OnInit {
       //   enderecoid: ['', Validators.required],
       //   sexo: ['', Validators.required],
       // });
+    } else {
+      this.cpfHabilitado = true;
+      // this.descricaoContrato = "Adicione um novo contrato para poder vincular cargo e benefícios.";
+      // this.mostraTabela = false;
     }
 
   }

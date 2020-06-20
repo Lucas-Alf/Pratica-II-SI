@@ -8,15 +8,18 @@ import java.util.List;
 
 import com.setrem.pratica2api.model.Contrato;
 import com.setrem.pratica2api.repository.ContratoRepository;
+import com.setrem.pratica2api.repository.PessoaRepository;
 
 @RestController
 @RequestMapping("/api/contrato")
 @CrossOrigin
 public class ContratoController {
     private ContratoRepository ContratoRepository;
+    private PessoaRepository PessoaRepository;
 
-    public ContratoController(ContratoRepository ContratoRepository) {
+    public ContratoController(ContratoRepository ContratoRepository,  PessoaRepository PessoaRepository) {
         this.ContratoRepository = ContratoRepository;
+        this.PessoaRepository = PessoaRepository;
     }
 
     @GetMapping("/all")
@@ -39,6 +42,7 @@ public class ContratoController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
+        PessoaRepository.save(data.getPessoa());
         data = this.ContratoRepository.save(data);
         return data;
     }

@@ -1,88 +1,88 @@
 <app-folha-menu-lateral></app-folha-menu-lateral>
 <div style="margin-left: 250px;">
-  <app-cabecalho-sistema></app-cabecalho-sistema>
-  <div style="margin: 15px;">
-    <mat-card><b>Cálculo da Folha de Pagamento</b></mat-card>
-    <table>
-      <tr>
-        <td>
-          <mat-card style="margin-top: 5px; height: 546px;">
-            <div style="width: 100%; display:inline-block;">
-              <mat-form-field style="margin-left: 10px; width: 560px;">
-                <mat-label>🔎 Pesquisar por nome</mat-label>
-                <input matInput (keyup)="applyFilter($event)">
-              </mat-form-field>
-              <div style="float: right">
-                <button (click)="calcular()" mat-button class="calcular-button">Calcular</button>
-                <button style="margin-left: 5px;" (click)="imprimir()" mat-button class="imprimir-button">Imprimir</button>
-              </div>
-            </div>
-            <mat-table [dataSource]="storeFuncionario">
-              <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-          </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let row">
-          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
-          </mat-checkbox>
-        </td>
-        </ng-container>
-        <ng-container matColumnDef="situacao">
-          <th style="width: 6%;" mat-header-cell *matHeaderCellDef> Sit. </th>
-          <td mat-cell *matCellDef="let contrato" [ngSwitch]="contrato.situacao">
-            <img *ngSwitchCase="1" style="height: 20px;" src="../../assets/img/circuloverde.png" matTooltip="Ativo" />
-            <img *ngSwitchCase="2" style="height: 20px;" src="../../assets/img/circuloamarelo.png" matTooltip="Afastado" />
-            <img *ngSwitchCase="3" style="height: 20px;" src="../../assets/img/circulovermelho.png" matTooltip="Demitido" />
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="matricula">
-          <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Matricula </th>
-          <td mat-cell *matCellDef="let contrato"> {{contrato.matricula}} </td>
-        </ng-container>
-        <ng-container matColumnDef="nome">
-          <th style="width: 90%;" mat-header-cell *matHeaderCellDef> Nome </th>
-          <td mat-cell *matCellDef="let contrato"> {{contrato.pessoa.nome}} </td>
-        </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr style="cursor: pointer;" mat-row (click)="buscaCalculo(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
-      </mat-table>
-      </mat-card>
-      </td>
-      <td style="width: 450px;">
-        <mat-card style="margin-top: 5px;"><b>Cálculo do Contrato</b></mat-card>
-        <mat-card style="margin-top: 5px; height: 490px;">
-          <mat-table [dataSource]="storeCalculo">
-            <ng-container matColumnDef="tipo">
-      <th style="width: 7%;" mat-header-cell *matHeaderCellDef> Tipo </th>
-      <td mat-cell *matCellDef="let calculo" [ngSwitch]="calculo.evento.tipo">
-        <img *ngSwitchCase="'V'" style="height: 20px;" src="../../assets/img/vencimento.png" matTooltip="Vencimento" />
-        <img *ngSwitchCase="'B'" style="height: 20px;" src="../../assets/img/base.png" matTooltip="Base" />
-        <img *ngSwitchCase="'D'" style="height: 20px;" src="../../assets/img/desconto.png" matTooltip="Desconto" />
-      </td>
-      </ng-container>
-      <ng-container matColumnDef="evento">
-        <th style="width: 40%;" mat-header-cell *matHeaderCellDef> Evento </th>
-        <td mat-cell *matCellDef="let calculo"> {{calculo.evento.descricao}} </td>
-      </ng-container>
-      <ng-container matColumnDef="referencia">
-        <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Ref. </th>
-        <td mat-cell *matCellDef="let calculo">{{calculo.referencia > 0 ? calculo.referencia : ''}}</td>
-      </ng-container>
-      <ng-container matColumnDef="valor">
-        <th id="headerValor" style="width: 10%;" mat-header-cell *matHeaderCellDef> Valor </th>
-        <td style="text-align: right;" mat-cell *matCellDef="let calculo">
-          {{calculo.valor | currency:'BRL':true}} </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsCalc"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsCalc;"></tr>
-      </mat-table>
-      <mat-progress-spinner *ngIf="isLoading" style="margin-top: 130px; margin-left: auto; margin-right: auto;" color="primary" mode="indeterminate">
-      </mat-progress-spinner>
-      </mat-card>
-      </td>
-      </tr>
-    </table>
-  </div>
-  <app-rodape-sistema></app-rodape-sistema>
+    <app-cabecalho-sistema></app-cabecalho-sistema>
+    <div style="margin: 15px;">
+        <mat-card><b>Cálculo da Folha de Pagamento</b></mat-card>
+        <table>
+            <tr>
+                <td>
+                    <mat-card style="margin-top: 5px; height: 546px;">
+                        <div style="width: 100%; display:inline-block;">
+                            <mat-form-field style="margin-left: 10px; width: 560px;">
+                                <mat-label>🔎 Pesquisar por nome</mat-label>
+                                <input matInput (keyup)="applyFilter($event)">
+                            </mat-form-field>
+                            <div style="float: right">
+                                <button (click)="calcular()" mat-button class="calcular-button">Calcular</button>
+                                <button style="margin-left: 5px;" (click)="imprimir()" mat-button class="imprimir-button">Imprimir</button>
+                            </div>
+                        </div>
+                        <mat-table [dataSource]="storeFuncionario">
+                            <ng-container matColumnDef="select">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                    </mat-checkbox>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                                    </mat-checkbox>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="situacao">
+                                <th style="width: 6%;" mat-header-cell *matHeaderCellDef> Sit. </th>
+                                <td mat-cell *matCellDef="let contrato" [ngSwitch]="contrato.situacao">
+                                    <img *ngSwitchCase="1" style="height: 20px;" src="../../assets/img/circuloverde.png" matTooltip="Ativo" />
+                                    <img *ngSwitchCase="2" style="height: 20px;" src="../../assets/img/circuloamarelo.png" matTooltip="Afastado" />
+                                    <img *ngSwitchCase="3" style="height: 20px;" src="../../assets/img/circulovermelho.png" matTooltip="Demitido" />
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="matricula">
+                                <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Matricula </th>
+                                <td mat-cell *matCellDef="let contrato"> {{contrato.matricula}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="nome">
+                                <th style="width: 90%;" mat-header-cell *matHeaderCellDef> Nome </th>
+                                <td mat-cell *matCellDef="let contrato"> {{contrato.pessoa.nome}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr style="cursor: pointer;" mat-row (click)="buscaCalculo(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </mat-table>
+                    </mat-card>
+                </td>
+                <td style="width: 450px;">
+                    <mat-card style="margin-top: 5px;"><b>Cálculo do Contrato</b></mat-card>
+                    <mat-card style="margin-top: 5px; height: 490px;">
+                        <mat-table [dataSource]="storeCalculo">
+                            <ng-container matColumnDef="tipo">
+                                <th style="width: 7%;" mat-header-cell *matHeaderCellDef> Tipo </th>
+                                <td mat-cell *matCellDef="let calculo" [ngSwitch]="calculo.evento.tipo">
+                                    <img *ngSwitchCase="'V'" style="height: 20px;" src="../../assets/img/vencimento.png" matTooltip="Vencimento" />
+                                    <img *ngSwitchCase="'B'" style="height: 20px;" src="../../assets/img/base.png" matTooltip="Base" />
+                                    <img *ngSwitchCase="'D'" style="height: 20px;" src="../../assets/img/desconto.png" matTooltip="Desconto" />
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="evento">
+                                <th style="width: 40%;" mat-header-cell *matHeaderCellDef> Evento </th>
+                                <td mat-cell *matCellDef="let calculo"> {{calculo.evento.descricao}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="referencia">
+                                <th style="width: 10%;" mat-header-cell *matHeaderCellDef> Ref. </th>
+                                <td mat-cell *matCellDef="let calculo">{{calculo.referencia > 0 ? calculo.referencia : ''}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="valor">
+                                <th id="headerValor" style="width: 10%;" mat-header-cell *matHeaderCellDef> Valor </th>
+                                <td style="text-align: right;" mat-cell *matCellDef="let calculo">
+                                    {{calculo.valor | currency:'BRL':true}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnsCalc"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnsCalc;"></tr>
+                        </mat-table>
+                        <mat-progress-spinner *ngIf="isLoading" style="margin-top: 130px; margin-left: auto; margin-right: auto;" color="primary" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </mat-card>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <app-rodape-sistema></app-rodape-sistema>
 </div>
