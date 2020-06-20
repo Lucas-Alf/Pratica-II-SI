@@ -153,6 +153,7 @@ public class VagaPessoaController {
 
         int id = this.VagaPessoaRepository.maxIdVagaPessoa();
         data.setId(id);
+        data.getCpf().setAtivo(true);
         this.VagaPessoaRepository.save(data);
 
         Optional<Vaga> lista = this.VagaRepository.findById(data.getVagaid().getId());

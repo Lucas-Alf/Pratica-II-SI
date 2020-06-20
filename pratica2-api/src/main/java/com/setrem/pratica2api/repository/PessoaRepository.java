@@ -19,7 +19,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, String> {
     @Query(value = "select * from pessoa inner join dependente on (pessoa.cpf = ?1)", nativeQuery = true)
     public List<Pessoa> findDepedentesCpf(String cpf);
 
-    @Query(value = "select * from pessoa where ativo = true", nativeQuery = true)
+    @Query(value = "select * from pessoa where ativo = true order by nome", nativeQuery = true)
     public List<Pessoa> allAtivo();
 
     @Transactional
