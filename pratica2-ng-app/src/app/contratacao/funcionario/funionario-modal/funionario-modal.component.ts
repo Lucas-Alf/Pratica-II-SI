@@ -203,7 +203,7 @@ export class FunionarioModalComponent implements OnInit {
     axios.get(this.apiUrl + 'contrato/findByCpf?cpf=' + cpf).then((response) => {
       if (response && response.data) {
         this.storeContrato.data = response.data;
-        if (this.storeContrato.data.length = 0) {
+        if (response.data.length == 0) {
           this.descricaoContrato = "Adicione um novo contrato para poder vincular cargo e benefícios.";
           this.mostraTabela = false;
         } else {
@@ -354,6 +354,7 @@ export class FunionarioModalComponent implements OnInit {
       if (response && response.data) {
         this.listarContrato(this.cpf, true);
         this.mostraTabela = true;
+        this.descricaoContrato = "Selecione o contrato que deseja manipular.";
         this.cancelar();
       } else {
         this.loaderService.hide();
@@ -682,8 +683,8 @@ export class FunionarioModalComponent implements OnInit {
       this.pessoaHabilidadesAtitudes = this.data.info.pessoaHabilidadesAtitudes.map(x => x.habilidadeAtitude);
       this.pessoaIdiomas = this.data.info.pessoaIdiomas.map(x => x.idioma);
       this.cpfHabilitado = false;
-      this.descricaoContrato = "Selecione o contrato que deseja manipular.";
-      this.mostraTabela = true;
+     // this.descricaoContrato = "Selecione o contrato que deseja manipular.";
+      //this.mostraTabela = true;
       // this.validador = new FormGroup({
       //   cpfteste: new FormControl('', Validators.required)
       // });
@@ -695,7 +696,7 @@ export class FunionarioModalComponent implements OnInit {
       // });
     } else {
       this.cpfHabilitado = true;
-      // this.descricaoContrato = "Adicione um novo contrato para poder vincular cargo e benefícios.";
+     this.descricaoContrato = "Adicione um novo contrato para poder vincular cargo e benefícios.";
       // this.mostraTabela = false;
     }
 

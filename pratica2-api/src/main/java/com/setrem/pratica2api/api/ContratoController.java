@@ -7,6 +7,10 @@ import javax.validation.ValidationException;
 import java.util.List;
 
 import com.setrem.pratica2api.model.Contrato;
+import com.setrem.pratica2api.model.Dependente;
+import com.setrem.pratica2api.model.PessoaConhecimento;
+import com.setrem.pratica2api.model.PessoaHabilidadesAtitudes;
+import com.setrem.pratica2api.model.PessoaIdioma;
 import com.setrem.pratica2api.repository.ContratoRepository;
 import com.setrem.pratica2api.repository.PessoaRepository;
 
@@ -17,7 +21,7 @@ public class ContratoController {
     private ContratoRepository ContratoRepository;
     private PessoaRepository PessoaRepository;
 
-    public ContratoController(ContratoRepository ContratoRepository,  PessoaRepository PessoaRepository) {
+    public ContratoController(ContratoRepository ContratoRepository, PessoaRepository PessoaRepository) {
         this.ContratoRepository = ContratoRepository;
         this.PessoaRepository = PessoaRepository;
     }
@@ -42,6 +46,25 @@ public class ContratoController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException();
         }
+        if (data.getPessoa().getDependente() != null)
+            for (Dependente dep : data.getPessoa().getDependente()) {
+                dep.setPessoacpf(data.getPessoa());
+            }
+
+        if (data.getPessoa().getPessoaIdiomas() != null)
+            for (PessoaIdioma pessoaIdioma : data.getPessoa().getPessoaIdiomas()) {
+                pessoaIdioma.setCpf(data.getPessoa());
+            }
+
+        if (data.getPessoa().getPessoaConhecimentos() != null)
+            for (PessoaConhecimento pessoaConhecimento : data.getPessoa().getPessoaConhecimentos()) {
+                pessoaConhecimento.setCpf(data.getPessoa());
+            }
+
+        if (data.getPessoa().getPessoaHabilidadesAtitudes() != null)
+            for (PessoaHabilidadesAtitudes pessoaHabilidadesAtitudes : data.getPessoa().getPessoaHabilidadesAtitudes()) {
+                pessoaHabilidadesAtitudes.setCpf(data.getPessoa());
+            }
         PessoaRepository.save(data.getPessoa());
         data = this.ContratoRepository.save(data);
         return data;
